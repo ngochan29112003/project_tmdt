@@ -1,19 +1,24 @@
 <!doctype html>
-<!--
-* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
-* @version 1.0.0-beta20
-* @link https://tabler.io
-* Copyright 2018-2023 The Tabler Authors
-* Copyright 2018-2023 codecalm.net Paweł Kuna
-* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
--->
 <html lang="en">
 <head>
+    <style>
+        .toast-success {
+            background-color: #51a351 !important;
+            color: #ffffff !important;
+        }
+
+        .toast-error {
+            background-color: #bd362f !important;
+            color: #ffffff !important;
+        }
+    </style>
+
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Sign in - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
+    <title>Sign up - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
     <!-- CSS files -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link href="./dist/css/tabler.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/tabler-flags.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/tabler-payments.min.css?1692870487" rel="stylesheet"/>
@@ -30,7 +35,6 @@
     </style>
 </head>
 <body  class=" d-flex flex-column">
-<script src="./dist/js/demo-theme.min.js?1692870487"></script>
 <div class="page page-center">
     <div class="container container-tight py-4">
         <div class="text-center mb-4">
@@ -38,22 +42,31 @@
                 <img src="./static/logo.svg" width="110" height="32" alt="Tabler" class="navbar-brand-image">
             </a>
         </div>
-        <div class="card card-md">
+        <form  class="card card-md" id="formdangky" enctype="multipart/form-data" >
+            @csrf
             <div class="card-body">
-                <h2 class="h2 text-center mb-4">Đăng nhập</h2>
-                <form action="./" method="get" autocomplete="off" novalidate>
-                    <div class="mb-3">
-                        <label class="form-label">Tên đăng nhập</label>
-                        <input type="text" class="form-control" autocomplete="off">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Mật khẩu
-                            <span class="form-label-description">
-                                <a href="./forgot-password.html">Quên mật khẩu</a>
-                            </span></label>
-                        <div class="input-group input-group-flat">
-                            <input type="password" id="pwd-input" class="form-control" placeholder="Mật khẩu" autocomplete="off">
-                            <span class="input-group-text">
+                <h2 class="card-title text-center mb-4">Tạo tài khoản</h2>
+                <div class="mb-3">
+                    <label class="form-label">Họ và tên</label>
+                    <input type="text" id="hoten" name="HoTen" class="form-control" placeholder="Nhập họ tên" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Tài khoản</label>
+                    <input type="text" id="taikhoan" name="TenDangNhap" class="form-control" placeholder="Nhập tài khoản" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="text" id="email" name="Email" class="form-control" placeholder="Nhập email" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Số điện thoại</label>
+                    <input type="number" id="sodienthoai" name="SDT" class="form-control" placeholder=" Nhập vào số điện thoại" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Mật khẩu</label>
+                    <div class="input-group input-group-flat">
+                        <input type="password" id="pwd-input" name="MatKhau" class="form-control" placeholder="Mật khẩu" required>
+                        <span class="input-group-text">
                           <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip">
                             <svg xmlns="http://www.w3.org/2000/svg" id="showPwdCheckbox" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                               <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -68,24 +81,30 @@
                             </svg>
                           </a>
                         </span>
-                        </div>
                     </div>
-                    <div class="form-footer">
-                        <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Nhập lại mật khẩu</label>
+                    <input type="password" name="repwd" class="form-control" placeholder="Nhập lại mật khẩu" id="re-pwd" required   >
+                </div>
 
-        </div>
+                <div class="form-footer">
+                    <button type="submit" class="btn btn-primary w-100">Tạo tài khoản</button>
+                </div>
+            </div>
+        </form>
         <div class="text-center text-secondary mt-3">
-            Bạn chưa có tài khoản? <a href="{{route('index.register')}}" tabindex="-1">Đăng ký</a>
+            Bạn đã có tài khoản? <a href="{{route('index.login')}}" tabindex="-1">Đăng nhập</a>
         </div>
     </div>
 </div>
-<!-- Libs JS -->
-<!-- Tabler Core -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="./dist/js/demo-theme.min.js?1692870487"></script>
 <script src="./dist/js/tabler.min.js?1692870487" defer></script>
 <script src="./dist/js/demo.min.js?1692870487" defer></script>
+
+
 <script>
     document.getElementById('showPwdCheckbox').addEventListener('click', function (e) {
         e.preventDefault();
@@ -109,6 +128,36 @@
             showIcon.classList.remove('d-none'); // Hiện biểu tượng "eye"
             this.classList.add('d-none'); // Ẩn biểu tượng "eye-off"
         }
+    });
+
+    $('#formdangky').submit(function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: '{{ route('add-account') }}',
+            method: 'POST',
+            data: $(this).serialize(),
+            success: function (response) {
+                if (response.success) {
+                    toastr.success(response.message, "Thành công");
+                    setTimeout(function () {
+                        location.reload()
+                    }, 500);
+                } else {
+                    toastr.error(response.message, "Lỗi");
+                }
+            },
+            error: function (xhr) {
+                // Sửa lỗi này bằng cách lấy thông báo chính xác từ phản hồi JSON
+                if (xhr.status === 400) {
+                    var response = xhr.responseJSON;
+                    toastr.error(response.message, "Lỗi");
+                } else {
+                    // Trường hợp lỗi khác (nếu có)
+                    toastr.error("An error occurred", "Lỗi");
+                }
+            }
+        });
     });
 
 </script>

@@ -2,10 +2,10 @@
 -- version 5.1.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Oct 05, 2024 at 10:50 PM
--- Server version: 5.7.24
--- PHP Version: 8.1.0
+-- Máy chủ: localhost:3306
+-- Thời gian đã tạo: Th10 06, 2024 lúc 03:16 AM
+-- Phiên bản máy phục vụ: 5.7.24
+-- Phiên bản PHP: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `tmdt_db`
+-- Cơ sở dữ liệu: `tmdt_db`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `baidang`
+-- Cấu trúc bảng cho bảng `baidang`
 --
 
 CREATE TABLE `baidang` (
@@ -39,7 +39,7 @@ CREATE TABLE `baidang` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `baocao`
+-- Cấu trúc bảng cho bảng `baocao`
 --
 
 CREATE TABLE `baocao` (
@@ -53,7 +53,7 @@ CREATE TABLE `baocao` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `binhluan`
+-- Cấu trúc bảng cho bảng `binhluan`
 --
 
 CREATE TABLE `binhluan` (
@@ -69,7 +69,7 @@ CREATE TABLE `binhluan` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chitietdonhang`
+-- Cấu trúc bảng cho bảng `chitietdonhang`
 --
 
 CREATE TABLE `chitietdonhang` (
@@ -83,7 +83,7 @@ CREATE TABLE `chitietdonhang` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chitietsanpham`
+-- Cấu trúc bảng cho bảng `chitietsanpham`
 --
 
 CREATE TABLE `chitietsanpham` (
@@ -98,7 +98,7 @@ CREATE TABLE `chitietsanpham` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `danhmucsanpham`
+-- Cấu trúc bảng cho bảng `danhmucsanpham`
 --
 
 CREATE TABLE `danhmucsanpham` (
@@ -111,7 +111,7 @@ CREATE TABLE `danhmucsanpham` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `donhang`
+-- Cấu trúc bảng cho bảng `donhang`
 --
 
 CREATE TABLE `donhang` (
@@ -127,7 +127,7 @@ CREATE TABLE `donhang` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `giohang`
+-- Cấu trúc bảng cho bảng `giohang`
 --
 
 CREATE TABLE `giohang` (
@@ -140,7 +140,7 @@ CREATE TABLE `giohang` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hangsanxuat`
+-- Cấu trúc bảng cho bảng `hangsanxuat`
 --
 
 CREATE TABLE `hangsanxuat` (
@@ -153,7 +153,7 @@ CREATE TABLE `hangsanxuat` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `khuyenmai`
+-- Cấu trúc bảng cho bảng `khuyenmai`
 --
 
 CREATE TABLE `khuyenmai` (
@@ -171,7 +171,7 @@ CREATE TABLE `khuyenmai` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lichsutrangthaidh`
+-- Cấu trúc bảng cho bảng `lichsutrangthaidh`
 --
 
 CREATE TABLE `lichsutrangthaidh` (
@@ -185,7 +185,7 @@ CREATE TABLE `lichsutrangthaidh` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `phanquyen`
+-- Cấu trúc bảng cho bảng `phanquyen`
 --
 
 CREATE TABLE `phanquyen` (
@@ -201,7 +201,7 @@ CREATE TABLE `phanquyen` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `phuongthucthanhtoan`
+-- Cấu trúc bảng cho bảng `phuongthucthanhtoan`
 --
 
 CREATE TABLE `phuongthucthanhtoan` (
@@ -212,7 +212,7 @@ CREATE TABLE `phuongthucthanhtoan` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sanpham`
+-- Cấu trúc bảng cho bảng `sanpham`
 --
 
 CREATE TABLE `sanpham` (
@@ -232,28 +232,27 @@ CREATE TABLE `sanpham` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `taikhoan`
+-- Cấu trúc bảng cho bảng `taikhoan`
 --
 
 CREATE TABLE `taikhoan` (
   `MaTK` int(11) NOT NULL,
+  `HoTen` text,
   `TenDangNhap` text,
   `MatKhau` text,
-  `VaiTro` text,
+  `VaiTro` int(11) DEFAULT NULL,
   `AnhDaiDien` text,
   `Email` text,
   `NgaySinh` text,
   `GioiTinh` text,
   `SDT` text,
-  `NgayTaoTK` text,
-  `NgaySuaDoi` text,
   `DiaChi` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `thongbao`
+-- Cấu trúc bảng cho bảng `thongbao`
 --
 
 CREATE TABLE `thongbao` (
@@ -266,7 +265,7 @@ CREATE TABLE `thongbao` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `thongtinvanchuyen`
+-- Cấu trúc bảng cho bảng `thongtinvanchuyen`
 --
 
 CREATE TABLE `thongtinvanchuyen` (
@@ -278,207 +277,213 @@ CREATE TABLE `thongtinvanchuyen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `baidang`
+-- Chỉ mục cho bảng `baidang`
 --
 ALTER TABLE `baidang`
   ADD PRIMARY KEY (`MaBD`);
 
 --
--- Indexes for table `baocao`
+-- Chỉ mục cho bảng `baocao`
 --
 ALTER TABLE `baocao`
   ADD PRIMARY KEY (`MaBC`);
 
 --
--- Indexes for table `binhluan`
+-- Chỉ mục cho bảng `binhluan`
 --
 ALTER TABLE `binhluan`
   ADD PRIMARY KEY (`MaBL`);
 
 --
--- Indexes for table `chitietdonhang`
+-- Chỉ mục cho bảng `chitietdonhang`
 --
 ALTER TABLE `chitietdonhang`
   ADD PRIMARY KEY (`MaCTDH`);
 
 --
--- Indexes for table `chitietsanpham`
+-- Chỉ mục cho bảng `chitietsanpham`
 --
 ALTER TABLE `chitietsanpham`
   ADD PRIMARY KEY (`MaCTSP`);
 
 --
--- Indexes for table `danhmucsanpham`
+-- Chỉ mục cho bảng `danhmucsanpham`
 --
 ALTER TABLE `danhmucsanpham`
   ADD PRIMARY KEY (`MaDM`);
 
 --
--- Indexes for table `donhang`
+-- Chỉ mục cho bảng `donhang`
 --
 ALTER TABLE `donhang`
   ADD PRIMARY KEY (`MaDH`);
 
 --
--- Indexes for table `giohang`
+-- Chỉ mục cho bảng `giohang`
 --
 ALTER TABLE `giohang`
   ADD PRIMARY KEY (`MaGH`);
 
 --
--- Indexes for table `hangsanxuat`
+-- Chỉ mục cho bảng `hangsanxuat`
 --
 ALTER TABLE `hangsanxuat`
   ADD PRIMARY KEY (`MaHSX`);
 
 --
--- Indexes for table `khuyenmai`
+-- Chỉ mục cho bảng `khuyenmai`
 --
 ALTER TABLE `khuyenmai`
   ADD PRIMARY KEY (`MaKM`);
 
 --
--- Indexes for table `lichsutrangthaidh`
+-- Chỉ mục cho bảng `lichsutrangthaidh`
 --
 ALTER TABLE `lichsutrangthaidh`
   ADD PRIMARY KEY (`MaLS`);
 
 --
--- Indexes for table `phanquyen`
+-- Chỉ mục cho bảng `phanquyen`
 --
 ALTER TABLE `phanquyen`
   ADD PRIMARY KEY (`MaPQ`);
 
 --
--- Indexes for table `phuongthucthanhtoan`
+-- Chỉ mục cho bảng `phuongthucthanhtoan`
 --
 ALTER TABLE `phuongthucthanhtoan`
   ADD PRIMARY KEY (`MaPTTT`);
 
 --
--- Indexes for table `sanpham`
+-- Chỉ mục cho bảng `sanpham`
 --
 ALTER TABLE `sanpham`
   ADD PRIMARY KEY (`MaSP`);
 
 --
--- Indexes for table `taikhoan`
+-- Chỉ mục cho bảng `taikhoan`
 --
 ALTER TABLE `taikhoan`
   ADD PRIMARY KEY (`MaTK`);
 
 --
--- Indexes for table `thongbao`
+-- Chỉ mục cho bảng `thongbao`
 --
 ALTER TABLE `thongbao`
   ADD PRIMARY KEY (`MaTB`);
 
 --
--- Indexes for table `thongtinvanchuyen`
+-- Chỉ mục cho bảng `thongtinvanchuyen`
 --
 ALTER TABLE `thongtinvanchuyen`
   ADD PRIMARY KEY (`MaVC`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `baidang`
+-- AUTO_INCREMENT cho bảng `baidang`
 --
 ALTER TABLE `baidang`
   MODIFY `MaBD` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `baocao`
+-- AUTO_INCREMENT cho bảng `baocao`
 --
 ALTER TABLE `baocao`
   MODIFY `MaBC` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `binhluan`
+-- AUTO_INCREMENT cho bảng `binhluan`
 --
 ALTER TABLE `binhluan`
   MODIFY `MaBL` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `chitietdonhang`
+-- AUTO_INCREMENT cho bảng `chitietdonhang`
 --
 ALTER TABLE `chitietdonhang`
   MODIFY `MaCTDH` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `chitietsanpham`
+-- AUTO_INCREMENT cho bảng `chitietsanpham`
 --
 ALTER TABLE `chitietsanpham`
   MODIFY `MaCTSP` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `danhmucsanpham`
+-- AUTO_INCREMENT cho bảng `danhmucsanpham`
 --
 ALTER TABLE `danhmucsanpham`
   MODIFY `MaDM` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `donhang`
+-- AUTO_INCREMENT cho bảng `donhang`
 --
 ALTER TABLE `donhang`
   MODIFY `MaDH` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `giohang`
+-- AUTO_INCREMENT cho bảng `giohang`
 --
 ALTER TABLE `giohang`
   MODIFY `MaGH` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `hangsanxuat`
+-- AUTO_INCREMENT cho bảng `hangsanxuat`
 --
 ALTER TABLE `hangsanxuat`
   MODIFY `MaHSX` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `khuyenmai`
+-- AUTO_INCREMENT cho bảng `khuyenmai`
 --
 ALTER TABLE `khuyenmai`
   MODIFY `MaKM` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `lichsutrangthaidh`
+-- AUTO_INCREMENT cho bảng `lichsutrangthaidh`
 --
 ALTER TABLE `lichsutrangthaidh`
   MODIFY `MaLS` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `phanquyen`
+-- AUTO_INCREMENT cho bảng `phanquyen`
 --
 ALTER TABLE `phanquyen`
   MODIFY `MaPQ` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `phuongthucthanhtoan`
+-- AUTO_INCREMENT cho bảng `phuongthucthanhtoan`
 --
 ALTER TABLE `phuongthucthanhtoan`
   MODIFY `MaPTTT` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `sanpham`
+-- AUTO_INCREMENT cho bảng `sanpham`
 --
 ALTER TABLE `sanpham`
   MODIFY `MaSP` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `thongbao`
+-- AUTO_INCREMENT cho bảng `taikhoan`
+--
+ALTER TABLE `taikhoan`
+  MODIFY `MaTK` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `thongbao`
 --
 ALTER TABLE `thongbao`
   MODIFY `MaTB` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `thongtinvanchuyen`
+-- AUTO_INCREMENT cho bảng `thongtinvanchuyen`
 --
 ALTER TABLE `thongtinvanchuyen`
   MODIFY `MaVC` int(11) NOT NULL AUTO_INCREMENT;
