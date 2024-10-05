@@ -14,11 +14,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Dashboard - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
     <!-- CSS files -->
-    <link href="./dist/css/tabler.min.css?1692870487" rel="stylesheet"/>
-    <link href="./dist/css/tabler-flags.min.css?1692870487" rel="stylesheet"/>
-    <link href="./dist/css/tabler-payments.min.css?1692870487" rel="stylesheet"/>
-    <link href="./dist/css/tabler-vendors.min.css?1692870487" rel="stylesheet"/>
-    <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet"/>
+    <link href="{{asset('dist/css/tabler.min.css?1692870487')}}" rel="stylesheet"/>
+    <link href="{{asset('dist/css/tabler-flags.min.css?1692870487')}}" rel="stylesheet"/>
+    <link href="{{asset('dist/css/tabler-payments.min.css?1692870487')}}" rel="stylesheet"/>
+    <link href="{{asset('dist/css/tabler-vendors.min.css?1692870487')}}" rel="stylesheet"/>
+    <link href="{{asset('dist/css/demo.min.css?1692870487')}}" rel="stylesheet"/>
     <style>
         @import url('https://rsms.me/inter/inter.css');
         :root {
@@ -30,7 +30,7 @@
     </style>
 </head>
 <body >
-<script src="./dist/js/demo-theme.min.js?1692870487"></script>
+<script src="{{asset('dist/js/demo-theme.min.js?1692870487')}}"></script>
 <div class="page">
     <!-- Sidebar -->
     <aside class="navbar navbar-vertical navbar-expand-lg navbar-transparent">
@@ -40,7 +40,7 @@
             </button>
             <h1 class="navbar-brand navbar-brand-autodark">
                 <a href=".">
-                    <img src="./static/logo.svg" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+                    <img src="{{asset('static/logo.svg')}}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
                 </a>
             </h1>
             <div class="navbar-nav flex-row d-lg-none">
@@ -156,7 +156,7 @@
                 </div>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-                        <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
+                        <span class="avatar avatar-sm" style="background-image: url({{asset('static/avatars/000m.jpg')}})"></span>
                         <div class="d-none d-xl-block ps-2">
                             <div>Paweł Kuna</div>
                             <div class="mt-1 small text-secondary">UI Designer</div>
@@ -164,18 +164,18 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                         <a href="#" class="dropdown-item">Status</a>
-                        <a href="./profile.html" class="dropdown-item">Profile</a>
+                        <a href="{{asset('profile.html')}}" class="dropdown-item">Profile</a>
                         <a href="#" class="dropdown-item">Feedback</a>
                         <div class="dropdown-divider"></div>
-                        <a href="./settings.html" class="dropdown-item">Settings</a>
-                        <a href="./sign-in.html" class="dropdown-item">Logout</a>
+                        <a href="{{asset('settings.html')}}" class="dropdown-item">Settings</a>
+                        <a href="{{asset('sign-in.html')}}" class="dropdown-item">Logout</a>
                     </div>
                 </div>
             </div>
             <div class="collapse navbar-collapse" id="sidebar-menu">
                 <ul class="navbar-nav pt-lg-3">
                     <li class="nav-item">
-                        <a class="nav-link" href="./" >
+                        <a class="nav-link" href="{{asset('')}}" >
                   <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chart-dots-2">
                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -211,10 +211,10 @@
                         <div class="dropdown-menu">
                             <div class="dropdown-menu-columns">
                                 <div class="dropdown-menu-column">
-                                    <a class="dropdown-item" href="./alerts.html">
+                                    <a class="dropdown-item" href="{{asset('alerts.html')}}">
                                         Danh sách quản lý
                                     </a>
-                                    <a class="dropdown-item" href="./accordion.html">
+                                    <a class="dropdown-item" href="{{asset('accordion.html')}}">
                                         Danh sách khách hàng
                                     </a>
 {{--                                    <div class="dropend">--}}
@@ -402,7 +402,7 @@
 {{--                        </div>--}}
 {{--                    </li>--}}
                     <li class="nav-item">
-                        <a class="nav-link" href="./form-elements.html" >
+                        <a class="nav-link" href="{{asset('form-elements.html')}}" >
                   <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/checkbox -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-category">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -419,7 +419,7 @@
                         </a>
                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./form-elements.html" >
+                                        <a class="nav-link" href="{{asset('form-elements.html')}}" >
                   <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/checkbox -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-building-factory-2">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -608,7 +608,7 @@
                     </li>
 
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./icons.html" >
+                                        <a class="nav-link" href="{{asset('icons.html')}}" >
                   <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/ghost -->
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-credit-card-pay">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -628,7 +628,7 @@
 
 
                     <li class="nav-item">
-                        <a class="nav-link" href="./icons.html" >
+                        <a class="nav-link" href="{{asset('icons.html')}}" >
                   <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/ghost -->
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-truck-delivery">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -645,7 +645,7 @@
                     </li>
 
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./icons.html" >
+                                        <a class="nav-link" href="{{asset('icons.html')}}" >
                   <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/ghost -->
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-http-post">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -662,7 +662,7 @@
 
 
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./icons.html" >
+                                        <a class="nav-link" href="{{asset('icons.html')}}" >
                   <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/ghost -->
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-message">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -680,7 +680,7 @@
 
 
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./icons.html" >
+                                        <a class="nav-link" href="{{asset('icons.html')}}" >
                   <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/ghost -->
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-dollar">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -699,7 +699,7 @@
                                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="./emails.html" >
+                        <a class="nav-link" href="{{asset('emails.html')}}" >
                   <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/mail-opened -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-description">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -789,7 +789,7 @@
                     <div class="col-lg-auto ms-lg-auto">
                         <ul class="list-inline list-inline-dots mb-0">
                             <li class="list-inline-item"><a href="https://tabler.io/docs" target="_blank" class="link-secondary" rel="noopener">Documentation</a></li>
-                            <li class="list-inline-item"><a href="./license.html" class="link-secondary">License</a></li>
+                            <li class="list-inline-item"><a href="{{asset('license.html')}}" class="link-secondary">License</a></li>
                             <li class="list-inline-item"><a href="https://github.com/tabler/tabler" target="_blank" class="link-secondary" rel="noopener">Source code</a></li>
                             <li class="list-inline-item">
                                 <a href="https://github.com/sponsors/codecalm" target="_blank" class="link-secondary" rel="noopener">
@@ -808,7 +808,7 @@
                                 All rights reserved.
                             </li>
                             <li class="list-inline-item">
-                                <a href="./changelog.html" class="link-secondary" rel="noopener">
+                                <a href="{{asset('changelog.html')}}" class="link-secondary" rel="noopener">
                                     v1.0.0-beta20
                                 </a>
                             </li>
@@ -927,13 +927,13 @@
 
 
 <!-- Libs JS -->
-<script src="./dist/libs/apexcharts/dist/apexcharts.min.js?1692870487" defer></script>
-<script src="./dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1692870487" defer></script>
-<script src="./dist/libs/jsvectormap/dist/maps/world.js?1692870487" defer></script>
-<script src="./dist/libs/jsvectormap/dist/maps/world-merc.js?1692870487" defer></script>
+<script src="{{asset('dist/libs/apexcharts/dist/apexcharts.min.js?1692870487')}}" defer></script>
+<script src="{{asset('dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1692870487')}}" defer></script>
+<script src="{{asset('dist/libs/jsvectormap/dist/maps/world.js?1692870487')}}" defer></script>
+<script src="{{asset('dist/libs/jsvectormap/dist/maps/world-merc.js?1692870487')}}" defer></script>
 <!-- Tabler Core -->
-<script src="./dist/js/tabler.min.js?1692870487" defer></script>
-<script src="./dist/js/demo.min.js?1692870487" defer></script>
+<script src="{{asset('dist/js/tabler.min.js?1692870487')}}" defer></script>
+<script src="{{asset('dist/js/demo.min.js?1692870487')}}" defer></script>
 <script>
     // @formatter:off
     document.addEventListener("DOMContentLoaded", function () {
