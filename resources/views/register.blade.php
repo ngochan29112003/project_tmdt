@@ -19,11 +19,11 @@
     <title>Sign up - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
     <!-- CSS files -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <link href="./dist/css/tabler.min.css?1692870487" rel="stylesheet"/>
-    <link href="./dist/css/tabler-flags.min.css?1692870487" rel="stylesheet"/>
-    <link href="./dist/css/tabler-payments.min.css?1692870487" rel="stylesheet"/>
-    <link href="./dist/css/tabler-vendors.min.css?1692870487" rel="stylesheet"/>
-    <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet"/>
+    <link href="{{asset('dist/css/tabler.min.css?1692870487')}}" rel="stylesheet"/>
+    <link href="{{asset('dist/css/tabler-flags.min.css?1692870487')}}" rel="stylesheet"/>
+    <link href="{{asset('dist/css/tabler-payments.min.css?1692870487')}}" rel="stylesheet"/>
+    <link href="{{asset('dist/css/tabler-vendors.min.css?1692870487')}}" rel="stylesheet"/>
+    <link href="{{asset('dist/css/demo.min.css?1692870487')}}" rel="stylesheet"/>
     <style>
         @import url('https://rsms.me/inter/inter.css');
         :root {
@@ -39,7 +39,7 @@
     <div class="container container-tight py-4">
         <div class="text-center mb-4">
             <a href="." class="navbar-brand navbar-brand-autodark">
-                <img src="./static/logo.svg" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+                <img src="{{asset('static/logo.svg')}}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
             </a>
         </div>
         <form  class="card card-md" id="formdangky" enctype="multipart/form-data" >
@@ -100,9 +100,9 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script src="./dist/js/demo-theme.min.js?1692870487"></script>
-<script src="./dist/js/tabler.min.js?1692870487" defer></script>
-<script src="./dist/js/demo.min.js?1692870487" defer></script>
+<script src="{{asset('dist/js/demo-theme.min.js?1692870487')}}"></script>
+<script src="{{asset('dist/js/tabler.min.js?1692870487')}}" defer></script>
+<script src="{{asset('dist/js/demo.min.js?1692870487')}}" defer></script>
 
 
 <script>

@@ -14,11 +14,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Sign in - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
     <!-- CSS files -->
-    <link href="./dist/css/tabler.min.css?1692870487" rel="stylesheet"/>
-    <link href="./dist/css/tabler-flags.min.css?1692870487" rel="stylesheet"/>
-    <link href="./dist/css/tabler-payments.min.css?1692870487" rel="stylesheet"/>
-    <link href="./dist/css/tabler-vendors.min.css?1692870487" rel="stylesheet"/>
-    <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet"/>
+    <link href="{{asset('dist/css/tabler.min.css?1692870487')}}" rel="stylesheet"/>
+    <link href="{{asset('dist/css/tabler-flags.min.css?1692870487')}}" rel="stylesheet"/>
+    <link href="{{asset('dist/css/tabler-payments.min.css?1692870487')}}" rel="stylesheet"/>
+    <link href="{{asset('dist/css/tabler-vendors.min.css?1692870487')}}" rel="stylesheet"/>
+    <link href="{{asset('dist/css/demo.min.css?1692870487')}}" rel="stylesheet"/>
     <style>
         @import url('https://rsms.me/inter/inter.css');
         :root {
@@ -30,12 +30,12 @@
     </style>
 </head>
 <body  class=" d-flex flex-column">
-<script src="./dist/js/demo-theme.min.js?1692870487"></script>
+<script src="{{asset('dist/js/demo-theme.min.js?1692870487')}}"></script>
 <div class="page page-center">
     <div class="container container-tight py-4">
         <div class="text-center mb-4">
             <a href="." class="navbar-brand navbar-brand-autodark">
-                <img src="./static/logo.svg" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+                <img src="{{asset('static/logo.svg')}}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
             </a>
         </div>
         <div class="card card-md">
@@ -49,7 +49,7 @@
                     <div class="mb-3">
                         <label class="form-label">Mật khẩu
                             <span class="form-label-description">
-                                <a href="./forgot-password.html">Quên mật khẩu</a>
+                                <a href="{{asset('forgot-password.html')}}">Quên mật khẩu</a>
                             </span></label>
                         <div class="input-group input-group-flat">
                             <input type="password" id="pwd-input" class="form-control" placeholder="Mật khẩu" autocomplete="off">
@@ -84,8 +84,8 @@
 </div>
 <!-- Libs JS -->
 <!-- Tabler Core -->
-<script src="./dist/js/tabler.min.js?1692870487" defer></script>
-<script src="./dist/js/demo.min.js?1692870487" defer></script>
+<script src="{{asset('dist/js/tabler.min.js?1692870487')}}" defer></script>
+<script src="{{asset('dist/js/demo.min.js?1692870487')}}" defer></script>
 <script>
     document.getElementById('showPwdCheckbox').addEventListener('click', function (e) {
         e.preventDefault();
