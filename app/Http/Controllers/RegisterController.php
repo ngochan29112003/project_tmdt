@@ -17,7 +17,7 @@ class RegisterController extends Controller
         $request->validate([
             'HoTen' => 'required|string|max:255',
             'TenDangNhap' => 'required|string',
-            'Email' => 'required',
+            'Email' => 'required|string',
             'SDT' => 'string',
             'MatKhau' => 'required|string',
             'repwd' => 'required|string',

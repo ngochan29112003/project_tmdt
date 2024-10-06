@@ -56,7 +56,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Email</label>
-                    <input type="text" id="email" name="Email" class="form-control" placeholder="Nhập email" required>
+                    <input type="email" id="email" name="Email" class="form-control" placeholder="Nhập email" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Số điện thoại</label>
