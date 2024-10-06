@@ -21,7 +21,7 @@
                               <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
                             </svg>
                         </span>
-                        Thêm mới tài khoản
+                        Thêm mới tài khoản quản lý
                     </a>
                 </div>
             </div>
@@ -34,14 +34,17 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="table-responsive p-2">
-                            <table id="tableTaiKhoanQuanLy" class="table table-vcenter card-table table-striped">
+                            <table id="tableDanhSachTaiKhoanQuanLy" class="table table-vcenter card-table table-striped">
                                 <thead>
                                 <tr>
                                     <th>STT</th>
-                                    <th>Tên tài khoản</th>
+                                    <th>Ảnh đại diện</th>
+                                    <th>Họ và tên</th>
                                     <th>Email</th>
                                     <th>Giới tính</th>
                                     <th>Ngày sinh</th>
+                                    <th>Vai trò</th>
+                                    <th>SĐT</th>
                                     <th>Địa chỉ</th>
                                     <th class="text-center">Action</th>
                                 </tr>
@@ -58,11 +61,11 @@
 @endsection
 @section('scripts')
     <script>
-        var table = $('#tableTaiKhoanQuanLy').DataTable({
+        var table = $('#tableDanhSachTaiKhoanQuanLy').DataTable({
             "language": {
                 "emptyTable": "Không có dữ liệu trong bảng",
                 "search": "Tìm kiếm:",
-                "lengthMenu": "Hiển thị _MENU_ tài khoản mỗi trang",
+                "lengthMenu": "Hiển thị _MENU_ tài khoản quản lý mỗi trang",
                 "zeroRecords": "Không tìm thấy kết quả",
                 "infoEmpty": "Không có dữ liệu"
 

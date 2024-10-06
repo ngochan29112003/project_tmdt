@@ -234,8 +234,8 @@
                         <div class = "dropdown-menu">
                             <div class = "dropdown-menu-columns">
                                 <div class = "dropdown-menu-column">
-                                    <a class = "dropdown-item" href = "{{asset('alerts.html')}}"> Danh sách quản lý </a>
-                                    <a class = "dropdown-item" href = "{{asset('accordion.html')}}"> Danh sách khách hàng </a>
+                                    <a class = "dropdown-item" href = "{{asset('DS_quanly')}}"> Danh sách quản lý </a>
+                                    <a class = "dropdown-item" href = "{{asset('DS_khachhang')}}"> Danh sách khách hàng </a>
                                     <li class = "nav-item">
                                         <a class = "nav-link" href = "{{asset('form-elements.html')}}">
                   <span class = "nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/checkbox -->
@@ -342,7 +342,7 @@
                       <path d = "M12 8a2 2 0 0 1 2 2v4a2 2 0 1 1 -4 0v-4a2 2 0 0 1 2 -2z" />
                       <path d = "M17 15a1 1 0 0 0 1 1h2a1 1 0 0 0 1 -1v-2a1 1 0 0 0 -1 -1h-2a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1" />
                     </svg>
-                  </span> <span class = "nav-link-title"> 
+                  </span> <span class = "nav-link-title">
                     Quản lý bài đăng
                   </span> </a>
                                     </li>

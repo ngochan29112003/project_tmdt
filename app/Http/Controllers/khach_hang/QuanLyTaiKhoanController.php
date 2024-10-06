@@ -9,11 +9,11 @@ class QuanLyTaiKhoanController extends Controller
 {
     public function getViewDSQuanLy()
     {
-        return view('admin.ql_tk.danh-sach-quan-ly');
+        return view('admin.ql_tk.ds-tk-quan-ly');
     }
 
     public function getViewDSKhachHang()
     {
-
+        return view('admin.ql_tk.ds-tk-khach-hang');
     }
 }

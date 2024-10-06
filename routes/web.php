@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\DashBoardController;
+use App\Http\Controllers\khach_hang\QuanLyTaiKhoanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -19,3 +20,6 @@ Route::get('/',[LoginController::class,'getViewLogin'])->name('index.login');
 Route::get('/register',[RegisterController::class,'getViewRegister'])->name('index.register');
 Route::get('/dashboard',[DashBoardController::class,'getViewDashBoard'])->name('index.dashboard');
 Route::post('/register/add',[RegisterController::class,'addAccount'])->name('add-account');
+
+Route::get('/dashboard/tkquanly',[QuanLyTaiKhoanController::class,'getViewDSQuanLy'])->name('DS_quanly');
+Route::get('/dashboard/tkkhachhang',[QuanLyTaiKhoanController::class,'getViewDSKhachHang'])->name('DS_khachhang');
