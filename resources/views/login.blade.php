@@ -13,21 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Sign in - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
-    <!-- CSS files -->
-    <link href="{{asset('dist/css/tabler.min.css?1692870487')}}" rel="stylesheet"/>
-    <link href="{{asset('dist/css/tabler-flags.min.css?1692870487')}}" rel="stylesheet"/>
-    <link href="{{asset('dist/css/tabler-payments.min.css?1692870487')}}" rel="stylesheet"/>
-    <link href="{{asset('dist/css/tabler-vendors.min.css?1692870487')}}" rel="stylesheet"/>
-    <link href="{{asset('dist/css/demo.min.css?1692870487')}}" rel="stylesheet"/>
-    <style>
-        @import url('https://rsms.me/inter/inter.css');
-        :root {
-            --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
-        }
-        body {
-            font-feature-settings: "cv03", "cv04", "cv11";
-        }
-    </style>
+    @include('lib-css')
 </head>
 <body  class=" d-flex flex-column">
 <script src="{{asset('dist/js/demo-theme.min.js?1692870487')}}"></script>
@@ -41,18 +27,19 @@
         <div class="card card-md">
             <div class="card-body">
                 <h2 class="h2 text-center mb-4">Đăng nhập</h2>
-                <form action="./" method="get" autocomplete="off" novalidate>
+                <form id="formdangnhap" enctype="multipart/form-data">
+                    @csrf
                     <div class="mb-3">
-                        <label class="form-label">Tên đăng nhập</label>
-                        <input type="text" class="form-control" autocomplete="off">
+                        <label class="form-label">Tài khoản</label>
+                        <input type="text" class="form-control" name="taikhoan" placeholder="Tài khoản của bạn" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Mật khẩu
                             <span class="form-label-description">
-                                <a href="{{asset('forgot-password.html')}}">Quên mật khẩu</a>
+                                <a href="">Quên mật khẩu</a>
                             </span></label>
                         <div class="input-group input-group-flat">
-                            <input type="password" id="pwd-input" class="form-control" placeholder="Mật khẩu" autocomplete="off">
+                            <input type="password" id="pwd-input" name="password" class="form-control" placeholder="Mật khẩu của bạn" autocomplete="off" required>
                             <span class="input-group-text">
                           <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip">
                             <svg xmlns="http://www.w3.org/2000/svg" id="showPwdCheckbox" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -75,17 +62,13 @@
                     </div>
                 </form>
             </div>
-
         </div>
         <div class="text-center text-secondary mt-3">
             Bạn chưa có tài khoản? <a href="{{route('index.register')}}" tabindex="-1">Đăng ký</a>
         </div>
     </div>
 </div>
-<!-- Libs JS -->
-<!-- Tabler Core -->
-<script src="{{asset('dist/js/tabler.min.js?1692870487')}}" defer></script>
-<script src="{{asset('dist/js/demo.min.js?1692870487')}}" defer></script>
+@include('lib-js')
 <script>
     document.getElementById('showPwdCheckbox').addEventListener('click', function (e) {
         e.preventDefault();
@@ -109,6 +92,39 @@
             showIcon.classList.remove('d-none'); // Hiện biểu tượng "eye"
             this.classList.add('d-none'); // Ẩn biểu tượng "eye-off"
         }
+    });
+
+    $('#formdangnhap').submit(function (e) {
+      e.preventDefault();
+
+      $.ajax({
+        url: '{{ route('login-action') }}',
+        method: 'POST', // sử dụng POST để tránh lộ thông tin qua URL
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // thêm CSRF token
+        },
+        data: $(this).serialize(),
+        success: function (response) {
+          if (response.success) {
+            toastr.success(response.message, "Thành công");
+            setTimeout(function () {
+              window.location.href = response.redirect; // Chuyển hướng người dùng
+            }, 500);
+          } else {
+            toastr.error(response.message, "Lỗi");
+          }
+        },
+        error: function (xhr) {
+          // Sửa lỗi này bằng cách lấy thông báo chính xác từ phản hồi JSON
+          if (xhr.status === 400) {
+            var response = xhr.responseJSON;
+            toastr.error(response.message, "Lỗi");
+          } else {
+            // Trường hợp lỗi khác (nếu có)
+            toastr.error("An error occurred", "Lỗi");
+          }
+        }
+      });
     });
 
 </script>

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AuthModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -30,5 +32,46 @@ class RegisterController extends Controller
                 'message' => 'Mật khẩu không trùng khớp',
             ]);
         }
+
+        // Kiểm tra tài khoản đã có trong hệ thống chưa nếu có rồi thì không tạo nữa
+        $existingAccount = AuthModel::where('TenDangNhap', $request->TenDangNhap)->first();
+        if ($existingAccount) {
+            return response()->json([
+                'success' => false,
+                'status' => 400,
+                'message' => 'Tài khoản đã tồn tại, vui lòng chọn tài khoản khác',
+            ]);
+        }
+
+        // Băm password
+        $hashedPassword = Hash::make($request->MatKhau);
+
+        // Lưu thông tin vào database
+        $newAccount = new AuthModel(); //Tạo đối tượng để lưu vào database
+        $newAccount->HoTen = $request->HoTen;
+        $newAccount->TenDangNhap = $request->TenDangNhap;
+        $newAccount->Email = $request->Email;
+        $newAccount->SDT = $request->SDT;
+        $newAccount->MatKhau = $hashedPassword;
+        $newAccount->VaiTro = 0;
+
+//        0 là khách hàng
+//        1 là supAdmin
+//        bắt đầu từ 2 là Admin 1, 2, 3 gì đó
+
+        if ($newAccount->save()) {
+            return response()->json([
+                'success' => true,
+                'status' => 200,
+                'message' => 'Tài khoản đăng ký thành công',
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'status' => 500,
+                'message' => 'Có lỗi xảy ra khi lưu tài khoản',
+            ]);
+        }
+
     }
 }

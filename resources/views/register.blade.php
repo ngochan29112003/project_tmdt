@@ -1,38 +1,11 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <style>
-        .toast-success {
-            background-color: #51a351 !important;
-            color: #ffffff !important;
-        }
-
-        .toast-error {
-            background-color: #bd362f !important;
-            color: #ffffff !important;
-        }
-    </style>
-
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Sign up - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
-    <!-- CSS files -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <link href="{{asset('dist/css/tabler.min.css?1692870487')}}" rel="stylesheet"/>
-    <link href="{{asset('dist/css/tabler-flags.min.css?1692870487')}}" rel="stylesheet"/>
-    <link href="{{asset('dist/css/tabler-payments.min.css?1692870487')}}" rel="stylesheet"/>
-    <link href="{{asset('dist/css/tabler-vendors.min.css?1692870487')}}" rel="stylesheet"/>
-    <link href="{{asset('dist/css/demo.min.css?1692870487')}}" rel="stylesheet"/>
-    <style>
-        @import url('https://rsms.me/inter/inter.css');
-        :root {
-            --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
-        }
-        body {
-            font-feature-settings: "cv03", "cv04", "cv11";
-        }
-    </style>
+    @include('lib-css')
 </head>
 <body  class=" d-flex flex-column">
 <div class="page page-center">
@@ -42,7 +15,7 @@
                 <img src="{{asset('static/logo.svg')}}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
             </a>
         </div>
-        <form  class="card card-md" id="formdangky" enctype="multipart/form-data" >
+        <form class="card card-md" id="formdangky" enctype="multipart/form-data" >
             @csrf
             <div class="card-body">
                 <h2 class="card-title text-center mb-4">Tạo tài khoản</h2>
@@ -98,13 +71,7 @@
         </div>
     </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script src="{{asset('dist/js/demo-theme.min.js?1692870487')}}"></script>
-<script src="{{asset('dist/js/tabler.min.js?1692870487')}}" defer></script>
-<script src="{{asset('dist/js/demo.min.js?1692870487')}}" defer></script>
-
-
+    @include('lib-js')
 <script>
     document.getElementById('showPwdCheckbox').addEventListener('click', function (e) {
         e.preventDefault();

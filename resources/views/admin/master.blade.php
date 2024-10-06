@@ -13,22 +13,7 @@
     <meta http-equiv = "X-UA-Compatible" content = "ie=edge" />
     <title>Dashboard - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
     <!-- CSS files -->
-    <link href = "{{asset('dist/css/tabler.min.css?1692870487')}}" rel = "stylesheet" />
-    <link href = "{{asset('dist/css/tabler-flags.min.css?1692870487')}}" rel = "stylesheet" />
-    <link href = "{{asset('dist/css/tabler-payments.min.css?1692870487')}}" rel = "stylesheet" />
-    <link href = "{{asset('dist/css/tabler-vendors.min.css?1692870487')}}" rel = "stylesheet" />
-    <link href = "{{asset('dist/css/demo.min.css?1692870487')}}" rel = "stylesheet" />
-    <style>
-        @import url('https://rsms.me/inter/inter.css');
-
-        :root {
-            --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
-        }
-
-        body {
-            font-feature-settings: "cv03", "cv04", "cv11";
-        }
-    </style>
+    @include('lib-css')
 </head>
 <body>
 <script src = "{{asset('dist/js/demo-theme.min.js?1692870487')}}"></script>
@@ -204,7 +189,7 @@
             <div class = "collapse navbar-collapse" id = "sidebar-menu">
                 <ul class = "navbar-nav pt-lg-3">
                     <li class = "nav-item">
-                        <a class = "nav-link" href = "{{asset('')}}">
+                        <a class = "nav-link" href = "">
                           <span class = "nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                             <svg xmlns = "http://www.w3.org/2000/svg" width = "24" height = "24" viewBox = "0 0 24 24" fill = "none" stroke = "currentColor" stroke-width = "2" stroke-linecap = "round" stroke-linejoin = "round" class = "icon icon-tabler icons-tabler-outline icon-tabler-chart-dots-2">
                                   <path stroke = "none" d = "M0 0h24v24H0z" fill = "none" />
@@ -234,10 +219,10 @@
                         <div class = "dropdown-menu">
                             <div class = "dropdown-menu-columns">
                                 <div class = "dropdown-menu-column">
-                                    <a class = "dropdown-item" href = "{{asset('DS_quanly')}}"> Danh sách quản lý </a>
-                                    <a class = "dropdown-item" href = "{{asset('DS_khachhang')}}"> Danh sách khách hàng </a>
+                                    <a class = "dropdown-item" href = "{{route('DS-quanly')}}"> Danh sách quản lý </a>
+                                    <a class = "dropdown-item" href = "{{route('DS-khachhang')}}"> Danh sách khách hàng </a>
                                     <li class = "nav-item">
-                                        <a class = "nav-link" href = "{{asset('form-elements.html')}}">
+                                        <a class = "nav-link" href = "">
                   <span class = "nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/checkbox -->
                     <svg xmlns = "http://www.w3.org/2000/svg" width = "24" height = "24" viewBox = "0 0 24 24" fill = "none" stroke = "currentColor" stroke-width = "2" stroke-linecap = "round" stroke-linejoin = "round" class = "icon icon-tabler icons-tabler-outline icon-tabler-category">
                       <path stroke = "none" d = "M0 0h24v24H0z" fill = "none" />
@@ -580,16 +565,7 @@
         @yield('contents')
     </div>
 </div>
-
-
-<!-- Libs JS -->
-<script src = "{{asset('dist/libs/apexcharts/dist/apexcharts.min.js?1692870487')}}" defer></script>
-<script src = "{{asset('dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1692870487')}}" defer></script>
-<script src = "{{asset('dist/libs/jsvectormap/dist/maps/world.js?1692870487')}}" defer></script>
-<script src = "{{asset('dist/libs/jsvectormap/dist/maps/world-merc.js?1692870487')}}" defer></script>
-<!-- Tabler Core -->
-<script src = "{{asset('dist/js/tabler.min.js?1692870487')}}" defer></script>
-<script src = "{{asset('dist/js/demo.min.js?1692870487')}}" defer></script>
+@include('lib-js')
 <script>
   // @formatter:off
     document.addEventListener("DOMContentLoaded", function () {
