@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\DashBoardController;
 use App\Http\Controllers\khach_hang\QuanLyTaiKhoanController;
+use App\Http\Controllers\khach_hang\TrangChuController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -13,6 +14,7 @@ Route::post('/register/add',[RegisterController::class,'addAccount'])->name('add
 Route::get('/login',[LoginController::class,'getViewLogin'])->name('index.login');
 Route::post('/login',[LoginController::class,'loginAction'])->name('login-action');
 Route::get('/logout', [LoginController::class, 'logoutAction'])->name('logout');
+Route::get('/trang-chu-kh',[TrangChuController::class,'getViewTrangChu'])->name('trang-chu');
 
 Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
 

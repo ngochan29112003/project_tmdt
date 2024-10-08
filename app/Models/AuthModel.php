@@ -11,5 +11,4 @@ class AuthModel extends Model
     protected $table = 'taikhoan';
     protected $primaryKey = 'MaTK';
     public $timestamps = false;
-
 }
