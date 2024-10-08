@@ -29,14 +29,24 @@
         }
     </style>
 
+    <style>
+        .login-link {
+            padding: 10px; /* Add padding to make the hover effect larger */
+            border-radius: 5px; /* Optional rounded corners */
+            transition: background-color 0.3s ease; /* Smooth transition */
+        }
 
+        .login-link:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* Add a light background color on hover */
+        }
+    </style>
 </head>
 <body>
 <script src="{{asset('dist/js/demo-theme.min.js?1692870487')}}"></script>
 <div class="page">
     <!-- Navbar -->
     <header class="navbar navbar-expand-md d-print-none bg-warning">
-        <div class="container-xl">
+        <div class="container-xl p-0">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -44,63 +54,67 @@
                 <a href=".">
                     <img src="http://127.0.0.1:8000/asset/img/logo.png" height="60" alt=" ">
                 </a>
-
-                <div class="input-icon mx-auto" style="width: 400px;">
-                      <span class="input-icon-addon">
-                        <!-- Download SVG icon from http://tabler-icons.io/i/search -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                          <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
-                          <path d="M21 21l-6 -6"></path>
-                        </svg>
-                      </span>
-                    <input type="text" value="" class="form-control form-control-rounded" placeholder="Bạn tìm gì..." aria-label="Search in website">
-                </div>
             </h1>
 
+            <!-- Add Search Bar with new style -->
+            <form class="d-flex mx-auto" role="search" style="max-width: 500px; width: 100%;">
+                <div class="input-group">
+                    <input class="form-control" type="search" placeholder="Bạn cần tìm gì?" aria-label="Search" style="border-radius: 20px 0 0 20px; box-shadow: none; border: 1px solid #ddd;">
+                    <button class="btn btn-light" type="submit" style="border-radius: 0 20px 20px 0; border: 1px solid #ddd; border-left: 0;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
+                            <path d="M21 21l-6 -6"></path>
+                        </svg>
+                    </button>
+                </div>
+            </form>
 
-            <div class="navbar-nav flex-row order-md-last">
-                <div class="nav-item d-none d-md-flex me-3">
-                    <div class="btn-list">
-
-                        <a href="#" class="cart-icon text-decoration-none d-flex align-items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-map-pin">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
-                                <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
-                            </svg>
-                            <span class="ms-1 text-white" style="font-size: 16px;">Hệ thống showroom</span>
-                        </a>
-
-                        <a href="#" class="cart-icon text-decoration-none d-flex align-items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-phone">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
-                            </svg>
-                            <span class="ms-1 text-white" style="font-size: 16px;">Liên hệ</span>
-                        </a>
-
-                        <a href="#" class="cart-icon text-decoration-none d-flex align-items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-shopping-cart">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                                <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                                <path d="M17 17h-11v-14h-2"></path>
-                                <path d="M6 5l14 1l-1 7h-13"></path>
-                            </svg>
-                            <span class="ms-1 text-white" style="font-size: 16px;">Giỏ hàng</span>
-                            <span class="badge ms-1" style="background-color: #FFEB3B">3</span>
-                        </a>
-
-                        <a href="http://127.0.0.1:8000/login" class="btn" target="_blank" rel="noreferrer">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-                                <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-                            </svg>
-                            Đăng nhập
-                        </a>
-
+            <div class="navbar-nav flex-row order-md-last mx-2">
+                <div class="nav-item d-none d-md-flex">
+                    <div class="row align-items-center d-flex">
+                        <div class="col-auto mb-2">
+                            <a href = "#" class = "cart-icon text-decoration-none d-flex align-items-center mx-3">
+                                <svg xmlns = "http://www.w3.org/2000/svg" width = "24" height = "24" viewBox = "0 0 24 24" fill = "none" stroke = "white" stroke-width = "2" stroke-linecap = "round" stroke-linejoin = "round" class = "icon icon-tabler icons-tabler-outline icon-tabler-map-pin">
+                                    <path stroke = "none" d = "M0 0h24v24H0z" fill = "none" />
+                                    <path d = "M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+                                    <path d = "M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
+                                </svg>
+                                <span class = "ms-1 text-white fw-bold fs-3">Hệ thống showroom</span>
+                            </a>
+                        </div>
+                        <div class="col-auto mb-2">
+                            <a href="#" class="cart-icon text-decoration-none d-flex align-items-center mx-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-phone">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
+                                </svg>
+                                <span class="ms-1 text-white fw-bold fs-3">Liên hệ</span>
+                            </a>
+                        </div>
+                        <div class="col-auto mb-2">
+                            <a href="#" class="cart-icon text-decoration-none d-flex align-items-center mx-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-shopping-cart">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                                    <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                                    <path d="M17 17h-11v-14h-2"></path>
+                                    <path d="M6 5l14 1l-1 7h-13"></path>
+                                </svg>
+                                <span class="ms-1 text-white fw-bold fs-3">Giỏ hàng</span>
+                                <span class="badge ms-1" style="background-color: #FFEB3B">3</span>
+                            </a>
+                        </div>
+                        <div class="col-auto mb-2">
+                            <a href="{{route('index.login')}}" class="cart-icon text-decoration-none d-flex align-items-center mx-3 login-link rounded-pill">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                                </svg>
+                                <span class="ms-1 text-white fw-bold fs-3">Đăng nhập</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
