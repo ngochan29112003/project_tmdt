@@ -102,7 +102,7 @@
                                     <path d="M6 5l14 1l-1 7h-13"></path>
                                 </svg>
                                 <span class="ms-1 text-white fw-bold fs-3">Giỏ hàng</span>
-                                <span class="badge ms-1" style="background-color: #FFEB3B">3</span>
+                                <span class="badge ms-1" style="background-color: #FFEB3B">0</span>
                             </a>
                         </div>
                         <div class="col-auto mb-2">
