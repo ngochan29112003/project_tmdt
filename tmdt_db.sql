@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 10, 2024 at 10:13 PM
+-- Generation Time: Oct 10, 2024 at 11:31 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.1.12
 
@@ -212,6 +212,17 @@ CREATE TABLE `phuongthucthanhtoan` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `quyen`
+--
+
+CREATE TABLE `quyen` (
+  `id` int(11) NOT NULL,
+  `ten_quyen` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sanpham`
 --
 
@@ -256,7 +267,7 @@ CREATE TABLE `taikhoan` (
 
 INSERT INTO `taikhoan` (`MaTK`, `HoTen`, `TenDangNhap`, `MatKhau`, `VaiTro`, `AnhDaiDien`, `Email`, `NgaySinh`, `GioiTinh`, `SDT`, `DiaChi`, `TrangThai`) VALUES
 (3, 'admin', 'super', '$2y$12$EkIwMrbinlzNsvTjFoRoYuguGL3r7bVNLa87WbHkULkR1loPf1Dl2', 1, NULL, 'admin@admin', NULL, NULL, '0123123123', NULL, 0),
-(4, 'asdsasad', 'test', '$2y$12$GSIvcf3PKK5n/MkPDdP/IeFkQm50xtp7AAD9fj53p1Q.yRLIS.MeS', 0, NULL, '123@123', NULL, NULL, '123', NULL, 0);
+(4, 'asdsasad', 'test', '$2y$12$GSIvcf3PKK5n/MkPDdP/IeFkQm50xtp7AAD9fj53p1Q.yRLIS.MeS', 3, NULL, '123@123', NULL, NULL, '123', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -284,6 +295,26 @@ CREATE TABLE `thongtinvanchuyen` (
   `MaTheoDoi` text,
   `NgayDuKienGiaoHang` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vaitro`
+--
+
+CREATE TABLE `vaitro` (
+  `id_vai_tro` int(11) NOT NULL,
+  `ten_vai_tro` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `vaitro`
+--
+
+INSERT INTO `vaitro` (`id_vai_tro`, `ten_vai_tro`) VALUES
+(1, 'Super'),
+(2, 'Admin'),
+(3, 'Khách Hàng');
 
 --
 -- Indexes for dumped tables
@@ -368,6 +399,12 @@ ALTER TABLE `phuongthucthanhtoan`
   ADD PRIMARY KEY (`MaPTTT`);
 
 --
+-- Indexes for table `quyen`
+--
+ALTER TABLE `quyen`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `sanpham`
 --
 ALTER TABLE `sanpham`
@@ -390,6 +427,12 @@ ALTER TABLE `thongbao`
 --
 ALTER TABLE `thongtinvanchuyen`
   ADD PRIMARY KEY (`MaVC`);
+
+--
+-- Indexes for table `vaitro`
+--
+ALTER TABLE `vaitro`
+  ADD PRIMARY KEY (`id_vai_tro`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -474,6 +517,12 @@ ALTER TABLE `phuongthucthanhtoan`
   MODIFY `MaPTTT` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `quyen`
+--
+ALTER TABLE `quyen`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `sanpham`
 --
 ALTER TABLE `sanpham`
@@ -496,6 +545,12 @@ ALTER TABLE `thongbao`
 --
 ALTER TABLE `thongtinvanchuyen`
   MODIFY `MaVC` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `vaitro`
+--
+ALTER TABLE `vaitro`
+  MODIFY `id_vai_tro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
