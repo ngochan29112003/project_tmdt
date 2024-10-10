@@ -7,27 +7,7 @@
     <link rel="shortcut icon" href="{{asset('asset/img/icon.png')}}">
     <title>Trang chủ</title>
     <!-- CSS files -->
-    <link rel="stylesheet" href="{{asset('https://cdn.datatables.net/2.1.7/css/dataTables.dataTables.css')}}" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link href="{{asset('dist/css/tabler.min.css?1692870487')}}" rel="stylesheet"/>
-    <link href="{{asset('dist/css/tabler-flags.min.css?1692870487')}}" rel="stylesheet"/>
-    <link href="{{asset('dist/css/tabler-payments.min.css?1692870487')}}" rel="stylesheet"/>
-    <link href="{{asset('dist/css/tabler-vendors.min.css?1692870487')}}" rel="stylesheet"/>
-    <link href="{{asset('dist/css/demo.min.css')}}"/>
-    <link href="{{asset('dist/css/toastr.css')}}" rel="stylesheet"/>
-    <link rel="stylesheet"
-          href="{{asset('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css')}}">
-    <style>
-        @import url('https://rsms.me/inter/inter.css');
-
-        :root {
-            --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
-        }
-
-        body {
-            font-feature-settings: "cv03", "cv04", "cv11";
-        }
-    </style>
+    @include('lib-css')
 
     <style>
         .login-link {
@@ -338,15 +318,7 @@
 
 
 <!-- Libs JS -->
-<script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
-<script src="{{asset('dist/libs/apexcharts/dist/apexcharts.min.js?1692870487')}}" defer></script>
-<script src="{{asset('dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1692870487')}}" defer></script>
-<script src="{{asset('dist/libs/jsvectormap/dist/maps/world.js?1692870487')}}" defer></script>
-<script src="{{asset('dist/libs/jsvectormap/dist/maps/world-merc.js?1692870487')}}" defer></script>
-
-<script src="{{asset('dist/js/tabler.min.js?1692870487')}}" defer></script>
-<script src="{{asset('dist/js/demo.min.js?1692870487')}}" defer></script>
-<script src="{{asset('dist/js/toastr.min.js')}}"></script>
+@include('lib-js')
 <script>
     // @formatter:off
     document.addEventListener("DOMContentLoaded", function () {

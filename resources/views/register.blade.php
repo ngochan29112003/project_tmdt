@@ -12,7 +12,7 @@
     <div class="container container-tight py-4">
         <div class="text-center mb-4">
             <a href="." class="navbar-brand navbar-brand-autodark">
-                <img src="http://127.0.0.1:8000/asset/img/logo.png" height="70" alt=" ">
+                <img src="{{asset('asset/img/logo.png')}}" height="70" alt=" ">
             </a>
         </div>
         <form class="card card-md" id="formdangky" enctype="multipart/form-data" >

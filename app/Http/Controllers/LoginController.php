@@ -75,8 +75,7 @@ class LoginController extends Controller
         // Lưu MaTK và VaiTro lên session để còn tái sử dụng
         session([
             'MaTK' => $account->MaTK,
-            'VaiTro' => $account->VaiTro,
-        ]);
+            'VaiTro' => $account->VaiTro,]);
 
         // Kiểm tra quyền người dùng và chuyển hướng
         if ($account->VaiTro == 1) {
