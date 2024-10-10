@@ -9,6 +9,6 @@ class TrangChuController extends Controller
 {
     public function getViewTrangChu()
     {
-        return view('khach_hang.master');
+        return view('khach-hang.master');
     }
 }

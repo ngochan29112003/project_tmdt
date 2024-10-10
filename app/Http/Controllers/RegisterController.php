@@ -54,6 +54,7 @@ class RegisterController extends Controller
         $newAccount->SDT = $request->SDT;
         $newAccount->MatKhau = $hashedPassword;
         $newAccount->VaiTro = 0;
+        $newAccount->TrangThai = 0;
 
 //        0 là khách hàng
 //        1 là supAdmin

@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\admin\DashBoardController;
-use App\Http\Controllers\khach_hang\QuanLyTaiKhoanController;
+use App\Http\Controllers\super_admin\DashBoardController;
+use App\Http\Controllers\super_admin\QuanLyTaiKhoanController;
 use App\Http\Controllers\khach_hang\TrangChuController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -18,18 +18,19 @@ Route::get('/trang-chu-kh',[TrangChuController::class,'getViewTrangChu'])->name(
 
 Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
 
-    Route::group(['prefix' => '/admin'], function () {
-        Route::get('/home',[DashBoardController::class,'getViewDashBoard'])->name('admin-home');
-        Route::get('/danh-sach-quan-ly',[QuanLyTaiKhoanController::class,'getViewDSQuanLy'])->name('DS-quanly');
-        Route::get('danh-sach-khac-hang',[QuanLyTaiKhoanController::class,'getViewDSKhachHang'])->name('DS-khachhang');
+    Route::group(['prefix' => '/super-admin'], function () {
+        Route::get('/home',[DashBoardController::class,'getViewDashBoard'])->name('super-admin-home');
+        Route::get('/danh-sach-tai-khoan',[QuanLyTaiKhoanController::class,'getView'])->name('danh-sach-tai-khoan');
+        Route::post('/unlock', [QuanLyTaiKhoanController::class, 'unlockAccount'])->name('unlock.route');
+
     });
 
     Route::group(['prefix' => '/khach-hang'], function () {
         Route::get('/home',[DashBoardController::class,'getViewDashBoardKH'])->name('khach-hang-home');
     });
 
-    Route::group(['prefix' => '/super-admin'], function () {
-        Route::get('/home',[DashBoardController::class,'getViewDashBoardSAdmin'])->name('super-admin-home');
+    Route::group(['prefix' => '/admin'], function () {
+        Route::get('/home',[DashBoardController::class,'getViewDashBoardSAdmin'])->name('admin-home');
 
     });
 });

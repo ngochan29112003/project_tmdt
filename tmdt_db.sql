@@ -254,7 +254,7 @@ CREATE TABLE `taikhoan` (
 --
 
 INSERT INTO `taikhoan` (`MaTK`, `HoTen`, `TenDangNhap`, `MatKhau`, `VaiTro`, `AnhDaiDien`, `Email`, `NgaySinh`, `GioiTinh`, `SDT`, `DiaChi`) VALUES
-(3, 'admin', 'admin', '$2y$12$EkIwMrbinlzNsvTjFoRoYuguGL3r7bVNLa87WbHkULkR1loPf1Dl2', 2, NULL, 'admin@admin', NULL, NULL, '0123123123', NULL);
+(3, 'super-admin', 'super-admin', '$2y$12$EkIwMrbinlzNsvTjFoRoYuguGL3r7bVNLa87WbHkULkR1loPf1Dl2', 2, NULL, 'super-admin@super-admin', NULL, NULL, '0123123123', NULL);
 
 -- --------------------------------------------------------
 

@@ -15,16 +15,16 @@ class LoginController extends Controller
 
     public function loginAction(Request $request)
     {
-        //Lấy lại tk và mk được gửi từ Form qua
+        // Lấy lại tk và mk được gửi từ Form qua
         $request->validate([
             'taikhoan' => 'required|string',
             'password' => 'required|string',
         ]);
 
-        //Gọi model
+        // Gọi model
         $account = AuthModel::where('TenDangNhap', $request->taikhoan)->first();
 
-        // Tài khoản không có
+        // Tài khoản không tồn tại
         if (!$account) {
             return response()->json([
                 'success' => false,
@@ -33,14 +33,44 @@ class LoginController extends Controller
             ]);
         }
 
+        // Kiểm tra nếu tài khoản bị khóa
+        if ($account->TrangThai == 1) {
+            return response()->json([
+                'success' => false,
+                'status' => 403,
+                'message' => 'Tài khoản đã bị khóa.',
+            ]);
+        }
+
+        // Khởi tạo hoặc cập nhật số lần đăng nhập sai trong session
+        $loginAttempts = session()->get('login_attempts_' . $account->MaTK, 0);
+
         // Kiểm tra password
         if (!Hash::check($request->password, $account->MatKhau)) {
+            $loginAttempts++;
+            session(['login_attempts_' . $account->MaTK => $loginAttempts]);
+
+            // Nếu đăng nhập sai quá 5 lần thì khóa tài khoản
+            if ($loginAttempts >= 5) {
+                $account->TrangThai = 1; // Khóa tài khoản
+                $account->save(); // Lưu thay đổi trạng thái tài khoản
+
+                return response()->json([
+                    'success' => false,
+                    'status' => 403,
+                    'message' => 'Tài khoản đã bị khóa do đăng nhập quá nhiều lần.',
+                ]);
+            }
+
             return response()->json([
                 'success' => false,
                 'status' => 400,
-                'message' => 'Mật khẩu không đúng',
+                'message' => 'Mật khẩu không đúng. Số lần đăng nhập sai: ' . $loginAttempts,
             ]);
         }
+
+        // Xoá số lần đăng nhập sai sau khi đăng nhập thành công
+        session()->forget('login_attempts_' . $account->MaTK);
 
         // Lưu MaTK và VaiTro lên session để còn tái sử dụng
         session([
@@ -69,6 +99,7 @@ class LoginController extends Controller
             ]);
         }
     }
+
 
     public function logoutAction(Request $request)
     {
