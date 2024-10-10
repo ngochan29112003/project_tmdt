@@ -12,7 +12,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Sign in - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
+    <link rel="shortcut icon" href="{{asset('asset/img/icon.png')}}">
     @include('lib-css')
 </head>
 <body  class=" d-flex flex-column">
@@ -21,7 +21,7 @@
     <div class="container container-tight py-4">
         <div class="text-center mb-4">
             <a href="." class="navbar-brand navbar-brand-autodark">
-                <img src="{{asset('static/logo.svg')}}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+                <img src="http://127.0.0.1:8000/asset/img/logo.png" height="70" alt=" ">
             </a>
         </div>
         <div class="card card-md">
