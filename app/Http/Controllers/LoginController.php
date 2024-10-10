@@ -79,23 +79,28 @@ class LoginController extends Controller
         ]);
 
         // Kiểm tra quyền người dùng và chuyển hướng
-        if ($account->VaiTro == 0) {
-            return response()->json([
-                'success' => true,
-                'status' => 200,
-                'redirect' => route('khach-hang-home'),
-            ]);
-        } elseif ($account->VaiTro == 1) {
+        if ($account->VaiTro == 1) {
             return response()->json([
                 'success' => true,
                 'status' => 200,
                 'redirect' => route('super-admin-home'),
             ]);
-        } else {
+        } elseif ($account->VaiTro == 2) {
             return response()->json([
                 'success' => true,
                 'status' => 200,
                 'redirect' => route('admin-home'),
+            ]);
+        } elseif($account->VaiTro == 3) {
+            return response()->json([
+                'success'  => true,
+                'status'   => 200,
+                'redirect' => route('khach-hang-home'),
+            ]);
+        } else {
+            return response()->json([
+                'success'  => false,
+                'status'   => 400,
             ]);
         }
     }

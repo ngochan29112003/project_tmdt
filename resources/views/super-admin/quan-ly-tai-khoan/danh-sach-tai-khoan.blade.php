@@ -1,5 +1,19 @@
 @extends('super-admin.master')
 @section('contents')
+    <style>
+        .form-floating select {
+            padding-top: 1.25rem; /* Điều chỉnh khoảng cách nhãn */
+            padding-bottom: 0.25rem;
+        }
+
+        .form-floating label {
+            white-space: nowrap; /* Giữ cho nhãn không bị xuống dòng */
+            overflow: hidden;    /* Ẩn phần thừa khi bị tràn */
+            text-overflow: ellipsis; /* Thêm dấu "..." khi bị tràn */
+            width: 100%;
+        }
+    </style>
+
     <div class = "page-header d-print-none">
         <div class = "container-xl">
             <div class = "row g-2 align-items-center">
@@ -8,8 +22,8 @@
                         TRANG QUẢN LÝ TÀI KHOẢN </h2>
                 </div>
             </div>
-            <div class = "row mt-2 mb-0">
-                <div class = "col-auto">
+            <div class = "row mt-2">
+                <div class = "col-9">
                     <a href = "#" class = "btn btn-primary">
                         <span>
                             <svg xmlns = "http://www.w3.org/2000/svg" width = "24" height = "24" viewBox = "0 0 24 24" fill = "none" stroke = "currentColor" stroke-width = "2" stroke-linecap = "round" stroke-linejoin = "round" class = "icon icon-tabler icons-tabler-outline icon-tabler-user-plus">
@@ -21,9 +35,20 @@
                             </svg>
                         </span> Thêm mới </a>
                 </div>
+                <div class="col-3">
+                    <div class="form-floating w-100">
+                        <select class="form-select" id="floatingSelect" onchange="filterByRole(this.value)">
+                            <option value="" selected>Hiện tất cả</option>
+                            <option value="1">Tài khoản Super Admin</option>
+                            <option value="2">Tài khoản Admin</option>
+                            <option value="3">Tài khoản Khách hàng</option>
+                        </select>
+                        <label for="floatingSelect">Lựa chọn loại tài khoản hiển thị</label>
+                    </div>
+
+                </div>
             </div>
         </div>
-        
     </div>
 
     <div class = "page-body">
@@ -56,13 +81,7 @@
                                         <td>{{ $taiKhoan->GioiTinh == 1 ? 'Nam' : 'Nữ' }}</td>
                                         <td>{{ $taiKhoan->SDT }}</td>
                                         <td>{{ $taiKhoan->DiaChi }}</td>
-                                        <td>
-                                            @if($taiKhoan->VaiTro === 0)
-                                                Khách hàng
-                                            @elseif($taiKhoan->VaiTro == 1)
-                                                Super admin
-                                            @endif
-                                        </td>
+                                        <td>{{ $taiKhoan['vaitro']->ten_vai_tro }}</td>
                                         <td>
                                             @if($taiKhoan->TrangThai == 1)
                                                 <span class = "badge bg-danger text-white unlock-badge" data-id = "{{ $taiKhoan->MaTK }}" style = "cursor:pointer;">Đang bị khoá</span>
@@ -117,44 +136,39 @@
     </script>
 
     <script>
-      let unlockUserId = null;
-
-      // When a locked account is clicked
-      $(document).on('click', '.unlock-badge', function() {
-        unlockUserId = $(this).data('id');
-        $('#unlockModal').modal('show');  // Show the modal
-      });
-
-      // When the user confirms unlocking
-      $('#confirmUnlock').on('click', function() {
-        if (unlockUserId) {
-          $.ajax({
-            url: "{{ route('unlock.route') }}",  // Backend route to unlock
-            type: 'POST',
-            data: {
-              _token: '{{ csrf_token() }}',
-              id: unlockUserId
-            },
-            success: function(response) {
-              if (response.success) {
-                $('#unlockModal').modal('hide');  // Hide the modal
-
-                // Show toastr success message
-                toastr.success('Tài khoản đã được mở khóa thành công.');
-
-                // Reload the page after a short delay to reflect changes
-                setTimeout(function() {
-                  location.reload();
-                }, 2000); // Reload after 2 seconds
-              } else {
-                toastr.error('Có lỗi xảy ra khi mở khóa tài khoản.');
-              }
-            },
-            error: function() {
-              toastr.error('Có lỗi xảy ra khi mở khóa tài khoản.');
-            }
-          });
-        }
-      });
+      function filterByRole(role) {
+        $.ajax({
+          url: "{{ route('super-admin.filter-accounts') }}", // Đường dẫn đến route xử lý
+          type: "GET",
+          data: { role: role }, // Truyền giá trị VaiTro
+          success: function(response) {
+            // Cập nhật lại bảng tài khoản
+            var tbody = $('#tableTaiKhoanKhachHang tbody');
+            tbody.empty(); // Xóa tất cả các dòng cũ
+            $.each(response.data, function(index, taiKhoan) {
+              var gioiTinh = taiKhoan.GioiTinh == 1 ? 'Nam' : 'Nữ';
+              var trangThai = taiKhoan.TrangThai == 1 ? '<span class="badge bg-danger text-white">Đang bị khoá</span>' : '<span class="badge bg-success text-white">Hoạt động</span>';
+              tbody.append(`
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td>${taiKhoan.HoTen}</td>
+                            <td>${taiKhoan.NgaySinh}</td>
+                            <td>${gioiTinh}</td>
+                            <td>${taiKhoan.SDT}</td>
+                            <td>${taiKhoan.DiaChi}</td>
+                            <td>${taiKhoan.vaitro.ten_vai_tro}</td>
+                            <td>${trangThai}</td>
+                            <td class="text-center"></td>
+                        </tr>
+                    `);
+            });
+          },
+          error: function(xhr, status, error) {
+            console.error(error);
+          }
+        });
+      }
     </script>
+
+
 @endsection
