@@ -9,11 +9,25 @@ class QuanLyTaiKhoanController extends Controller
 {
     public function getView()
     {
-        $dataTaiKhoan = QuanLyTaiKhoan::all();
-
-        // Pass data to the view
+        $dataTaiKhoan = QuanLyTaiKhoan::with('vaitro')->get(); // Lấy tất cả tài khoản
         return view('super-admin.quan-ly-tai-khoan.danh-sach-tai-khoan', compact('dataTaiKhoan'));
     }
+
+    public function filterAccounts(Request $request)
+    {
+        $role = $request->get('role');
+
+        if ($role) {
+            // Lọc theo VaiTro nếu có giá trị
+            $dataTaiKhoan = QuanLyTaiKhoan::with('vaitro')->where('VaiTro', $role)->get();
+        } else {
+            // Hiển thị tất cả nếu không chọn VaiTro
+            $dataTaiKhoan = QuanLyTaiKhoan::with('vaitro')->get();
+        }
+
+        return response()->json(['data' => $dataTaiKhoan]);
+    }
+
 
     public function unlockAccount(Request $request)
     {
@@ -21,7 +35,6 @@ class QuanLyTaiKhoanController extends Controller
         $taiKhoan = QuanLyTaiKhoan::find($request->id);
 
         if ($taiKhoan) {
-            // Update the 'TrangThai' to 0 (active)
             $taiKhoan->TrangThai = 0;
             $taiKhoan->save();
 

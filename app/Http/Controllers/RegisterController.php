@@ -53,12 +53,8 @@ class RegisterController extends Controller
         $newAccount->Email = $request->Email;
         $newAccount->SDT = $request->SDT;
         $newAccount->MatKhau = $hashedPassword;
-        $newAccount->VaiTro = 0;
+        $newAccount->VaiTro = 3;
         $newAccount->TrangThai = 0;
-
-//        0 là khách hàng
-//        1 là supAdmin
-//        bắt đầu từ 2 là Admin 1, 2, 3 gì đó
 
         if ($newAccount->save()) {
             return response()->json([

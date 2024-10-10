@@ -11,4 +11,10 @@ class QuanLyTaiKhoan extends Model
     protected $table = 'taikhoan';
     protected $primaryKey = 'MaTK';
     public $timestamps = false;
+
+    public function vaitro()
+    {
+        return $this->belongsTo(VaiTroTaiKhoan::class, 'VaiTro', 'id_vai_tro');
+    }
 }
+
