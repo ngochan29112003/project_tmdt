@@ -8,22 +8,20 @@
                         TRANG QUẢN LÝ SẢN PHẨM </h2>
                 </div>
             </div>
-        </div>
 
-        <!-- lấy này nè -->
-        <div class="row mt-2">
-            <div class="col-md-9 d-flex align-items-center gap-2 justify-content-start">
-                <button class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#Modaladdsanpham">
-                    <i class="bi bi-file-earmark-plus pe-2"></i>
-                    Thêm mới
-                </button>
-                <a href="#" class="btn btn-success d-flex align-items-center text-white btn-export">
-                    <i class="bi bi-file-earmark-arrow-down pe-2"></i>
-                    Xuất file Excel
-                </a>
+            <div class="row mt-2">
+                <div class="col-md-9 d-flex align-items-center gap-2 justify-content-start">
+                    <button class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#Modaladdsanpham">
+                        <i class="bi bi-file-earmark-plus pe-2"></i>
+                        Thêm mới
+                    </button>
+                    <a href="#" class="btn btn-success d-flex align-items-center text-white btn-export">
+                        <i class="bi bi-file-earmark-arrow-down pe-2"></i>
+                        Xuất file Excel
+                    </a>
+                </div>
             </div>
         </div>
-
     </div>
 
     <div class = "page-body">
