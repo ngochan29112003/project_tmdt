@@ -5,7 +5,7 @@
             <div class = "row g-2 align-items-center">
                 <div class = "col">
                     <h2 class = "page-title">
-                        Quản lý danh mục </h2>
+                        TRANG QUẢN LÝ DANH MỤC SẢN PHẨM </h2>
                 </div>
             </div>
         </div>
@@ -13,7 +13,7 @@
         <!-- lấy này nè -->
         <div class="row mt-2">
             <div class="col-md-9 d-flex align-items-center gap-2 justify-content-start">
-                <button class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#Modaldanhmuc">
+                <button class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#Modaladddanhmuc">
                     <i class="bi bi-file-earmark-plus pe-2"></i>
                     Thêm mới
                 </button>
@@ -54,7 +54,7 @@
     </div>
 
     <!-- ======= Modal thêm (tìm hiểu Modal này trên BS5) ======= -->
-    <div class="modal fade" id="Modaldanhmuc">
+    <div class="modal fade" id="Modaladddanhmuc">
         <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
             <div class="modal-content">
                 <div class="modal-header">
@@ -74,8 +74,12 @@
                                 <input type="text" class="form-control" name="AnhDM" id="AnhDM" required>
                             </div>
                             <div class="col-md-12 mb-3">
-                                <label for="TrangTaiDM" class="form-label">Trạng thái danh mục</label>
-                                <input type="text" class="form-control" name="TrangTaiDM" id="TrangTaiDM" required>
+                                <label for="TrangThaiDM" class="form-label">Trạng thái danh mục</label>
+                                <select class="form-select" name="TrangThaiDM" id="TrangThaiDM">
+                                    <option value="" disabled selected>Chọn trạng thái</option>
+                                    <option value="1">Ẩn</option>
+                                    <option value="2">Hiện</option>
+                                </select>
                             </div>
                         </div>
                         <div class="text-end">

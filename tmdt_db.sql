@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.2
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Oct 10, 2024 at 11:31 PM
--- Server version: 5.7.24
--- PHP Version: 8.1.12
+-- Host: 127.0.0.1
+-- Generation Time: Oct 16, 2024 at 06:21 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,10 +31,10 @@ CREATE TABLE `baidang` (
   `MaBD` int(11) NOT NULL,
   `MaTK` int(11) DEFAULT NULL,
   `MaSP` int(11) DEFAULT NULL,
-  `AnhBD` text,
-  `NoiDungBD` text,
-  `NgayTaoBD` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `AnhBD` text DEFAULT NULL,
+  `NoiDungBD` text DEFAULT NULL,
+  `NgayTaoBD` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -44,11 +44,11 @@ CREATE TABLE `baidang` (
 
 CREATE TABLE `baocao` (
   `MaBC` int(11) NOT NULL,
-  `NoiDungBC` text,
-  `TongDoanhThu` text,
-  `NgayTaoBC` text,
+  `NoiDungBC` text DEFAULT NULL,
+  `TongDoanhThu` text DEFAULT NULL,
+  `NgayTaoBC` text DEFAULT NULL,
   `MaTK` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -60,11 +60,11 @@ CREATE TABLE `binhluan` (
   `MaBL` int(11) NOT NULL,
   `MaTK` int(11) DEFAULT NULL,
   `MaSP` int(11) DEFAULT NULL,
-  `DanhGia` text,
-  `AnhBL` text,
-  `NoiDungDG` text,
-  `NgayTaoBL` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `DanhGia` text DEFAULT NULL,
+  `AnhBL` text DEFAULT NULL,
+  `NoiDungDG` text DEFAULT NULL,
+  `NgayTaoBL` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -76,9 +76,9 @@ CREATE TABLE `chitietdonhang` (
   `MaCTDH` int(11) NOT NULL,
   `MaDH` int(11) DEFAULT NULL,
   `MaSP` int(11) DEFAULT NULL,
-  `SoLuong` text,
-  `Gia` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `SoLuong` text DEFAULT NULL,
+  `Gia` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -89,11 +89,11 @@ CREATE TABLE `chitietdonhang` (
 CREATE TABLE `chitietsanpham` (
   `MaCTSP` int(11) NOT NULL,
   `MaSP` int(11) DEFAULT NULL,
-  `ThongSoKyThuat` text,
-  `NhaCungCap` text,
-  `BaoHanh` text,
-  `XuatXu` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `ThongSoKyThuat` text DEFAULT NULL,
+  `NhaCungCap` text DEFAULT NULL,
+  `BaoHanh` text DEFAULT NULL,
+  `XuatXu` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -103,10 +103,10 @@ CREATE TABLE `chitietsanpham` (
 
 CREATE TABLE `danhmucsanpham` (
   `MaDM` int(11) NOT NULL,
-  `TenDM` text,
-  `AnhDM` text,
-  `TrangThaiDM` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `TenDM` text DEFAULT NULL,
+  `AnhDM` text DEFAULT NULL,
+  `TrangThaiDM` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -116,13 +116,14 @@ CREATE TABLE `danhmucsanpham` (
 
 CREATE TABLE `donhang` (
   `MaDH` int(11) NOT NULL,
-  `TrangThaiDH` text,
-  `TongTien` text,
-  `DiaChiGiaoHang` text,
-  `NgayTaoDH` text,
+  `MaSP` int(11) NOT NULL,
+  `TrangThaiDH` text DEFAULT NULL,
+  `TongTien` text DEFAULT NULL,
+  `DiaChiGiaoHang` text DEFAULT NULL,
+  `NgayTaoDH` text DEFAULT NULL,
   `PhuongThucThanhToan` int(11) DEFAULT NULL,
   `MaTK` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -134,8 +135,8 @@ CREATE TABLE `giohang` (
   `MaGH` int(11) NOT NULL,
   `MaTK` int(11) DEFAULT NULL,
   `MaSP` int(11) DEFAULT NULL,
-  `SoLuong` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `SoLuong` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -145,10 +146,10 @@ CREATE TABLE `giohang` (
 
 CREATE TABLE `hangsanxuat` (
   `MaHSX` int(11) NOT NULL,
-  `TenHSX` text,
-  `AnhHSX` text,
-  `TrangThaiHSX` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `TenHSX` text DEFAULT NULL,
+  `AnhHSX` text DEFAULT NULL,
+  `TrangThaiHSX` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -159,14 +160,14 @@ CREATE TABLE `hangsanxuat` (
 CREATE TABLE `khuyenmai` (
   `MaKM` int(11) NOT NULL,
   `MaTK` int(11) DEFAULT NULL,
-  `TenKM` text,
-  `DieuKien` text,
-  `PhanTramGiam` text,
-  `GiaTriToiDa` text,
-  `NgayBD` text,
-  `NgayKT` text,
-  `SoLanSuDung` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `TenKM` text DEFAULT NULL,
+  `DieuKien` text DEFAULT NULL,
+  `PhanTramGiam` text DEFAULT NULL,
+  `GiaTriToiDa` text DEFAULT NULL,
+  `NgayBD` text DEFAULT NULL,
+  `NgayKT` text DEFAULT NULL,
+  `SoLuongMa` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -177,10 +178,10 @@ CREATE TABLE `khuyenmai` (
 CREATE TABLE `lichsutrangthaidh` (
   `MaLS` int(11) NOT NULL,
   `MaDH` int(11) DEFAULT NULL,
-  `TrangThaiCu` text,
-  `TrangThaiMoi` text,
-  `NgayThaiDoi` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `TrangThaiCu` text DEFAULT NULL,
+  `TrangThaiMoi` text DEFAULT NULL,
+  `NgayThaiDoi` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -191,12 +192,12 @@ CREATE TABLE `lichsutrangthaidh` (
 CREATE TABLE `phanquyen` (
   `MaPQ` int(11) NOT NULL,
   `MaTK` int(11) DEFAULT NULL,
-  `QLDonHang` text,
-  `QLSanPham` text,
-  `QLTaiKhoan` text,
-  `QLBinhLuan` text,
-  `QLBaoCao` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `QLDonHang` text DEFAULT NULL,
+  `QLSanPham` text DEFAULT NULL,
+  `QLTaiKhoan` text DEFAULT NULL,
+  `QLBinhLuan` text DEFAULT NULL,
+  `QLBaoCao` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -206,8 +207,8 @@ CREATE TABLE `phanquyen` (
 
 CREATE TABLE `phuongthucthanhtoan` (
   `MaPTTT` int(11) NOT NULL,
-  `TenPTTT` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `TenPTTT` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -217,8 +218,8 @@ CREATE TABLE `phuongthucthanhtoan` (
 
 CREATE TABLE `quyen` (
   `id` int(11) NOT NULL,
-  `ten_quyen` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `ten_quyen` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -228,17 +229,17 @@ CREATE TABLE `quyen` (
 
 CREATE TABLE `sanpham` (
   `MaSP` int(11) NOT NULL,
-  `TenSP` text,
-  `AnhSP` text,
-  `GiaBan` text,
-  `SoLuongTonKho` text,
-  `NgayTaoSP` text,
-  `TrangThaiSP` text,
-  `MoTaChiTiet` text,
-  `ThoiGianBaoHanh` text,
+  `TenSP` text DEFAULT NULL,
+  `AnhSP` text DEFAULT NULL,
+  `GiaBan` text DEFAULT NULL,
+  `SoLuongTonKho` text DEFAULT NULL,
+  `NgayTaoSP` text DEFAULT NULL,
+  `TrangThaiSP` text DEFAULT NULL,
+  `MoTaChiTiet` text DEFAULT NULL,
+  `ThoiGianBaoHanh` text DEFAULT NULL,
   `HangSanXuat` int(11) DEFAULT NULL,
   `DanhMucSP` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -248,18 +249,18 @@ CREATE TABLE `sanpham` (
 
 CREATE TABLE `taikhoan` (
   `MaTK` int(11) NOT NULL,
-  `HoTen` text,
-  `TenDangNhap` text,
-  `MatKhau` text,
+  `HoTen` text DEFAULT NULL,
+  `TenDangNhap` text DEFAULT NULL,
+  `MatKhau` text DEFAULT NULL,
   `VaiTro` int(11) DEFAULT NULL,
-  `AnhDaiDien` text,
-  `Email` text,
-  `NgaySinh` text,
-  `GioiTinh` text,
-  `SDT` text,
-  `DiaChi` text,
+  `AnhDaiDien` text DEFAULT NULL,
+  `Email` text DEFAULT NULL,
+  `NgaySinh` text DEFAULT NULL,
+  `GioiTinh` text DEFAULT NULL,
+  `SDT` text DEFAULT NULL,
+  `DiaChi` text DEFAULT NULL,
   `TrangThai` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `taikhoan`
@@ -277,10 +278,10 @@ INSERT INTO `taikhoan` (`MaTK`, `HoTen`, `TenDangNhap`, `MatKhau`, `VaiTro`, `An
 
 CREATE TABLE `thongbao` (
   `MaTB` int(11) NOT NULL,
-  `NoiDungTB` text,
-  `NgayTaoTB` text,
+  `NoiDungTB` text DEFAULT NULL,
+  `NgayTaoTB` text DEFAULT NULL,
   `MaTK` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -291,10 +292,10 @@ CREATE TABLE `thongbao` (
 CREATE TABLE `thongtinvanchuyen` (
   `MaVC` int(11) NOT NULL,
   `MaDH` int(11) DEFAULT NULL,
-  `DonViVC` text,
-  `MaTheoDoi` text,
-  `NgayDuKienGiaoHang` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `DonViVC` text DEFAULT NULL,
+  `MaTheoDoi` text DEFAULT NULL,
+  `NgayDuKienGiaoHang` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -304,8 +305,8 @@ CREATE TABLE `thongtinvanchuyen` (
 
 CREATE TABLE `vaitro` (
   `id_vai_tro` int(11) NOT NULL,
-  `ten_vai_tro` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `ten_vai_tro` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `vaitro`
@@ -360,7 +361,8 @@ ALTER TABLE `danhmucsanpham`
 -- Indexes for table `donhang`
 --
 ALTER TABLE `donhang`
-  ADD PRIMARY KEY (`MaDH`);
+  ADD PRIMARY KEY (`MaDH`),
+  ADD KEY `MaSP` (`MaSP`);
 
 --
 -- Indexes for table `giohang`
