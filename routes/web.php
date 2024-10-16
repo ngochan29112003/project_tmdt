@@ -16,6 +16,7 @@ Route::post('/login',[LoginController::class,'loginAction'])->name('login-action
 Route::get('/logout', [LoginController::class, 'logoutAction'])->name('logout');
 Route::get('/trang-chu-kh',[TrangChuController::class,'getViewTrangChu'])->name('trang-chu');
 
+
 Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
 
     Route::group(['prefix' => '/super-admin'], function () {
