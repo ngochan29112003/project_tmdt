@@ -90,7 +90,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="">
+                            <a class="nav-link" href="{{route('danh-sach-danh-muc')}}">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -109,7 +109,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{asset('form-elements.html')}}">
+                            <a class="nav-link" href="{{route('danh-sach-hang-san-xuat')}}">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -130,7 +130,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#navbar-extra">
+                            <a class="nav-link" href="{{route('danh-sach-san-pham')}}">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -150,7 +150,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#navbar-layout">
+                            <a class="nav-link" href="{{route('danh-sach-don-hang')}}">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <!-- Download SVG icon from http://tabler-icons.io/i/layout-2 -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -169,7 +169,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{asset('icons.html')}}">
+                            <a class="nav-link" href="{{route('danh-sach-phuong-thuc-thanh-toan')}}">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <!-- Download SVG icon from http://tabler-icons.io/i/ghost -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -190,7 +190,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{asset('icons.html')}}">
+                            <a class="nav-link" href="{{route('danh-sach-van-chuyen')}}">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <!-- Download SVG icon from http://tabler-icons.io/i/ghost -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -209,7 +209,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{asset('icons.html')}}">
+                            <a class="nav-link" href="{{route('danh-sach-bai-dang')}}">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <!-- Download SVG icon from http://tabler-icons.io/i/ghost -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -228,7 +228,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{asset('icons.html')}}">
+                            <a class="nav-link" href="{{route('danh-sach-binh-luan')}}">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <!-- Download SVG icon from http://tabler-icons.io/i/ghost -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -247,7 +247,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{asset('icons.html')}}">
+                            <a class="nav-link" href="{{route('danh-sach-khuyen-mai')}}">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <!-- Download SVG icon from http://tabler-icons.io/i/ghost -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -268,7 +268,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{asset('emails.html')}}">
+                            <a class="nav-link" href="{{route('danh-sach-bao-cao')}}">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <!-- Download SVG icon from http://tabler-icons.io/i/mail-opened -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
