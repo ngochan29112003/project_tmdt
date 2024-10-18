@@ -44,7 +44,29 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-
+                                @php $stt = 1; @endphp <!-- Initialize the serial number -->
+                                @foreach($list_khuyen_mai as $item)
+                                    <tr>
+                                        <td>{{ $stt++ }}</td>
+                                        <td>{{ $item->MaTK}}</td>
+                                        <td>{{ $item->TenKM}}</td>
+                                        <td>{{ $item->DieuKien}}</td>
+                                        <td>{{ $item->PhanTramGiam}}</td>
+                                        <td>{{ $item->NgayBD}}</td>
+                                        <td>{{ $item->NgayKT}}</td>
+                                        <td class="text-center align-middle">
+                                            <a href="" class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                            |
+                                            <button
+                                                class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
+                                                data-id="{{ $item->MaKM}}">
+                                                <i class="bi bi-trash3"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
