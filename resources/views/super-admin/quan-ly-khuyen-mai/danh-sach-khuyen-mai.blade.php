@@ -85,7 +85,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="Formhangsanxuat" enctype="multipart/form-data">
+                    <form id="Formkhuyenmai" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                         <div class="col-md-6 mb-3">
@@ -147,5 +147,37 @@
 
         }
       });
+
+      var table = $('#tableKhuyenMai').DataTable();
+
+        $('#Formkhuyenmai').submit(function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '{{ route('add-sinh-vien') }}',
+                method: 'POST',
+                data: $(this).serialize(),
+                success: function (response) {
+                    if (response.success) {
+                        $('#Modal').modal('hide');
+                        toastr.success(response.message, "Successful");
+                        setTimeout(function () {
+                            location.reload()
+                        }, 500);
+                    } else {
+                        toastr.error(response.message, "Error");
+                    }
+                },
+                error: function (xhr) {
+                    toastr.error(response.message, "Error");
+                    if (xhr.status === 400) {
+                        var response = xhr.responseJSON;
+                        toastr.error(response.message, "Error");
+                    } else {
+                        toastr.error("An error occurred", "Error");
+                    }
+                }
+            });
+        });
     </script>
 @endsection
