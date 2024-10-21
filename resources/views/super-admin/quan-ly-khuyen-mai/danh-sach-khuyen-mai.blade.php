@@ -118,11 +118,11 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="NgayBD" class="form-label">Ngày bắt đầu</label>
-                                <input type="text" class="form-control" name="NgayBD" id="NgayBD" required>
+                                <input type="date" class="form-control" name="NgayBD" id="NgayBD" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="NgayKT" class="form-label">Ngày kết thúc</label>
-                                <input type="text" class="form-control" name="NgayKT" id="NgayKT" required>
+                                <input type="date" class="form-control" name="NgayKT" id="NgayKT" required>
                             </div>
                         </div>
                         <div class="text-end">
@@ -154,7 +154,7 @@
             e.preventDefault();
 
             $.ajax({
-                url: '{{ route('add-sinh-vien') }}',
+                url: '{{ route('danh-sach-khuyen-mai') }}',
                 method: 'POST',
                 data: $(this).serialize(),
                 success: function (response) {

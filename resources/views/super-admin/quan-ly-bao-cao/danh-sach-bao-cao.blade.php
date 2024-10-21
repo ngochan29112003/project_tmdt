@@ -94,7 +94,7 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="NgayTaoBC" class="form-label">Ngày tạo báo cáo</label>
-                                <input type="text" class="form-control" name="NgayTaoBC" id="NgayTaoBC" required>
+                                <input type="date" class="form-control" name="NgayTaoBC" id="NgayTaoBC" required>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="TongDoanhThu" class="form-label">Tổng doanh thu</label>

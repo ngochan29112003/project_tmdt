@@ -28,7 +28,6 @@ Route::get('/trang-chu-kh',[TrangChuController::class,'getViewTrangChu'])->name(
 
 
 Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
-
     Route::group(['prefix' => '/super-admin'], function () {
         Route::get('/home',[DashBoardController::class,'getViewDashBoard'])->name('super-admin-home');
         Route::get('/danh-sach-tai-khoan',[QuanLyTaiKhoanController::class,'getView'])->name('danh-sach-tai-khoan');
@@ -56,17 +55,29 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::post('/update-san-pham/{id}', [QuanLySanPhamController::class, 'updateSanPham'])->name('update-san-pham');
         Route::delete('/delete-san-pham/{id}',[QuanLySanPhamController::class,'deleteSP'])->name('delete-san-pham');
 
-
+        //Đơn hàng
         Route::get('/danh-sach-don-hang',[QuanLyDonHangController::class,'getView'])->name('danh-sach-don-hang');
+
+        //Phương thức thanh toán
         Route::get('/danh-sach-phuong-thuc-thanh-toan',[PhuongThucThanhToanController::class,'getView'])->name('danh-sach-phuong-thuc-thanh-toan');
+
+        //Thông tin vân chuyển
         Route::get('/danh-sach-van-chuyen',[QuanLyVanChuyenController::class,'getView'])->name('danh-sach-van-chuyen');
+
+        //Bài đăng
         Route::get('/danh-sach-bai-dang',[QuanLyBaiDangController::class,'getView'])->name('danh-sach-bai-dang');
         Route::post('/bai-dang-add',[QuanLyBaiDangController::class,'addBaiDang'])->name('add-bai-dang');
         Route::post('/bai-dang-edit', [QuanLyBaiDangController::class, 'editBaiDang'])->name('edit-bai-dang');
         Route::post('/bai-dang-update/{id}', [QuanLyBaiDangController::class, 'updateBaiDang'])->name('update-bai-dang');
         Route::delete('/bai-dang-delete/{id}',[QuanLyBaiDangController::class,'deleteBaiDang'])->name('delete-bai-dang');
+
+        //Bình luận
         Route::get('/danh-sach-binh-luan',[QuanLyBinhLuanController::class,'getView'])->name('danh-sach-binh-luan');
+
+        //Khuyến mãi
         Route::get('/danh-sach-khuyen-mai',[QuanLyKhuyenMaiController::class,'getView'])->name('danh-sach-khuyen-mai');
+
+        //Báo cáo
         Route::get('/danh-sach-bao-cao',[QuanLyBaoCaoController::class,'getView'])->name('danh-sach-bao-cao');
     });
 
