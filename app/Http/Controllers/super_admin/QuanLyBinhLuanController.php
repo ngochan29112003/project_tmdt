@@ -16,4 +16,15 @@ class QuanLyBinhLuanController extends Controller
         compact('list_binh_luan'));
     }
 
+    function deleteBL($id)
+    {
+        $binhluan = QuanLyBinhLuan::findOrFail($id);
+
+        $binhluan->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Xóa thành công'
+        ]);
+    }
 }

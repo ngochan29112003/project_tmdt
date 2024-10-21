@@ -43,7 +43,19 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/danh-sach-bai-dang',[QuanLyBaiDangController::class,'getView'])->name('danh-sach-bai-dang');
         Route::get('/danh-sach-binh-luan',[QuanLyBinhLuanController::class,'getView'])->name('danh-sach-binh-luan');
         Route::get('/danh-sach-khuyen-mai',[QuanLyKhuyenMaiController::class,'getView'])->name('danh-sach-khuyen-mai');
+        Route::post('/khuyen-mai/add',[QuanLyKhuyenMaiController::class,'addKhuyenMai'])->name('add-khuyen-mai');
+        Route::get('/edit-khuyen-mai/{id}', [QuanLyKhuyenMaiController::class, 'editKhuyenMai'])->name('edit-khuyen-mai');
+        Route::post('/update-khuyen-mai/{id}', [QuanLyKhuyenMaiController::class, 'updateKhuyenMai'])->name('update-khuyen-mai');
+        Route::delete('/khuyen-mai/delete/{id}',[QuanLyKhuyenMaiController::class,'deleteKM'])->name('delete-khuyen-mai');
         Route::get('/danh-sach-bao-cao',[QuanLyBaoCaoController::class,'getView'])->name('danh-sach-bao-cao');
+        Route::post('/bao-cao/add',[QuanLyBaoCaoController::class,'addBaoCao'])->name('add-bao-cao');
+        Route::get('/edit-bao-cao/{id}', [QuanLyBaoCaoController::class, 'editBaoCao'])->name('edit-bao-cao');
+        Route::post('/update-bao-cao/{id}', [QuanLyBaoCaoController::class, 'updateBaoCao'])->name('update-bao-cao');
+        Route::delete('/bao-cao/delete/{id}',[QuanLyBaoCaoController::class,'deleteBC'])->name('delete-bao-cao');
+        Route::post('/bao-cao/add',[QuanLyBaoCaoController::class,'addBaoCao'])->name('add-bao-cao');
+        Route::delete('/bao-cao/delete/{id}',[QuanLyBaoCaoController::class,'deleteBC'])->name('delete-bao-cao');
+        Route::delete('/binh-luan/delete/{id}',[QuanLyBinhLuanController::class,'deleteBL'])->name('delete-binh-luan');
+        
     });
 
     Route::group(['prefix' => '/khach-hang'], function () {
