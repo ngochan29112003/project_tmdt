@@ -34,9 +34,29 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/danh-sach-tai-khoan',[QuanLyTaiKhoanController::class,'getView'])->name('danh-sach-tai-khoan');
         Route::post('/unlock', [QuanLyTaiKhoanController::class, 'unlockAccount'])->name('unlock.route');
         Route::get('filter-accounts', [QuanLyTaiKhoanController::class, 'filterAccounts'])->name('super-admin.filter-accounts');
+
+        //Danh mục
         Route::get('/danh-sach-danh-muc',[QuanLyDanhMucController::class,'getView'])->name('danh-sach-danh-muc');
+        Route::post('/add-danh-muc',[QuanLyDanhMucController::class,'addDanhMuc'])->name('add-danh-muc');
+        Route::delete('/delete-danh-muc/{id}',[QuanLyDanhMucController::class,'deleteDanhMuc'])->name('delete-danh-muc');
+        Route::get('/edit-danh-muc/{id}', [QuanLyDanhMucController::class, 'editDanhMuc'])->name('edit-danh-muc');
+        Route::post('/update-danh-muc/{id}', [QuanLyDanhMucController::class, 'updateDanhMuc'])->name('update-danh-muc');
+
+        //Hãng sản xuất
         Route::get('/danh-sach-hang-san-xuat',[QuanLyHangSanXuatController::class,'getView'])->name('danh-sach-hang-san-xuat');
+        Route::post('/add-hang-san-xuat',[QuanLyHangSanXuatController::class,'addHangSanXuat'])->name('add-hang-san-xuat');
+        Route::delete('/delete-hang-san-xuat/{id}',[QuanLyHangSanXuatController::class,'deleteHangSanXuat'])->name('delete-hang-san-xuat');
+        Route::get('/edit-hang-san-xuat/{id}', [QuanLyHangSanXuatController::class, 'editHangSanXuat'])->name('edit-hang-san-xuat');
+        Route::post('/update-hang-san-xuat/{id}', [QuanLyHangSanXuatController::class, 'updateHangSanXuat'])->name('update-hang-san-xuat');
+
+        //Sản phẩm
         Route::get('/danh-sach-san-pham',[QuanLySanPhamController::class,'getView'])->name('danh-sach-san-pham');
+        Route::post('/add-san-pham',[QuanLySanPhamController::class,'addSanPham'])->name('add-san-pham');
+        Route::get('/edit-san-pham/{id}', [QuanLySanPhamController::class, 'editSanPham'])->name('edit-san-pham');
+        Route::post('/update-san-pham/{id}', [QuanLySanPhamController::class, 'updateSanPham'])->name('update-san-pham');
+        Route::delete('/delete-san-pham/{id}',[QuanLySanPhamController::class,'deleteSP'])->name('delete-san-pham');
+
+
         Route::get('/danh-sach-don-hang',[QuanLyDonHangController::class,'getView'])->name('danh-sach-don-hang');
         Route::get('/danh-sach-phuong-thuc-thanh-toan',[PhuongThucThanhToanController::class,'getView'])->name('danh-sach-phuong-thuc-thanh-toan');
         Route::get('/danh-sach-van-chuyen',[QuanLyVanChuyenController::class,'getView'])->name('danh-sach-van-chuyen');
