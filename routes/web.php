@@ -41,6 +41,10 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/danh-sach-phuong-thuc-thanh-toan',[PhuongThucThanhToanController::class,'getView'])->name('danh-sach-phuong-thuc-thanh-toan');
         Route::get('/danh-sach-van-chuyen',[QuanLyVanChuyenController::class,'getView'])->name('danh-sach-van-chuyen');
         Route::get('/danh-sach-bai-dang',[QuanLyBaiDangController::class,'getView'])->name('danh-sach-bai-dang');
+        Route::post('/bai-dang-add',[QuanLyBaiDangController::class,'addBaiDang'])->name('add-bai-dang');
+        Route::post('/bai-dang-edit', [QuanLyBaiDangController::class, 'editBaiDang'])->name('edit-bai-dang');
+        Route::post('/bai-dang-update/{id}', [QuanLyBaiDangController::class, 'updateBaiDang'])->name('update-bai-dang');
+        Route::delete('/bai-dang-delete/{id}',[QuanLyBaiDangController::class,'deleteBaiDang'])->name('delete-bai-dang');
         Route::get('/danh-sach-binh-luan',[QuanLyBinhLuanController::class,'getView'])->name('danh-sach-binh-luan');
         Route::get('/danh-sach-khuyen-mai',[QuanLyKhuyenMaiController::class,'getView'])->name('danh-sach-khuyen-mai');
         Route::get('/danh-sach-bao-cao',[QuanLyBaoCaoController::class,'getView'])->name('danh-sach-bao-cao');
