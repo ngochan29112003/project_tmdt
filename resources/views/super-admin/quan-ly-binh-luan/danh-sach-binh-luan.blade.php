@@ -17,11 +17,11 @@
                 <div class = "col-12">
                     <div class = "card">
                         <div class = "table-responsive p-2">
-                            <table id = "tableBinhLuan" class = "table table-vcenter card-table table-striped">
+                            <table id = "table" class = "table table-vcenter card-table table-striped">
                                 <thead>
                                 <tr>
                                     <th>STT</th>
-                                    <th>Mã tài khoản</th>
+                                    <th>Tên tài khoản</th>
                                     <th>Mã sản phẩm</th>
                                     <th>Đánh giá</th>
                                     <th>Nội dung đánh giá</th>
@@ -34,17 +34,29 @@
                                 @foreach($list_binh_luan as $item)
                                     <tr>
                                         <td>{{ $stt++ }}</td>
-                                        <td>{{ $item->MaTK}}</td>
+                                        <td>{{ $item->HoTen}}</td>
                                         <td>{{ $item->MaSP}}</td>
                                         <td>{{ $item->DanhGia}}</td>
                                         <td>{{ $item->NoiDungDG}}</td>
                                         <td>{{ $item->NgayTaoBL}}</td>
                                         <td class="text-center align-middle">
+                                            <button class="btn p-0  btn-primary border-0 bg-transparent text-danger shadow-none edit-btn" data-id="{{ $item->MaBL }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="m-0 icon icon-tabler icons-tabler-outline icon-tabler-pencil">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+                                                    <path d="M13.5 6.5l4 4" />
+                                                </svg>
+                                            </button>
                                             |
-                                            <button
-                                                class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
-                                                data-id="{{ $item->MaBL}}">
-                                                <i class="bi bi-trash3"></i>
+                                            <button class="btn p-0 m-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn" data-id="{{ $item->MaBL }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="m-0 icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M4 7l16 0" />
+                                                    <path d="M10 11l0 6" />
+                                                    <path d="M14 11l0 6" />
+                                                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                                </svg>
                                             </button>
                                         </td>
                                     </tr>
@@ -58,64 +70,10 @@
         </div>
     </div>
 
-    <!-- ======= Modal thêm (tìm hiểu Modal này trên BS5) ======= -->
-    <div class="modal fade" id="Modaladdbinhluan">
-        <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Thêm bình luận</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="Formhangsanxuat" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row">
-                        <div class="col-md-6 mb-3">
-                                <label for="MaTK" class="form-label">Tài khoản</label>
-                                <select class="form-select" name="MaTK" id="MaTK">
-                                    <option value="" disabled selected>Chọn tài khoản</option>
-                                    <option value="1">Admin</option>
-                                    <option value="2">Nhân viên</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="MaSP" class="form-label">Sản phẩm</label>
-                                <select class="form-select" name="MaSP" id="MaSP">
-                                    <option value="" disabled selected>Chọn sản phẩm</option>
-                                    <option value="1">Ram 8G</option>
-                                    <option value="2">Máy tính HP</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="AnhBL" class="form-label">Ảnh bình luận</label>
-                                <input type="text" class="form-control" name="AnhBL" id="AnhBL" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="DanhGia" class="form-label">Đánh giá</label>
-                                <input type="text" class="form-control" name="DanhGia" id="DanhGia" required>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <label for="NoiDungDG" class="form-label">Nội dung đánh giá</label>
-                                <input type="text" class="form-control" name="NoiDungDG" id="NoiDungDG" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="NgayTaoBL" class="form-label">Ngày tạo bình luận</label>
-                                <input type="text" class="form-control" name="NgayTaoBL" id="NgayTaoBL" required>
-                            </div>
-                        </div>
-                        <div class="text-end">
-                            <button type="submit" class="btn btn-primary">Thêm</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 @section('scripts')
     <script>
-      var table = $('#tableBinhLuan').DataTable({
+      var table = $('#table').DataTable({
         "language": {
           "emptyTable": "Không có dữ liệu trong bảng",
           "search": "Tìm kiếm:",
@@ -125,5 +83,44 @@
 
         }
       });
+
+      $('#table').on('click', '.delete-btn', function () {
+            var MaBL = $(this).data('id');
+            var row = $(this).closest('tr');
+
+            Swal.fire({
+                title: 'Bạn có chắc chăn ?',
+                text: "Bạn có muốn xóa khoa không ?",
+                icon: 'cảnh báo',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '{{ route('delete-binh-luan', ':id') }}'.replace(':id', MaBL),
+                        method: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                toastr.success(response.message, "Xóa thành công");
+                                setTimeout(function () {
+                                    location.reload()
+                                }, 500);
+                            } else {
+                                toastr.error("Xóa không thành công.",
+                                    "Operation Failed");
+                            }
+                        },
+                        error: function (xhr) {
+                            toastr.error("An error occurred.", "Operation Failed");
+                        }
+                    });
+                }
+            });
+        });
     </script>
 @endsection

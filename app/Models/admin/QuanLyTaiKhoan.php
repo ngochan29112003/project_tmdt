@@ -2,6 +2,7 @@
 
 namespace App\Models\admin;
 
+use DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,6 +16,10 @@ class QuanLyTaiKhoan extends Model
     public function vaitro()
     {
         return $this->belongsTo(VaiTroTaiKhoan::class, 'VaiTro', 'id_vai_tro');
+    }
+
+    public function getTaiKhoan(){
+        return DB::table('taikhoan')->get();
     }
 }
 
