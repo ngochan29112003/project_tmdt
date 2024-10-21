@@ -148,8 +148,6 @@
         }
       });
 
-      var table = $('#tableKhuyenMai').DataTable();
-
         $('#Formkhuyenmai').submit(function (e) {
             e.preventDefault();
 

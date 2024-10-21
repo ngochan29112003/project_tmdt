@@ -175,8 +175,6 @@
         }
       });
 
-      var table = $('#tableDanhMuc').DataTable();
-
       $('#Formdanhmuc').submit(function (e) {
           e.preventDefault();
 

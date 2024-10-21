@@ -262,8 +262,6 @@
         }
       });
 
-      var table = $('#tableSanPham').DataTable();
-
       $('#Formsanpham').submit(function (e) {
           e.preventDefault();
 

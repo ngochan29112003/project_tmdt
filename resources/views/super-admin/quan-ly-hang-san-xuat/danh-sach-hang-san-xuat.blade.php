@@ -175,7 +175,6 @@
         }
       });
 
-      var table = $('#tableHangSanXuat').DataTable();
 
       $('#Formhangsanxuat').submit(function (e) {
           e.preventDefault();
