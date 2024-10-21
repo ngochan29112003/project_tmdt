@@ -236,6 +236,7 @@
 
             $.ajax({
                 url: '{{ route('add-khuyen-mai') }}',
+                url: '{{ route('danh-sach-khuyen-mai') }}',
                 method: 'POST',
                 data: $(this).serialize(),
                 success: function (response) {

@@ -122,6 +122,10 @@
                                 <input type="date" class="form-control" name="NgayTaoBC" id="NgayTaoBC" required>
                             </div>
                             <div class="col-md-12 mb-3">
+                                <label for="TongDoanhThu" class="form-label">Tổng doanh thu</label>
+                                <input type="text" class="form-control" name="TongDoanhThu" id="TongDoanhThu" required>
+                            </div>
+                            <div class="col-md-12 mb-3">
                                 <label for="NoiDungBC" class="form-label">Nội dung báo cáo</label>
                                 <input type="text" class="form-control" name="NoiDungBC" id="NoiDungBC" required>
                             </div>
