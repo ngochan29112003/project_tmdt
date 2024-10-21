@@ -8,19 +8,6 @@
                         TRANG QUẢN LÝ DANH SÁCH BÌNH LUẬN </h2>
                 </div>
             </div>
-
-            <div class="row mt-2">
-                <div class="col-md-9 d-flex align-items-center gap-2 justify-content-start">
-                    <button class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#Modaladdbinhluan">
-                        <i class="bi bi-file-earmark-plus pe-2"></i>
-                        Thêm mới
-                    </button>
-                    <a href="#" class="btn btn-success d-flex align-items-center text-white btn-export">
-                        <i class="bi bi-file-earmark-arrow-down pe-2"></i>
-                        Xuất file Excel
-                    </a>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -43,7 +30,25 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-
+                                @php $stt = 1; @endphp <!-- Initialize the serial number -->
+                                @foreach($list_binh_luan as $item)
+                                    <tr>
+                                        <td>{{ $stt++ }}</td>
+                                        <td>{{ $item->MaTK}}</td>
+                                        <td>{{ $item->MaSP}}</td>
+                                        <td>{{ $item->DanhGia}}</td>
+                                        <td>{{ $item->NoiDungDG}}</td>
+                                        <td>{{ $item->NgayTaoBL}}</td>
+                                        <td class="text-center align-middle">
+                                            |
+                                            <button
+                                                class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
+                                                data-id="{{ $item->MaBL}}">
+                                                <i class="bi bi-trash3"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>

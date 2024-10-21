@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2024 at 06:21 PM
+-- Generation Time: Oct 18, 2024 at 08:08 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -65,6 +65,13 @@ CREATE TABLE `binhluan` (
   `NoiDungDG` text DEFAULT NULL,
   `NgayTaoBL` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `binhluan`
+--
+
+INSERT INTO `binhluan` (`MaBL`, `MaTK`, `MaSP`, `DanhGia`, `AnhBL`, `NoiDungDG`, `NgayTaoBL`) VALUES
+(1, 4, 2, '5 sao', NULL, 'san pham dep, tot', '30/06/2024');
 
 -- --------------------------------------------------------
 
@@ -361,8 +368,7 @@ ALTER TABLE `danhmucsanpham`
 -- Indexes for table `donhang`
 --
 ALTER TABLE `donhang`
-  ADD PRIMARY KEY (`MaDH`),
-  ADD KEY `MaSP` (`MaSP`);
+  ADD PRIMARY KEY (`MaDH`);
 
 --
 -- Indexes for table `giohang`
@@ -456,7 +462,7 @@ ALTER TABLE `baocao`
 -- AUTO_INCREMENT for table `binhluan`
 --
 ALTER TABLE `binhluan`
-  MODIFY `MaBL` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaBL` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `chitietdonhang`
