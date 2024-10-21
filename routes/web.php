@@ -87,8 +87,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/edit-bao-cao/{id}', [QuanLyBaoCaoController::class, 'editBaoCao'])->name('edit-bao-cao');
         Route::post('/update-bao-cao/{id}', [QuanLyBaoCaoController::class, 'updateBaoCao'])->name('update-bao-cao');
         Route::delete('/bao-cao/delete/{id}',[QuanLyBaoCaoController::class,'deleteBC'])->name('delete-bao-cao');
-        Route::post('/bao-cao/add',[QuanLyBaoCaoController::class,'addBaoCao'])->name('add-bao-cao');
-        Route::delete('/bao-cao/delete/{id}',[QuanLyBaoCaoController::class,'deleteBC'])->name('delete-bao-cao');
+
+        //Binh Luan
         Route::delete('/binh-luan/delete/{id}',[QuanLyBinhLuanController::class,'deleteBL'])->name('delete-binh-luan');
         
     });
