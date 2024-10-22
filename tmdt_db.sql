@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 18, 2024 at 08:08 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Host: localhost:3306
+-- Generation Time: Oct 22, 2024 at 09:09 PM
+-- Server version: 5.7.24
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,10 +31,19 @@ CREATE TABLE `baidang` (
   `MaBD` int(11) NOT NULL,
   `MaTK` int(11) DEFAULT NULL,
   `MaSP` int(11) DEFAULT NULL,
-  `AnhBD` text DEFAULT NULL,
-  `NoiDungBD` text DEFAULT NULL,
-  `NgayTaoBD` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `AnhBD` text,
+  `NoiDungBD` text,
+  `NgayTaoBD` text,
+  `TenBD` text COMMENT 'TenBD',
+  `TrangThaiBD` text COMMENT 'TrangThaiBD'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `baidang`
+--
+
+INSERT INTO `baidang` (`MaBD`, `MaTK`, `MaSP`, `AnhBD`, `NoiDungBD`, `NgayTaoBD`, `TenBD`, `TrangThaiBD`) VALUES
+(1, 4, 11, 'Giá', 'Giảm giá sâu', '2024-10-18', 'Sản phẩm giá rẻ', 'Hiện');
 
 -- --------------------------------------------------------
 
@@ -44,11 +53,11 @@ CREATE TABLE `baidang` (
 
 CREATE TABLE `baocao` (
   `MaBC` int(11) NOT NULL,
-  `NoiDungBC` text DEFAULT NULL,
-  `TongDoanhThu` text DEFAULT NULL,
-  `NgayTaoBC` text DEFAULT NULL,
-  `MaTK` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `NoiDungBC` text,
+  `NgayTaoBC` text,
+  `MaTK` int(11) DEFAULT NULL,
+  `LoaiBC` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -60,11 +69,11 @@ CREATE TABLE `binhluan` (
   `MaBL` int(11) NOT NULL,
   `MaTK` int(11) DEFAULT NULL,
   `MaSP` int(11) DEFAULT NULL,
-  `DanhGia` text DEFAULT NULL,
-  `AnhBL` text DEFAULT NULL,
-  `NoiDungDG` text DEFAULT NULL,
-  `NgayTaoBL` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `DanhGia` text,
+  `AnhBL` text,
+  `NoiDungDG` text,
+  `NgayTaoBL` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `binhluan`
@@ -83,9 +92,9 @@ CREATE TABLE `chitietdonhang` (
   `MaCTDH` int(11) NOT NULL,
   `MaDH` int(11) DEFAULT NULL,
   `MaSP` int(11) DEFAULT NULL,
-  `SoLuong` text DEFAULT NULL,
-  `Gia` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `SoLuong` text,
+  `Gia` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -96,11 +105,11 @@ CREATE TABLE `chitietdonhang` (
 CREATE TABLE `chitietsanpham` (
   `MaCTSP` int(11) NOT NULL,
   `MaSP` int(11) DEFAULT NULL,
-  `ThongSoKyThuat` text DEFAULT NULL,
-  `NhaCungCap` text DEFAULT NULL,
-  `BaoHanh` text DEFAULT NULL,
-  `XuatXu` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `ThongSoKyThuat` text,
+  `NhaCungCap` text,
+  `BaoHanh` text,
+  `XuatXu` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -110,10 +119,18 @@ CREATE TABLE `chitietsanpham` (
 
 CREATE TABLE `danhmucsanpham` (
   `MaDM` int(11) NOT NULL,
-  `TenDM` text DEFAULT NULL,
-  `AnhDM` text DEFAULT NULL,
-  `TrangThaiDM` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `TenDM` text,
+  `TrangThaiDM` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `danhmucsanpham`
+--
+
+INSERT INTO `danhmucsanpham` (`MaDM`, `TenDM`, `TrangThaiDM`) VALUES
+(1, 'Laptop', 'Hiện'),
+(3, 'RAM', 'Ẩn'),
+(4, 'Điện thoại', 'Hiện');
 
 -- --------------------------------------------------------
 
@@ -124,13 +141,40 @@ CREATE TABLE `danhmucsanpham` (
 CREATE TABLE `donhang` (
   `MaDH` int(11) NOT NULL,
   `MaSP` int(11) NOT NULL,
-  `TrangThaiDH` text DEFAULT NULL,
-  `TongTien` text DEFAULT NULL,
-  `DiaChiGiaoHang` text DEFAULT NULL,
-  `NgayTaoDH` text DEFAULT NULL,
-  `PhuongThucThanhToan` int(11) DEFAULT NULL,
-  `MaTK` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `TrangThaiDH` text,
+  `TongTien` text,
+  `DiaChiGiaoHang` text,
+  `NgayTaoDH` text,
+  `MaPTTT` int(11) DEFAULT NULL,
+  `MaTK` int(11) DEFAULT NULL,
+  `MaKM` int(11) DEFAULT NULL,
+  `MaVC` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `donhang`
+--
+
+INSERT INTO `donhang` (`MaDH`, `MaSP`, `TrangThaiDH`, `TongTien`, `DiaChiGiaoHang`, `NgayTaoDH`, `MaPTTT`, `MaTK`, `MaKM`, `MaVC`) VALUES
+(1, 8, 'Hiện', '10000', 'P2, Vĩnh Long', '22/12/2024', 1, 3, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `donvivanchuyen`
+--
+
+CREATE TABLE `donvivanchuyen` (
+  `MaVC` int(11) NOT NULL,
+  `TenDonViVC` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `donvivanchuyen`
+--
+
+INSERT INTO `donvivanchuyen` (`MaVC`, `TenDonViVC`) VALUES
+(1, 'Công ty giao hàng tiết kiệm');
 
 -- --------------------------------------------------------
 
@@ -142,8 +186,8 @@ CREATE TABLE `giohang` (
   `MaGH` int(11) NOT NULL,
   `MaTK` int(11) DEFAULT NULL,
   `MaSP` int(11) DEFAULT NULL,
-  `SoLuong` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `SoLuong` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -153,10 +197,19 @@ CREATE TABLE `giohang` (
 
 CREATE TABLE `hangsanxuat` (
   `MaHSX` int(11) NOT NULL,
-  `TenHSX` text DEFAULT NULL,
-  `AnhHSX` text DEFAULT NULL,
-  `TrangThaiHSX` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `TenHSX` text,
+  `TrangThaiHSX` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `hangsanxuat`
+--
+
+INSERT INTO `hangsanxuat` (`MaHSX`, `TenHSX`, `TrangThaiHSX`) VALUES
+(1, 'Asus', 'Hien'),
+(4, 'Dell', 'Hiện'),
+(5, 'HP', 'Hiện'),
+(6, 'Apple', 'Hiện');
 
 -- --------------------------------------------------------
 
@@ -167,14 +220,21 @@ CREATE TABLE `hangsanxuat` (
 CREATE TABLE `khuyenmai` (
   `MaKM` int(11) NOT NULL,
   `MaTK` int(11) DEFAULT NULL,
-  `TenKM` text DEFAULT NULL,
-  `DieuKien` text DEFAULT NULL,
-  `PhanTramGiam` text DEFAULT NULL,
-  `GiaTriToiDa` text DEFAULT NULL,
-  `NgayBD` text DEFAULT NULL,
-  `NgayKT` text DEFAULT NULL,
-  `SoLuongMa` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `TenKM` text,
+  `DieuKien` text,
+  `PhanTramGiam` text,
+  `GiaTriToiDa` text,
+  `NgayBD` text,
+  `NgayKT` text,
+  `SoLuongMa` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `khuyenmai`
+--
+
+INSERT INTO `khuyenmai` (`MaKM`, `MaTK`, `TenKM`, `DieuKien`, `PhanTramGiam`, `GiaTriToiDa`, `NgayBD`, `NgayKT`, `SoLuongMa`) VALUES
+(1, 3, 'giảm giá', 'đã đăng ký', '10', '1000', '12/02/2024', '12/03/2024', '5');
 
 -- --------------------------------------------------------
 
@@ -185,10 +245,10 @@ CREATE TABLE `khuyenmai` (
 CREATE TABLE `lichsutrangthaidh` (
   `MaLS` int(11) NOT NULL,
   `MaDH` int(11) DEFAULT NULL,
-  `TrangThaiCu` text DEFAULT NULL,
-  `TrangThaiMoi` text DEFAULT NULL,
-  `NgayThaiDoi` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `TrangThaiCu` text,
+  `TrangThaiMoi` text,
+  `NgayThaiDoi` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -199,12 +259,12 @@ CREATE TABLE `lichsutrangthaidh` (
 CREATE TABLE `phanquyen` (
   `MaPQ` int(11) NOT NULL,
   `MaTK` int(11) DEFAULT NULL,
-  `QLDonHang` text DEFAULT NULL,
-  `QLSanPham` text DEFAULT NULL,
-  `QLTaiKhoan` text DEFAULT NULL,
-  `QLBinhLuan` text DEFAULT NULL,
-  `QLBaoCao` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `QLDonHang` text,
+  `QLSanPham` text,
+  `QLTaiKhoan` text,
+  `QLBinhLuan` text,
+  `QLBaoCao` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -214,8 +274,15 @@ CREATE TABLE `phanquyen` (
 
 CREATE TABLE `phuongthucthanhtoan` (
   `MaPTTT` int(11) NOT NULL,
-  `TenPTTT` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `TenPTTT` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `phuongthucthanhtoan`
+--
+
+INSERT INTO `phuongthucthanhtoan` (`MaPTTT`, `TenPTTT`) VALUES
+(1, 'COD');
 
 -- --------------------------------------------------------
 
@@ -225,8 +292,8 @@ CREATE TABLE `phuongthucthanhtoan` (
 
 CREATE TABLE `quyen` (
   `id` int(11) NOT NULL,
-  `ten_quyen` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `ten_quyen` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -236,17 +303,26 @@ CREATE TABLE `quyen` (
 
 CREATE TABLE `sanpham` (
   `MaSP` int(11) NOT NULL,
-  `TenSP` text DEFAULT NULL,
-  `AnhSP` text DEFAULT NULL,
-  `GiaBan` text DEFAULT NULL,
-  `SoLuongTonKho` text DEFAULT NULL,
-  `NgayTaoSP` text DEFAULT NULL,
-  `TrangThaiSP` text DEFAULT NULL,
-  `MoTaChiTiet` text DEFAULT NULL,
-  `ThoiGianBaoHanh` text DEFAULT NULL,
-  `HangSanXuat` int(11) DEFAULT NULL,
-  `DanhMucSP` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `TenSP` text,
+  `AnhSP` text,
+  `GiaBan` text,
+  `SoLuongTonKho` text,
+  `NgayTaoSP` text,
+  `TrangThaiSP` text,
+  `MoTaChiTiet` text,
+  `ThoiGianBaoHanh` text,
+  `MaDM` int(11) DEFAULT NULL,
+  `MaHSX` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `sanpham`
+--
+
+INSERT INTO `sanpham` (`MaSP`, `TenSP`, `AnhSP`, `GiaBan`, `SoLuongTonKho`, `NgayTaoSP`, `TrangThaiSP`, `MoTaChiTiet`, `ThoiGianBaoHanh`, `MaDM`, `MaHSX`) VALUES
+(8, 'ewqe', '432er', '324', '432', '2024-10-18', 'Hiện', '2131', '432', NULL, NULL),
+(10, 'hihihi', 'hihi', '10000000', '3', '2024-10-01', 'Ẩn', 'hihi', '3 tháng', 1, 1),
+(11, 'Iphone 16 Pro Max', 'deoco', '36500000', '100', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 4, 6);
 
 -- --------------------------------------------------------
 
@@ -256,18 +332,18 @@ CREATE TABLE `sanpham` (
 
 CREATE TABLE `taikhoan` (
   `MaTK` int(11) NOT NULL,
-  `HoTen` text DEFAULT NULL,
-  `TenDangNhap` text DEFAULT NULL,
-  `MatKhau` text DEFAULT NULL,
+  `HoTen` text,
+  `TenDangNhap` text,
+  `MatKhau` text,
   `VaiTro` int(11) DEFAULT NULL,
-  `AnhDaiDien` text DEFAULT NULL,
-  `Email` text DEFAULT NULL,
-  `NgaySinh` text DEFAULT NULL,
-  `GioiTinh` text DEFAULT NULL,
-  `SDT` text DEFAULT NULL,
-  `DiaChi` text DEFAULT NULL,
+  `AnhDaiDien` text,
+  `Email` text,
+  `NgaySinh` text,
+  `GioiTinh` text,
+  `SDT` text,
+  `DiaChi` text,
   `TrangThai` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `taikhoan`
@@ -285,10 +361,10 @@ INSERT INTO `taikhoan` (`MaTK`, `HoTen`, `TenDangNhap`, `MatKhau`, `VaiTro`, `An
 
 CREATE TABLE `thongbao` (
   `MaTB` int(11) NOT NULL,
-  `NoiDungTB` text DEFAULT NULL,
-  `NgayTaoTB` text DEFAULT NULL,
+  `NoiDungTB` text,
+  `NgayTaoTB` text,
   `MaTK` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -297,12 +373,32 @@ CREATE TABLE `thongbao` (
 --
 
 CREATE TABLE `thongtinvanchuyen` (
-  `MaVC` int(11) NOT NULL,
+  `MaTTVC` int(11) NOT NULL,
   `MaDH` int(11) DEFAULT NULL,
-  `DonViVC` text DEFAULT NULL,
-  `MaTheoDoi` text DEFAULT NULL,
-  `NgayDuKienGiaoHang` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `MaVC` int(11) DEFAULT NULL,
+  `NgayDuKienGiaoHang` text,
+  `TrangThaiVC` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `thongtinvanchuyen`
+--
+
+INSERT INTO `thongtinvanchuyen` (`MaTTVC`, `MaDH`, `MaVC`, `NgayDuKienGiaoHang`, `TrangThaiVC`) VALUES
+(1, 1, 1, '22/10/2024', 'Đang giao');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `traloibl`
+--
+
+CREATE TABLE `traloibl` (
+  `MaTL` int(11) NOT NULL,
+  `MaBL` int(11) DEFAULT NULL,
+  `TieuDe` text,
+  `NoiDungTL` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -312,8 +408,8 @@ CREATE TABLE `thongtinvanchuyen` (
 
 CREATE TABLE `vaitro` (
   `id_vai_tro` int(11) NOT NULL,
-  `ten_vai_tro` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `ten_vai_tro` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `vaitro`
@@ -369,6 +465,12 @@ ALTER TABLE `danhmucsanpham`
 --
 ALTER TABLE `donhang`
   ADD PRIMARY KEY (`MaDH`);
+
+--
+-- Indexes for table `donvivanchuyen`
+--
+ALTER TABLE `donvivanchuyen`
+  ADD PRIMARY KEY (`MaVC`);
 
 --
 -- Indexes for table `giohang`
@@ -434,7 +536,13 @@ ALTER TABLE `thongbao`
 -- Indexes for table `thongtinvanchuyen`
 --
 ALTER TABLE `thongtinvanchuyen`
-  ADD PRIMARY KEY (`MaVC`);
+  ADD PRIMARY KEY (`MaTTVC`);
+
+--
+-- Indexes for table `traloibl`
+--
+ALTER TABLE `traloibl`
+  ADD PRIMARY KEY (`MaTL`);
 
 --
 -- Indexes for table `vaitro`
@@ -450,7 +558,7 @@ ALTER TABLE `vaitro`
 -- AUTO_INCREMENT for table `baidang`
 --
 ALTER TABLE `baidang`
-  MODIFY `MaBD` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaBD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `baocao`
@@ -480,13 +588,19 @@ ALTER TABLE `chitietsanpham`
 -- AUTO_INCREMENT for table `danhmucsanpham`
 --
 ALTER TABLE `danhmucsanpham`
-  MODIFY `MaDM` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaDM` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `donhang`
 --
 ALTER TABLE `donhang`
-  MODIFY `MaDH` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaDH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `donvivanchuyen`
+--
+ALTER TABLE `donvivanchuyen`
+  MODIFY `MaVC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `giohang`
@@ -498,13 +612,13 @@ ALTER TABLE `giohang`
 -- AUTO_INCREMENT for table `hangsanxuat`
 --
 ALTER TABLE `hangsanxuat`
-  MODIFY `MaHSX` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaHSX` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `khuyenmai`
 --
 ALTER TABLE `khuyenmai`
-  MODIFY `MaKM` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaKM` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `lichsutrangthaidh`
@@ -522,7 +636,7 @@ ALTER TABLE `phanquyen`
 -- AUTO_INCREMENT for table `phuongthucthanhtoan`
 --
 ALTER TABLE `phuongthucthanhtoan`
-  MODIFY `MaPTTT` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaPTTT` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `quyen`
@@ -534,7 +648,7 @@ ALTER TABLE `quyen`
 -- AUTO_INCREMENT for table `sanpham`
 --
 ALTER TABLE `sanpham`
-  MODIFY `MaSP` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaSP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `taikhoan`
@@ -552,7 +666,13 @@ ALTER TABLE `thongbao`
 -- AUTO_INCREMENT for table `thongtinvanchuyen`
 --
 ALTER TABLE `thongtinvanchuyen`
-  MODIFY `MaVC` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaTTVC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `traloibl`
+--
+ALTER TABLE `traloibl`
+  MODIFY `MaTL` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `vaitro`

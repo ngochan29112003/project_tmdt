@@ -67,7 +67,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         //Bài đăng
         Route::get('/danh-sach-bai-dang',[QuanLyBaiDangController::class,'getView'])->name('danh-sach-bai-dang');
         Route::post('/bai-dang-add',[QuanLyBaiDangController::class,'addBaiDang'])->name('add-bai-dang');
-        Route::post('/bai-dang-edit', [QuanLyBaiDangController::class, 'editBaiDang'])->name('edit-bai-dang');
+        Route::get('/bai-dang-edit/{id}', [QuanLyBaiDangController::class, 'editBaiDang'])->name('edit-bai-dang');
         Route::post('/bai-dang-update/{id}', [QuanLyBaiDangController::class, 'updateBaiDang'])->name('update-bai-dang');
         Route::delete('/bai-dang-delete/{id}',[QuanLyBaiDangController::class,'deleteBaiDang'])->name('delete-bai-dang');
 
@@ -88,9 +88,9 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::post('/update-bao-cao/{id}', [QuanLyBaoCaoController::class, 'updateBaoCao'])->name('update-bao-cao');
         Route::delete('/bao-cao/delete/{id}',[QuanLyBaoCaoController::class,'deleteBC'])->name('delete-bao-cao');
 
-        //Binh Luan
+        //Bình Luận
         Route::delete('/binh-luan/delete/{id}',[QuanLyBinhLuanController::class,'deleteBL'])->name('delete-binh-luan');
-        
+
     });
 
     Route::group(['prefix' => '/khach-hang'], function () {

@@ -64,9 +64,15 @@
                                         <td>{{$item->TenSP}}</td>
                                         <td>{{$item->TenBD}}</td>
                                         <td>{{$item->AnhBD}}</td>
-                                        <td>{{$item->NoiDungBD}}</td>
-                                        <td>{{$item->NgayTaoBD}}</td>
-                                        <td>{{$item->TrangThaiBD}}</td>
+                                        <td class="text-center align-middle">{{$item->NoiDungBD}}</td>
+                                        <td class="text-center align-middle">{{$item->NgayTaoBD}}</td>
+                                        <td>
+                                            @if($item->TrangThaiBD === "Ẩn")
+                                                <span class = "badge bg-danger text-white p-2">Ẩn</span>
+                                            @else
+                                                <span class = "badge bg-success text-white p-2">Hiện</span>
+                                            @endif
+                                        </td>
                                         <td class="text-center align-middle">
                                             <button class="btn p-0  btn-primary border-0 bg-transparent text-danger shadow-none edit-btn" data-id="{{ $item->MaBD }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="m-0 icon icon-tabler icons-tabler-outline icon-tabler-pencil">
@@ -168,32 +174,32 @@
         <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Sửa bài đăng</h4>
+                    <h4 class="modal-title">Thêm bài đăng</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="Formeditbaidang" enctype="multipart/form-data">
                         @csrf
-                        <div class="col-md-6 mb-3">
-                            <label for="MaTK" class="form-label">Tài khoản</label>
-                            <select class="form-select" name="MaTK" id="edit_MaTK">
-                                <option value="" disabled selected>Chọn tài khoản</option>
-                                @foreach ($list_taikhoan as $item)
-                                    <option value="{{ $item->MaTK}}">{{ $item->HoTen}} </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="MaSP" class="form-label">Sản phẩm</label>
-                            <select class="form-select" name="MaSP" id="edit_MaSP">
-                                <option value="" disabled selected>Chọn sản phẩm</option>
-                                @foreach ($list_sanpham as $item)
-                                    <option value="{{ $item->MaSP}}">{{ $item->TenSP}} </option>
-                                @endforeach
-                            </select>
-                        </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
+                                <label for="MaTK" class="form-label">Tài khoản</label>
+                                <select class="form-select" name="MaTK" id="edit_MaTK">
+                                    <option value="" disabled selected>Chọn tài khoản</option>
+                                    @foreach ($list_taikhoan as $item)
+                                        <option value="{{ $item->MaTK}}">{{ $item->HoTen}} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="MaSP" class="form-label">Sản phẩm</label>
+                                <select class="form-select" name="MaSP" id="edit_MaSP">
+                                    <option value="" disabled selected>Chọn sản phẩm</option>
+                                    @foreach ($list_sanpham as $item)
+                                        <option value="{{ $item->MaSP}}">{{ $item->TenSP}} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-12 mb-3">
                                 <label for="TenBD" class="form-label">Tên bài đăng</label>
                                 <input type="text" class="form-control" name="TenBD" id="edit_TenBD" required>
                             </div>
@@ -203,14 +209,14 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="NgayTaoBD" class="form-label">Ngày tạo bài đăng</label>
-                                <input type="text" class="form-control" name="NgayTaoBD" id="edit_NgayTaoBD" required>
+                                <input type="date" class="form-control" name="NgayTaoBD" id="edit_NgayTaoBD" required>
                             </div>
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-12 mb-3">
                                 <label for="NoiDungBD" class="form-label">Nội dung bài đăng</label>
                                 <input type="text" class="form-control" name="NoiDungBD" id="edit_NoiDungBD" required>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="TrangThaiBD" class="form-label">Trạng thái</label>
+                            <div class="col-md-12 mb-3">
+                                <label for="TrangThaiBD" class="form-label">Trạng thái hãng sản xuất</label>
                                 <select class="form-select" name="TrangThaiBD" id="edit_TrangThaiBD">
                                     <option value="Hiện">Hiện</option>
                                     <option value="Ẩn">Ẩn</option>
@@ -218,7 +224,7 @@
                             </div>
                         </div>
                         <div class="text-end">
-                            <button type="submit" class="btn btn-primary">Sửa</button>
+                            <button type="submit" class="btn btn-primary">Thêm</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                         </div>
                     </form>
@@ -240,8 +246,6 @@
 
         }
       });
-
-      var table = $('#tableBaiDang').DataTable();
 
       $('#Formbaidang').submit(function (e) {
           e.preventDefault();
