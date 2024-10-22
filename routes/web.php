@@ -1,107 +1,127 @@
 <?php
 
-use App\Http\Controllers\super_admin\DashBoardController;
-use App\Http\Controllers\super_admin\QuanLyTaiKhoanController;
-use App\Http\Controllers\super_admin\QuanLyDanhMucController;
-use App\Http\Controllers\super_admin\QuanLyHangSanXuatController;
-use App\Http\Controllers\super_admin\QuanLySanPhamController;
-use App\Http\Controllers\super_admin\QuanLyDonHangController;
-use App\Http\Controllers\super_admin\PhuongThucThanhToanController;
-use App\Http\Controllers\super_admin\QuanLyVanChuyenController;
-use App\Http\Controllers\super_admin\QuanLyBaiDangController;
-use App\Http\Controllers\super_admin\QuanLyBinhLuanController;
-use App\Http\Controllers\super_admin\QuanLyKhuyenMaiController;
-use App\Http\Controllers\super_admin\QuanLyBaoCaoController;
+use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\khach_hang\TrangChuController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\super_admin\PhuongThucThanhToanController;
+use App\Http\Controllers\super_admin\QuanLyBaiDangController;
+use App\Http\Controllers\super_admin\QuanLyBaoCaoController;
+use App\Http\Controllers\super_admin\QuanLyBinhLuanController;
+use App\Http\Controllers\super_admin\QuanLyDanhMucController;
+use App\Http\Controllers\super_admin\QuanLyDonHangController;
+use App\Http\Controllers\super_admin\QuanLyHangSanXuatController;
+use App\Http\Controllers\super_admin\QuanLyKhuyenMaiController;
+use App\Http\Controllers\super_admin\QuanLySanPhamController;
+use App\Http\Controllers\super_admin\QuanLyTaiKhoanController;
+use App\Http\Controllers\super_admin\QuanLyVanChuyenController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/',[LoginController::class,'getViewLogin'])->name('index.login'); //Cái này nữa làm trang web khách
+Route::get('/',[DashBoardController::class,'getViewDashBoardUser'])->name('home-page');
 
 Route::get('/register',[RegisterController::class,'getViewRegister'])->name('index.register');
 Route::post('/register/add',[RegisterController::class,'addAccount'])->name('add-account');
 Route::get('/login',[LoginController::class,'getViewLogin'])->name('index.login');
 Route::post('/login',[LoginController::class,'loginAction'])->name('login-action');
 Route::get('/logout', [LoginController::class, 'logoutAction'])->name('logout');
-Route::get('/trang-chu-kh',[TrangChuController::class,'getViewTrangChu'])->name('trang-chu');
 
 
 Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::group(['prefix' => '/super-admin'], function () {
-        Route::get('/home',[DashBoardController::class,'getViewDashBoard'])->name('super-admin-home');
-        Route::get('/danh-sach-tai-khoan',[QuanLyTaiKhoanController::class,'getView'])->name('danh-sach-tai-khoan');
-        Route::post('/unlock', [QuanLyTaiKhoanController::class, 'unlockAccount'])->name('unlock.route');
-        Route::get('filter-accounts', [QuanLyTaiKhoanController::class, 'filterAccounts'])->name('super-admin.filter-accounts');
+        Route::get('/home',[DashBoardController::class,'getViewDashBoardSuperAdmin'])->name('super-admin-home');
 
-        //Danh mục
-        Route::get('/danh-sach-danh-muc',[QuanLyDanhMucController::class,'getView'])->name('danh-sach-danh-muc');
-        Route::post('/add-danh-muc',[QuanLyDanhMucController::class,'addDanhMuc'])->name('add-danh-muc');
-        Route::delete('/delete-danh-muc/{id}',[QuanLyDanhMucController::class,'deleteDanhMuc'])->name('delete-danh-muc');
-        Route::get('/edit-danh-muc/{id}', [QuanLyDanhMucController::class, 'editDanhMuc'])->name('edit-danh-muc');
-        Route::post('/update-danh-muc/{id}', [QuanLyDanhMucController::class, 'updateDanhMuc'])->name('update-danh-muc');
+        // Tài khoản
+        Route::group(['prefix' => '/tai-khoan'], function () {
+            Route::get('/danh-sach',[QuanLyTaiKhoanController::class,'getView'])->name('danh-sach-tai-khoan');
+            Route::post('/unlock', [QuanLyTaiKhoanController::class, 'unlockAccount'])->name('unlock.route');
+            Route::get('filter-accounts', [QuanLyTaiKhoanController::class, 'filterAccounts'])->name('super-admin.filter-accounts');
+        });
 
-        //Hãng sản xuất
-        Route::get('/danh-sach-hang-san-xuat',[QuanLyHangSanXuatController::class,'getView'])->name('danh-sach-hang-san-xuat');
-        Route::post('/add-hang-san-xuat',[QuanLyHangSanXuatController::class,'addHangSanXuat'])->name('add-hang-san-xuat');
-        Route::delete('/delete-hang-san-xuat/{id}',[QuanLyHangSanXuatController::class,'deleteHangSanXuat'])->name('delete-hang-san-xuat');
-        Route::get('/edit-hang-san-xuat/{id}', [QuanLyHangSanXuatController::class, 'editHangSanXuat'])->name('edit-hang-san-xuat');
-        Route::post('/update-hang-san-xuat/{id}', [QuanLyHangSanXuatController::class, 'updateHangSanXuat'])->name('update-hang-san-xuat');
+        // Danh mục
+        Route::group(['prefix' => '/danh-muc'], function () {
+            Route::get('/danh-sach',[QuanLyDanhMucController::class,'getView'])->name('danh-sach-danh-muc');
+            Route::post('/add',[QuanLyDanhMucController::class,'addDanhMuc'])->name('add-danh-muc');
+            Route::delete('/delete/{id}',[QuanLyDanhMucController::class,'deleteDanhMuc'])->name('delete-danh-muc');
+            Route::get('/edit/{id}', [QuanLyDanhMucController::class, 'editDanhMuc'])->name('edit-danh-muc');
+            Route::post('/update/{id}', [QuanLyDanhMucController::class, 'updateDanhMuc'])->name('update-danh-muc');
+        });
 
-        //Sản phẩm
-        Route::get('/danh-sach-san-pham',[QuanLySanPhamController::class,'getView'])->name('danh-sach-san-pham');
-        Route::post('/add-san-pham',[QuanLySanPhamController::class,'addSanPham'])->name('add-san-pham');
-        Route::get('/edit-san-pham/{id}', [QuanLySanPhamController::class, 'editSanPham'])->name('edit-san-pham');
-        Route::post('/update-san-pham/{id}', [QuanLySanPhamController::class, 'updateSanPham'])->name('update-san-pham');
-        Route::delete('/delete-san-pham/{id}',[QuanLySanPhamController::class,'deleteSP'])->name('delete-san-pham');
+        // Hãng sản xuất
+        Route::group(['prefix' => '/hang-san-xuat'], function () {
+            Route::get('/danh-sach',[QuanLyHangSanXuatController::class,'getView'])->name('danh-sach-hang-san-xuat');
+            Route::post('/add',[QuanLyHangSanXuatController::class,'addHangSanXuat'])->name('add-hang-san-xuat');
+            Route::delete('/delete/{id}',[QuanLyHangSanXuatController::class,'deleteHangSanXuat'])->name('delete-hang-san-xuat');
+            Route::get('/edit/{id}', [QuanLyHangSanXuatController::class, 'editHangSanXuat'])->name('edit-hang-san-xuat');
+            Route::post('/update/{id}', [QuanLyHangSanXuatController::class, 'updateHangSanXuat'])->name('update-hang-san-xuat');
+        });
 
-        //Đơn hàng
-        Route::get('/danh-sach-don-hang',[QuanLyDonHangController::class,'getView'])->name('danh-sach-don-hang');
+        // Sản phẩm
+        Route::group(['prefix' => '/san-pham'], function () {
+            Route::get('/danh-sach',[QuanLySanPhamController::class,'getView'])->name('danh-sach-san-pham');
+            Route::post('/add',[QuanLySanPhamController::class,'addSanPham'])->name('add-san-pham');
+            Route::get('/edit/{id}', [QuanLySanPhamController::class, 'editSanPham'])->name('edit-san-pham');
+            Route::post('/update/{id}', [QuanLySanPhamController::class, 'updateSanPham'])->name('update-san-pham');
+            Route::delete('/delete/{id}',[QuanLySanPhamController::class,'deleteSP'])->name('delete-san-pham');
+        });
 
-        //Phương thức thanh toán
-        Route::get('/danh-sach-phuong-thuc-thanh-toan',[PhuongThucThanhToanController::class,'getView'])->name('danh-sach-phuong-thuc-thanh-toan');
+        // Đơn hàng
+        Route::group(['prefix' => '/don-hang'], function () {
+            Route::get('/danh-sach',[QuanLyDonHangController::class,'getView'])->name('danh-sach-don-hang');
+        });
 
-        //Thông tin vân chuyển
-        Route::get('/danh-sach-van-chuyen',[QuanLyVanChuyenController::class,'getView'])->name('danh-sach-van-chuyen');
+        // Phương thức thanh toán
+        Route::group(['prefix' => '/phuong-thuc-thanh-toan'], function () {
+            Route::get('/danh-sach',[PhuongThucThanhToanController::class,'getView'])->name('danh-sach-phuong-thuc-thanh-toan');
+        });
 
-        //Bài đăng
-        Route::get('/danh-sach-bai-dang',[QuanLyBaiDangController::class,'getView'])->name('danh-sach-bai-dang');
-        Route::post('/bai-dang-add',[QuanLyBaiDangController::class,'addBaiDang'])->name('add-bai-dang');
-        Route::get('/bai-dang-edit/{id}', [QuanLyBaiDangController::class, 'editBaiDang'])->name('edit-bai-dang');
-        Route::post('/bai-dang-update/{id}', [QuanLyBaiDangController::class, 'updateBaiDang'])->name('update-bai-dang');
-        Route::delete('/bai-dang-delete/{id}',[QuanLyBaiDangController::class,'deleteBaiDang'])->name('delete-bai-dang');
+        // Vận chuyển
+        Route::group(['prefix' => '/van-chuyen'], function () {
+            Route::get('/danh-sach',[QuanLyVanChuyenController::class,'getView'])->name('danh-sach-van-chuyen');
+        });
 
-        //Bình luận
-        Route::get('/danh-sach-binh-luan',[QuanLyBinhLuanController::class,'getView'])->name('danh-sach-binh-luan');
+        // Bài đăng
+        Route::group(['prefix' => '/bai-dang'], function () {
+            Route::get('/danh-sach',[QuanLyBaiDangController::class,'getView'])->name('danh-sach-bai-dang');
+            Route::post('/add',[QuanLyBaiDangController::class,'addBaiDang'])->name('add-bai-dang');
+            Route::get('/edit/{id}', [QuanLyBaiDangController::class, 'editBaiDang'])->name('edit-bai-dang');
+            Route::post('/update/{id}', [QuanLyBaiDangController::class, 'updateBaiDang'])->name('update-bai-dang');
+            Route::delete('/delete/{id}',[QuanLyBaiDangController::class,'deleteBaiDang'])->name('delete-bai-dang');
+        });
 
-        //Khuyến mãi
-        Route::get('/danh-sach-khuyen-mai',[QuanLyKhuyenMaiController::class,'getView'])->name('danh-sach-khuyen-mai');
-        Route::post('/khuyen-mai/add',[QuanLyKhuyenMaiController::class,'addKhuyenMai'])->name('add-khuyen-mai');
-        Route::get('/edit-khuyen-mai/{id}', [QuanLyKhuyenMaiController::class, 'editKhuyenMai'])->name('edit-khuyen-mai');
-        Route::post('/update-khuyen-mai/{id}', [QuanLyKhuyenMaiController::class, 'updateKhuyenMai'])->name('update-khuyen-mai');
-        Route::delete('/khuyen-mai/delete/{id}',[QuanLyKhuyenMaiController::class,'deleteKM'])->name('delete-khuyen-mai');
+        // Bình luận
+        Route::group(['prefix' => '/binh-luan'], function () {
+            Route::get('/danh-sach',[QuanLyBinhLuanController::class,'getView'])->name('danh-sach-binh-luan');
+            Route::delete('/delete/{id}',[QuanLyBinhLuanController::class,'deleteBL'])->name('delete-binh-luan');
+        });
 
-        //Báo cáo
-        Route::get('/danh-sach-bao-cao',[QuanLyBaoCaoController::class,'getView'])->name('danh-sach-bao-cao');
-        Route::post('/bao-cao/add',[QuanLyBaoCaoController::class,'addBaoCao'])->name('add-bao-cao');
-        Route::get('/edit-bao-cao/{id}', [QuanLyBaoCaoController::class, 'editBaoCao'])->name('edit-bao-cao');
-        Route::post('/update-bao-cao/{id}', [QuanLyBaoCaoController::class, 'updateBaoCao'])->name('update-bao-cao');
-        Route::delete('/bao-cao/delete/{id}',[QuanLyBaoCaoController::class,'deleteBC'])->name('delete-bao-cao');
+        // Khuyến mãi
+        Route::group(['prefix' => '/khuyen-mai'], function () {
+            Route::get('/danh-sach',[QuanLyKhuyenMaiController::class,'getView'])->name('danh-sach-khuyen-mai');
+            Route::post('/add',[QuanLyKhuyenMaiController::class,'addKhuyenMai'])->name('add-khuyen-mai');
+            Route::get('/edit/{id}', [QuanLyKhuyenMaiController::class, 'editKhuyenMai'])->name('edit-khuyen-mai');
+            Route::post('/update/{id}', [QuanLyKhuyenMaiController::class, 'updateKhuyenMai'])->name('update-khuyen-mai');
+            Route::delete('/delete/{id}',[QuanLyKhuyenMaiController::class,'deleteKM'])->name('delete-khuyen-mai');
+        });
 
-        //Bình Luận
-        Route::delete('/binh-luan/delete/{id}',[QuanLyBinhLuanController::class,'deleteBL'])->name('delete-binh-luan');
-
+        // Báo cáo
+        Route::group(['prefix' => '/bao-cao'], function () {
+            Route::get('/danh-sach',[QuanLyBaoCaoController::class,'getView'])->name('danh-sach-bao-cao');
+            Route::post('/add',[QuanLyBaoCaoController::class,'addBaoCao'])->name('add-bao-cao');
+            Route::get('/edit/{id}', [QuanLyBaoCaoController::class, 'editBaoCao'])->name('edit-bao-cao');
+            Route::post('/update/{id}', [QuanLyBaoCaoController::class, 'updateBaoCao'])->name('update-bao-cao');
+            Route::delete('/delete/{id}',[QuanLyBaoCaoController::class,'deleteBC'])->name('delete-bao-cao');
+        });
     });
 
     Route::group(['prefix' => '/khach-hang'], function () {
-        Route::get('/home',[DashBoardController::class,'getViewDashBoardKH'])->name('khach-hang-home');
+        Route::get('/home',[DashBoardController::class,'getViewDashBoardUser'])->name('khach-hang-home');
     });
 
     Route::group(['prefix' => '/admin'], function () {
         Route::get('/home',[DashBoardController::class,'getViewDashBoardSAdmin'])->name('admin-home');
-
     });
 });
+
 
 
 

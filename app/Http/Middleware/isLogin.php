@@ -16,7 +16,7 @@ class isLogin
     public function handle(Request $request, Closure $next): Response
     {
         if (!$request->session()->has('MaTK')) {
-            return redirect()->route('index.login')->with('error', 'Bạn cần đăng nhập để truy cập trang này.');
+            return redirect()->route('home-page')->with('error', 'Bạn cần đăng nhập để truy cập trang này.');
         }
 
         return $next($request);

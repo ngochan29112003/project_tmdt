@@ -111,6 +111,6 @@ class LoginController extends Controller
         $request->session()->flush();
 
         //Chuyển hướng về Login
-        return redirect()->route('index.login');
+        return redirect()->route('home-page');
     }
 }

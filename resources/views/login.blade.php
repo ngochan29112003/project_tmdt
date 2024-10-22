@@ -31,7 +31,7 @@
                     @csrf
                     <div class="mb-3">
                         <label class="form-label">Tài khoản</label>
-                        <input type="text" class="form-control" name="taikhoan" placeholder="Tài khoản của bạn" required>
+                        <input type="text" class="form-control" name="taikhoan" tabindex="1" placeholder="Tài khoản của bạn" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Mật khẩu
@@ -39,7 +39,7 @@
                                 <a href="">Quên mật khẩu</a>
                             </span></label>
                         <div class="input-group input-group-flat">
-                            <input type="password" id="pwd-input" name="password" class="form-control" placeholder="Mật khẩu của bạn" autocomplete="off" required>
+                            <input type="password" id="pwd-input" name="password" class="form-control" tabindex="2" placeholder="Mật khẩu của bạn" autocomplete="off" required>
                             <span class="input-group-text">
                           <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip">
                             <svg xmlns="http://www.w3.org/2000/svg" id="showPwdCheckbox" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -58,7 +58,7 @@
                         </div>
                     </div>
                     <div class="form-footer">
-                        <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
+                        <button type="submit" tabindex="3" class="btn btn-primary w-100">Đăng nhập</button>
                     </div>
                 </form>
             </div>
