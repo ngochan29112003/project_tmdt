@@ -12,8 +12,9 @@ class QuanLyBinhLuanController extends Controller
     {
         $quanlybinhluanModel = new QuanLyBinhLuan();
         $list_binh_luan= $quanlybinhluanModel->getbinhluan();
+        $list_traloi= $quanlybinhluanModel->gettlbinhluan();
         return view('super-admin.quan-ly-binh-luan.danh-sach-binh-luan', 
-        compact('list_binh_luan'));
+        compact('list_binh_luan', 'list_traloi'));
     }
 
     function deleteBL($id)
@@ -27,4 +28,4 @@ class QuanLyBinhLuanController extends Controller
             'message' => 'Xóa thành công'
         ]);
     }
-}
+} 

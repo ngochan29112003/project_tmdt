@@ -8,6 +8,7 @@ use App\Http\Controllers\super_admin\PhuongThucThanhToanController;
 use App\Http\Controllers\super_admin\QuanLyBaiDangController;
 use App\Http\Controllers\super_admin\QuanLyBaoCaoController;
 use App\Http\Controllers\super_admin\QuanLyBinhLuanController;
+use App\Http\Controllers\super_admin\TraLoiBinhLuanController;
 use App\Http\Controllers\super_admin\QuanLyDanhMucController;
 use App\Http\Controllers\super_admin\QuanLyDonHangController;
 use App\Http\Controllers\super_admin\QuanLyHangSanXuatController;
@@ -97,6 +98,14 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
             Route::delete('/delete/{id}',[QuanLyBinhLuanController::class,'deleteBL'])->name('delete-binh-luan');
         });
 
+        //Trả lời bình luận
+        Route::group(['prefix' => '/tra-loi-binh-luan'], function () {
+            Route::get('/danh-sach',[TraLoiBinhLuanController::class,'getView'])->name('danh-sach-tra-loi-binh-luan');
+            Route::post('/add',[TraLoiBinhLuanController::class,'addTraLoi'])->name('add-tra-loi-binh-luan');
+            Route::get('/edit/{id}', [TraLoiBinhLuanController::class, 'editTraLoi'])->name('edit-tra-loi-binh-luan');
+            Route::post('/update/{id}', [TraLoiBinhLuanController::class, 'updateTraLoi'])->name('update-tra-loi-binh-luan');
+            Route::delete('/delete/{id}',[TraLoiBinhLuanController::class,'deleteTL'])->name('delete-tra-loi-binh-luan');
+        });
         // Khuyến mãi
         Route::group(['prefix' => '/khuyen-mai'], function () {
             Route::get('/danh-sach',[QuanLyKhuyenMaiController::class,'getView'])->name('danh-sach-khuyen-mai');

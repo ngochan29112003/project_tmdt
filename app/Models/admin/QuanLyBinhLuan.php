@@ -19,4 +19,9 @@ class QuanLyBinhLuan extends Model
         ->join('taikhoan','taikhoan.MaTK','=','binhluan.MaTK')
         ->get();
     }
+
+    public function gettlbinhluan()
+    {
+        return DB::table('traloibl')->get();
+    }
 }
