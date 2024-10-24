@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashBoardController;
+use App\Http\Controllers\khach_hang\GioHangController;
 use App\Http\Controllers\khach_hang\TrangChuController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -24,6 +25,9 @@ Route::post('/register/add',[RegisterController::class,'addAccount'])->name('add
 Route::get('/login',[LoginController::class,'getViewLogin'])->name('index.login');
 Route::post('/login',[LoginController::class,'loginAction'])->name('login-action');
 Route::get('/logout', [LoginController::class, 'logoutAction'])->name('logout');
+
+//Giỏ hàng
+Route::get('/gio-hang', [GioHangController::class, 'getDsGioHang'])->name('gio-hang');
 
 
 Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {

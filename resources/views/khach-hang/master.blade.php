@@ -73,7 +73,7 @@
                             </a>
                         </div>
                         <div class="col-auto mb-2">
-                            <a href="#" class="cart-icon text-decoration-none d-flex align-items-center mx-3">
+                            <a href="{{route('gio-hang')}}" class="cart-icon text-decoration-none d-flex align-items-center mx-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-shopping-cart">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                     <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
