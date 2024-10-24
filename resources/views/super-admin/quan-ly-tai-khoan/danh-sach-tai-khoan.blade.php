@@ -184,6 +184,46 @@
         });
       }
     </script>
+    
+    <script>
+      let unlockUserId = null;
 
+      // When a locked account is clicked
+      $(document).on('click', '.unlock-badge', function() {
+        unlockUserId = $(this).data('id');
+        $('#unlockModal').modal('show');  // Show the modal
+      });
 
+      // When the user confirms unlocking
+      $('#confirmUnlock').on('click', function() {
+        if (unlockUserId) {
+          $.ajax({
+            url: "{{ route('unlock.route') }}",  // Backend route to unlock
+            type: 'POST',
+            data: {
+              _token: '{{ csrf_token() }}',
+              id: unlockUserId
+            },
+            success: function(response) {
+              if (response.success) {
+                $('#unlockModal').modal('hide');  // Hide the modal
+
+                // Show toastr success message
+                toastr.success('Tài khoản đã được mở khóa thành công.');
+
+                // Reload the page after a short delay to reflect changes
+                setTimeout(function() {
+                  location.reload();
+                }, 2000); // Reload after 2 seconds
+              } else {
+                toastr.error('Có lỗi xảy ra khi mở khóa tài khoản.');
+              }
+            },
+            error: function() {
+              toastr.error('Có lỗi xảy ra khi mở khóa tài khoản.');
+            }
+          });
+        }
+      });
+    </script>
 @endsection
