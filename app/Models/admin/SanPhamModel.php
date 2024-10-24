@@ -43,6 +43,35 @@ class SanPhamModel extends Model
     {
         return DB::table('hangsanxuat')->get();
     }
+    
+    public function getPCBanChay()
+    {
+        return DB::table('sanpham')
+            ->join('danhmucsanpham','danhmucsanpham.MaDM','=','sanpham.MaDM')
+            ->join('hangsanxuat','hangsanxuat.MaHSX','sanpham.MaHSX')
+            ->where('sanpham.MaDM','=',5)
+            ->take(8)
+            ->get();
+    }
 
+    public function getPCMoi()
+    {
+        return DB::table('sanpham')
+            ->join('danhmucsanpham','danhmucsanpham.MaDM','=','sanpham.MaDM')
+            ->join('hangsanxuat','hangsanxuat.MaHSX','sanpham.MaHSX')
+            ->where('sanpham.MaDM','=',5)
+            ->take(4)
+            ->get();
+    }
+
+    public function getPCKm()
+    {
+        return DB::table('sanpham')
+            ->join('danhmucsanpham','danhmucsanpham.MaDM','=','sanpham.MaDM')
+            ->join('hangsanxuat','hangsanxuat.MaHSX','sanpham.MaHSX')
+            ->where('sanpham.MaDM','=',5)
+            ->take(4)
+            ->get();
+    }
 
 }
