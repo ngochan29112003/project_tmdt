@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\khach_hang\GioHangController;
-use App\Http\Controllers\khach_hang\TrangChuController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\super_admin\PhuongThucThanhToanController;
@@ -26,8 +25,8 @@ Route::get('/login',[LoginController::class,'getViewLogin'])->name('index.login'
 Route::post('/login',[LoginController::class,'loginAction'])->name('login-action');
 Route::get('/logout', [LoginController::class, 'logoutAction'])->name('logout');
 
-//Giỏ hàng
-Route::get('/gio-hang', [GioHangController::class, 'getDsGioHang'])->name('gio-hang');
+
+
 
 
 Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
@@ -119,6 +118,12 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
 
     Route::group(['prefix' => '/khach-hang'], function () {
         Route::get('/home',[DashBoardController::class,'getViewDashBoardUser'])->name('khach-hang-home');
+
+        //Giỏ hàng
+        Route::group(['prefix' => '/gio-hang'], function () {
+            Route::get('/', [GioHangController::class, 'getDsGioHang'])->name('gio-hang');
+            Route::post('/them', [GioHangController::class, 'addToCart'])->name('them-gio-hang');
+        });
     });
 
     Route::group(['prefix' => '/admin'], function () {

@@ -82,16 +82,16 @@
             margin-bottom: 10px;
         }
 
-             /* Nút với gradient từ trái sang phải */
-         .btn-custom {
-             background-image: linear-gradient(to right, #ff7e5f, #feb47b); /* Gradient từ trái sang phải */
-             color: white;
-             border: none;
-             padding: 10px 20px;
-             font-size: 16px;
-             border-radius: 5px;
-             transition: background-image 0.4s ease; /* Thời gian chuyển đổi */
-         }
+        /* Nút với gradient từ trái sang phải */
+        .btn-custom {
+            background-image: linear-gradient(to right, #ff7e5f, #feb47b); /* Gradient từ trái sang phải */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-image 0.4s ease; /* Thời gian chuyển đổi */
+        }
 
         /* Hiệu ứng khi hover: gradient ngược từ phải sang trái */
         .btn-custom:hover {
@@ -99,65 +99,56 @@
             cursor: pointer;
         }
     </style>
-    <div class="page-body">
-        <div class="container-xl">
+    <div class = "page-body">
+        <div class = "container-xl">
             <!-- Slider hiện tại -->
-            <div class="d-flex align-items-center justify-content-center">
-                <div class="slider-container">
-                    <div class="slider">
-                        <div class="slide active">
-                            <img class="imgSlider"
-                                 src="https://file.hstatic.net/200000722513/file/pc_gvn_t10_web_slider_800x400.png"
-                                 alt="Slide 1">
+            <div class = "d-flex align-items-center justify-content-center">
+                <div class = "slider-container">
+                    <div class = "slider">
+                        <div class = "slide active">
+                            <img class = "imgSlider" src = "https://file.hstatic.net/200000722513/file/pc_gvn_t10_web_slider_800x400.png" alt = "Slide 1">
                         </div>
-                        <div class="slide">
-                            <img class="imgSlider"
-                                 src="https://tabler.io/static/samples/photos/people-watching-a-presentation-in-a-room.jpg"
-                                 alt="Slide 2">
+                        <div class = "slide">
+                            <img class = "imgSlider" src = "https://tabler.io/static/samples/photos/people-watching-a-presentation-in-a-room.jpg" alt = "Slide 2">
                         </div>
-                        <div class="slide">
-                            <img class="imgSlider"
-                                 src="https://tabler.io/static/samples/photos/people-by-a-banquet-table-full-with-food.jpg"
-                                 alt="Slide 3">
+                        <div class = "slide">
+                            <img class = "imgSlider" src = "https://tabler.io/static/samples/photos/people-by-a-banquet-table-full-with-food.jpg" alt = "Slide 3">
                         </div>
-                        <div class="slide">
-                            <img class="imgSlider"
-                                 src="https://cdnv2.tgdd.vn/mwg-static/common/News/1570471/tgdd-tecno-spark-go-1-21.jpg"
-                                 alt="Slide 4">
+                        <div class = "slide">
+                            <img class = "imgSlider" src = "https://cdnv2.tgdd.vn/mwg-static/common/News/1570471/tgdd-tecno-spark-go-1-21.jpg" alt = "Slide 4">
                         </div>
                     </div>
-                    <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
-                    <button class="next" onclick="moveSlide(1)">&#10095;</button>
+                    <button class = "prev" onclick = "moveSlide(-1)">&#10094;</button>
+                    <button class = "next" onclick = "moveSlide(1)">&#10095;</button>
                 </div>
             </div>
 
             <!-- Phần hiển thị sản phẩm mới -->
-            <div class="card border-0 mt-4">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <div class="col-auto fs-1 fw-bold">
+            <div class = "card border-0 mt-4">
+                <div class = "card-header d-flex justify-content-between align-items-center">
+                    <div class = "col-auto fs-1 fw-bold">
                         Sản phẩm mới
                     </div>
-                    <div class="col-auto fs-3 text-info text-decoration-none">
+                    <div class = "col-auto fs-3 text-info text-decoration-none">
                         <a href = "">Xem tất cả</a>
                     </div>
                 </div>
 
-                <div class="card-body">
-                    <div class="row">
+                <div class = "card-body">
+                    <div class = "row">
                         @foreach($pcMoi as $item)
-                            <div class="col-md-3 mb-4">
-                                <div class="card h-100">
+                            <div class = "col-md-3 mb-4">
+                                <div class = "card h-100">
                                     <a href = "">
-                                        <img class="card-img-top" src="{{asset('asset/img-product/'.$item->AnhSP)}}" alt="{{ $item->TenSP }}">
+                                        <img class = "card-img-top" src = "{{asset('asset/img-product/'.$item->AnhSP)}}" alt = "{{ $item->TenSP }}">
                                     </a>
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $item->TenSP }}</h5>
-                                        <p class="card-text text-danger fw-bold">{{ number_format($item->GiaBan, 0, ',', '.') }}₫</p>
-                                        <button class="btn btn-custom rounded-4">
+                                    <div class = "card-body">
+                                        <h5 class = "card-title">{{ $item->TenSP }}</h5>
+                                        <p class = "card-text text-danger fw-bold">{{ number_format($item->GiaBan, 0, ',', '.') }}₫</p>
+                                        <button class = "btn-gio-hang btn btn-custom rounded-4" data-masp = "{{ $item->MaSP }}" onclick = "addToCart(this);">
                                             Thêm vào giỏ
                                         </button>
                                     </div>
-
                                 </div>
                             </div>
                         @endforeach
@@ -166,28 +157,28 @@
             </div>
 
             <!-- Phần hiển thị sản phẩm nổi bật -->
-            <div class="card border-0 mt-4">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <div class="col-auto fs-1 fw-bold">
+            <div class = "card border-0 mt-4">
+                <div class = "card-header d-flex justify-content-between align-items-center">
+                    <div class = "col-auto fs-1 fw-bold">
                         Sản phẩm bán chạy
                     </div>
-                    <div class="col-auto fs-3 text-info text-decoration-none">
+                    <div class = "col-auto fs-3 text-info text-decoration-none">
                         <a href = "">Xem tất cả</a>
                     </div>
                 </div>
 
-                <div class="card-body">
-                    <div class="row">
+                <div class = "card-body">
+                    <div class = "row">
                         @foreach($pcBanChay as $item)
-                            <div class="col-md-3 mb-4">
-                                <div class="card h-100">
+                            <div class = "col-md-3 mb-4">
+                                <div class = "card h-100">
                                     <a href = "">
-                                        <img class="card-img-top" src="{{asset('asset/img-product/'.$item->AnhSP)}}" alt="{{ $item->TenSP }}">
+                                        <img class = "card-img-top" src = "{{asset('asset/img-product/'.$item->AnhSP)}}" alt = "{{ $item->TenSP }}">
                                     </a>
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $item->TenSP }}</h5>
-                                        <p class="card-text text-danger fw-bold">{{ number_format($item->GiaBan, 0, ',', '.') }}₫</p>
-                                        <button class="btn btn-custom rounded-4">
+                                    <div class = "card-body">
+                                        <h5 class = "card-title">{{ $item->TenSP }}</h5>
+                                        <p class = "card-text text-danger fw-bold">{{ number_format($item->GiaBan, 0, ',', '.') }}₫</p>
+                                        <button class = "btn-gio-hang btn btn-custom rounded-4" data-masp = "{{ $item->MaSP }}" onclick = "addToCart(this);">
                                             Thêm vào giỏ
                                         </button>
                                     </div>
@@ -196,32 +187,34 @@
                             </div>
                         @endforeach
                     </div>
+
                 </div>
             </div>
 
             <!-- Phần hiển thị sản phẩm mới -->
-            <div class="card border-0 mt-4">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <div class="col-auto fs-1 fw-bold">
+            <div class = "card border-0 mt-4">
+                <div class = "card-header d-flex justify-content-between align-items-center">
+                    <div class = "col-auto fs-1 fw-bold">
                         Sản phẩm khuyến mãi
                     </div>
-                    <div class="col-auto fs-3 text-info text-decoration-none">
+                    <div class = "col-auto fs-3 text-info text-decoration-none">
                         <a href = "">Xem tất cả</a>
                     </div>
                 </div>
 
-                <div class="card-body">
-                    <div class="row">
+                <div class = "card-body">
+
+                    <div class = "row">
                         @foreach($pcKM as $item)
-                            <div class="col-md-3 mb-4">
-                                <div class="card h-100">
+                            <div class = "col-md-3 mb-4">
+                                <div class = "card h-100">
                                     <a href = "">
-                                        <img class="card-img-top" src="{{asset('asset/img-product/'.$item->AnhSP)}}" alt="{{ $item->TenSP }}">
+                                        <img class = "card-img-top" src = "{{asset('asset/img-product/'.$item->AnhSP)}}" alt = "{{ $item->TenSP }}">
                                     </a>
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $item->TenSP }}</h5>
-                                        <p class="card-text text-danger fw-bold">{{ number_format($item->GiaBan, 0, ',', '.') }}₫</p>
-                                        <button class="btn btn-custom rounded-4">
+                                    <div class = "card-body">
+                                        <h5 class = "card-title">{{ $item->TenSP }}</h5>
+                                        <p class = "card-text text-danger fw-bold">{{ number_format($item->GiaBan, 0, ',', '.') }}₫</p>
+                                        <button class = "btn-gio-hang btn btn-custom rounded-4" data-masp = "{{ $item->MaSP }}" onclick = "addToCart(this);">
                                             Thêm vào giỏ
                                         </button>
                                     </div>
@@ -240,14 +233,14 @@
     <script>
       // Slider hiện tại
       let currentSlide = 0;
-      const slides = document.querySelectorAll('.slide');
+      const slides = document.querySelectorAll(".slide");
       const totalSlides = slides.length;
-      const slider = document.querySelector('.slider');
+      const slider = document.querySelector(".slider");
       const slideInterval = 3500;
 
       function showSlide(index) {
         const translateValue = -index * 100;
-        slider.style.transition = 'transform 0.8s ease-in-out';
+        slider.style.transition = "transform 0.8s ease-in-out";
         slider.style.transform = `translateX(${translateValue}%)`;
       }
 
@@ -261,7 +254,7 @@
         showSlide(currentSlide);
       }
 
-      setInterval(function () {
+      setInterval(function() {
         moveSlide(1);
       }, slideInterval);
 
@@ -269,38 +262,29 @@
     </script>
 
     <script>
-      // let currentIndex = 0;
-      // const slidesToShow = 4; // Hiển thị 4 sản phẩm cùng lúc
-      // const slidesFeature = document.querySelectorAll('.slide-feature');
-      // const totalSlidesFeature = slidesFeature.length;
-      // const sliderRow = document.querySelector('.slider-row');
-      //
-      // // Ẩn các sản phẩm dư thừa
-      // function showSlides() {
-      //   slidesFeature.forEach((slide, index) => {
-      //     if (index >= currentIndex * slidesToShow && index < (currentIndex + 1) * slidesToShow) {
-      //       slide.style.display = 'block';
-      //     } else {
-      //       slide.style.display = 'none';
-      //     }
-      //   });
-      // }
-      //
-      // document.querySelector('.prev-feature').addEventListener('click', function() {
-      //   currentIndex = Math.max(currentIndex - 1, 0);
-      //   showSlides();
-      // });
-      //
-      // document.querySelector('.next-feature').addEventListener('click', function() {
-      //   if ((currentIndex + 1) * slidesToShow < totalSlidesFeature) {
-      //     currentIndex++;
-      //   }
-      //   showSlides();
-      // });
-      //
-      // // Khởi tạo slider sản phẩm với nhóm đầu tiên
-      // showSlides();
+      function addToCart(buttonElement) {
+        var loggedIn = @json(session()->has('MaTK')); // Pass the session check to JavaScript
 
-
+        if (loggedIn) {
+          var productId = buttonElement.getAttribute('data-masp');
+          $.ajax({
+            url: '{{route('them-gio-hang')}}',
+            type: 'POST',
+            data: {
+              MaSP: productId,
+              _token: '{{ csrf_token() }}' // CSRF token for security
+            },
+            success: function(response) {
+              toastr.success(response.message);
+            },
+            error: function(error) {
+              toastr.error('Error adding product to cart.');
+            }
+          });
+        } else {
+          toastr.warning('Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.'); // Warning if not logged in
+        }
+      }
     </script>
+
 @endsection

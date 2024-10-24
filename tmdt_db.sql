@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 22, 2024 at 09:09 PM
+-- Generation Time: Oct 24, 2024 at 09:28 AM
 -- Server version: 5.7.24
--- PHP Version: 8.1.25
+-- PHP Version: 7.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -99,6 +99,29 @@ CREATE TABLE `chitietdonhang` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `chitietgiohang`
+--
+
+CREATE TABLE `chitietgiohang` (
+  `id` int(11) NOT NULL,
+  `MaGH` int(11) DEFAULT NULL,
+  `MaSP` int(11) DEFAULT NULL,
+  `SLSanPham` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `chitietgiohang`
+--
+
+INSERT INTO `chitietgiohang` (`id`, `MaGH`, `MaSP`, `SLSanPham`) VALUES
+(1, 1, 12, 1),
+(2, 1, 13, 1),
+(3, 1, 17, 2),
+(4, 1, 18, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `chitietsanpham`
 --
 
@@ -130,7 +153,8 @@ CREATE TABLE `danhmucsanpham` (
 INSERT INTO `danhmucsanpham` (`MaDM`, `TenDM`, `TrangThaiDM`) VALUES
 (1, 'Laptop', 'Hiện'),
 (3, 'RAM', 'Ẩn'),
-(4, 'Điện thoại', 'Hiện');
+(4, 'Điện thoại', 'Hiện'),
+(5, 'PC', 'Hiện');
 
 -- --------------------------------------------------------
 
@@ -184,10 +208,15 @@ INSERT INTO `donvivanchuyen` (`MaVC`, `TenDonViVC`) VALUES
 
 CREATE TABLE `giohang` (
   `MaGH` int(11) NOT NULL,
-  `MaTK` int(11) DEFAULT NULL,
-  `MaSP` int(11) DEFAULT NULL,
-  `SoLuong` text
+  `MaTK` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `giohang`
+--
+
+INSERT INTO `giohang` (`MaGH`, `MaTK`) VALUES
+(1, 4);
 
 -- --------------------------------------------------------
 
@@ -320,9 +349,23 @@ CREATE TABLE `sanpham` (
 --
 
 INSERT INTO `sanpham` (`MaSP`, `TenSP`, `AnhSP`, `GiaBan`, `SoLuongTonKho`, `NgayTaoSP`, `TrangThaiSP`, `MoTaChiTiet`, `ThoiGianBaoHanh`, `MaDM`, `MaHSX`) VALUES
-(8, 'ewqe', '432er', '324', '432', '2024-10-18', 'Hiện', '2131', '432', NULL, NULL),
-(10, 'hihihi', 'hihi', '10000000', '3', '2024-10-01', 'Ẩn', 'hihi', '3 tháng', 1, 1),
-(11, 'Iphone 16 Pro Max', 'deoco', '36500000', '100', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 4, 6);
+(8, 'ewqe', 'pc_case_xigmatek_-_26_e36ac54740974ec88f65ca6eedfd10a2_medium.png', '324', '432', '2024-10-18', 'Hiện', '2131', '432', NULL, NULL),
+(10, 'hihihi', 'pc_case_xigmatek_-_26_e36ac54740974ec88f65ca6eedfd10a2_medium.png', '10000000', '3', '2024-10-01', 'Ẩn', 'hihi', '3 tháng', 1, 1),
+(11, 'Iphone 16 Pro Max', 'pc_case_xigmatek_-_26_e36ac54740974ec88f65ca6eedfd10a2_medium.png', '36500000', '100', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 4, 6),
+(12, 'PC GVN x ASUS Advanced Ai (Intel Core Ultra 9 285K/ VGA RTX 4090)', 'pc_case_xigmatek_-_26_e36ac54740974ec88f65ca6eedfd10a2_medium.png', '140000000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 5, 1),
+(13, 'PC GVN x MSI Dragon ACE (Intel i9-14900K/ VGA RTX 4080 Super)', 'artboard_3_b5ccc140878a433db58322a5adeb8b3c_medium.png', '93990000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 5, 1),
+(14, 'PC GVN x AORUS XTREME ICE (Intel i9-14900K/ VGA RTX 4080 Super)', 'pc_gvn_x_gigabyte__ice__-_32_e797aed458a94914b78e491d8c7a5ccb_medium.png', '150000000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 5, 1),
+(15, 'PC GVN x MSI PROJECT ZERO WHITE (Intel i5-14400F/ VGA RTX 4060)', 'thumb_project_zero_c58860d9fa3a409294c17ab45f46f612_medium.png', '24990000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 5, 1),
+(17, 'PC GVN x MSI PROJECT ZERO WHITE (Intel i5-14400F/ VGA RTX 4060)', 'thumb_project_zero_c58860d9fa3a409294c17ab45f46f612_medium.png', '24990000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 5, 1),
+(18, 'PC GVN x MSI PROJECT ZERO WHITE (Intel i5-14400F/ VGA RTX 4060)', 'thumb_project_zero_c58860d9fa3a409294c17ab45f46f612_medium.png', '24990000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 5, 1),
+(19, 'PC GVN x MSI PROJECT ZERO WHITE (Intel i5-14400F/ VGA RTX 4060)', 'thumb_project_zero_c58860d9fa3a409294c17ab45f46f612_medium.png', '24990000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 5, 1),
+(20, 'PC GVN x AORUS XTREME ICE (Intel i9-14900K/ VGA RTX 4080 Super)', 'pc_gvn_x_gigabyte__ice__-_32_e797aed458a94914b78e491d8c7a5ccb_medium.png', '150000000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 5, 1),
+(21, 'PC GVN x AORUS XTREME ICE (Intel i9-14900K/ VGA RTX 4080 Super)', 'pc_gvn_x_gigabyte__ice__-_32_e797aed458a94914b78e491d8c7a5ccb_medium.png', '150000000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 5, 1),
+(22, 'PC GVN x AORUS XTREME ICE (Intel i9-14900K/ VGA RTX 4080 Super)', 'pc_gvn_x_gigabyte__ice__-_32_e797aed458a94914b78e491d8c7a5ccb_medium.png', '150000000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 5, 1),
+(23, 'PC GVN x AORUS XTREME ICE (Intel i9-14900K/ VGA RTX 4080 Super)', 'pc_gvn_x_gigabyte__ice__-_32_e797aed458a94914b78e491d8c7a5ccb_medium.png', '150000000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 5, 1),
+(24, 'PC GVN x MSI Dragon ACE (Intel i9-14900K/ VGA RTX 4080 Super)', 'artboard_3_b5ccc140878a433db58322a5adeb8b3c_medium.png', '93990000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 5, 1),
+(25, 'PC GVN x MSI Dragon ACE (Intel i9-14900K/ VGA RTX 4080 Super)', 'artboard_3_b5ccc140878a433db58322a5adeb8b3c_medium.png', '93990000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 5, 1),
+(26, 'PC GVN x MSI Dragon ACE (Intel i9-14900K/ VGA RTX 4080 Super)', 'artboard_3_b5ccc140878a433db58322a5adeb8b3c_medium.png', '93990000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -351,7 +394,7 @@ CREATE TABLE `taikhoan` (
 
 INSERT INTO `taikhoan` (`MaTK`, `HoTen`, `TenDangNhap`, `MatKhau`, `VaiTro`, `AnhDaiDien`, `Email`, `NgaySinh`, `GioiTinh`, `SDT`, `DiaChi`, `TrangThai`) VALUES
 (3, 'admin', 'super', '$2y$12$EkIwMrbinlzNsvTjFoRoYuguGL3r7bVNLa87WbHkULkR1loPf1Dl2', 1, NULL, 'admin@admin', NULL, NULL, '0123123123', NULL, 0),
-(4, 'asdsasad', 'test', '$2y$12$GSIvcf3PKK5n/MkPDdP/IeFkQm50xtp7AAD9fj53p1Q.yRLIS.MeS', 3, NULL, '123@123', NULL, NULL, '123', NULL, 0);
+(4, 'chị Bảy', 'test', '$2y$12$GSIvcf3PKK5n/MkPDdP/IeFkQm50xtp7AAD9fj53p1Q.yRLIS.MeS', 3, NULL, '123@123', NULL, NULL, '123', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -447,6 +490,12 @@ ALTER TABLE `binhluan`
 --
 ALTER TABLE `chitietdonhang`
   ADD PRIMARY KEY (`MaCTDH`);
+
+--
+-- Indexes for table `chitietgiohang`
+--
+ALTER TABLE `chitietgiohang`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `chitietsanpham`
@@ -579,6 +628,12 @@ ALTER TABLE `chitietdonhang`
   MODIFY `MaCTDH` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `chitietgiohang`
+--
+ALTER TABLE `chitietgiohang`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `chitietsanpham`
 --
 ALTER TABLE `chitietsanpham`
@@ -588,7 +643,7 @@ ALTER TABLE `chitietsanpham`
 -- AUTO_INCREMENT for table `danhmucsanpham`
 --
 ALTER TABLE `danhmucsanpham`
-  MODIFY `MaDM` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `MaDM` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `donhang`
@@ -606,7 +661,7 @@ ALTER TABLE `donvivanchuyen`
 -- AUTO_INCREMENT for table `giohang`
 --
 ALTER TABLE `giohang`
-  MODIFY `MaGH` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaGH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `hangsanxuat`
@@ -648,7 +703,7 @@ ALTER TABLE `quyen`
 -- AUTO_INCREMENT for table `sanpham`
 --
 ALTER TABLE `sanpham`
-  MODIFY `MaSP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `MaSP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `taikhoan`

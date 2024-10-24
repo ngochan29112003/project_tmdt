@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\admin\SanPhamModel;
+use Illuminate\Support\Facades\DB;
 
 class DashBoardController extends Controller
 {
     public function getViewDashBoardSuperAdmin()
     {
+
         return view('super-admin.master');
     }
 
