@@ -99,14 +99,6 @@
             cursor: pointer;
         }
     </style>
-
-    <!-- Nút "Thêm vào giỏ" -->
-    <button class="btn btn-custom">
-        Thêm vào giỏ
-    </button>
-
-    </style>
-
     <div class="page-body">
         <div class="container-xl">
             <!-- Slider hiện tại -->
