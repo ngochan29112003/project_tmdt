@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\khach_hang\GioHangController;
+use App\Http\Controllers\khach_hang\ThongTinTaiKhoanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\super_admin\PhuongThucThanhToanController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\super_admin\QuanLySanPhamController;
 use App\Http\Controllers\super_admin\QuanLyTaiKhoanController;
 use App\Http\Controllers\super_admin\QuanLyVanChuyenController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/',[DashBoardController::class,'getViewDashBoardUser'])->name('home-page');
 
@@ -132,6 +134,13 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::group(['prefix' => '/gio-hang'], function () {
             Route::get('/', [GioHangController::class, 'getDsGioHang'])->name('gio-hang');
             Route::post('/them', [GioHangController::class, 'addToCart'])->name('them-gio-hang');
+        });
+
+        //Account
+        Route::group(['prefix'=> '/thong-tin-tai-khoan'], function () {
+            Route::get('/', [ThongTinTaiKhoanController::class, 'getViewTaiKhoan'])->name('thong-tin-tai-khoan');
+            Route::get('/edit{id}', [ThongTinTaiKhoanController::class, 'editTaiKhoan'])->name('edit-thong-tin-tai-khoan');
+            Route::post('/update{id}', [ThongTinTaiKhoanController::class, 'updateTTTaiKhoan'])->name('update-thong-tin-tai-khoan');
         });
     });
 
