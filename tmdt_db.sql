@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 27, 2024 at 11:25 PM
+-- Generation Time: Oct 28, 2024 at 01:12 AM
 -- Server version: 5.7.24
--- PHP Version: 8.1.0
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -152,21 +152,9 @@ CREATE TABLE `danhmucsanpham` (
 
 INSERT INTO `danhmucsanpham` (`MaDM`, `TenDM`, `TrangThaiDM`) VALUES
 (1, 'Laptop', 'Hiện'),
-(2, 'Laptop Gaming', 'Hiện'),
-(3, 'Ổ cứng, RAM, Thẻ nhớ', 'Hiện'),
-(4, 'PC GVN', 'Hiện'),
-(5, 'Main, CPU, VGA', 'Hiện'),
-(6, 'Case, Nguồn, Tản', 'Hiện'),
-(7, 'Loa, Micro, Webcam', 'Hiện'),
-(8, 'Màn hình', 'Hiện'),
-(9, 'Bàn phím', 'Hiện'),
-(10, 'Chuột + Lót chuột', 'Hiện'),
-(11, 'Tai nghe', 'Hiện'),
-(12, 'Ghế - Bàn', 'Hiện'),
-(13, 'Phần mềm, mạng', 'Hiện'),
-(14, 'Handheld, Console', 'Hiện'),
-(15, 'Phụ kiện (Hub, sạc, cáp..)', 'Hiện'),
-(16, 'Dịch vụ và thông tin khác', 'Hiện');
+(3, 'RAM', 'Ẩn'),
+(4, 'Điện thoại', 'Hiện'),
+(5, 'PC', 'Hiện');
 
 -- --------------------------------------------------------
 
@@ -247,33 +235,10 @@ CREATE TABLE `hangsanxuat` (
 --
 
 INSERT INTO `hangsanxuat` (`MaHSX`, `TenHSX`, `TrangThaiHSX`) VALUES
-(7, 'ASUS', 'Hiện'),
-(8, 'ACER', 'Hiện'),
-(9, 'MSI', 'Hiện'),
-(10, 'LENOVO', 'Hiện'),
-(11, 'DELL', 'Hiện'),
-(12, 'HP - Pavilion', 'Hiện'),
-(13, 'LG - Gram', 'Hiện'),
-(14, 'ACER/PREDATOR', 'Hiện'),
-(15, 'ASUS/ROG', 'Hiện'),
-(16, 'GIGABYTE/AORUS', 'Hiện'),
-(17, 'Edifier', 'Hiện'),
-(18, 'Razer', 'Hiện'),
-(19, 'Logitech', 'Hiện'),
-(20, 'SoundMax', 'Hiện'),
-(21, 'ViewSonic', 'Hiện'),
-(22, 'AOC', 'Hiện'),
-(23, 'HKC', 'Hiện'),
-(24, 'AKKO', 'Hiện'),
-(25, 'Dare-U', 'Hiện'),
-(26, 'Rapoo', 'Hiện'),
-(27, 'FL-Esports', 'Hiện'),
-(28, 'Corsair', 'Hiện'),
-(29, 'E-Dra', 'Hiện'),
-(30, 'Cidoo', 'Hiện'),
-(31, 'Microsoft', 'Hiện'),
-(32, '', 'Hiện'),
-(33, '', 'Hiện');
+(1, 'Asus', 'Hien'),
+(4, 'Dell', 'Hiện'),
+(5, 'HP', 'Hiện'),
+(6, 'Apple', 'Hiện');
 
 -- --------------------------------------------------------
 
@@ -384,7 +349,7 @@ CREATE TABLE `sanpham` (
 --
 
 INSERT INTO `sanpham` (`MaSP`, `TenSP`, `AnhSP`, `GiaBan`, `SoLuongTonKho`, `NgayTaoSP`, `TrangThaiSP`, `MoTaChiTiet`, `ThoiGianBaoHanh`, `MaDM`, `MaHSX`) VALUES
-(8, 'ewqe', 'pc_case_xigmatek_-_26_e36ac54740974ec88f65ca6eedfd10a2_medium.png', '324', '432', '2024-10-18', 'Hiện', '2131', '432', 1, 1),
+(8, 'ewqe', 'pc_case_xigmatek_-_26_e36ac54740974ec88f65ca6eedfd10a2_medium.png', '324', '432', '2024-10-18', 'Hiện', '2131', '432', NULL, NULL),
 (10, 'hihihi', 'pc_case_xigmatek_-_26_e36ac54740974ec88f65ca6eedfd10a2_medium.png', '10000000', '3', '2024-10-01', 'Ẩn', 'hihi', '3 tháng', 1, 1),
 (11, 'Iphone 16 Pro Max', 'pc_case_xigmatek_-_26_e36ac54740974ec88f65ca6eedfd10a2_medium.png', '36500000', '100', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 4, 6),
 (12, 'PC GVN x ASUS Advanced Ai (Intel Core Ultra 9 285K/ VGA RTX 4090)', 'pc_case_xigmatek_-_26_e36ac54740974ec88f65ca6eedfd10a2_medium.png', '140000000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 5, 1),
@@ -678,7 +643,7 @@ ALTER TABLE `chitietsanpham`
 -- AUTO_INCREMENT for table `danhmucsanpham`
 --
 ALTER TABLE `danhmucsanpham`
-  MODIFY `MaDM` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `MaDM` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `donhang`
@@ -702,7 +667,7 @@ ALTER TABLE `giohang`
 -- AUTO_INCREMENT for table `hangsanxuat`
 --
 ALTER TABLE `hangsanxuat`
-  MODIFY `MaHSX` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `MaHSX` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `khuyenmai`
