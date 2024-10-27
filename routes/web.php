@@ -5,6 +5,7 @@ use App\Http\Controllers\khach_hang\GioHangController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\super_admin\PhuongThucThanhToanController;
+use App\Http\Controllers\super_admin\QuanLyAdminController;
 use App\Http\Controllers\super_admin\QuanLyBaiDangController;
 use App\Http\Controllers\super_admin\QuanLyBaoCaoController;
 use App\Http\Controllers\super_admin\QuanLyBinhLuanController;
@@ -39,6 +40,11 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
             Route::get('/danh-sach',[QuanLyTaiKhoanController::class,'getView'])->name('danh-sach-tai-khoan');
             Route::post('/unlock', [QuanLyTaiKhoanController::class, 'unlockAccount'])->name('unlock.route');
             Route::get('filter-accounts', [QuanLyTaiKhoanController::class, 'filterAccounts'])->name('super-admin.filter-accounts');
+        });
+
+        //Quản lý admin
+        Route::group(['prefix' => '/tai-khoan-admin'], function () {
+            Route::get('/danh-sach',[QuanLyAdminController::class,'getView'])->name('danh-sach-admin');
         });
 
         // Danh mục
