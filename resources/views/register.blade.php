@@ -62,7 +62,7 @@
                 </div>
 
                 <div class="form-footer">
-                    <button type="submit" class="btn btn-primary w-100">Tạo tài khoản</button>
+                    <button type="submit" class="btn btn-primary w-100" style="background-color: red">Tạo tài khoản</button>
                 </div>
             </div>
         </form>

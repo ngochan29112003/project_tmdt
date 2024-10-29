@@ -62,7 +62,7 @@
 
             var url = "{{ route('edit-thong-tin-tai-khoan', ':id') }}";
             url = url.replace(':id', TaiKhoan);
-            
+
             $.ajax({
                 url: url,
                 method: 'GET',

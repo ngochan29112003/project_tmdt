@@ -110,13 +110,13 @@
                             <img class = "imgSlider" src = "https://file.hstatic.net/200000722513/file/pc_gvn_t10_web_slider_800x400.png" alt = "Slide 1">
                         </div>
                         <div class = "slide">
-                            <img class = "imgSlider" src = "https://tabler.io/static/samples/photos/people-watching-a-presentation-in-a-room.jpg" alt = "Slide 2">
+                            <img class = "imgSlider" src = "{{asset('asset/img/banner.jpg')}}" alt = "Slide 2">
                         </div>
                         <div class = "slide">
-                            <img class = "imgSlider" src = "https://tabler.io/static/samples/photos/people-by-a-banquet-table-full-with-food.jpg" alt = "Slide 3">
+                            <img class = "imgSlider" src = "{{asset('asset/img/banner-2.jpg')}}" alt = "Slide 3">
                         </div>
                         <div class = "slide">
-                            <img class = "imgSlider" src = "https://cdnv2.tgdd.vn/mwg-static/common/News/1570471/tgdd-tecno-spark-go-1-21.jpg" alt = "Slide 4">
+                            <img class = "imgSlider" src = "{{asset('asset/img/banner-3.png')}}" alt = "Slide 4">
                         </div>
                     </div>
                     <button class = "prev" onclick = "moveSlide(-1)">&#10094;</button>
