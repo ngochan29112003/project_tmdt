@@ -24,15 +24,11 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/',[DashBoardController::class,'getViewDashBoardUser'])->name('home-page');
-
 Route::get('/register',[RegisterController::class,'getViewRegister'])->name('index.register');
 Route::post('/register/add',[RegisterController::class,'addAccount'])->name('add-account');
 Route::get('/login',[LoginController::class,'getViewLogin'])->name('index.login');
 Route::post('/login',[LoginController::class,'loginAction'])->name('login-action');
 Route::get('/logout', [LoginController::class, 'logoutAction'])->name('logout');
-
-
-
 
 
 Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
@@ -116,6 +112,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
             Route::post('/update/{id}', [TraLoiBinhLuanController::class, 'updateTraLoi'])->name('update-tra-loi-binh-luan');
             Route::delete('/delete/{id}',[TraLoiBinhLuanController::class,'deleteTL'])->name('delete-tra-loi-binh-luan');
         });
+
         // Khuyến mãi
         Route::group(['prefix' => '/khuyen-mai'], function () {
             Route::get('/danh-sach',[QuanLyKhuyenMaiController::class,'getView'])->name('danh-sach-khuyen-mai');

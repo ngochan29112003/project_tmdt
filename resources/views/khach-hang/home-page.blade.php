@@ -275,7 +275,7 @@
               _token: '{{ csrf_token() }}' // CSRF token for security
             },
             success: function(response) {
-              toastr.success(response.message);
+              toastr.info(response.message);
             },
             error: function(error) {
               toastr.error('Error adding product to cart.');
