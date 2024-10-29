@@ -39,7 +39,7 @@
                         <a class="nav-link" href="#">Mới</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Đang xử lý</a>
+                        <a class="nav-link" href="#">Đang soạn hàng</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Đang chờ vận chuyển</a>
