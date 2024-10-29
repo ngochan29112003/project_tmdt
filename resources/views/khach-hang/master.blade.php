@@ -28,11 +28,11 @@
 <div class="page">
     <!-- Navbar -->
     <header class="navbar navbar-expand-md d-print-none bg-warning">
-        <div class="container-xl p-0">
+        <div class="container-fluid p-0">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+            <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3 ms-7">
                 <a href="{{route('home-page')}}">
                     <img src="{{asset('asset/img/logo.png')}}" height="60" alt=" ">
                 </a>
@@ -62,7 +62,7 @@
                                     <path d = "M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
                                     <path d = "M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
                                 </svg>
-                                <span class = "ms-1 text-white fw-bold fs-3">Hệ thống <br>showroom</span>
+                                <span class = "ms-1 text-white fw-bold fs-3">Hệ thống showroom</span>
                             </a>
                         </div>
                         <div class="col-auto mb-1">
@@ -82,7 +82,7 @@
                                     <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
                                     <path d="M5 17h-2v-11a1 1 0 0 1 1 -1h9v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5" />
                                 </svg>
-                                <span class="ms-1 text-white fw-bold fs-3">Tra cứu <br> đơn hàng</span>
+                                <span class="ms-1 text-white fw-bold fs-3">Tra cứu đơn hàng</span>
                             </a>
                         </div>
                         <div class="col-auto mb-1">
@@ -104,7 +104,7 @@
                                         ->where('MaTK', session('MaTK'))
                                         ->first();
                                 ?>
-                            <div class="col-auto mb-2">
+                            <div class="col-auto mb-2 me-7">
                                 <div class="nav-item dropdown">
                                     <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
                                        aria-label="Open user menu">
