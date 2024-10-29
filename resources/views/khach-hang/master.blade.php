@@ -55,17 +55,17 @@
             <div class="navbar-nav flex-row order-md-last mx-2">
                 <div class="nav-item d-none d-md-flex">
                     <div class="row align-items-center d-flex">
-                        <div class="col-auto mb-2">
+                        <div class="col-auto mb-1">
                             <a href = "#" class = "cart-icon text-decoration-none d-flex align-items-center mx-3">
                                 <svg xmlns = "http://www.w3.org/2000/svg" width = "24" height = "24" viewBox = "0 0 24 24" fill = "none" stroke = "white" stroke-width = "2" stroke-linecap = "round" stroke-linejoin = "round" class = "icon icon-tabler icons-tabler-outline icon-tabler-map-pin">
                                     <path stroke = "none" d = "M0 0h24v24H0z" fill = "none" />
                                     <path d = "M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
                                     <path d = "M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
                                 </svg>
-                                <span class = "ms-1 text-white fw-bold fs-3">Hệ thống showroom</span>
+                                <span class = "ms-1 text-white fw-bold fs-3">Hệ thống <br>showroom</span>
                             </a>
                         </div>
-                        <div class="col-auto mb-2">
+                        <div class="col-auto mb-1">
                             <a href="#" class="cart-icon text-decoration-none d-flex align-items-center mx-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-phone">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -74,7 +74,18 @@
                                 <span class="ms-1 text-white fw-bold fs-3">Liên hệ</span>
                             </a>
                         </div>
-                        <div class="col-auto mb-2">
+                        <div class="col-auto mb-1">
+                            <a href="#" class="cart-icon text-decoration-none d-flex align-items-center mx-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon text-white icon-tabler icons-tabler-outline icon-tabler-truck">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                    <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                    <path d="M5 17h-2v-11a1 1 0 0 1 1 -1h9v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5" />
+                                </svg>
+                                <span class="ms-1 text-white fw-bold fs-3">Tra cứu <br> đơn hàng</span>
+                            </a>
+                        </div>
+                        <div class="col-auto mb-1">
                             <a href="{{route('gio-hang')}}" class="cart-icon text-decoration-none d-flex align-items-center mx-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-shopping-cart">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -359,12 +370,83 @@
         @yield('contents')
     </div>
 </div>
+{{--col-sm-12 col-md-6 col-lg-2 col-lg--}}
+<footer class="main-footer mt-3 bg-white">
+    <div class="main-footer-top">
+        <div class="container-fluid">
+            <div class="row d-flex justify-content-center ">
+                <div class="col-sm-12 col-md-6 col-lg-2 col-lg mt-4">
+                    <div class="footer-col footer-link toggle-footer toggle-first">
+                        <div class="footer-title">
+                            <h4>Về GEARVN 	</h4>
+                            <span class="icon-title"></span>
+                        </div>
+                        <div class="footer-content">
+                            <ul>
+                                <li class="item"><a href="/pages/gioi-thieu-gearvn" title="Giới thiệu">Giới thiệu</a></li>
+                                <li class="item"><a href="https://tuyendung.gearvn.com/" title="Tuyển dụng">Tuyển dụng</a></li>
+                                <li class="item"><a href="/pages/black-friday" title="Black Friday 2024">Black Friday 2024</a></li>
 
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-2 col-lg mt-4">
+                    <div class="footer-col footer-link toggle-footer">
+                        <div class="footer-title active">
+                            <h4>Chính sách </h4>
+                            <span class="icon-title"></span>
+                        </div>
+                        <div class="footer-content" style="display: block;">
+                            <ul>
+                                <li class="item"><a href="/pages/chinh-sach-bao-hanh" title="Chính sách bảo hành">Chính sách bảo hành</a></li>
+                                <li class="item"><a href="/pages/chinh-sach-giao-hang" title="Chính sách giao hàng">Chính sách giao hàng</a></li>
+                                <li class="item"><a href="/pages/chinh-sach-bao-mat" title="Chính sách bảo mật">Chính sách bảo mật</a></li>
 
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-2 col-lg mt-4">
+                    <div class="footer-col footer-link toggle-footer">
+                        <div class="footer-title">
+                            <h4>Thông tin </h4>
+                            <span class="icon-title"></span>
+                        </div>
+                        <div class="footer-content">
+                            <ul>
+                                <li class="item"><a href="/pages/he-thong-showroom-gearvn" title="Hệ thống cửa hàng">Hệ thống cửa hàng</a></li>
+                                <li class="item"><a href="/pages/huong-dan-mua-hang" title="Hướng dẫn mua hàng">Hướng dẫn mua hàng</a></li>
+                                <li class="item"><a href="/pages/huong-dan-thanh-toan-gearvn" title="Hướng dẫn thanh toán">Hướng dẫn thanh toán</a></li>
+                                <li class="item"><a href="/pages/huong-dan-tra-gop" title="Hướng dẫn trả góp">Hướng dẫn trả góp</a></li>
+                                <li class="item"><a href="/pages/trung-tam-ho-tro-tra-cuu-thong-tin-bao-hanh-san-pham-chinh-hang" title="Tra cứu địa chỉ bảo hành">Tra cứu địa chỉ bảo hành</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-2 col-lg mt-4">
+                    <div class="footer-col footer-block toggle-footer">
+                        <div class="footer-title"><h4>TỔNG ĐÀI HỖ TRỢ <span>(8:00 - 21:00)</span></h4></div>
+                        <div class="footer-content">
+                            <div class="list-info">
+                                <p><span>Mua hàng:</span> <a href="tel:19005301">1900.5301 <span>  </span> </a></p><p><span>Bảo hành: </span> <a href="tel:19005325">1900.5325 <span>  </span> </a><br></p><p><span>Khiếu nại: </span> <a href="tel:18006173">1800.6173 <span>  </span> </a><br>
+                                    <span>Email: </span> <a href="mailto:cskh@gearvn.com">cskh@gearvn.com</a>
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</footer>
 <!-- Libs JS -->
 @include('lib-js')
 @yield('scripts')
-@yield('scripts')
 </body>
+
 </html>
 
