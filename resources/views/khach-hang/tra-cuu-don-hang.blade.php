@@ -73,7 +73,7 @@
                 <div class="text-center mt-5 bg-white">
                     <img src="{{asset('asset/img/no_oder.jpg')}}" alt="No Orders" class="mb-3" width="120">
                     <p>Quý khách chưa có đơn hàng nào.</p>
-                    <button class="btn btn-danger">Tiếp tục mua hàng</button>
+                    <a class="btn btn-danger" href="{{ route('home-page') }}">Tiếp tục mua hàng</a>
                 </div>
             </main>
         </div>
