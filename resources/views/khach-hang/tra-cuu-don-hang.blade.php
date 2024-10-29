@@ -1,10 +1,20 @@
 @extends('khach-hang.master')
 @section('contents')
+    <style>
+        .hover-red {
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .hover-red:hover {
+            background-color: #f8d7da;
+            color: #dc3545;
+        }
+    </style>
     <body>
     <div class="container-xxl py-4">
         <div class="row">
             <!-- Sidebar -->
-            <div class="col-md-3 bg-white border rounded shadow-sm p-4">
+            <div class="col-md-3 bg-white border rounded flex-wrap shadow-sm p-4">
                 <div class="text-center mb-4">
                     <img src="#" class="rounded-circle mb-2" alt="User Avatar" width="80" height="80">
                     <h6 class="fw-bold">User</h6>
@@ -31,7 +41,7 @@
             <!-- Main Content -->
             <main class="col-md-9 p-4">
                 <h1 class="fw-bold text-danger">Quản lý đơn hàng</h1>
-                <ul class="nav nav-tabs mt-3 bg-white">
+                <ul class="nav nav-tabs flex-wrap mt-3 bg-white">
                     <li class="nav-item">
                         <a class="nav-link active text-danger" href="#">Tất cả</a>
                     </li>
@@ -39,7 +49,10 @@
                         <a class="nav-link" href="#">Mới</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Đang xử lý</a>
+                        <a class="nav-link" href="#">Đang soạn hàng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Đang chờ vận chuyển</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Đang vận chuyển</a>
@@ -58,7 +71,7 @@
                 </div>
 
                 <div class="text-center mt-5 bg-white">
-                    <img src="#" alt="No Orders" class="mb-3" width="120">
+                    <img src="{{asset('asset/img/no_oder.jpg')}}" alt="No Orders" class="mb-3" width="120">
                     <p>Quý khách chưa có đơn hàng nào.</p>
                     <button class="btn btn-danger">Tiếp tục mua hàng</button>
                 </div>
