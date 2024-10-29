@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\khach_hang\GioHangController;
+use App\Http\Controllers\khach_hang\DatHangController;
 use App\Http\Controllers\khach_hang\ThongTinTaiKhoanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -140,6 +141,11 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::group(['prefix' => '/gio-hang'], function () {
             Route::get('/', [GioHangController::class, 'getDsGioHang'])->name('gio-hang');
             Route::post('/them', [GioHangController::class, 'addToCart'])->name('them-gio-hang');
+        });
+
+        //Đơn hàng
+        Route::group(['prefix' => '/don-hang'], function () {
+            Route::get('/', [DatHangController::class, 'getDonHang'])->name('don-hang');
         });
 
         //Account
