@@ -63,4 +63,76 @@ class GioHangController extends Controller
 
         return response()->json(['message' => 'Sản phẩm đã được thêm vào giỏ hàng thành công!']);
     }
+
+    public function decreaseQuantity(Request $request)
+    {
+        $MaSP = $request->MaSP;
+        $MaTK = session('MaTK');
+
+        $cartItem = DB::table('giohang')
+            ->join('chitietgiohang', 'giohang.MaGH', '=', 'chitietgiohang.MaGH')
+            ->where('giohang.MaTK', $MaTK)
+            ->where('chitietgiohang.MaSP', $MaSP)
+            ->first();
+
+        if ($cartItem && $cartItem->SLSanPham > 1) {
+            DB::table('chitietgiohang')
+                ->where('MaGH', $cartItem->MaGH)
+                ->where('MaSP', $MaSP)
+                ->decrement('SLSanPham');
+
+            return response()->json(['message' => 'Số lượng sản phẩm đã được giảm thành công!']);
+        }
+
+        return response()->json(['message' => 'Không thể giảm số lượng sản phẩm!'], 400);
+    }
+
+    public function increaseQuantity(Request $request)
+    {
+        $MaSP = $request->MaSP;
+        $MaTK = session('MaTK');
+
+        $cartItem = DB::table('giohang')
+            ->join('chitietgiohang', 'giohang.MaGH', '=', 'chitietgiohang.MaGH')
+            ->where('giohang.MaTK', $MaTK)
+            ->where('chitietgiohang.MaSP', $MaSP)
+            ->first();
+
+        if ($cartItem) {
+            DB::table('chitietgiohang')
+                ->where('MaGH', $cartItem->MaGH)
+                ->where('MaSP', $MaSP)
+                ->increment('SLSanPham');
+
+            return response()->json(['message' => 'Số lượng sản phẩm đã được tăng thành công!']);
+        }
+
+        return response()->json(['message' => 'Không thể tăng số lượng sản phẩm!'], 400);
+    }
+
+    public function removeFromCart(Request $request)
+    {
+        $MaSP = $request->MaSP;
+        $MaTK = session('MaTK');
+
+        // Lấy thông tin giỏ hàng của người dùng
+        $cartItem = DB::table('giohang')
+            ->join('chitietgiohang', 'giohang.MaGH', '=', 'chitietgiohang.MaGH')
+            ->where('giohang.MaTK', $MaTK)
+            ->where('chitietgiohang.MaSP', $MaSP)
+            ->first();
+
+        if ($cartItem) {
+            // Xóa sản phẩm khỏi giỏ hàng
+            DB::table('chitietgiohang')
+                ->where('MaGH', $cartItem->MaGH)
+                ->where('MaSP', $MaSP)
+                ->delete();
+
+            return response()->json(['message' => 'Sản phẩm đã được xóa khỏi giỏ hàng!']);
+        }
+
+        return response()->json(['message' => 'Không thể xóa sản phẩm!'], 400);
+    }
+
 }

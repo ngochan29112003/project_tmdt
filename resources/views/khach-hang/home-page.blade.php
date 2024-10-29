@@ -84,20 +84,21 @@
 
         /* Nút với gradient từ trái sang phải */
         .btn-custom {
-            background-image: linear-gradient(to right, #ff7e5f, #feb47b); /* Gradient từ trái sang phải */
+            background-image: linear-gradient(to right, #E30019, #d16868); /* Gradient từ trái sang phải với tone màu đỏ */
             color: white;
             border: none;
             padding: 10px 20px;
             font-size: 16px;
             border-radius: 5px;
-            transition: background-image 0.4s ease; /* Thời gian chuyển đổi */
+            transition: background-position 0.4s ease; /* Hiệu ứng chuyển màu mượt */
         }
 
         /* Hiệu ứng khi hover: gradient ngược từ phải sang trái */
         .btn-custom:hover {
-            background-image: linear-gradient(to left, #ff7e5f, #feb47b); /* Gradient ngược từ phải sang trái */
+            background-image: linear-gradient(to left, #E30019, #d16868); /* Gradient ngược từ phải sang trái */
             cursor: pointer;
         }
+
     </style>
     <div class = "page-body">
         <div class = "container-xl">
@@ -263,28 +264,56 @@
 
     <script>
       function addToCart(buttonElement) {
-        var loggedIn = @json(session()->has('MaTK')); // Pass the session check to JavaScript
+        var loggedIn = @json(session()->has('MaTK')); // Kiểm tra đăng nhập từ session PHP
 
         if (loggedIn) {
           var productId = buttonElement.getAttribute('data-masp');
           $.ajax({
-            url: '{{route('them-gio-hang')}}',
+            url: '{{ route('them-gio-hang') }}',
             type: 'POST',
             data: {
               MaSP: productId,
-              _token: '{{ csrf_token() }}' // CSRF token for security
+              _token: '{{ csrf_token() }}' // CSRF token cho bảo mật
             },
             success: function(response) {
-              toastr.info(response.message);
+              Swal.fire({
+                title: 'Thành công!',
+                text: response.message,
+                icon: 'success',
+                timer: 3000,
+                showConfirmButton: false
+              });
+              setTimeout(function () {
+                location.reload(); // Chuyển hướng người dùng
+              }, 1000);
+
             },
             error: function(error) {
-              toastr.error('Error adding product to cart.');
+              Swal.fire({
+                title: 'Lỗi!',
+                text: 'Không thể thêm sản phẩm vào giỏ hàng.',
+                icon: 'error',
+                timer: 3000,
+                showConfirmButton: false
+              });
             }
           });
         } else {
-          toastr.warning('Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.'); // Warning if not logged in
+          Swal.fire({
+            title: 'Yêu cầu đăng nhập',
+            text: 'Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Đăng nhập',
+            cancelButtonText: 'Hủy'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = "{{ route('index.login') }}";
+            }
+          });
         }
       }
     </script>
+
 
 @endsection

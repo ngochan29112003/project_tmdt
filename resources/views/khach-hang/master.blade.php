@@ -28,10 +28,8 @@
             /* Add a light background color on hover */
         }
 
-        .col:hover .bi {
-            transform: scale(1.2);
-            color: #FFD700;
-            transition: transform 0.2s ease, color 0.2s ease;
+        .background-header{
+            background-color: #E30019;
         }
     </style>
 </head>
@@ -48,7 +46,7 @@
 <body>
     <script src="{{asset('dist/js/demo-theme.min.js?1692870487')}}"></script>
     <div class="page">
-        <header class="navbar navbar-expand-md d-print-none bg-warning">
+        <header class="navbar navbar-expand-md d-print-none background-header">
             <div class="container-xl p-0">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu"
                     aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,23 +57,17 @@
                         <img src="{{asset('asset/img/logo.png')}}" height="60" alt=" "> </a>
                 </h1>
 
-                <!-- Add Search Bar with new style -->
-                <form class="d-flex mx-auto" role="search" style="max-width: 366px; width: 100%;">
+                <form class="d-flex mx-auto col-8 col-md-6 col-lg-5" role="search">
                     <div class="input-group">
                         <input class="form-control" type="search" placeholder="Bạn cần tìm gì?" aria-label="Search"
-                            style="border-radius: 20px 0 0 20px; box-shadow: none; border: 1px solid #ddd;">
+                               style="border-radius: 20px 0 0 20px; box-shadow: none; border: 1px solid #ddd;">
                         <button class="btn btn-light" type="submit"
-                            style="border-radius: 0 20px 20px 0; border: 1px solid #ddd; border-left: 0;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="icon">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
-                                <path d="M21 21l-6 -6"></path>
-                            </svg>
+                                style="border-radius: 0 20px 20px 0; border: 1px solid #ddd; border-left: 0;">
+                            <i class="bi bi-search fs-3"></i>
                         </button>
                     </div>
                 </form>
+
 
                 <div class="navbar-nav flex-row order-md-last mx-1">
                     <div class="nav-item d-none d-md-flex">
@@ -511,6 +503,54 @@
     @include('lib-js')
     @yield('scripts')
 
-</body>
+    <!-- Kiểm tra trạng thái đăng nhập bằng toastr -->
+    <!-- Thiết lập toastr với nút đóng -->
+    <!-- Kiểm tra trạng thái đăng nhập bằng SweetAlert2 với nút chuyển hướng đến trang đăng nhập -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Kiểm tra đăng nhập cho Tra cứu đơn hàng
+        const orderTrackingLink = document.querySelector('a[href="{{route('tra-cuu-don-hang')}}"]');
+        orderTrackingLink.addEventListener("click", function (event) {
+            @if(!session()->has('MaTK'))
+            event.preventDefault();
+          Swal.fire({
+            title: 'Yêu cầu đăng nhập',
+            text: 'Bạn cần đăng nhập để tra cứu đơn hàng.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Đăng nhập',
+            cancelButtonText: 'Hủy'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = "{{ route('index.login') }}";
+            }
+          });
+            @endif
+        });
 
+        // Kiểm tra đăng nhập cho Giỏ hàng
+        const cartLink = document.querySelector('a[href="{{route('gio-hang')}}"]');
+        cartLink.addEventListener("click", function (event) {
+            @if(!session()->has('MaTK'))
+            event.preventDefault();
+          Swal.fire({
+            title: 'Yêu cầu đăng nhập',
+            text: 'Bạn cần đăng nhập để vào giỏ hàng.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Đăng nhập',
+            cancelButtonText: 'Hủy'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = "{{ route('index.login') }}";
+            }
+          });
+            @endif
+        });
+      });
+    </script>
+
+
+
+</body>
 </html>

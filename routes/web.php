@@ -136,11 +136,16 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/home',[DashBoardController::class,'getViewDashBoardUser'])->name('khach-hang-home');
         Route::get('/home/tra-cuu-don-hang',[TraCuuDonHangController::class,'getViewTraCuuDonHang'])->name('tra-cuu-don-hang');
 
-        //Giỏ hàng
+        // Giỏ hàng
         Route::group(['prefix' => '/gio-hang'], function () {
             Route::get('/', [GioHangController::class, 'getDsGioHang'])->name('gio-hang');
             Route::post('/them', [GioHangController::class, 'addToCart'])->name('them-gio-hang');
+            Route::post('/giam-so-luong', [GioHangController::class, 'decreaseQuantity'])->name('gio-hang.giam-so-luong');
+            Route::post('/tang-so-luong', [GioHangController::class, 'increaseQuantity'])->name('gio-hang.tang-so-luong');
+            Route::post('/xoa-san-pham', [GioHangController::class, 'removeFromCart'])->name('gio-hang.xoa-san-pham');
+
         });
+
 
         //Đơn hàng
         Route::group(['prefix' => '/don-hang'], function () {
@@ -148,6 +153,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         });
 
         //Tra cứu đơn hàng
+
 
         //Account
         Route::group(['prefix'=> '/thong-tin-tai-khoan'], function () {
