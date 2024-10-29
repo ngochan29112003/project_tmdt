@@ -4,6 +4,7 @@ use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\khach_hang\GioHangController;
 use App\Http\Controllers\khach_hang\DatHangController;
 use App\Http\Controllers\khach_hang\ThongTinTaiKhoanController;
+use App\Http\Controllers\khach_hang\TraCuuDonHangController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\super_admin\PhuongThucThanhToanController;
@@ -136,6 +137,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
 
     Route::group(['prefix' => '/khach-hang'], function () {
         Route::get('/home',[DashBoardController::class,'getViewDashBoardUser'])->name('khach-hang-home');
+        Route::get('/home/tra-cuu-don-hang',[TraCuuDonHangController::class,'getViewTraCuuDonHang'])->name('tra-cuu-don-hang');
 
         //Giỏ hàng
         Route::group(['prefix' => '/gio-hang'], function () {
@@ -147,6 +149,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::group(['prefix' => '/don-hang'], function () {
             Route::get('/', [DatHangController::class, 'getDonHang'])->name('don-hang');
         });
+
+        //Tra cứu đơn hàng
 
         //Account
         Route::group(['prefix'=> '/thong-tin-tai-khoan'], function () {

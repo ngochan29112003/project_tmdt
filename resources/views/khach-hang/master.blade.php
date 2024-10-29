@@ -52,7 +52,7 @@
                 </div>
             </form>
 
-            <div class="navbar-nav flex-row order-md-last mx-2">
+            <div class="navbar-nav flex-row order-md-last mx-1">
                 <div class="nav-item d-none d-md-flex">
                     <div class="row align-items-center d-flex">
                         <div class="col-auto mb-1">
@@ -62,7 +62,7 @@
                                     <path d = "M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
                                     <path d = "M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
                                 </svg>
-                                <span class = "ms-1 text-white fw-bold fs-3">Hệ thống showroom</span>
+                                <span class = "ms-1 text-white fw-bold fs-3">Hệ thống <br>showroom</span>
                             </a>
                         </div>
                         <div class="col-auto mb-1">
@@ -75,14 +75,14 @@
                             </a>
                         </div>
                         <div class="col-auto mb-1">
-                            <a href="#" class="cart-icon text-decoration-none d-flex align-items-center mx-3">
+                            <a href="{{route('tra-cuu-don-hang')}}" class="cart-icon text-decoration-none d-flex align-items-center mx-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon text-white icon-tabler icons-tabler-outline icon-tabler-truck">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                     <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
                                     <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
                                     <path d="M5 17h-2v-11a1 1 0 0 1 1 -1h9v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5" />
                                 </svg>
-                                <span class="ms-1 text-white fw-bold fs-3">Tra cứu đơn hàng</span>
+                                <span class="ms-1 text-white fw-bold fs-3">Tra cứu<br> đơn hàng</span>
                             </a>
                         </div>
                         <div class="col-auto mb-1">
@@ -104,7 +104,7 @@
                                         ->where('MaTK', session('MaTK'))
                                         ->first();
                                 ?>
-                            <div class="col-auto mb-2 me-7">
+                            <div class="col-auto mb-2 me-8">
                                 <div class="nav-item dropdown">
                                     <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
                                        aria-label="Open user menu">
