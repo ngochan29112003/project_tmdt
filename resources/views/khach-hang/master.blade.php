@@ -76,7 +76,7 @@
                                 <a href="#" class="cart-icon text-decoration-none d-flex align-items-center">
                                     <span class="">
                                         <i class="bi bi-geo-alt fs-2 text-white shake-icon"></i>
-                                    </span> 
+                                    </span>
                                     <span class="ms-1 text-white fw-bold fs-5">Hệ thống showroom</span>
                                 </a>
                             </div>
@@ -392,113 +392,70 @@
         </div>
     </div>
     {{--col-sm-12 col-md-6 col-lg-2 col-lg--}}
-    <footer class="main-footer mt-3 bg-white">
-        <div class="main-footer-top">
-            <div class="container-fluid">
-                <div class="row d-flex justify-content-center ">
-                    <div class="col-sm-12 col-md-6 col-lg-2 col-lg mt-4">
-                        <div class="footer-col footer-link toggle-footer toggle-first">
-                            <div class="footer-title">
-                                <h4>Về GEARVN </h4>
-                                <span class="icon-title"></span>
-                            </div>
-                            <div class="footer-content">
-                                <ul>
-                                    <li class="item">
-                                        <a href="/pages/gioi-thieu-gearvn" title="Giới thiệu">Giới thiệu</a>
-                                    </li>
-                                    <li class="item">
-                                        <a href="https://tuyendung.gearvn.com/" title="Tuyển dụng">Tuyển dụng</a>
-                                    </li>
-                                    <li class="item">
-                                        <a href="/pages/black-friday" title="Black Friday 2024">Black Friday 2024</a>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-2 col-lg mt-4">
-                        <div class="footer-col footer-link toggle-footer">
-                            <div class="footer-title active">
-                                <h4>Chính sách </h4>
-                                <span class="icon-title"></span>
-                            </div>
-                            <div class="footer-content" style="display: block;">
-                                <ul>
-                                    <li class="item">
-                                        <a href="/pages/chinh-sach-bao-hanh" title="Chính sách bảo hành">Chính sách bảo
-                                            hành</a>
-                                    </li>
-                                    <li class="item">
-                                        <a href="/pages/chinh-sach-giao-hang" title="Chính sách giao hàng">Chính sách
-                                            giao hàng</a>
-                                    </li>
-                                    <li class="item">
-                                        <a href="/pages/chinh-sach-bao-mat" title="Chính sách bảo mật">Chính sách bảo
-                                            mật</a>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-2 col-lg mt-4">
-                        <div class="footer-col footer-link toggle-footer">
-                            <div class="footer-title">
-                                <h4>Thông tin </h4>
-                                <span class="icon-title"></span>
-                            </div>
-                            <div class="footer-content">
-                                <ul>
-                                    <li class="text">
-                                        <a href="/pages/he-thong-showroom-gearvn" title="Hệ thống cửa hàng">Hệ thống cửa
-                                            hàng</a>
-                                    </li>
-                                    <li class="item">
-                                        <a href="/pages/huong-dan-mua-hang" title="Hướng dẫn mua hàng">Hướng dẫn mua
-                                            hàng</a>
-                                    </li>
-                                    <li class="item">
-                                        <a href="/pages/huong-dan-thanh-toan-gearvn" title="Hướng dẫn thanh toán">Hướng
-                                            dẫn thanh toán</a>
-                                    </li>
-                                    <li class="item">
-                                        <a href="/pages/huong-dan-tra-gop" title="Hướng dẫn trả góp">Hướng dẫn trả
-                                            góp</a>
-                                    </li>
-                                    <li class="item">
-                                        <a href="/pages/trung-tam-ho-tro-tra-cuu-thong-tin-bao-hanh-san-pham-chinh-hang"
-                                            title="Tra cứu địa chỉ bảo hành">Tra cứu địa chỉ bảo hành</a>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-2 col-lg mt-4">
-                        <div class="footer-col footer-block toggle-footer">
-                            <div class="footer-title">
-                                <h4>TỔNG ĐÀI HỖ TRỢ <span>(8:00 - 21:00)</span></h4>
-                            </div>
-                            <div class="footer-content">
-                                <div class="list-info">
-                                    <p><span>Mua hàng:</span> <a href="tel:19005301">1900.5301 <span> </span> </a></p>
-                                    <p><span>Bảo hành: </span> <a href="tel:19005325">1900.5325 <span> </span> </a><br>
-                                    </p>
-                                    <p><span>Khiếu nại: </span> <a href="tel:18006173">1800.6173 <span> </span> </a><br>
-                                        <span>Email: </span> <a href="mailto:cskh@gearvn.com">cskh@gearvn.com</a>
-
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <footer class="main-footer mt-3 bg-white text-dark">
+        <div class="container-fluid ">
+            <div class="row text-center text-md-start d-flex justify-content-center">
+                <div class="col-sm-12 col-md-6 col-lg-2 mt-4">
+                    <h4 class="text-dark">Về PC Store</h4>
+                    <ul class="list-unstyled">
+                        <li class="text-dark">
+                            <a href="#" title="Giới thiệu" class="text-dark">Giới thiệu</a>
+                        </li>
+                        <li class="text-dark">
+                            <a href="#" title="Tuyển dụng" class="text-dark">Tuyển dụng</a>
+                        </li>
+                        <li class="text-dark">
+                            <a href="#" title="Khuyến mãi" class="text-dark">Khuyến mãi</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-2 mt-4">
+                    <h4 class="text-dark">Chính sách</h4>
+                    <ul class="list-unstyled">
+                        <li class="text-dark">
+                            <a href="#" title="Chính sách bảo hành" class="text-dark">Chính sách bảo hành</a>
+                        </li>
+                        <li class="text-dark">
+                            <a href="#" title="Chính sách giao hàng" class="text-dark">Chính sách giao hàng</a>
+                        </li>
+                        <li class="text-dark">
+                            <a href="#" title="Chính sách bảo mật" class="text-dark">Chính sách bảo mật</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-2 mt-4">
+                    <h4 class="text-dark">Thông tin</h4>
+                    <ul class="list-unstyled">
+                        <li class="text-dark">
+                            <a href="#" title="Hệ thống cửa hàng" class="text-dark">Hệ thống cửa hàng</a>
+                        </li>
+                        <li class="text-dark">
+                            <a href="#" title="Hướng dẫn mua hàng" class="text-dark">Hướng dẫn mua hàng</a>
+                        </li>
+                        <li class="text-dark">
+                            <a href="#" title="Hướng dẫn thanh toán" class="text-dark">Hướng dẫn thanh toán</a>
+                        </li>
+                        <li class="text-dark">
+                            <a href="#" title="Hướng dẫn trả góp" class="text-dark">Hướng dẫn trả góp</a>
+                        </li>
+                        <li class="text-dark">
+                            <a href="#" title="Hướng dẫn bảo hành" class="text-dark">Hướng dẫn bảo hành</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-2 mt-4">
+                    <h4 class="text-dark">TỔNG ĐÀI HỖ TRỢ <span>(8:00 - 21:00)</span></h4>
+                    <p class="text-dark"><span>Mua hàng:</span> <a href="#" class="text-dark">1900.5301</a></p>
+                    <p class="text-dark"><span>Bảo hành:</span> <a href="#" class="text-dark">1900.5325</a></p>
+                    <p class="text-dark"><span>Khiếu nại:</span> <a href="#" class="text-dark">1800.6173</a></p>
+                    <p class="text-dark"><span>Email:</span> <a href="#" class="text-dark">cskh@storepc.com</a></p>
                 </div>
             </div>
         </div>
-
     </footer>
+
+
+
     <!-- Libs JS -->
     @include('lib-js')
     @yield('scripts')
