@@ -31,6 +31,10 @@
         .background-header{
             background-color: #E30019;
         }
+        .icon-tabler-cpu {
+            opacity: 0.7; /* Tạo hiệu ứng nhạt hơn */
+            color: #706b6b; /* Chọn màu nhạt tùy ý */
+        }
     </style>
 </head>
 <?php
@@ -234,7 +238,10 @@
                                         <a class="nav-link dropdown-toggle" href="#navbar-help"
                                             data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"
                                             aria-expanded="false">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-cpu">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                 stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"
+                                                 class="icon icon-tabler icons-tabler-outline icon-tabler-cpu">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                 <path d="M5 5m0 1a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1z" />
                                                 <path d="M9 9h6v6h-6z" />
@@ -247,7 +254,8 @@
                                                 <path d="M14 21v-2" />
                                                 <path d="M10 21v-2" />
                                             </svg>
-                                            <span class="nav-link-title">Bộ nhỡ lưu trữ</span> </a>
+
+                                            <span class="nav-link-title">Bộ nhớ lưu trữ</span> </a>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item" href="">
 
@@ -391,6 +399,7 @@
             @yield('contents')
         </div>
     </div>
+
     {{--col-sm-12 col-md-6 col-lg-2 col-lg--}}
     <footer class="main-footer mt-3 bg-white text-dark">
         <div class="container-fluid ">
@@ -453,8 +462,6 @@
             </div>
         </div>
     </footer>
-
-
 
     <!-- Libs JS -->
     @include('lib-js')

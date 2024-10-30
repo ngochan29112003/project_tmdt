@@ -116,7 +116,7 @@
                             <img class = "imgSlider" src = "{{asset('asset/img/banner-2.jpg')}}" alt = "Slide 3">
                         </div>
                         <div class = "slide">
-                            <img class = "imgSlider" src = "{{asset('asset/img/banner-3.png')}}" alt = "Slide 4">
+                            <img class = "imgSlider" src = "{{asset('asset/img/banner-3.jpg')}}" alt = "Slide 4">
                         </div>
                     </div>
                     <button class = "prev" onclick = "moveSlide(-1)">&#10094;</button>
