@@ -15,6 +15,7 @@ use App\Http\Controllers\super_admin\QuanLyBinhLuanController;
 use App\Http\Controllers\super_admin\TraLoiBinhLuanController;
 use App\Http\Controllers\super_admin\QuanLyDanhMucController;
 use App\Http\Controllers\super_admin\QuanLyDonHangController;
+use App\Http\Controllers\super_admin\QuanLyTTDHController;
 use App\Http\Controllers\super_admin\QuanLyHangSanXuatController;
 use App\Http\Controllers\super_admin\QuanLyKhuyenMaiController;
 use App\Http\Controllers\super_admin\QuanLySanPhamController;
@@ -77,6 +78,13 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         // Đơn hàng
         Route::group(['prefix' => '/don-hang'], function () {
             Route::get('/danh-sach',[QuanLyDonHangController::class,'getView'])->name('danh-sach-don-hang');
+        });
+
+        //Trạng thái đơn hàng
+        Route::group(['prefix' => '/trang-thai-don-hang'], function () {
+            Route::get('/danh-sach',[QuanLyTTDHController::class,'getView'])->name('danh-sach-trang-thai-don-hang');
+            Route::delete('/delete/{id}',[QuanLyTTDHController::class,'deleteTTDH'])->name('delete-trang-thai-don-hang');
+            Route::post('/update/{id}', [QuanLyTTDHController::class, 'updateTTDH'])->name('update-trang-thai-don-hang');
         });
 
         // Phương thức thanh toán
