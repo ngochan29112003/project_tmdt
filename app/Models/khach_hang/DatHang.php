@@ -40,6 +40,8 @@ class DatHang extends Model
         ->join('donvivanchuyen','donvivanchuyen.MaVC','=','donhang.MaVC')
         ->get();
     }
+}
+
 
     public function getsanpham()
     {
@@ -80,6 +82,5 @@ class DatHang extends Model
         return DB::table('donvivanchuyen')->get();
     }
 
-    
-
 }
+

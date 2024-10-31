@@ -44,4 +44,19 @@ class QuanLyTaiKhoanController extends Controller
         return response()->json(['success' => false]);
     }
 
+    public function lockAccount(Request $request)
+    {
+        // Find the account by ID
+        $taiKhoan = QuanLyTaiKhoan::find($request->id);
+
+        if ($taiKhoan) {
+            $taiKhoan->TrangThai = 1;
+            $taiKhoan->save();
+
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false]);
+    }
+
 }

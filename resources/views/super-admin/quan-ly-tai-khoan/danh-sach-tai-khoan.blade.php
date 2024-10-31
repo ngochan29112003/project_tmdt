@@ -84,7 +84,7 @@
                                             @if($taiKhoan->TrangThai == 1)
                                                 <span class = "badge bg-danger text-white unlock-badge" data-id = "{{ $taiKhoan->MaTK }}" style = "cursor:pointer;">Đang bị khoá</span>
                                             @else
-                                                <span class = "badge bg-success text-white">Hoạt động</span>
+                                                <span class = "badge bg-success text-white lock-badge" data-id = "{{ $taiKhoan->MaTK }}" style = "cursor:pointer;">Hoạt động</span>
                                             @endif
                                         </td>
                                         <td class="text-center align-middle">
@@ -118,6 +118,7 @@
         </div>
     </div>
 
+    <!-- Un Lock Modal -->
     <div class = "modal fade" id = "unlockModal" tabindex = "-1" aria-labelledby = "unlockModalLabel" aria-hidden = "true">
         <div class = "modal-dialog">
             <div class = "modal-content">
@@ -131,6 +132,25 @@
                 <div class = "modal-footer">
                     <button type = "button" class = "btn btn-secondary" data-bs-dismiss = "modal">Huỷ</button>
                     <button type = "button" class = "btn btn-primary" id = "confirmUnlock">Mở khóa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lock Modal -->
+    <div class="modal fade" id="lockModal" tabindex="-1" aria-labelledby="lockModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="lockModalLabel">Khóa tài khoản</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc muốn khóa tài khoản này không?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                    <button type="button" class="btn btn-danger" id="confirmLock">Khóa</button>
                 </div>
             </div>
         </div>
@@ -184,46 +204,77 @@
         });
       }
     </script>
-    
     <script>
-      let unlockUserId = null;
 
-      // When a locked account is clicked
-      $(document).on('click', '.unlock-badge', function() {
-        unlockUserId = $(this).data('id');
-        $('#unlockModal').modal('show');  // Show the modal
-      });
+        let unlockUserId = null;
+        let lockUserId = null;
 
-      // When the user confirms unlocking
-      $('#confirmUnlock').on('click', function() {
-        if (unlockUserId) {
-          $.ajax({
-            url: "{{ route('unlock.route') }}",  // Backend route to unlock
-            type: 'POST',
-            data: {
-              _token: '{{ csrf_token() }}',
-              id: unlockUserId
-            },
-            success: function(response) {
-              if (response.success) {
-                $('#unlockModal').modal('hide');  // Hide the modal
+        // Khi click vào badge mở khóa
+        $(document).on('click', '.unlock-badge', function() {
+            unlockUserId = $(this).data('id');
+            $('#unlockModal').modal('show');
+        });
 
-                // Show toastr success message
-                toastr.success('Tài khoản đã được mở khóa thành công.');
-
-                // Reload the page after a short delay to reflect changes
-                setTimeout(function() {
-                  location.reload();
-                }, 2000); // Reload after 2 seconds
-              } else {
-                toastr.error('Có lỗi xảy ra khi mở khóa tài khoản.');
-              }
-            },
-            error: function() {
-              toastr.error('Có lỗi xảy ra khi mở khóa tài khoản.');
+        // Xác nhận mở khóa tài khoản
+        $('#confirmUnlock').on('click', function() {
+            if (unlockUserId) {
+                $.ajax({
+                    url: "{{ route('unlock.route') }}",
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: unlockUserId
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            $('#unlockModal').modal('hide');
+                            toastr.success('Tài khoản đã được mở khóa thành công.');
+                            setTimeout(function() {
+                                location.reload();
+                            }, 2000);
+                        } else {
+                            toastr.error('Có lỗi xảy ra khi mở khóa tài khoản.');
+                        }
+                    },
+                    error: function() {
+                        toastr.error('Có lỗi xảy ra khi mở khóa tài khoản.');
+                    }
+                });
             }
-          });
-        }
-      });
+        });
+
+        // Khi click vào badge khóa
+        $(document).on('click', '.lock-badge', function() {
+            lockUserId = $(this).data('id');
+            $('#lockModal').modal('show');
+        });
+
+        // Xác nhận khóa tài khoản
+        $('#confirmLock').on('click', function() {
+            if (lockUserId) {
+                $.ajax({
+                    url: "{{ route('lock.route') }}",
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: lockUserId
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            $('#lockModal').modal('hide');
+                            toastr.success('Tài khoản đã bị khóa thành công.');
+                            setTimeout(function() {
+                                location.reload();
+                            }, 2000);
+                        } else {
+                            toastr.error('Có lỗi xảy ra khi khóa tài khoản.');
+                        }
+                    },
+                    error: function() {
+                        toastr.error('Có lỗi xảy ra khi khóa tài khoản.');
+                    }
+                });
+            }
+        });
     </script>
 @endsection

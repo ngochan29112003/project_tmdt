@@ -20,10 +20,6 @@
                                 <input type="test" class="form-control" name="TenDangNhap" id="edit_TenDangNhap" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="MatKhau" class="form-label">Mật khẩu</label>
-                                <input type="test" class="form-control" name="MatKhau" id="edit_MatKhau" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
                                 <label for="NgaySinh" class="form-label">Ngày sinh</label>
                                 <input type="test" class="form-control" name="NgaySinh" id="edit_NgaySinh" required>
                             </div>
@@ -39,7 +35,7 @@
                                 <label for="DiaChi" class="form-label">Địa chỉ</label>
                                 <input type="test" class="form-control" name="DiaChi" id="edit_DiaChi" required>
                             </div>
-                            <div class="col-md-12 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="Email" class="form-label">Email</label>
                                 <input type="test" class="form-control" name="Email" id="edit_Email" required>
                             </div>
