@@ -86,8 +86,6 @@ class LoginController extends Controller
         ]);
     }
 
-
-
     public function logoutAction(Request $request)
     {
         //Xoá session
@@ -96,4 +94,6 @@ class LoginController extends Controller
         //Chuyển hướng về Login
         return redirect()->route('home-page');
     }
+
+
 }

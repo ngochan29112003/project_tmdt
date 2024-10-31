@@ -118,7 +118,7 @@
         </div>
     </div>
 
-    <!-- Un Lock Modal -->
+    <!-- UnLock Modal -->
     <div class = "modal fade" id = "unlockModal" tabindex = "-1" aria-labelledby = "unlockModalLabel" aria-hidden = "true">
         <div class = "modal-dialog">
             <div class = "modal-content">
@@ -155,6 +155,8 @@
             </div>
         </div>
     </div>
+
+
 @endsection
 @section('scripts')
     <script>

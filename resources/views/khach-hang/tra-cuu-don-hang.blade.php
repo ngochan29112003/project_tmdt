@@ -16,8 +16,8 @@
             <!-- Sidebar -->
             <div class="col-md-3 bg-white border rounded flex-wrap shadow-sm p-4">
                 <div class="text-center mb-4">
-                    <img src="#" class="rounded-circle mb-2" alt="User Avatar" width="80" height="80">
-                    <h6 class="fw-bold">User</h6>
+                    <img src="{{asset('asset/img/user.jpg')}}" class="rounded-circle mb-2" alt="User Avatar" width="80" height="80">
+                    <h3 class="fw-bold">chị Bảy</h3>
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2">
