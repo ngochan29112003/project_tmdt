@@ -158,6 +158,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         //Đơn hàng
         Route::group(['prefix' => '/don-hang'], function () {
             Route::get('/', [DatHangController::class, 'getDonHang'])->name('don-hang');
+            Route::post('/thanh-toan', [DatHangController::class, 'datHang'])->name('thanh-toan');
         });
 
         //Tra cứu đơn hàng
