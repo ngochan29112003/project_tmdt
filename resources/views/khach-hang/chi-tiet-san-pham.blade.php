@@ -128,11 +128,7 @@
 
                 <!-- Comment Submission Form -->
                 <div class="p-3 border-top mt-3">
-                    <h5 class="text-secondary">Thêm bình luận:</h5>
                     <form id="commentForm">
-                        <div class="mb-3">
-                            <input type="text" class="form-control" id="commenterName" placeholder="Tên của bạn" required>
-                        </div>
                         <div class="mb-3">
                             <textarea class="form-control" id="commentText" rows="3" placeholder="Nội dung bình luận" required></textarea>
                         </div>
