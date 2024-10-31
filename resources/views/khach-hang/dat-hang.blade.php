@@ -25,8 +25,8 @@
 
             <!-- Khung 2: Bảng sản phẩm -->
             <div class="card mb-4">
-                <div class="card-body">
-                    <table class="table table-hover">
+                <div class="card-body table-responsive" >
+                    <table class="table table-hover ">
                         <thead>
                         <tr>
                             <th>Sản phẩm</th>

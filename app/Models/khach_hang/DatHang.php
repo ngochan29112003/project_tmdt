@@ -12,13 +12,6 @@ class DatHang extends Model
     protected $table="donhang";
     protected $primaryKey='MaDH';
 
-    // protected $fillable = [
-    //     'MaTK',
-    //     'LoaiBC',
-    //     'NoiDungBC',
-    //     'NgayTaoBC',
-    // ];
-    
     public $timestamps = false;
 
     public function getdonhang()

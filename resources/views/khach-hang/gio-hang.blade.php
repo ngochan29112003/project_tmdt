@@ -69,7 +69,7 @@
                             </div>
                         </div>
                         <div class="row mt-4">
-                            <button class="w-100 h-5 btn bg-red fs-2 fw-bold text-white p-5">ĐẶT HÀNG</button>
+                            <a class="w-100 h-5 btn bg-red fs-2 fw-bold text-white p-5" href="{{route('don-hang')}}">ĐẶT HÀNG</a>
                         </div>
                     </div>
                 @else
