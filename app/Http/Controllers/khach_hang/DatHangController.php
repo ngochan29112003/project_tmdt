@@ -37,6 +37,7 @@ class DatHangController extends Controller
         $grouped_products = $list_chitiet_giohang->groupBy('MaSP');
         
         // Tạo mảng để lưu dữ liệu cho view
+        // Tạo mảng để lưu dữ liệu cho view
         $products = [];
         
         foreach ($grouped_products as $MaSP => $items) {
@@ -46,19 +47,22 @@ class DatHangController extends Controller
             // Tính tổng tiền
             $totalPrice = $firstItem->SLSanPham * $sanpham->GiaBan;
 
+            // Thêm ảnh vào mảng sản phẩm
             $products[] = [
                 'TenSP' => $sanpham->TenSP, // Đổi tên thành TenSP
                 'GiaBan' => $sanpham->GiaBan,
                 'SLSanPham' => $firstItem->SLSanPham,
                 'Total' => $totalPrice,
+                'AnhSP' => asset('asset/img-product/' . $sanpham->AnhSP) // Thêm ảnh sản phẩm
             ];
         }
 
-//        dd($chitiet);
-        return view('khach-hang.dat-hang',
-        compact('list_don_hang', 'list_don_hang', 'list_san_pham',
-        'list_tai_khoan', 'list_pttt', 'list_dvvc', 'list_khuyenmai', 'list_khuyenmaivc', 'products'));
-    }
+        return view('khach-hang.dat-hang', compact(
+            'list_don_hang', 'list_san_pham', 'list_tai_khoan', 
+            'list_pttt', 'list_dvvc', 'list_khuyenmai', 
+            'list_khuyenmaivc', 'products'
+        ));
+}
 
     public function getctgh()
     {

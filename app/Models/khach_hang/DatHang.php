@@ -5,6 +5,7 @@ namespace App\Models\khach_hang;
 use DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use function Laravel\Prompts\select;
 
 class DatHang extends Model
 {
@@ -42,7 +43,9 @@ class DatHang extends Model
 
     public function getsanpham()
     {
-        return DB::table('sanpham')->get();
+        return DB::table('sanpham')
+        ->select('TenSP', 'AnhSP')
+        ->get();
     }
 
     public function getpttt()

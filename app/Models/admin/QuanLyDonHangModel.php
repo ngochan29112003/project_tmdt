@@ -21,18 +21,21 @@ class QuanLyDonHangModel extends Model
             ->join('donvivanchuyen', 'donvivanchuyen.MaVC', '=', 'donhang.MaVC')
             ->join('taikhoan', 'taikhoan.MaTK', '=', 'donhang.MaTK')
             ->join('khuyenmai', 'khuyenmai.MaKM', '=', 'donhang.MaKM')
+            ->join('trangthai', 'trangthai.MaTT','=', 'donhang.MaTT')
             ->select(
                 'donhang.MaDH',
                 'sanpham.TenSP', // Lấy tên sản phẩm
-                'taikhoan.HoTen',
                 'phuongthucthanhtoan.TenPTTT',
                 'donvivanchuyen.TenDonViVC',
                 'khuyenmai.TenKM',
-                'taikhoan.SDT',
+                'donhang.TenKH',
+                'donhang.SDT',
                 'donhang.DiaChiGiaoHang',
-                'donhang.TrangThaiDH',// Lấy trạng thái đơn hàng
                 'donhang.NgayTaoDH',  // Lấy ngày tạo đơn hàng
-                'donhang.TongTien'  // Lấy tổng tiền
+                'donhang.TongTien',  // Lấy tổng tiền
+                'donhang.MaTT',
+                'trangthai.MaTT',
+                'trangthai.TenTT'
             )
             ->get();
     }

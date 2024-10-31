@@ -38,7 +38,13 @@
                         <tbody>
                             @foreach($products as $product)
                                 <tr>
-                                    <td>{{ $product['TenSP'] }}</td> <!-- Hiển thị tên sản phẩm -->
+                                    
+                                    <td>
+                                        <a href="">
+                                            <img class="dathang-img" src="{{ $product['AnhSP'] }}" alt="{{ $product['TenSP'] }}">
+                                        </a>
+                                        {{ $product['TenSP'] }}
+                                    </td> <!-- Hiển thị tên sản phẩm -->
                                     <td>{{ number_format($product['GiaBan'], 0, ',', '.') }}₫</td>
                                     <td>{{ $product['SLSanPham'] }}</td>
                                     <td class="item-total">{{ number_format($product['Total'], 0, ',', '.') }}₫</td>

@@ -19,74 +19,79 @@
                         Xuất file PDF
                     </a>
                 </div>
+
+                <div class="col-3">
+                    <div class="form-floating w-100">
+                        <select class="form-select" id="filter-status">
+                            <option value="">Tất cả trạng thái</option>
+                            @foreach($list_tt as $trangThai)
+                                <option value="{{ $trangThai->MaTT }}">
+                                    {{ $trangThai->TenTT }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <label for="floatingSelect">Lựa chọn loại trạng thái đơn hàng</label>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class = "page-body">
-        <div class = "container-xl">
-            <div class = "row row-deck row-cards">
-                <div class = "col-12">
-                    <div class = "card">
-                        <div class = "table-responsive p-2">
-                            <table id = "tableDonHang" class = "table table-vcenter card-table table-striped">
+    <div class="page-body">
+        <div class="container-xl">
+            <div class="row row-deck row-cards">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="table-responsive p-2">
+                            <table id="tableDonHang" class="table table-vcenter card-table table-striped">
                                 <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Tên khách hàng</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Số điện thoại</th>
-                                    <th>Địa chỉ giao hàng</th>
-                                    <th>PTTT</th>
-                                    <th>Đơn vị vận chuyển</th>
-                                    <th>Tổng tiền</th>
-                                    <th>Xuất đơn hàng</th>
-                                    <th>Duyệt/Hủy đơn hàng</th>
-                                </tr>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Tên khách hàng</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Địa chỉ giao hàng</th>
+                                        <th>PTTT</th>
+                                        <th>Đơn vị vận chuyển</th>
+                                        <th>Tổng tiền</th>
+                                        <th>Xuất đơn hàng</th>
+                                        <th>Trạng thái đơn hàng</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                @php($stt = 1)
-                                @foreach($list_donhang as $item)
-                                    <tr>
-                                        <td>{{$stt++}}</td>
-                                        <td>{{$item->HoTen}}</td>
-                                        <td>{{$item->TenSP}}</td>
-                                        <td>{{$item->SDT}}</td>
-                                        <td>{{$item->DiaChiGiaoHang}}</td>
-                                        <td>{{$item->TenPTTT}}</td>
-                                        <td>{{$item->TenDonViVC}}</td>
-                                        <td>{{$item->TongTien}}</td>
-                                        <td class="text-center align-middle">
-                                            <a href="">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-arrow-right text-danger">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                                                    <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-                                                    <path d="M9 15h6" />
-                                                    <path d="M12.5 17.5l2.5 -2.5l-2.5 -2.5" />
-                                                </svg>
-                                            </a>
-                                        </td>
-                                        <td class="text-center align-middle">
-                                            <a href="">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-square-check text-success">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path d="M3 3m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
-                                                    <path d="M9 12l2 2l4 -4" />
-                                                </svg>
-                                            </a>
-                                            |
-                                            <a href="">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-square-x text-danger">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path d="M3 5a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-14z" />
-                                                    <path d="M9 9l6 6m0 -6l-6 6" />
-                                                </svg>
-                                            </a>
-
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                    @php($stt = 1)
+                                    @foreach($list_donhang as $item)
+                                        <tr>
+                                            <td>{{$stt++}}</td>
+                                            <td>{{$item->TenKH}}</td>
+                                            <td>{{$item->TenSP}}</td>
+                                            <td>{{$item->SDT}}</td>
+                                            <td>{{$item->DiaChiGiaoHang}}</td>
+                                            <td>{{$item->TenPTTT}}</td>
+                                            <td>{{$item->TenDonViVC}}</td>
+                                            <td>{{$item->TongTien}}</td>
+                                            <td class="text-center align-middle">
+                                                <a href="">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-arrow-right text-danger">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                                                        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+                                                        <path d="M9 15h6" />
+                                                        <path d="M12.5 17.5l2.5 -2.5l-2.5 -2.5" />
+                                                    </svg>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <select class="form-select change-status" data-id="{{ $item->MaDH }}"> <!-- Sử dụng MaDH làm data-id -->
+                                                    @foreach($list_tt as $trangThai)
+                                                        <option value="{{ $trangThai->MaTT }}" {{ $item->MaTT == $trangThai->MaTT ? 'selected' : '' }}>
+                                                            {{ $trangThai->TenTT }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -169,5 +174,70 @@
 
         }
       });
+
+      $(document).ready(function () {
+    // Lắng nghe sự kiện thay đổi trên select trạng thái
+    $('#filter-status').on('change', function () {
+        var trangThaiId = $(this).val(); // Lấy trạng thái mới được chọn
+        var url = "{{ route('loc-trang-thai-don-hang') }}"; // Route đã định nghĩa
+
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: {
+                trangThaiId: trangThaiId,
+                _token: '{{ csrf_token() }}' // Thêm CSRF token
+            },
+            success: function (response) {
+                // Cập nhật lại nội dung bảng
+                $('#tableDonHang tbody').html(response.html); 
+            },
+            error: function (xhr) {
+                toastr.error("Có lỗi xảy ra khi lọc.", "Operation Failed");
+            }
+        });
+    });
+
+    // Lắng nghe sự kiện thay đổi trên trạng thái đơn hàng
+    $('#tableDonHang').on('change', '.change-status', function () {
+        var ttdhid = $(this).data('id'); // Lấy ID của trạng thái đơn hàng
+        var newStatus = $(this).val(); // Lấy trạng thái mới được chọn
+        var url = "{{ route('update-trang-thai-don-hang', ':id') }}".replace(':id', ttdhid);
+
+        var formData = new FormData();
+        formData.append('_token', '{{ csrf_token() }}'); // Thêm CSRF token
+        formData.append('MaTT', newStatus); // Thêm trạng thái mới
+
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response.success) {
+                    toastr.success(response.message, "Cập nhật thành công");
+
+                    // Kiểm tra trạng thái lọc
+                    var currentFilterStatus = $('#filter-status').val();
+                    if (currentFilterStatus) {
+                        // Nếu có lọc, xóa dòng tương ứng
+                        $('#tableDonHang tbody tr').each(function () {
+                            var rowStatus = $(this).find('.change-status').val();
+                            if ($(this).find('.change-status').data('id') == ttdhid) {
+                                $(this).remove(); // Xóa dòng tương ứng
+                            }
+                        });
+                    }
+                } else {
+                    toastr.error("Cập nhật không thành công.", "Operation Failed");
+                }
+            },
+            error: function (xhr) {
+                toastr.error("Có lỗi xảy ra khi cập nhật.", "Operation Failed");
+            }
+        });
+    });
+});
     </script>
 @endsection
