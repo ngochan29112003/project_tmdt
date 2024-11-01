@@ -33,16 +33,11 @@ class DatHang extends Model
     public function getdonhang()
     {
         return DB::table('donhang')
-        ->join('phuongthucthanhtoan','phuongthucthanhtoan.MaPTTT','=','donhang.MaPTTT')
-        ->join('taikhoan','taikhoan.MaTK','=','donhang.MaTK')
-        ->join('khuyenmai','khuyenmai.MaKM','=','donhang.MaKM')
-        ->join('donvivanchuyen','donvivanchuyen.MaVC','=','donhang.MaVC')
-        ->get();
-    }
-
-    public function getsanpham()
-    {
-        return DB::table('sanpham')->get();
+            ->join('phuongthucthanhtoan', 'phuongthucthanhtoan.MaPTTT', '=', 'donhang.MaPTTT')
+            ->join('taikhoan', 'taikhoan.MaTK', '=', 'donhang.MaTK')
+            ->join('khuyenmai', 'khuyenmai.MaKM', '=', 'donhang.MaKM')
+            ->join('donvivanchuyen', 'donvivanchuyen.MaVC', '=', 'donhang.MaVC')
+            ->get();
     }
 
     public function getpttt()

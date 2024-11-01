@@ -25,7 +25,7 @@ class DatHangController extends Controller
 
         $dathang = new DatHang();
         $list_don_hang = $dathang -> getdonhang();
-        $list_san_pham = $dathang -> getsanpham();
+//        $list_san_pham = $dathang -> getsanpham();
         $list_pttt = $dathang -> getpttt();
         $list_dvvc = $dathang -> getdvvc();
         $list_khuyenmai = $dathang -> getkhuyenmai($MaTK);
@@ -60,7 +60,7 @@ class DatHangController extends Controller
         }
 
         return view('khach-hang.dat-hang', compact(
-            'list_don_hang', 'list_san_pham', 'list_tai_khoan',
+            'list_don_hang',  'list_tai_khoan',
             'list_pttt', 'list_dvvc', 'list_khuyenmai',
             'list_khuyenmaivc', 'products'
         ));

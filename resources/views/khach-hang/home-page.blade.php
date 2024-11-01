@@ -183,7 +183,6 @@
                                             Thêm vào giỏ
                                         </button>
                                     </div>
-
                                 </div>
                             </div>
                         @endforeach
@@ -219,7 +218,6 @@
                                             Thêm vào giỏ
                                         </button>
                                     </div>
-
                                 </div>
                             </div>
                         @endforeach

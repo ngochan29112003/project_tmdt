@@ -39,7 +39,7 @@
                         <tbody>
                             @foreach($products as $product)
                                 <tr>
-                                    
+
                                     <td>
                                         <a href="">
                                             <img class="dathang-img" src="{{ $product['AnhSP'] }}" alt="{{ $product['TenSP'] }}">
@@ -129,7 +129,7 @@
             <!-- Khung 7: đặt hàng -->
             <div class="card mb-4">
                 <div class="card-body text-end">
-                    <h3 class="d-inline tongthanhtoan">Tổng thanh toán: <span class="text-danger" id="tongthanhtoan">0</span></h3> 
+                    <h3 class="d-inline tongthanhtoan">Tổng thanh toán: <span class="text-danger" id="tongthanhtoan">0</span></h3>
                     <a class="btn btn-danger ms-3" id="btnThanhToan" data-bs-toggle="modal" data-bs-target="#confirmPaymentModal">Thanh toán</a>
                 </div>
             </div>
@@ -374,12 +374,23 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         dataType: 'json',
-        success: function (response) {
-            if (response.success) {
-                window.location.href = '/tra-cuu-don-hang';
-            } else {
-                alert(response.message);
-            }
+            success: function (response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Đặt hàng thành công!',
+                        text: response.message,
+                        icon: 'success',
+                        timer: 2000, // Hiển thị alert trong 5 giây
+                        showConfirmButton: false
+                    });
+
+                    // Sử dụng setTimeout để đợi 5 giây (5000 ms) trước khi chuyển hướng
+                    setTimeout(function() {
+                        window.location.href = "{{ route('tra-cuu-don-hang') }}";
+                    }, 2000);
+                } else {
+                    alert(response.message);
+                }
         },
         error: function (error) {
             alert('Có lỗi xảy ra, vui lòng thử lại.');
@@ -388,6 +399,42 @@
         }
     });
 });
+
+        {{--function dathang(buttonElement) {--}}
+        {{--    if (loggedIn) {--}}
+        {{--        var productId = buttonElement.getAttribute('data-masp');--}}
+        {{--        $.ajax({--}}
+        {{--            url: '{{ route('tra-cuu-don-hang') }}',--}}
+        {{--            type: 'POST',--}}
+        {{--            data: {--}}
+        {{--                MaSP: productId,--}}
+        {{--                _token: '{{ csrf_token() }}' // CSRF token cho bảo mật--}}
+        {{--            },--}}
+        {{--            success: function(response) {--}}
+        {{--                Swal.fire({--}}
+        {{--                    title: 'Đặt hàng thành công!',--}}
+        {{--                    text: response.message,--}}
+        {{--                    icon: 'success',--}}
+        {{--                    timer: 3000,--}}
+        {{--                    showConfirmButton: false--}}
+        {{--                });--}}
+        {{--                setTimeout(function () {--}}
+        {{--                    location.reload(); // Chuyển hướng người dùng--}}
+        {{--                }, 1000);--}}
+
+        {{--            },--}}
+        {{--            error: function(error) {--}}
+        {{--                Swal.fire({--}}
+        {{--                    title: 'Lỗi!',--}}
+        {{--                    text: 'Không thể đặt hàng.',--}}
+        {{--                    icon: 'error',--}}
+        {{--                    timer: 3000,--}}
+        {{--                    showConfirmButton: false--}}
+        {{--                });--}}
+        {{--            }--}}
+        {{--        });--}}
+        {{--    }--}}
+        {{--}--}}
     </script>
 
 @endsection

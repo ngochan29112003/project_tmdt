@@ -6,9 +6,10 @@
             <!-- Left Column: Product Image Carousel -->
             <div class="col-md-5">
                 <div class="card">
+                    <!-- Main Image Container -->
                     <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
-                        <!-- Main Images Carousel -->
                         <div class="carousel-inner">
+                            <!-- Main Images Carousel Items -->
                             <div class="carousel-item active">
                                 <img id="mainImage" src="{{ asset('asset/img-product/2_b81eb507bdfe42b3bce05c0c9e3e92d0_medium.png') }}" class="d-block w-100 main-image" alt="Main Image 1">
                             </div>
@@ -36,14 +37,15 @@
                     <!-- Thumbnails Below the Main Image -->
                     <div class="card-body text-center mt-3">
                         <div class="d-flex justify-content-center">
-                            <img src="{{ asset('asset/img-product/2_b81eb507bdfe42b3bce05c0c9e3e92d0_medium.png') }}" class="img-thumbnail mx-1 thumbnail-image" alt="Thumbnail 1" data-bs-target="#productCarousel" data-bs-slide-to="0" onclick="updateMainImage(this.src)" style="width:100px;height:100px">
-                            <img src="{{ asset('asset/img-product/artboard_3_b5ccc140878a433db58322a5adeb8b3c_medium.png') }}" class="img-thumbnail mx-1 thumbnail-image" alt="Thumbnail 2" data-bs-target="#productCarousel" data-bs-slide-to="1" onclick="updateMainImage(this.src)" style="width:100px;height:100px">
-                            <img src="{{ asset('asset/img-product/pc_case_xigmatek_-_26_e36ac54740974ec88f65ca6eedfd10a2_medium.png') }}" class="img-thumbnail mx-1 thumbnail-image" alt="Thumbnail 3" data-bs-target="#productCarousel" data-bs-slide-to="2" onclick="updateMainImage(this.src)" style="width:100px;height:100px">
-                            <img src="{{ asset('asset/img-product/pc_case_xigmatek_-_26_e36ac54740974ec88f65ca6eedfd10a2_medium.png') }}" class="img-thumbnail mx-1 thumbnail-image" alt="Thumbnail 4" data-bs-target="#productCarousel" data-bs-slide-to="3" onclick="updateMainImage(this.src)" style="width:100px;height:100px">
+                            <img src="{{ asset('asset/img-product/2_b81eb507bdfe42b3bce05c0c9e3e92d0_medium.png') }}" class="img-thumbnail mx-1 thumbnail-image" alt="Thumbnail 1" data-bs-target="#productCarousel" data-bs-slide-to="0" onclick="updateMainImage(this.src)" style="width: 70px; height: 70px; cursor: pointer;">
+                            <img src="{{ asset('asset/img-product/artboard_3_b5ccc140878a433db58322a5adeb8b3c_medium.png') }}" class="img-thumbnail mx-1 thumbnail-image" alt="Thumbnail 2" data-bs-target="#productCarousel" data-bs-slide-to="1" onclick="updateMainImage(this.src)" style="width: 70px; height: 70px; cursor: pointer;">
+                            <img src="{{ asset('asset/img-product/pc_case_xigmatek_-_26_e36ac54740974ec88f65ca6eedfd10a2_medium.png') }}" class="img-thumbnail mx-1 thumbnail-image" alt="Thumbnail 3" data-bs-target="#productCarousel" data-bs-slide-to="2" onclick="updateMainImage(this.src)" style="width: 70px; height: 70px; cursor: pointer;">
+                            <img src="{{ asset('asset/img-product/pc_case_xigmatek_-_26_e36ac54740974ec88f65ca6eedfd10a2_medium.png') }}" class="img-thumbnail mx-1 thumbnail-image" alt="Thumbnail 4" data-bs-target="#productCarousel" data-bs-slide-to="3" onclick="updateMainImage(this.src)" style="width: 70px; height: 70px; cursor: pointer;">
                         </div>
                     </div>
                 </div>
             </div>
+
 
             <!-- Right Column: Product Info -->
             <div class="col-md-7">
@@ -55,11 +57,11 @@
                         &#9733;&#9733;&#9733;&#9733;&#9734; <!-- 4 out of 5 stars -->
                     </span>
                 </div>
-                <h4 class="text-danger fw-bold fs-4" style="font-size: 1.5rem;">
+                <h3 class="text-danger fw-bold fs-4" style="font-size: 1.5rem;">
                     <span class="text-decoration-line-through">20,000,000₫</span> <!-- Original Price -->
                     <span class="mx-2">18,900,000₫</span> <!-- Discounted Price -->
                     <span class="badge bg-danger">-5%</span> <!-- Discount Percentage -->
-                </h4>
+                </h3>
 
                 <!-- Quantity Selector and Purchase Buttons -->
                 <div class="d-flex align-items-center mb-3">
