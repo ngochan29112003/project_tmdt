@@ -519,10 +519,8 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
 {{--                            <a href="#" class="dropdown-item">Status</a>--}}
-                            <a href="#" class="dropdown-item">Thông tin</a>
                             <a href="{{route('khach-hang-home')}}" class="dropdown-item">Trang chủ</a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">Cài đặt</a>
+{{--                            <div class="dropdown-divider"></div>--}}
                             <a href="{{route('logout')}}" class="dropdown-item">Đăng xuất</a>
                         </div>
                     </div>
