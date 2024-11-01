@@ -16,7 +16,6 @@ class QuanLyDonHangModel extends Model
     public function getDonHang()
     {
         return DB::table('donhang')
-            ->join('sanpham', 'sanpham.MaSP', '=', 'donhang.MaSP')
             ->join('phuongthucthanhtoan', 'phuongthucthanhtoan.MaPTTT', '=', 'donhang.MaPTTT')
             ->join('donvivanchuyen', 'donvivanchuyen.MaVC', '=', 'donhang.MaVC')
             ->join('taikhoan', 'taikhoan.MaTK', '=', 'donhang.MaTK')
@@ -24,7 +23,6 @@ class QuanLyDonHangModel extends Model
             ->join('trangthai', 'trangthai.MaTT','=', 'donhang.MaTT')
             ->select(
                 'donhang.MaDH',
-                'sanpham.TenSP', // Lấy tên sản phẩm
                 'phuongthucthanhtoan.TenPTTT',
                 'donvivanchuyen.TenDonViVC',
                 'khuyenmai.TenKM',

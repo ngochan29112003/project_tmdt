@@ -48,7 +48,6 @@
                                     <tr>
                                         <th>STT</th>
                                         <th>Tên khách hàng</th>
-                                        <th>Tên sản phẩm</th>
                                         <th>Số điện thoại</th>
                                         <th>Địa chỉ giao hàng</th>
                                         <th>PTTT</th>
@@ -64,7 +63,6 @@
                                         <tr>
                                             <td>{{$stt++}}</td>
                                             <td>{{$item->TenKH}}</td>
-                                            <td>{{$item->TenSP}}</td>
                                             <td>{{$item->SDT}}</td>
                                             <td>{{$item->DiaChiGiaoHang}}</td>
                                             <td>{{$item->TenPTTT}}</td>

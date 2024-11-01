@@ -11,15 +11,16 @@
                         <h1 class="mb-0 text-danger">ĐỊA CHỈ NHẬN HÀNG</h1>
                     </div>
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
-                        <div class="flex-grow-1">
-                            <span>{{ $list_tai_khoan->HoTen }} - {{ $list_tai_khoan->SDT }}</span><br>
-                            <span>{{ $list_tai_khoan->DiaChi }}</span>
-                            <span class="badge bg-danger text-white ms-2">Mặc định</span>
-                        </div>
-                        <button class="btn btn-outline-dark btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#Modaladddiachi">
-                            <i class="bi bi-pencil me-1"></i> Thay đổi
-                        </button>
+                    <div class="flex-grow-1" id="address-display">
+                        <span id="name-phone">{{ $list_tai_khoan->HoTen }} - {{ $list_tai_khoan->SDT }}</span><br>
+                        <span id="address">{{ $list_tai_khoan->DiaChi }}</span>
+                        <span class="badge bg-danger text-white ms-2">Mặc định</span>
                     </div>
+                    <button class="btn btn-outline-dark btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#Modaladddiachi"
+                        data-name="{{ $list_tai_khoan->HoTen }}" data-phone="{{ $list_tai_khoan->SDT }}" data-address="{{ $list_tai_khoan->DiaChi }}">
+                        <i class="bi bi-pencil me-1"></i> Thay đổi
+                    </button>
+                </div>
                 </div>
             </div>
 
@@ -129,7 +130,7 @@
             <div class="card mb-4">
                 <div class="card-body text-end">
                     <h3 class="d-inline tongthanhtoan">Tổng thanh toán: <span class="text-danger" id="tongthanhtoan">0</span></h3> 
-                    <button class="btn btn-danger ms-3" id="btnThanhToan" data-bs-toggle="modal" data-bs-target="#confirmPaymentModal">Thanh toán</button>
+                    <a class="btn btn-danger ms-3" id="btnThanhToan" data-bs-toggle="modal" data-bs-target="#confirmPaymentModal">Thanh toán</a>
                 </div>
             </div>
         </div>
@@ -156,38 +157,38 @@
 </div>
 
     <!-- Modal Thêm địa chỉ -->
-    <div class="modal fade" id="Modaladddiachi" tabindex="-1" aria-labelledby="ModaladddiachiLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="ModaladddiachiLabel">Thay đổi địa chỉ nhận hàng</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="changeAddressForm">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label for="name" class="form-label">Họ tên</label>
-                                <input type="text" class="form-control" id="name" required>
+        <div class="modal fade" id="Modaladddiachi" tabindex="-1" aria-labelledby="ModaladddiachiLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModaladddiachiLabel">Thay đổi địa chỉ nhận hàng</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="changeAddressForm">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Họ tên</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label">Số điện thoại</label>
+                                    <input type="tel" class="form-control" id="phone" required pattern="[0-9]{10}">
+                                </div>
+                                <div class="col-12">
+                                    <label for="address" class="form-label">Địa chỉ</label>
+                                    <input type="text" class="form-control" id="address-input" required>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <label for="phone" class="form-label">Số điện thoại</label>
-                                <input type="tel" class="form-control" id="phone" required pattern="[0-9]{10}">
+                            <div class="text-end mt-4">
+                                <button type="submit" class="btn btn-primary">Thay đổi</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                             </div>
-                            <div class="col-12">
-                                <label for="address" class="form-label">Địa chỉ</label>
-                                <input type="text" class="form-control" id="address" required>
-                            </div>
-                        </div>
-                        <div class="text-end mt-4">
-                            <button type="submit" class="btn btn-primary">Thay đổi</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 @endsection
 
 @section('scripts')
@@ -287,6 +288,106 @@
 
         // Gọi hàm capNhatTongThanhToan khi trang được tải
         document.addEventListener('DOMContentLoaded', capNhatTongThanhToan);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('Modaladddiachi');
+            modal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+                const name = button.getAttribute('data-name');
+                const phone = button.getAttribute('data-phone');
+                const address = button.getAttribute('data-address');
+
+                // Điền dữ liệu vào các trường trong modal
+                modal.querySelector('#name').value = name;
+                modal.querySelector('#phone').value = phone;
+                modal.querySelector('#address').value = address;
+            });
+        });
+
+        //Nhấn nút thay đổi trong modal
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('Modaladddiachi');
+            const changeAddressForm = document.getElementById('changeAddressForm');
+
+            // Khi modal mở, điền thông tin từ các thuộc tính data
+            modal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+                const name = button.getAttribute('data-name');
+                const phone = button.getAttribute('data-phone');
+                const address = button.getAttribute('data-address');
+
+                document.getElementById('name').value = name;
+                document.getElementById('phone').value = phone;
+                document.getElementById('address-input').value = address;
+            });
+
+            // Khi nhấn "Thay đổi" trong modal, cập nhật nội dung trên giao diện
+            changeAddressForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Ngăn không cho form gửi dữ liệu
+
+                // Lấy giá trị từ form
+                const newName = document.getElementById('name').value;
+                const newPhone = document.getElementById('phone').value;
+                const newAddress = document.getElementById('address-input').value;
+
+                // Cập nhật nội dung hiển thị trên view
+                document.getElementById('name-phone').textContent = `${newName} - ${newPhone}`;
+                document.getElementById('address').textContent = newAddress;
+
+                // Đóng modal sau khi cập nhật
+                bootstrap.Modal.getInstance(modal).hide();
+            });
+        });
+
+
+
+
+
+        $('#confirmPaymentButton').on('click', function () {
+    // Lấy các giá trị từ giao diện
+    const tenKH = $('#name-phone').text().split(' - ')[0];
+    const sdt = $('#name-phone').text().split(' - ')[1];
+    const diaChiGiaoHang = $('#address').text();
+    const tongTien = $('#tongthanhtoan').text().replace('₫', '').replace(/\./g, '');
+    const ghiChu = $('#note').val();
+    const maPTTT = $('input[name="MaPTTT"]:checked').val();
+    const maVC = $('input[name="MaVC"]:checked').val();
+    const maKM = $('#khuyenmai').val();
+    const maKMVC = $('#khuyenmaivc').val();
+
+    // Gửi yêu cầu AJAX tới server
+    $.ajax({
+        url: "{{ route('thanh-toan') }}",
+        type: 'POST',
+        data: {
+            TenKH: tenKH,
+            SDT: sdt,
+            DiaChiGiaoHang: diaChiGiaoHang,
+            TongTien: tongTien,
+            GhiChu: ghiChu,
+            MaPTTT: maPTTT,
+            MaVC: maVC,
+            MaKM: maKM,
+            MaKMVC: maKMVC,
+        },
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        dataType: 'json',
+        success: function (response) {
+            if (response.success) {
+                window.location.href = '/tra-cuu-don-hang';
+            } else {
+                alert(response.message);
+            }
+        },
+        error: function (error) {
+            alert('Có lỗi xảy ra, vui lòng thử lại.');
+            console.error('Error response:', error);
+            console.log('Error response text:', error.responseText);
+        }
+    });
+});
     </script>
 
 @endsection

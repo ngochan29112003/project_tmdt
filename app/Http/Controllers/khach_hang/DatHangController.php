@@ -7,6 +7,8 @@ use App\Models\khach_hang\DatHang;
 use App\Models\khach_hang\ChiTietDonHang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use Log;
 
 class DatHangController extends Controller
 {
@@ -62,10 +64,90 @@ class DatHangController extends Controller
             'list_pttt', 'list_dvvc', 'list_khuyenmai', 
             'list_khuyenmaivc', 'products'
         ));
+    }
+
+    public function thanhToan(Request $request)
+{
+    // Xác thực dữ liệu đầu vào
+    $request->validate([
+        'TenKH' => 'required|string|max:255',
+        'SDT' => 'required|string|max:15',
+        'DiaChiGiaoHang' => 'required|string|max:255',
+        'TongTien' => 'required|numeric',
+        'MaPTTT' => 'nullable|string',
+        'MaVC' => 'nullable|string',
+        'MaKM' => 'nullable|string',
+        'MaKMVC' => 'nullable|string',
+        'GhiChu' => 'nullable|string|max:255',
+    ]);
+
+    $MaTK = session('MaTK');
+
+    // Bắt đầu giao dịch
+    DB::beginTransaction();
+
+    try {
+        // Bước 1: Tạo bản ghi mới trong bảng donhang
+        $donHang = new DatHang();
+        $donHang->TenKH = $request->input('TenKH');
+        $donHang->SDT = $request->input('SDT');
+        $donHang->GhiChu = $request->input('GhiChu');
+        $donHang->TongTien = $request->input('TongTien');
+        $donHang->DiaChiGiaoHang = $request->input('DiaChiGiaoHang');
+        $donHang->MaPTTT = $request->input('MaPTTT');
+        $donHang->MaTK = $MaTK;
+        $donHang->MaSP=null;
+        $donHang->MaKM = $request->input('MaKM');
+        $donHang->MaKMVC = $request->input('MaKMVC');
+        $donHang->MaVC = $request->input('MaVC');
+        $donHang->MaTT = 1; // Mặc định
+        $donHang->NgayTaoDH = Carbon::now(); // Lấy ngày hiện tại
+        $donHang->save();
+
+        // Bước 2: Lấy MaDH vừa mới tạo
+        $MaDH = $donHang->MaDH;
+
+        // Bước 3: Thêm sản phẩm vào chitietdonhang
+        $list_chitiet_giohang = $this->getctgh();
+        foreach ($list_chitiet_giohang as $item) {
+            $chiTietDonHang = new ChiTietDonHang();
+            $chiTietDonHang->MaDH = $MaDH;
+            $chiTietDonHang->MaSP = $item->MaSP;
+            $chiTietDonHang->SoLuong = $item->SLSanPham;
+            $chiTietDonHang->GiaBan = $item->GiaBan;
+            $chiTietDonHang->save();
+
+            // Bước 4: Cập nhật số lượng tồn kho trong bảng sanpham
+            DB::table('sanpham')
+                ->where('MaSP', $item->MaSP)
+                ->decrement('SoLuongTonKho', $item->SLSanPham);
+        }
+
+        // Bước 5: Xóa giỏ hàng
+        DB::table('chitietgiohang')->delete();
+
+        // Commit giao dịch
+        DB::commit();
+
+        // Bước 6: Chuyển hướng về trang tra-cuu-don-hang
+        return response()->json(['success' => true, 'message' => 'Thanh toán thành công.']);
+    } catch (\Exception $e) {
+        // Rollback giao dịch nếu có lỗi xảy ra
+        DB::rollBack();
+    
+        // Ghi lại chi tiết lỗi vào log
+        Log::error('Error in thanhToan: ' . $e->getMessage());
+    
+        // Xử lý lỗi
+        return response()->json(['success' => false, 'message' => 'Có lỗi xảy ra, vui lòng thử lại.', 'error' => $e->getMessage()], 500);
+    }
 }
 
     public function getctgh()
     {
-        return DB::table('chitietgiohang')->get();
+        return DB::table('chitietgiohang')
+        ->join('sanpham', 'chitietgiohang.MaSP', '=', 'sanpham.MaSP')
+        ->select('chitietgiohang.*', 'sanpham.GiaBan') // Đảm bảo rằng GiaBan được lấy
+        ->get();
     }
 }

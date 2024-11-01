@@ -66,7 +66,6 @@ class QuanLyDonHangController extends Controller
             $list_donhang = (new QuanLyDonHangModel())->getDonHang();
         } else {
             $list_donhang = DB::table('donhang')
-                ->join('sanpham', 'sanpham.MaSP', '=', 'donhang.MaSP')
                 ->join('phuongthucthanhtoan', 'phuongthucthanhtoan.MaPTTT', '=', 'donhang.MaPTTT')
                 ->join('donvivanchuyen', 'donvivanchuyen.MaVC', '=', 'donhang.MaVC')
                 ->join('taikhoan', 'taikhoan.MaTK', '=', 'donhang.MaTK')
@@ -75,7 +74,6 @@ class QuanLyDonHangController extends Controller
                 ->where('donhang.MaTT', $trangThaiId)
                 ->select(
                     'donhang.MaDH',
-                    'sanpham.TenSP',
                     'phuongthucthanhtoan.TenPTTT',
                     'donvivanchuyen.TenDonViVC',
                     'khuyenmai.TenKM',
@@ -99,7 +97,6 @@ class QuanLyDonHangController extends Controller
             $html .= '<tr>';
             $html .= '<td>' . ($index + 1) . '</td>';
             $html .= '<td>' . $item->TenKH . '</td>';
-            $html .= '<td>' . $item->TenSP . '</td>';
             $html .= '<td>' . $item->SDT . '</td>';
             $html .= '<td>' . $item->DiaChiGiaoHang . '</td>';
             $html .= '<td>' . $item->TenPTTT . '</td>';
