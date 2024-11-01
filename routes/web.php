@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashBoardController;
+use App\Http\Controllers\khach_hang\ChiTietSanPhamController;
 use App\Http\Controllers\khach_hang\GioHangController;
 use App\Http\Controllers\khach_hang\DatHangController;
 use App\Http\Controllers\khach_hang\ThongTinTaiKhoanController;
@@ -154,6 +155,14 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
             Route::post('/giam-so-luong', [GioHangController::class, 'decreaseQuantity'])->name('gio-hang.giam-so-luong');
             Route::post('/tang-so-luong', [GioHangController::class, 'increaseQuantity'])->name('gio-hang.tang-so-luong');
             Route::post('/xoa-san-pham', [GioHangController::class, 'removeFromCart'])->name('gio-hang.xoa-san-pham');
+
+        });
+
+
+        //Chi tiết sản phẩm
+        Route::group(['prefix' => '/chi-tiet-san-pham'], function () {
+            Route::get('/', [ChiTietSanPhamController::class, 'getChiTietDonHang'])->name('chi-tiet-san-pham');
+
 
         });
 

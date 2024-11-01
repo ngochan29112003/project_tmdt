@@ -27,7 +27,7 @@ class DatHang extends Model
          'MaKMVC',
          'MaVC',
      ];
-    
+
     public $timestamps = false;
 
     public function getdonhang()
@@ -40,7 +40,6 @@ class DatHang extends Model
         ->join('donvivanchuyen','donvivanchuyen.MaVC','=','donhang.MaVC')
         ->get();
     }
-
 
     public function getsanpham()
     {

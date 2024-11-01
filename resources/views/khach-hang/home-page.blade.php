@@ -140,7 +140,7 @@
                         @foreach($pcMoi as $item)
                             <div class = "col-md-3 mb-4">
                                 <div class = "card h-100">
-                                    <a href = "">
+                                    <a href = "{{route("chi-tiet-san-pham")}}">
                                         <img class = "card-img-top" src = "{{asset('asset/img-product/'.$item->AnhSP)}}" alt = "{{ $item->TenSP }}">
                                     </a>
                                     <div class = "card-body">
@@ -173,7 +173,7 @@
                         @foreach($pcBanChay as $item)
                             <div class = "col-md-3 mb-4">
                                 <div class = "card h-100">
-                                    <a href = "">
+                                    <a href = "{{route("chi-tiet-san-pham")}}">
                                         <img class = "card-img-top" src = "{{asset('asset/img-product/'.$item->AnhSP)}}" alt = "{{ $item->TenSP }}">
                                     </a>
                                     <div class = "card-body">
@@ -209,7 +209,7 @@
                         @foreach($pcKM as $item)
                             <div class = "col-md-3 mb-4">
                                 <div class = "card h-100">
-                                    <a href = "">
+                                    <a href = "{{route("chi-tiet-san-pham")}}">
                                         <img class = "card-img-top" src = "{{asset('asset/img-product/'.$item->AnhSP)}}" alt = "{{ $item->TenSP }}">
                                     </a>
                                     <div class = "card-body">

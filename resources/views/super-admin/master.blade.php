@@ -5,7 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Dashboard - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
+    <title>Dashboard - PcStore</title>
+    <link rel="shortcut icon" href="{{asset('asset/img/icon.png')}}">
     @include('lib-css')
     <style>
         .collapse .navbar-nav .nav-item:hover {
@@ -27,7 +28,7 @@
                 </button>
                 <h1 class="navbar-brand navbar-brand-autodark pb-0">
                     <a href="{{route('super-admin-home')}}">
-                        <img src="{{asset('asset/img/logo.png')}}" width="100" height="auto">
+                        <img src="{{asset('asset/img/logo-admin.png')}}" width="100" height="auto">
                     </a>
                 </h1>
                 <div class="navbar-nav flex-row d-lg-none">
@@ -36,14 +37,14 @@
                             aria-label="Open user menu">
                             <span class="avatar avatar-sm" style=""></span>
                             <div class="d-none d-xl-block ps-2">
-                                <div>Paweł Kuna</div>
-                                <div class="mt-1 small text-secondary">UI Designer</div>
+                                <div>Super Admin</div>
+                                <div class="mt-1 small text-secondary">Quản trị người dùng</div>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <a href="#" class="dropdown-item">Status</a>
+{{--                            <a href="#" class="dropdown-item">Status</a>--}}
                             <a href="./profile.html" class="dropdown-item">Profile</a>
-                            <a href="#" class="dropdown-item">Feedback</a>
+{{--                            <a href="#" class="dropdown-item">Feedback</a>--}}
                             <div class="dropdown-divider"></div>
                             <a href="./settings.html" class="dropdown-item">Settings</a>
                             <a href="{{route('logout')}}" class="dropdown-item">Logout</a>
@@ -482,20 +483,21 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
                             aria-label="Open user menu">
-                            <span class="avatar avatar-sm"
-                                style=""></span>
+{{--                            <span class="avatar avatar-sm"--}}
+{{--                                style=""></span>--}}
+                            <img class="avatar avatar-m" src="{{asset('asset/img/user.jpg')}}">
                             <div class="d-none d-xl-block ps-2">
-                                <div>Paweł Kuna</div>
-                                <div class="mt-1 small text-secondary">UI Designer</div>
+                                <div>Super Admin</div>
+                                <div class="mt-1 small text-secondary">Quản trị người dùng</div>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <a href="#" class="dropdown-item">Status</a>
-                            <a href="./profile.html" class="dropdown-item">Profile</a>
-                            <a href="#" class="dropdown-item">Feedback</a>
+{{--                            <a href="#" class="dropdown-item">Status</a>--}}
+                            <a href="./profile.html" class="dropdown-item">Thông tin</a>
+{{--                            <a href="#" class="dropdown-item">Feedback</a>--}}
                             <div class="dropdown-divider"></div>
-                            <a href="./settings.html" class="dropdown-item">Settings</a>
-                            <a href="{{route('logout')}}" class="dropdown-item">Logout</a>
+                            <a href="./settings.html" class="dropdown-item">Cài đặt</a>
+                            <a href="{{route('logout')}}" class="dropdown-item">Đăng xuất</a>
                         </div>
                     </div>
                 </div>
