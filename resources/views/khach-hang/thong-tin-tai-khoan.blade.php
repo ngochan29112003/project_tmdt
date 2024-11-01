@@ -69,8 +69,6 @@
                     var data = response.taikhoan;
                     $('#edit_AnhDaiDien').val(data.AnhDaiDien);
                     $('#edit_HoTen').val(data.HoTen);
-                    $('#edit_TenDangNhap').val(data.TenDangNhap);
-                    $('#edit_MatKhau').val(data.MatKhau);
                     $('#edit_NgaySinh').val(data.NgaySinh);
                     $('#edit_GioiTinh').val(data.GioiTinh);
                     $('#edit_SDT').val(data.SDT);
