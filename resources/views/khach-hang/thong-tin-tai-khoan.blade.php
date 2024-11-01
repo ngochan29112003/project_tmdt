@@ -6,43 +6,46 @@
                 <div class="card-body">
                     <form id="Formthongtintk" enctype="multipart/form-data">
                         @csrf
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="AnhDaiDien" class="form-label">Ảnh đại diện</label>
-                                <input type="file" class="form-control" name="AnhDaiDien" id="edit_AnhDaiDien" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="HoTen" class="form-label">Họ tên</label>
-                                <input type="test" class="form-control" name="HoTen" id="edit_HoTen" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="TenDangNhap" class="form-label">Tên đăng nhập</label>
-                                <input type="test" class="form-control" name="TenDangNhap" id="edit_TenDangNhap" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="NgaySinh" class="form-label">Ngày sinh</label>
-                                <input type="test" class="form-control" name="NgaySinh" id="edit_NgaySinh" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="GioiTinh" class="form-label">Giới tính</label>
-                                <input type="test" class="form-control" name="GioiTinh" id="edit_GioiTinh" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="SDT" class="form-label">Số điện thoại</label>
-                                <input type="test" class="form-control" name="SDT" id="edit_SDT" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="DiaChi" class="form-label">Địa chỉ</label>
-                                <input type="test" class="form-control" name="DiaChi" id="edit_DiaChi" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="Email" class="form-label">Email</label>
-                                <input type="test" class="form-control" name="Email" id="edit_Email" required>
+                        <div class="container p-4 rounded shadow-sm" style="background-color: #f8f9fa;">
+                            <h1 class="mb-4 text-danger">Thông Tin Tài Khoản</h1>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="AnhDaiDien" class="form-label">Ảnh đại diện</label>
+                                    <input type="file" class="form-control" name="AnhDaiDien" id="edit_AnhDaiDien">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="HoTen" class="form-label">Họ tên</label>
+                                    <input type="text" class="form-control" name="HoTen" id="edit_HoTen" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="NgaySinh" class="form-label">Ngày sinh</label>
+                                    <input type="date" class="form-control" name="NgaySinh" id="edit_NgaySinh" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="GioiTinh" class="form-label">Giới tính</label>
+                                    <select class="form-select" name="GioiTinh" id="edit_GioiTinh" required>
+                                        <option value="" disabled selected>Chọn giới tính</option>
+                                        <option value="Nam">Nam</option>
+                                        <option value="Nữ">Nữ</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="SDT" class="form-label">Số điện thoại</label>
+                                    <input type="number" class="form-control" name="SDT" id="edit_SDT" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="Email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" name="Email" id="edit_Email" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="DiaChi" class="form-label">Địa chỉ</label>
+                                    <input type="text" class="form-control" name="DiaChi" id="edit_DiaChi" required>
+                                </div>
                             </div>
                         </div>
+
                         <div class="text-end">
-                            <button type="submit" class="btn btn-primary">Cập nhật</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                            <button type="submit" class="btn btn-danger">Lưu thay đổi</button>
                         </div>
                     </form>
                 </div>
