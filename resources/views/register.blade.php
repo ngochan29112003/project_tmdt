@@ -12,7 +12,7 @@
     <div class="container container-tight py-4">
         <div class="text-center mb-4">
             <a href="." class="navbar-brand navbar-brand-autodark">
-                <img src="{{asset('asset/img/logo.png')}}" height="70" alt="">
+                <img src="{{asset('asset/img/icon.png')}}" height="70" alt="">
             </a>
         </div>
         <form class="card card-md" id="formdangky" enctype="multipart/form-data">
@@ -85,7 +85,7 @@
                     @endif
                 </div>
                 <div class="form-footer">
-                    <button type="submit" class="btn btn-primary w-100" style="background-color: red">Tạo tài khoản</button>
+                    <button type="submit" class="btn btn-danger w-100" >Tạo tài khoản</button>
                 </div>
             </div>
         </form>

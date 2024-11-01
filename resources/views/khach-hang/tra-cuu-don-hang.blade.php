@@ -40,7 +40,7 @@
 
             <!-- Main Content -->
             <main class="col-md-9 p-4">
-                <h1 class="fw-bold text-danger">Quản lý đơn hàng</h1>
+                <h1 class="fw-bold text-danger" >Quản lý đơn hàng</h1>
                 <ul class="nav nav-tabs flex-wrap mt-3 bg-white">
                     <li class="nav-item">
                         <a class="nav-link active text-danger" href="#">Tất cả</a>

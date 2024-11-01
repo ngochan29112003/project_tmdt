@@ -39,7 +39,7 @@
             <div class="col-md-6 p-4">
                 <div class="text-center mb-4">
                     <a href="#" class="navbar-brand">
-                        <img src="http://127.0.0.1:8000/asset/img/logo.png" height="50" alt="Logo">
+                        <img src="http://127.0.0.1:8000/asset/img/icon.png" height="80" alt="Logo">
                     </a>
                 </div>
                 <h3 class="text-center mb-4">Đăng Nhập</h3>
