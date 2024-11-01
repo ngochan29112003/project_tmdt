@@ -33,7 +33,6 @@ class DatHang extends Model
     public function getdonhang()
     {
         return DB::table('donhang')
-        ->join('sanpham','sanpham.MaSP','=','donhang.MaSP')
         ->join('phuongthucthanhtoan','phuongthucthanhtoan.MaPTTT','=','donhang.MaPTTT')
         ->join('taikhoan','taikhoan.MaTK','=','donhang.MaTK')
         ->join('khuyenmai','khuyenmai.MaKM','=','donhang.MaKM')

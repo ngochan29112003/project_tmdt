@@ -13,6 +13,20 @@ class QuanLyTaiKhoanController extends Controller
         return view('super-admin.quan-ly-tai-khoan.danh-sach-tai-khoan', compact('dataTaiKhoan'));
     }
 
+    public function getViewTaiKhoanAd()
+    {
+        $model = new QuanLyTaiKhoan();
+        $dataTaiKhoan = $model->getAdmin();
+        return view ('super-admin.quan-ly-tai-khoan.tai-khoan-admin',compact('dataTaiKhoan'));
+    }
+
+    public function getViewTaiKhoanKhach()
+    {
+        $model = new QuanLyTaiKhoan();
+        $dataTaiKhoan = $model->getKhachHang();
+        return view ('super-admin.quan-ly-tai-khoan.tai-khoan-khach-hang',compact('dataTaiKhoan'));
+    }
+
     public function filterAccounts(Request $request)
     {
         $role = $request->get('role');

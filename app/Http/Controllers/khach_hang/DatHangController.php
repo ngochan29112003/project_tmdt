@@ -21,7 +21,7 @@ class DatHangController extends Controller
             ->where('donhang.MaTK', $MaTK)
             ->get();
 
-        
+
 
         $dathang = new DatHang();
         $list_don_hang = $dathang -> getdonhang();
@@ -34,14 +34,14 @@ class DatHangController extends Controller
 
         // Lấy chi tiết giỏ hàng
         $list_chitiet_giohang = $this->getctgh();
-        
+
         // Group sản phẩm theo MaSP
         $grouped_products = $list_chitiet_giohang->groupBy('MaSP');
-        
+
         // Tạo mảng để lưu dữ liệu cho view
         // Tạo mảng để lưu dữ liệu cho view
         $products = [];
-        
+
         foreach ($grouped_products as $MaSP => $items) {
             $firstItem = $items->first(); // Lấy phần tử đầu tiên trong nhóm
             $sanpham = DB::table('sanpham')->where('MaSP', $MaSP)->first();
@@ -60,8 +60,8 @@ class DatHangController extends Controller
         }
 
         return view('khach-hang.dat-hang', compact(
-            'list_don_hang', 'list_san_pham', 'list_tai_khoan', 
-            'list_pttt', 'list_dvvc', 'list_khuyenmai', 
+            'list_don_hang', 'list_san_pham', 'list_tai_khoan',
+            'list_pttt', 'list_dvvc', 'list_khuyenmai',
             'list_khuyenmaivc', 'products'
         ));
     }
@@ -96,7 +96,6 @@ class DatHangController extends Controller
         $donHang->DiaChiGiaoHang = $request->input('DiaChiGiaoHang');
         $donHang->MaPTTT = $request->input('MaPTTT');
         $donHang->MaTK = $MaTK;
-        $donHang->MaSP=null;
         $donHang->MaKM = $request->input('MaKM');
         $donHang->MaKMVC = $request->input('MaKMVC');
         $donHang->MaVC = $request->input('MaVC');
@@ -134,10 +133,10 @@ class DatHangController extends Controller
     } catch (\Exception $e) {
         // Rollback giao dịch nếu có lỗi xảy ra
         DB::rollBack();
-    
+
         // Ghi lại chi tiết lỗi vào log
         Log::error('Error in thanhToan: ' . $e->getMessage());
-    
+
         // Xử lý lỗi
         return response()->json(['success' => false, 'message' => 'Có lỗi xảy ra, vui lòng thử lại.', 'error' => $e->getMessage()], 500);
     }

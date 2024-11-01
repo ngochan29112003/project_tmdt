@@ -40,6 +40,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         // Tài khoản
         Route::group(['prefix' => '/tai-khoan'], function () {
             Route::get('/danh-sach',[QuanLyTaiKhoanController::class,'getView'])->name('danh-sach-tai-khoan');
+            Route::get('/danh-sach-admin',[QuanLyTaiKhoanController::class,'getViewTaiKhoanAd'])->name('tai-khoan-admin');
+            Route::get('/danh-sach-khach-hang',[QuanLyTaiKhoanController::class,'getViewTaiKhoanKhach'])->name('tai-khoan-khach-hang');
             Route::post('/unlock', [QuanLyTaiKhoanController::class, 'unlockAccount'])->name('unlock.route');
             Route::post('/lock', [QuanLyTaiKhoanController::class, 'lockAccount'])->name('lock.route');
             Route::get('filter-accounts', [QuanLyTaiKhoanController::class, 'filterAccounts'])->name('super-admin.filter-accounts');
@@ -88,7 +90,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::group(['prefix' => '/trang-thai-don-hang'], function () {
             Route::get('/danh-sach',[QuanLyTTDHController::class,'getView'])->name('danh-sach-trang-thai-don-hang');
             Route::delete('/delete/{id}',[QuanLyTTDHController::class,'deleteTTDH'])->name('delete-trang-thai-don-hang');
-            
+
         });
 
         // Phương thức thanh toán
