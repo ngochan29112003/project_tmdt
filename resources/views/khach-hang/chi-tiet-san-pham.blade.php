@@ -189,15 +189,6 @@
             });
         }
 
-
-        function changeImage(index) {
-            const carousel = document.querySelector('#productCarousel .carousel-inner');
-            const items = carousel.querySelectorAll('.carousel-item');
-            items.forEach((item, i) => {
-                item.classList.toggle('active', i === index);
-            });
-        }
-
         function submitComment(event) {
             event.preventDefault(); // Ngăn chặn gửi form
             const commentInput = document.getElementById('commentInput');
