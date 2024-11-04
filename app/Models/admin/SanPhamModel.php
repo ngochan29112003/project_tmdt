@@ -43,7 +43,7 @@ class SanPhamModel extends Model
     {
         return DB::table('hangsanxuat')->get();
     }
-    
+
     public function getPCBanChay()
     {
         return DB::table('sanpham')

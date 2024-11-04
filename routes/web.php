@@ -8,6 +8,7 @@ use App\Http\Controllers\khach_hang\ThongTinTaiKhoanController;
 use App\Http\Controllers\khach_hang\TraCuuDonHangController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ResetPassWordController;
 use App\Http\Controllers\super_admin\PhuongThucThanhToanController;
 use App\Http\Controllers\super_admin\QuanLyAdminController;
 use App\Http\Controllers\super_admin\QuanLyBaiDangController;
@@ -29,6 +30,7 @@ Route::get('/',[DashBoardController::class,'getViewDashBoardUser'])->name('home-
 Route::get('/register',[RegisterController::class,'getViewRegister'])->name('index.register');
 Route::post('/register/add',[RegisterController::class,'addAccount'])->name('add-account');
 Route::get('/login',[LoginController::class,'getViewLogin'])->name('index.login');
+Route::get('/reset-password',[ResetPassWordController::class,'getViewResetPassWord'])->name('get-reset-password');
 Route::post('/login',[LoginController::class,'loginAction'])->name('login-action');
 Route::get('/logout', [LoginController::class, 'logoutAction'])->name('logout');
 

@@ -75,7 +75,7 @@
                             <input type="checkbox" id="rememberMe">
                             <label for="rememberMe">Ghi Nhớ Tôi</label>
                         </div>
-                        <a href="#" class="text-muted">Quên Mật Khẩu?</a>
+                        <a href="{{route('get-reset-password')}}" class="text-muted">Quên Mật Khẩu?</a>
                     </div>
                     <div class="form-footer">
                         <button type="submit" class="btn btn-danger w-100">Đăng Nhập</button>

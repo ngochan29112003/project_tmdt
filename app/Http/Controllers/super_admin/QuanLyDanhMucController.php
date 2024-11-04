@@ -12,8 +12,9 @@ class QuanLyDanhMucController extends Controller
     {
         $danh_muc_sp = new DanhMucSanPhamModel();
         $list_danh_muc = $danh_muc_sp->danhmucSP();
-        return view('super-admin.quan-ly-danh-muc.danh-sach-danh-muc',
-        compact('list_danh_muc'));
+        $list_hsx =$danh_muc_sp->getHSX();
+;        return view('super-admin.quan-ly-danh-muc.danh-sach-danh-muc',
+        compact('list_danh_muc','list_hsx'));
     }
 
     public function addDanhMuc(Request $request)
@@ -22,6 +23,7 @@ class QuanLyDanhMucController extends Controller
         $validate = $request->validate([
             'TenDM'=> 'string',
             'TrangThaiDM' => 'string',
+            'MaHSX' => 'int',
         ]);
 
 
@@ -58,6 +60,7 @@ class QuanLyDanhMucController extends Controller
         $validated = $request->validate([
             'TenDM' => 'string',
             'TrangThaiDM' => 'string',
+            'MaHSX' => 'string',
         ]);
 
         $danhmuc = DanhMucSanPhamModel::findOrFail($id);
@@ -68,4 +71,6 @@ class QuanLyDanhMucController extends Controller
             'danhmuc' => $danhmuc,
         ]);
     }
+
+
 }

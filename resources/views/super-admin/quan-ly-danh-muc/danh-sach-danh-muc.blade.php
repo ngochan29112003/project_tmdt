@@ -46,6 +46,7 @@
                                 <tr>
                                     <th>STT</th>
                                     <th>Tên danh mục</th>
+                                    <th>Hãng sản xuất</th>
                                     <th>Trạng thái danh mục</th>
                                     <th class = "text-center">Action</th>
                                 </tr>
@@ -56,6 +57,7 @@
                                     <tr>
                                         <td>{{ $stt++ }}</td>
                                         <td>{{ $item->TenDM}}</td>
+                                        <td>{{ $item->TenHSX}}</td>
                                         <td>
                                             @if($item->TrangThaiDM === "Ẩn")
                                                 <span class = "badge bg-danger text-white p-2">Ẩn</span>
@@ -111,6 +113,15 @@
                                 <input type="text" class="form-control" name="TenDM" id="TenDM" required>
                             </div>
                             <div class="col-md-6 mb-3">
+                                <label for="MaHSX" class="form-label">Chọn hãng sản xuất</label>
+                                <select class="form-select" name="MaHSX" id="MaHSX">
+                                    <option value="" disabled selected>Chọn hãng sản xuất</option>
+                                    @foreach ($list_hsx as $hsx)
+                                        <option value="{{ $hsx->MaHSX}}">{{ $hsx->TenHSX}} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
                                 <label for="TrangThaiDM" class="form-label">Trạng thái danh mục</label>
                                 <select class="form-select" name="TrangThaiDM" id="TrangThaiDM">
                                     <option value="Hiện">Hiện</option>
@@ -143,6 +154,15 @@
                             <div class="col-md-6 mb-3">
                                 <label for="TenDM" class="form-label">Tên danh mục</label>
                                 <input type="text" class="form-control" name="TenDM" id="edit_TenDM" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="MaHSX" class="form-label">Hãng sản xuất</label>
+                                <select class="form-select" name="MaTK" id="edit_MaHSX">
+                                    <option value="" disabled selected>Chọn hãng sản xuất</option>
+                                    @foreach ($list_hsx as $hsx)
+                                        <option value="{{ $hsx->MaHSX}}">{{ $hsx->TenHSX}} </option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="TrangThaiDM" class="form-label">Trạng thái danh mục</label>
@@ -258,6 +278,7 @@
                   var data = response.danhmuc;
                   $('#edit_TenDM').val(data.TenDM);
                   $('#edit_TrangThaiDM').val(data.TrangThaiDM);
+                  $('#edit_MaHSX').val(data.MaHSX);
                   $('#Modaleditdanhmuc').modal('show');
               },
               error: function (xhr) {
