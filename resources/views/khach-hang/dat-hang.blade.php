@@ -344,50 +344,50 @@
 
 
         $('#confirmPaymentButton').on('click', function () {
-    // Lấy các giá trị từ giao diện
-    const tenKH = $('#name-phone').text().split(' - ')[0];
-    const sdt = $('#name-phone').text().split(' - ')[1];
-    const diaChiGiaoHang = $('#address').text();
-    const tongTien = $('#tongthanhtoan').text().replace('₫', '').replace(/\./g, '');
-    const ghiChu = $('#note').val();
-    const maPTTT = $('input[name="MaPTTT"]:checked').val();
-    const maVC = $('input[name="MaVC"]:checked').val();
-    const maKM = $('#khuyenmai').val();
-    const maKMVC = $('#khuyenmaivc').val();
+            // Lấy các giá trị từ giao diện
+            const tenKH = $('#name-phone').text().split(' - ')[0];
+            const sdt = $('#name-phone').text().split(' - ')[1];
+            const diaChiGiaoHang = $('#address').text();
+            const tongTien = $('#tongthanhtoan').text().replace('₫', '').replace(/\./g, '');
+            const ghiChu = $('#note').val();
+            const maPTTT = $('input[name="MaPTTT"]:checked').val();
+            const maVC = $('input[name="MaVC"]:checked').val();
+            const maKM = $('#khuyenmai').val();
+            const maKMVC = $('#khuyenmaivc').val();
 
-    // Gửi yêu cầu AJAX tới server
-    $.ajax({
-        url: "{{ route('thanh-toan') }}",
-        type: 'POST',
-        data: {
-            TenKH: tenKH,
-            SDT: sdt,
-            DiaChiGiaoHang: diaChiGiaoHang,
-            TongTien: tongTien,
-            GhiChu: ghiChu,
-            MaPTTT: maPTTT,
-            MaVC: maVC,
-            MaKM: maKM,
-            MaKMVC: maKMVC,
-        },
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        dataType: 'json',
-        success: function (response) {
-            if (response.success) {
-                window.location.href = '/tra-cuu-don-hang';
-            } else {
-                alert(response.message);
-            }
-        },
-        error: function (error) {
-            alert('Có lỗi xảy ra, vui lòng thử lại.');
-            console.error('Error response:', error);
-            console.log('Error response text:', error.responseText);
-        }
-    });
-});
+            // Gửi yêu cầu AJAX tới server
+            $.ajax({
+                url: "{{ route('thanh-toan') }}",
+                type: 'POST',
+                data: {
+                    TenKH: tenKH,
+                    SDT: sdt,
+                    DiaChiGiaoHang: diaChiGiaoHang,
+                    TongTien: tongTien,
+                    GhiChu: ghiChu,
+                    MaPTTT: maPTTT,
+                    MaVC: maVC,
+                    MaKM: maKM,
+                    MaKMVC: maKMVC,
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success) {
+                        window.location.href = '/tra-cuu-don-hang';
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function (error) {
+                    alert('Có lỗi xảy ra, vui lòng thử lại.');
+                    console.error('Error response:', error);
+                    console.log('Error response text:', error.responseText);
+                }
+            });
+        });
     </script>
 
 @endsection
