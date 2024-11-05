@@ -74,6 +74,10 @@ class DatHangController extends Controller
         'SDT' => 'required|string|max:15',
         'DiaChiGiaoHang' => 'required|string|max:255',
         'TongTien' => 'required|numeric',
+        'TienHang' => 'required|numeric',
+        'TienVC' => 'required|numeric',
+        'GiamTienHang' => 'required|numeric',
+        'GiamTienVC' => 'required|numeric',
         'MaPTTT' => 'nullable|string',
         'MaVC' => 'nullable|string',
         'MaKM' => 'nullable|string',
@@ -93,14 +97,18 @@ class DatHangController extends Controller
         $donHang->SDT = $request->input('SDT');
         $donHang->GhiChu = $request->input('GhiChu');
         $donHang->TongTien = $request->input('TongTien');
+        $donHang->TienHang = $request->input('TienHang');
+        $donHang->TienVC = $request->input('TienVC');
+        $donHang->GiamTienHang = $request->input('GiamTienHang');
+        $donHang->GiamTienVC = $request->input('GiamTienVC');
         $donHang->DiaChiGiaoHang = $request->input('DiaChiGiaoHang');
         $donHang->MaPTTT = $request->input('MaPTTT');
         $donHang->MaTK = $MaTK;
-        $donHang->MaKM = $request->input('MaKM');
-        $donHang->MaKMVC = $request->input('MaKMVC');
+        $donHang->MaKM = $request->input('MaKM') ?? null;
+        $donHang->MaKMVC = $request->input('MaKMVC') ?? null;
         $donHang->MaVC = $request->input('MaVC');
-        $donHang->MaTT = 1; // Mặc định
-        $donHang->NgayTaoDH = Carbon::now(); // Lấy ngày hiện tại
+        $donHang->MaTT = 1; // Mặc định trạng thái
+        $donHang->NgayTaoDH = Carbon::now(); // Ngày tạo đơn hàng
         $donHang->save();
 
         // Bước 2: Lấy MaDH vừa mới tạo
@@ -120,6 +128,42 @@ class DatHangController extends Controller
             DB::table('sanpham')
                 ->where('MaSP', $item->MaSP)
                 ->decrement('SoLuongTonKho', $item->SLSanPham);
+        }
+
+        // Cập nhật số lượng mã khuyến mãi và ẩn nếu số lượng về 0
+        if ($donHang->MaKM) {
+            DB::table('khuyenmai')
+                ->where('MaKM', $donHang->MaKM)
+                ->decrement('SoLuongMa');
+
+            // Kiểm tra nếu số lượng mã khuyến mãi về 0
+            $soLuongMaKM = DB::table('khuyenmai')
+                ->where('MaKM', $donHang->MaKM)
+                ->value('SoLuongMa');
+
+            if ($soLuongMaKM <= 0) {
+                DB::table('khuyenmai')
+                    ->where('MaKM', $donHang->MaKM)
+                    ->update(['TrangThaiMa' => 'ẩn']); // Giả sử bạn có cột 'TrangThaiMa'
+            }
+        }
+
+        // Cập nhật số lượng mã vận chuyển và ẩn nếu số lượng về 0
+        if ($donHang->MaKMVC) {
+            DB::table('khuyenmaivc')
+                ->where('MaKMVC', $donHang->MaKMVC)
+                ->decrement('SoLuongMa');
+
+            // Kiểm tra nếu số lượng mã vận chuyển về 0
+            $soLuongMaVC = DB::table('khuyenmaivc')
+                ->where('MaKMVC', $donHang->MaKMVC)
+                ->value('SoLuongMa');
+
+            if ($soLuongMaVC <= 0) {
+                DB::table('khuyenmaivc')
+                    ->where('MaKMVC', $donHang->MaKMVC)
+                    ->update(['TrangThaiMa' => 'ẩn']); // Giả sử bạn có cột 'TrangThaiMa'
+            }
         }
 
         // Bước 5: Xóa giỏ hàng

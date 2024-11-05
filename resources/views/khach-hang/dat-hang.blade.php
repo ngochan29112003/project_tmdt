@@ -109,7 +109,7 @@
                     <h3><i class="bi bi-clipboard text-warning me-2"></i>Chi tiết thanh toán</h3>
                     <div class="d-flex justify-content-between">
                         <span>Tổng tiền hàng</span>
-                        <span id="tongtienhang">0</span>
+                        <span id="tongtienhang">0₫</span>
                     </div>
                     <div class="d-flex justify-content-between">
                         <span>Tổng tiền vận chuyển</span>
@@ -117,11 +117,11 @@
                     </div>
                     <div class="d-flex justify-content-between">
                         <span>Giảm tiền hàng</span>
-                        <span id="giamtienhang">0₫</span>
+                        <span id="giamtienhang">-0₫</span>
                     </div>
                     <div class="d-flex justify-content-between">
                         <span>Giảm tiền vận chuyển</span>
-                        <span id="giamtienvc">0₫</span>
+                        <span id="giamtienvc">-0₫</span>
                     </div>
                 </div>
             </div>
@@ -339,16 +339,17 @@
             });
         });
 
-
-
-
-
+        //Nhấn nút đặt hàng
         $('#confirmPaymentButton').on('click', function () {
             // Lấy các giá trị từ giao diện
             const tenKH = $('#name-phone').text().split(' - ')[0];
             const sdt = $('#name-phone').text().split(' - ')[1];
             const diaChiGiaoHang = $('#address').text();
             const tongTien = $('#tongthanhtoan').text().replace('₫', '').replace(/\./g, '');
+            const tongTienHang = $('#tongtienhang').text().replace('₫', '').replace(/\./g, '');
+            const tongTienVC = $('#tongtienvc').text().replace('₫', '').replace(/\./g, '');
+            const giamTienHang = $('#giamtienhang').text().replace('₫', '').replace(/\./g, '');
+            const giamTienVC = $('#giamtienvc').text().replace('₫', '').replace(/\./g, '');
             const ghiChu = $('#note').val();
             const maPTTT = $('input[name="MaPTTT"]:checked').val();
             const maVC = $('input[name="MaVC"]:checked').val();
@@ -364,6 +365,10 @@
                     SDT: sdt,
                     DiaChiGiaoHang: diaChiGiaoHang,
                     TongTien: tongTien,
+                    TienHang:tongTienHang,
+                    TienVC: tongTienVC,
+                    GiamTienHang:giamTienHang,
+                    GiamTienVC:giamTienVC,
                     GhiChu: ghiChu,
                     MaPTTT: maPTTT,
                     MaVC: maVC,
@@ -376,7 +381,7 @@
                 dataType: 'json',
                 success: function (response) {
                     if (response.success) {
-                        window.location.href = '/tra-cuu-don-hang';
+                        window.location.href = '{{route('tra-cuu-don-hang')}}';
                     } else {
                         alert(response.message);
                     }
