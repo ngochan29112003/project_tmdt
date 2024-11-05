@@ -43,7 +43,7 @@ class SanPhamModel extends Model
     {
         return DB::table('hangsanxuat')->get();
     }
-    
+
     public function getPCBanChay()
     {
         return DB::table('sanpham')
@@ -72,6 +72,13 @@ class SanPhamModel extends Model
             ->where('sanpham.MaDM','=',5)
             ->take(4)
             ->get();
+    }
+
+    public function getChiTietSP($id)
+    {
+        return DB::table('sanpham')
+            ->where('MaSP','=' ,$id)
+            ->first();
     }
 
 }

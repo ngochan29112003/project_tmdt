@@ -11,6 +11,9 @@ class QuanLyTaiKhoan extends Model
     use HasFactory;
     protected $table = 'taikhoan';
     protected $primaryKey = 'MaTK';
+    protected $fillable =[
+        'HoTen',
+    ];
     public $timestamps = false;
 
     public function vaitro()
