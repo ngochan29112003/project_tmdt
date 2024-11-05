@@ -30,6 +30,10 @@ class QuanLyDonHangModel extends Model
                 'donhang.SDT',
                 'donhang.DiaChiGiaoHang',
                 'donhang.NgayTaoDH',  // Lấy ngày tạo đơn hàng
+                'donhang.TienHang',
+                'donhang.TienVC',
+                'donhang.GiamTienHang',
+                'donhang.GiamTienVC',
                 'donhang.TongTien',  // Lấy tổng tiền
                 'donhang.MaTT',
                 'trangthai.MaTT',

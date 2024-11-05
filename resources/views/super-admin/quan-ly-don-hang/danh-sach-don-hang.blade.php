@@ -52,6 +52,10 @@
                                         <th>Địa chỉ giao hàng</th>
                                         <th>PTTT</th>
                                         <th>Đơn vị vận chuyển</th>
+                                        <th>Tiền hàng</th>
+                                        <th>Tiền vận chuyển</th>
+                                        <th>Giảm tiền hàng</th>
+                                        <th>Giảm tiền hàng</th>
                                         <th>Tổng tiền</th>
                                         <th>Xuất đơn hàng</th>
                                         <th>Trạng thái đơn hàng</th>
@@ -67,9 +71,13 @@
                                             <td>{{$item->DiaChiGiaoHang}}</td>
                                             <td>{{$item->TenPTTT}}</td>
                                             <td>{{$item->TenDonViVC}}</td>
-                                            <td>{{$item->TongTien}}</td>
+                                            <td>{{number_format($item->TienHang, 0, ',', '.')}}</td>
+                                            <td>{{number_format($item->TienVC, 0, ',', '.')}}</td>
+                                            <td>{{number_format($item->GiamTienHang, 0, ',', '.')}}</td>
+                                            <td>{{number_format($item->GiamTienVC, 0, ',', '.')}}</td>
+                                            <td>{{number_format($item->TongTien, 0, ',', '.')}}</td>
                                             <td class="text-center align-middle">
-                                                <a href="">
+                                                <a target="_blank" href="{{ route('in-don-hang', $item->MaDH) }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-arrow-right text-danger">
                                                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                         <path d="M14 3v4a1 1 0 0 0 1 1h4" />
