@@ -182,21 +182,42 @@
       });
 
       $(document).ready(function () {
+    // Hàm để ẩn các option nhỏ hơn trạng thái hiện tại
+    function hideLowerStatusOptions() {
+        $('#tableDonHang tbody tr').each(function () {
+            var $row = $(this);
+            var currentMaTT = parseInt($row.find('.change-status').val()); // Lấy mã trạng thái hiện tại
+
+            // Lặp qua từng option trong select để ẩn các option nhỏ hơn currentMaTT
+            $row.find('.change-status option').each(function () {
+                var optionMaTT = parseInt($(this).val());
+
+                if (optionMaTT < currentMaTT) {
+                    $(this).hide(); // Ẩn các trạng thái có mã nhỏ hơn trạng thái hiện tại
+                } else {
+                    $(this).show(); // Hiển thị các trạng thái còn lại
+                }
+            });
+        });
+    }
+
     // Lắng nghe sự kiện thay đổi trên select trạng thái
     $('#filter-status').on('change', function () {
-        var trangThaiId = $(this).val(); // Lấy trạng thái mới được chọn
-        var url = "{{ route('loc-trang-thai-don-hang') }}"; // Route đã định nghĩa
+        var trangThaiId = $(this).val();
+        console.log("Selected Status ID: ", trangThaiId); // Kiểm tra giá trị được chọn
+        var url = "{{ route('loc-trang-thai-don-hang') }}";
 
         $.ajax({
             url: url,
             method: 'POST',
             data: {
                 trangThaiId: trangThaiId,
-                _token: '{{ csrf_token() }}' // Thêm CSRF token
+                _token: '{{ csrf_token() }}'
             },
             success: function (response) {
-                // Cập nhật lại nội dung bảng
-                $('#tableDonHang tbody').html(response.html); 
+                console.log(response); // Kiểm tra phản hồi từ server
+                $('#tableDonHang tbody').html(response.html);
+                hideLowerStatusOptions(); // Gọi hàm để ẩn trạng thái nhỏ hơn sau khi nhận phản hồi
             },
             error: function (xhr) {
                 toastr.error("Có lỗi xảy ra khi lọc.", "Operation Failed");
@@ -204,15 +225,15 @@
         });
     });
 
-    // Lắng nghe sự kiện thay đổi trên trạng thái đơn hàng
+    // Xử lý khi thay đổi trạng thái trong bảng
     $('#tableDonHang').on('change', '.change-status', function () {
-        var ttdhid = $(this).data('id'); // Lấy ID của trạng thái đơn hàng
-        var newStatus = $(this).val(); // Lấy trạng thái mới được chọn
+        var ttdhid = $(this).data('id');
+        var newStatus = $(this).val();
         var url = "{{ route('update-trang-thai-don-hang', ':id') }}".replace(':id', ttdhid);
 
         var formData = new FormData();
-        formData.append('_token', '{{ csrf_token() }}'); // Thêm CSRF token
-        formData.append('MaTT', newStatus); // Thêm trạng thái mới
+        formData.append('_token', '{{ csrf_token() }}');
+        formData.append('MaTT', newStatus);
 
         $.ajax({
             url: url,
@@ -223,18 +244,17 @@
             success: function (response) {
                 if (response.success) {
                     toastr.success(response.message, "Cập nhật thành công");
-
                     // Kiểm tra trạng thái lọc
                     var currentFilterStatus = $('#filter-status').val();
                     if (currentFilterStatus) {
                         // Nếu có lọc, xóa dòng tương ứng
                         $('#tableDonHang tbody tr').each(function () {
-                            var rowStatus = $(this).find('.change-status').val();
                             if ($(this).find('.change-status').data('id') == ttdhid) {
                                 $(this).remove(); // Xóa dòng tương ứng
                             }
                         });
                     }
+                    hideLowerStatusOptions(); // Gọi hàm để ẩn trạng thái nhỏ hơn sau khi thay đổi thành công
                 } else {
                     toastr.error("Cập nhật không thành công.", "Operation Failed");
                 }
@@ -244,6 +264,9 @@
             }
         });
     });
+
+    // Gọi hàm để ẩn trạng thái nhỏ hơn khi trang được tải lần đầu
+    hideLowerStatusOptions();
 });
     </script>
 @endsection

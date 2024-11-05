@@ -339,15 +339,16 @@
             });
         });
 
-
-
-
-
+        //
         $('#confirmPaymentButton').on('click', function () {
             // Lấy các giá trị từ giao diện
             const tenKH = $('#name-phone').text().split(' - ')[0];
             const sdt = $('#name-phone').text().split(' - ')[1];
             const diaChiGiaoHang = $('#address').text();
+            const tienHang = $('#tongtienhang').text().replace('₫', '').replace(/\./g, '');
+            const tienVC = $('#tongtienvc').text().replace('₫', '').replace(/\./g, '');
+            const giamTienHang = $('#giamtienhang').text().replace('₫', '').replace(/\./g, '');
+            const giamTienVC = $('#giamtienvc').text().replace('₫', '').replace(/\./g, '');
             const tongTien = $('#tongthanhtoan').text().replace('₫', '').replace(/\./g, '');
             const ghiChu = $('#note').val();
             const maPTTT = $('input[name="MaPTTT"]:checked').val();
@@ -363,6 +364,10 @@
                     TenKH: tenKH,
                     SDT: sdt,
                     DiaChiGiaoHang: diaChiGiaoHang,
+                    TienHang:tienHang,
+                    TienVC: tienVC,
+                    GiamTienHang:giamTienHang,
+                    GiamTienVC:giamTienVC,
                     TongTien: tongTien,
                     GhiChu: ghiChu,
                     MaPTTT: maPTTT,
@@ -376,7 +381,7 @@
                 dataType: 'json',
                 success: function (response) {
                     if (response.success) {
-                        window.location.href = '/tra-cuu-don-hang';
+                        window.location.href = '{{route('tra-cuu-don-hang')}}';
                     } else {
                         alert(response.message);
                     }

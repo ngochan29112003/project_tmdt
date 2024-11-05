@@ -74,7 +74,8 @@ class QuanLyDonHangController extends Controller
                 ->join('phuongthucthanhtoan', 'phuongthucthanhtoan.MaPTTT', '=', 'donhang.MaPTTT')
                 ->join('donvivanchuyen', 'donvivanchuyen.MaVC', '=', 'donhang.MaVC')
                 ->join('taikhoan', 'taikhoan.MaTK', '=', 'donhang.MaTK')
-                ->join('khuyenmai', 'khuyenmai.MaKM', '=', 'donhang.MaKM')
+                ->leftjoin('khuyenmai', 'khuyenmai.MaKM', '=', 'donhang.MaKM')
+                ->leftjoin('khuyenmaivc', 'khuyenmaivc.MaKMVC', '=', 'donhang.MaKMVC')
                 ->join('trangthai', 'trangthai.MaTT', '=', 'donhang.MaTT')
                 ->where('donhang.MaTT', $trangThaiId)
                 ->select(
@@ -85,8 +86,12 @@ class QuanLyDonHangController extends Controller
                     'donhang.TenKH',
                     'donhang.SDT',
                     'donhang.DiaChiGiaoHang',
-                    'donhang.NgayTaoDH',
-                    'donhang.TongTien',
+                    'donhang.NgayTaoDH',  // Lấy ngày tạo đơn hàng
+                    'donhang.TienHang',
+                    'donhang.TienVC',
+                    'donhang.GiamTienHang',
+                    'donhang.GiamTienVC',
+                    'donhang.TongTien',  // Lấy tổng tiền
                     'donhang.MaTT',
                     'trangthai.MaTT',
                     'trangthai.TenTT'
@@ -106,7 +111,11 @@ class QuanLyDonHangController extends Controller
             $html .= '<td>' . $item->DiaChiGiaoHang . '</td>';
             $html .= '<td>' . $item->TenPTTT . '</td>';
             $html .= '<td>' . $item->TenDonViVC . '</td>';
-            $html .= '<td>' . number_format($item->TongTien, 0, ',', '.') . ' VNĐ</td>';
+            $html .= '<td>' . number_format($item->TongTien, 0, ',', '.') . '</td>';
+            $html.='<td>' . number_format($item->TienHang, 0, ',', '.') . '</td>';
+            $html.='<td>' . number_format($item->TienVC, 0, ',', '.') . '</td>';
+            $html.='<td>' . number_format($item->GiamTienHang, 0, ',', '.') . '</td>';
+            $html.='<td>' . number_format($item->GiamTienVC, 0, ',', '.') . '</td>';
             $html .= '<td class="text-center align-middle">';
             $html .= '  <a href="{{ route(\'export-don-hang\', $item->MaDH) }}" title="Xuất đơn hàng">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-arrow-right text-danger">
@@ -162,14 +171,6 @@ class QuanLyDonHangController extends Controller
         if (!$donHang) {
             return ['success' => false, 'message' => 'Đơn hàng không tồn tại.'];
         }
-        // Lấy thông tin phương thức thanh toán và đơn vị vận chuyển
-        // $Ma_PTTT=$donHang->MaPTTT;
-        // $Ma_VC=$donHang->MaVC;
-        // // Lấy thông tin phương thức thanh toán
-        // $pttt = QuanLyPTTT::where('MaPTTT', $Ma_PTTT)->first();
-    
-        // // Lấy thông tin đơn vị vận chuyển
-        // $vanchuyen = QuanLyVC::where('MaVC', $Ma_VC)->first();
     
         // Lấy chi tiết đơn hàng
         $chitietdonhang = QuanLyCTDH::where('MaDH', $id)->get(); 
