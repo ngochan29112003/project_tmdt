@@ -19,7 +19,8 @@ class QuanLyDonHangModel extends Model
             ->join('phuongthucthanhtoan', 'phuongthucthanhtoan.MaPTTT', '=', 'donhang.MaPTTT')
             ->join('donvivanchuyen', 'donvivanchuyen.MaVC', '=', 'donhang.MaVC')
             ->join('taikhoan', 'taikhoan.MaTK', '=', 'donhang.MaTK')
-            ->join('khuyenmai', 'khuyenmai.MaKM', '=', 'donhang.MaKM')
+            ->leftjoin('khuyenmai', 'khuyenmai.MaKM', '=', 'donhang.MaKM')
+            ->leftjoin('khuyenmaivc', 'khuyenmaivc.MaKMVC', '=', 'donhang.MaKMVC')
             ->join('trangthai', 'trangthai.MaTT','=', 'donhang.MaTT')
             ->select(
                 'donhang.MaDH',
