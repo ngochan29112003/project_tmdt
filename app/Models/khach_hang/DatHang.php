@@ -37,7 +37,11 @@ class DatHang extends Model
         ->join('taikhoan','taikhoan.MaTK','=','donhang.MaTK')
         ->join('khuyenmai','khuyenmai.MaKM','=','donhang.MaKM')
         ->join('donvivanchuyen','donvivanchuyen.MaVC','=','donhang.MaVC')
-        ->get();
+            ->join('phuongthucthanhtoan', 'phuongthucthanhtoan.MaPTTT', '=', 'donhang.MaPTTT')
+            ->join('taikhoan', 'taikhoan.MaTK', '=', 'donhang.MaTK')
+            ->join('khuyenmai', 'khuyenmai.MaKM', '=', 'donhang.MaKM')
+            ->join('donvivanchuyen', 'donvivanchuyen.MaVC', '=', 'donhang.MaVC')
+            ->get();
     }
 
     public function getpttt()

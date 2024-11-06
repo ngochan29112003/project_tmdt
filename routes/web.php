@@ -32,6 +32,7 @@ Route::get('/login',[LoginController::class,'getViewLogin'])->name('index.login'
 Route::post('/login',[LoginController::class,'loginAction'])->name('login-action');
 Route::get('/logout', [LoginController::class, 'logoutAction'])->name('logout');
 
+Route::get('/chi-tiet-san-pham/{id}', [ChiTietSanPhamController::class, 'getViewChiTietSP'])->name('chi-tiet-san-pham');
 
 Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::group(['prefix' => '/super-admin'], function () {
@@ -40,6 +41,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         // Tài khoản
         Route::group(['prefix' => '/tai-khoan'], function () {
             Route::get('/danh-sach',[QuanLyTaiKhoanController::class,'getView'])->name('danh-sach-tai-khoan');
+            Route::get('/danh-sach-admin',[QuanLyTaiKhoanController::class,'getViewTaiKhoanAd'])->name('tai-khoan-admin');
+            Route::get('/danh-sach-khach-hang',[QuanLyTaiKhoanController::class,'getViewTaiKhoanKhach'])->name('tai-khoan-khach-hang');
             Route::post('/unlock', [QuanLyTaiKhoanController::class, 'unlockAccount'])->name('unlock.route');
             Route::post('/lock', [QuanLyTaiKhoanController::class, 'lockAccount'])->name('lock.route');
             Route::get('filter-accounts', [QuanLyTaiKhoanController::class, 'filterAccounts'])->name('super-admin.filter-accounts');
@@ -88,7 +91,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::group(['prefix' => '/trang-thai-don-hang'], function () {
             Route::get('/danh-sach',[QuanLyTTDHController::class,'getView'])->name('danh-sach-trang-thai-don-hang');
             Route::delete('/delete/{id}',[QuanLyTTDHController::class,'deleteTTDH'])->name('delete-trang-thai-don-hang');
-            
+
         });
 
         // Phương thức thanh toán
@@ -144,9 +147,11 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         });
     });
 
+
     Route::group(['prefix' => '/khach-hang'], function () {
         Route::get('/home',[DashBoardController::class,'getViewDashBoardUser'])->name('khach-hang-home');
         Route::get('/home/tra-cuu-don-hang',[TraCuuDonHangController::class,'getViewTraCuuDonHang'])->name('tra-cuu-don-hang');
+        Route::post('/add-binh-luan', [ChiTietSanPhamController::class, 'addBinhLuan'])->name('them-binh-luan');
 
         // Giỏ hàng
         Route::group(['prefix' => '/gio-hang'], function () {
@@ -159,21 +164,11 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         });
 
 
-        //Chi tiết sản phẩm
-        Route::group(['prefix' => '/chi-tiet-san-pham'], function () {
-            Route::get('/', [ChiTietSanPhamController::class, 'getChiTietDonHang'])->name('chi-tiet-san-pham');
-
-
-        });
-
-
         //Đơn hàng
         Route::group(['prefix' => '/don-hang'], function () {
             Route::get('/', [DatHangController::class, 'getDonHang'])->name('don-hang');
             Route::post('/thanh-toan', [DatHangController::class, 'thanhToan'])->name('thanh-toan');
         });
-
-        //Tra cứu đơn hàng
 
 
         //Account

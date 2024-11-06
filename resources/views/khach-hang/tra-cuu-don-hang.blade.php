@@ -46,7 +46,7 @@
                         <a class="nav-link active text-danger" href="#">Tất cả</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Mới</a>
+                        <a class="nav-link" href="#">Đang xử lý</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Đang soạn hàng</a>

@@ -140,7 +140,7 @@
                         @foreach($pcMoi as $item)
                             <div class = "col-md-3 mb-4">
                                 <div class = "card h-100">
-                                    <a href = "{{route("chi-tiet-san-pham")}}">
+                                    <a href = "{{route('chi-tiet-san-pham',['id' => $item->MaSP])}}">
                                         <img class = "card-img-top" src = "{{asset('asset/img-product/'.$item->AnhSP)}}" alt = "{{ $item->TenSP }}">
                                     </a>
                                     <div class = "card-body">
@@ -173,7 +173,7 @@
                         @foreach($pcBanChay as $item)
                             <div class = "col-md-3 mb-4">
                                 <div class = "card h-100">
-                                    <a href = "{{route("chi-tiet-san-pham")}}">
+                                    <a href = "{{route('chi-tiet-san-pham',['id' => $item->MaSP])}}">
                                         <img class = "card-img-top" src = "{{asset('asset/img-product/'.$item->AnhSP)}}" alt = "{{ $item->TenSP }}">
                                     </a>
                                     <div class = "card-body">
@@ -183,7 +183,6 @@
                                             Thêm vào giỏ
                                         </button>
                                     </div>
-
                                 </div>
                             </div>
                         @endforeach
@@ -209,7 +208,7 @@
                         @foreach($pcKM as $item)
                             <div class = "col-md-3 mb-4">
                                 <div class = "card h-100">
-                                    <a href = "{{route("chi-tiet-san-pham")}}">
+                                    <a href = "{{route('chi-tiet-san-pham',['id' => $item->MaSP])}}">
                                         <img class = "card-img-top" src = "{{asset('asset/img-product/'.$item->AnhSP)}}" alt = "{{ $item->TenSP }}">
                                     </a>
                                     <div class = "card-body">
@@ -219,7 +218,6 @@
                                             Thêm vào giỏ
                                         </button>
                                     </div>
-
                                 </div>
                             </div>
                         @endforeach

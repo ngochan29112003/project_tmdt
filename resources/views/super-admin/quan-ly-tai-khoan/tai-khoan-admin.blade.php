@@ -19,31 +19,19 @@
             <div class = "row g-2 align-items-center">
                 <div class = "col">
                     <h2 class = "page-title">
-                        TRANG QUẢN LÝ TÀI KHOẢN </h2>
+                        TRANG QUẢN LÝ TÀI KHOẢN ADMIN</h2>
                 </div>
             </div>
             <div class = "row mt-2">
-{{--                <div class = "col-9">--}}
-{{--                    <a href = "#" class = "btn btn-primary">--}}
-{{--                        <span>--}}
-{{--                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-plus">--}}
-{{--                              <path stroke="none" d="M0 0h24v24H0z" fill="none" />--}}
-{{--                              <path d="M12 5l0 14" />--}}
-{{--                              <path d="M5 12l14 0" />--}}
-{{--                            </svg>--}}
-{{--                        </span> Thêm mới </a>--}}
-{{--                </div>--}}
-                <div class="col-3">
-                    <div class="form-floating w-100">
-                        <select class="form-select" id="floatingSelect" onchange="filterByRole(this.value)">
-                            <option value="" selected>Hiện tất cả</option>
-                            <option value="1">Tài khoản Super Admin</option>
-                            <option value="2">Tài khoản Admin</option>
-                            <option value="3">Tài khoản Khách hàng</option>
-                        </select>
-                        <label for="floatingSelect">Lựa chọn loại tài khoản hiển thị</label>
-                    </div>
-
+                <div class = "col-9">
+                    <button class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#modalThem">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M12 5l0 14" />
+                            <path d="M5 12l14 0" />
+                        </svg>
+                        Thêm mới
+                    </button>
                 </div>
             </div>
         </div>
@@ -64,7 +52,6 @@
                                     <th>Giới tính</th>
                                     <th>SĐT</th>
                                     <th>Địa chỉ</th>
-                                    <th>Loại tài khoản</th>
                                     <th>Trạng thái</th>
                                     <th class = "text-center">Action</th>
                                 </tr>
@@ -79,7 +66,6 @@
                                         <td>{{ $taiKhoan->GioiTinh == 1 ? 'Nam' : 'Nữ' }}</td>
                                         <td>{{ $taiKhoan->SDT }}</td>
                                         <td>{{ $taiKhoan->DiaChi }}</td>
-                                        <td>{{ $taiKhoan['vaitro']->ten_vai_tro }}</td>
                                         <td>
                                             @if($taiKhoan->TrangThai == 1)
                                                 <span class = "badge bg-danger text-white unlock-badge" data-id = "{{ $taiKhoan->MaTK }}" style = "cursor:pointer;">Đang bị khoá</span>
@@ -156,7 +142,72 @@
         </div>
     </div>
 
+    <div class="modal fade" id="modalThem">
+        <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Thêm sản phẩm</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="Formsanpham" enctype="multipart/form-data">
+                        @csrf
+                        <input type="text" name="VaiTro" value="2" hidden>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="HoTen" class="form-label">Họ và tên</label>
+                                <input type="text" class="form-control" name="HoTen" id="HoTen" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="TenDangNhap" class="form-label">Tên tài khoản</label>
+                                <input type="text" class="form-control" name="TenDangNhap" id="TenDangNhap" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="MatKhau" class="form-label">Mật khẩu</label>
+                                <input type="number" class="form-control" name="MatKhau" id="MatKhau" required>
+                            </div>
 
+                            <div class="col-md-6 mb-3">
+                                <label for="Email" class="form-label">Email</label>
+                                <input type="Email" class="form-control" name="Email" id="Email" required>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="NgaySinh" class="form-label">Ngày sinh</label>
+                                <input type="text" class="form-control" name="NgaySinh" id="NgaySinh" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="GioiTinh" class="form-label">Giới tính</label>
+                                <select class="form-select" name="GioiTinh" id="GioiTinh">
+                                    <option value="Nam">Nam </option>
+                                    <option value="Nữ">Nữ </option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="DanhMucSP" class="form-label">Danh mục sản phẩm</label>
+                                <select class="form-select" name="MaDM" id="DanhMucSP">
+                                    <option value="" disabled selected>Chọn danh mục</option>
+{{--                                    @foreach ($list_danh_muc as $item)--}}
+{{--                                        <option value="{{ $item->MaDM}}">{{ $item->TenDM}} </option>--}}
+{{--                                    @endforeach--}}
+                                </select>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="TrangThaiSP" class="form-label">Trạng thái sản phẩm</label>
+                                <select class="form-select" name="TrangThaiSP" id="TrangThaiSP">
+                                    <option value="Ẩn">Ẩn</option>
+                                    <option value="Hiện">Hiện</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary">Thêm</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('scripts')
     <script>
@@ -170,41 +221,6 @@
 
         }
       });
-    </script>
-
-    <script>
-      function filterByRole(role) {
-        $.ajax({
-          url: "{{ route('super-admin.filter-accounts') }}", // Đường dẫn đến route xử lý
-          type: "GET",
-          data: { role: role }, // Truyền giá trị VaiTro
-          success: function(response) {
-            // Cập nhật lại bảng tài khoản
-            var tbody = $('#tableTaiKhoanKhachHang tbody');
-            tbody.empty(); // Xóa tất cả các dòng cũ
-            $.each(response.data, function(index, taiKhoan) {
-              var gioiTinh = taiKhoan.GioiTinh == 1 ? 'Nam' : 'Nữ';
-              var trangThai = taiKhoan.TrangThai == 1 ? '<span class="badge bg-danger text-white">Đang bị khoá</span>' : '<span class="badge bg-success text-white">Hoạt động</span>';
-              tbody.append(`
-                        <tr>
-                            <td>${index + 1}</td>
-                            <td>${taiKhoan.HoTen}</td>
-                            <td>${taiKhoan.NgaySinh}</td>
-                            <td>${gioiTinh}</td>
-                            <td>${taiKhoan.SDT}</td>
-                            <td>${taiKhoan.DiaChi}</td>
-                            <td>${taiKhoan.vaitro.ten_vai_tro}</td>
-                            <td>${trangThai}</td>
-                            <td class="text-center"></td>
-                        </tr>
-                    `);
-            });
-          },
-          error: function(xhr, status, error) {
-            console.error(error);
-          }
-        });
-      }
     </script>
     <script>
 
