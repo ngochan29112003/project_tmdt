@@ -339,66 +339,72 @@
             });
         });
 
-
-
-
-
+        //Nhấn nút thanh toán
         $('#confirmPaymentButton').on('click', function () {
-    // Lấy các giá trị từ giao diện
-    const tenKH = $('#name-phone').text().split(' - ')[0];
-    const sdt = $('#name-phone').text().split(' - ')[1];
-    const diaChiGiaoHang = $('#address').text();
-    const tongTien = $('#tongthanhtoan').text().replace('₫', '').replace(/\./g, '');
-    const ghiChu = $('#note').val();
-    const maPTTT = $('input[name="MaPTTT"]:checked').val();
-    const maVC = $('input[name="MaVC"]:checked').val();
-    const maKM = $('#khuyenmai').val();
-    const maKMVC = $('#khuyenmaivc').val();
+            // Lấy các giá trị từ giao diện
+            const tenKH = $('#name-phone').text().split(' - ')[0];
+            const sdt = $('#name-phone').text().split(' - ')[1];
+            const diaChiGiaoHang = $('#address').text();
+            const tienHang = $('#tongtienhang').text().replace('₫', '').replace(/\./g, '');
+            const tienVC = $('#tongtienvc').text().replace('₫', '').replace(/\./g, '');
+            const giamTienHang = $('#giamtienhang').text().replace('₫', '').replace(/\./g, '');
+            const giamTienVC = $('#giamtienvc').text().replace('₫', '').replace(/\./g, '');
+            const tongTien = $('#tongthanhtoan').text().replace('₫', '').replace(/\./g, '');
+            const ghiChu = $('#note').val();
+            const maPTTT = $('input[name="MaPTTT"]:checked').val();
+            const maVC = $('input[name="MaVC"]:checked').val();
+            const maKM = $('#khuyenmai').val();
+            const maKMVC = $('#khuyenmaivc').val();
 
-    // Gửi yêu cầu AJAX tới server
-    $.ajax({
-        url: "{{ route('thanh-toan') }}",
-        type: 'POST',
-        data: {
-            TenKH: tenKH,
-            SDT: sdt,
-            DiaChiGiaoHang: diaChiGiaoHang,
-            TongTien: tongTien,
-            GhiChu: ghiChu,
-            MaPTTT: maPTTT,
-            MaVC: maVC,
-            MaKM: maKM,
-            MaKMVC: maKMVC,
-        },
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        dataType: 'json',
-            success: function (response) {
-                if (response.success) {
-                    Swal.fire({
-                        title: 'Đặt hàng thành công!',
-                        text: response.message,
-                        icon: 'success',
-                        timer: 2000, // Hiển thị alert trong 5 giây
-                        showConfirmButton: false
-                    });
+            // Gửi yêu cầu AJAX tới server
+            $.ajax({
+                url: "{{ route('thanh-toan') }}",
+                type: 'POST',
+                data: {
+                    TenKH: tenKH,
+                    SDT: sdt,
+                    DiaChiGiaoHang: diaChiGiaoHang,
+                    TienHang:tienHang,
+                    TienVC: tienVC,
+                    GiamTienHang:giamTienHang,
+                    GiamTienVC:giamTienVC,
+                    TongTien: tongTien,
+                    GhiChu: ghiChu,
+                    MaPTTT: maPTTT,
+                    MaVC: maVC,
+                    MaKM: maKM,
+                    MaKMVC: maKMVC,
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                dataType: 'json',
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire({
+                                title: 'Đặt hàng thành công!',
+                                text: response.message,
+                                icon: 'success',
+                                timer: 2000, // Hiển thị alert trong 5 giây
+                                showConfirmButton: false
+                            });
 
-                    // Sử dụng setTimeout để đợi 5 giây (5000 ms) trước khi chuyển hướng
-                    setTimeout(function() {
-                        window.location.href = "{{ route('tra-cuu-don-hang') }}";
-                    }, 2000);
-                } else {
-                    alert(response.message);
+                            // Sử dụng setTimeout để đợi 5 giây (5000 ms) trước khi chuyển hướng
+                            setTimeout(function() {
+                                window.location.href = "{{ route('tra-cuu-don-hang') }}";
+                            }, 2000);
+                        } else {
+                            alert(response.message);
+                        }
+                },
+                error: function (error) {
+                    alert('Có lỗi xảy ra, vui lòng thử lại.');
+                    console.error('Error response:', error);
+                    console.log('Error response text:', error.responseText);
                 }
-        },
-        error: function (error) {
-            alert('Có lỗi xảy ra, vui lòng thử lại.');
-            console.error('Error response:', error);
-            console.log('Error response text:', error.responseText);
-        }
-    });
-});
+            });
+        });
+
 
         {{--function dathang(buttonElement) {--}}
         {{--    if (loggedIn) {--}}
