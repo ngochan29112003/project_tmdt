@@ -23,20 +23,46 @@ class BinhLuanModel extends Model
     ];
     public $timestamps = false;
 
-    public function getBinhLuan($id)
-    {
-        return DB::table('binhluan')
-            ->join('taikhoan', 'binhluan.MaTK', '=', 'taikhoan.MaTK')
-            ->join('anhbinhluan', 'binhluan.MaBL', '=', 'anhbinhluan.MaBL')
-            ->where('MaSP','=' ,$id)
-            ->select('binhluan.*', 'taikhoan.HoTen','anhbinhluan.TenAnhBL')
-            ->get();
-    }
+//    public function getBinhLuan()
+//    {
+//        $anhBL = DB::table('anhbinhluan')
+//            ->join('binhluan', 'binhluan.MaBL', '=', 'anhbinhluan.MaBL')
+//            ->orderBy('binhluan.NgayTaoBL', 'DESC') // Đổi từ DESC sang ASC
+//            ->select('anhbinhluan.TenAnhBL')
+//            ->get();
+//
+//        $binhLuan = DB::table('binhluan')
+//            ->join('taikhoan', 'taikhoan.MaTK', '=', 'binhluan.MaTK')
+//            ->orderBy('NgayTaoBL', 'DESC') // Đổi từ DESC sang ASC
+//            ->get();
+//
+//        // Trả về cả hai kết quả trong một mảng
+//        return [
+//            'anhbinhluan' => $anhBL,
+//            'binhluan' => $binhLuan
+//        ];
+//    }
 
-    public function getAnhBL()
+    public function getBinhLuan()
     {
-        return DB::table('binhluan')
-        ->join('anhbinhluan', 'binhluan.MaBL', '=', 'anhbinhluan.MaBL')->get();
+        $binhLuan = DB::table('binhluan')
+            ->join('taikhoan', 'taikhoan.MaTK', '=', 'binhluan.MaTK')
+            ->orderBy('NgayTaoBL', 'DESC') // Đổi từ DESC sang ASC
+            ->get();
+
+        // Lấy ảnh bình luận cho từng bình luận
+        $binhLuanWithImages = $binhLuan->map(function ($binhLuanItem) {
+            $anhBL = DB::table('anhbinhluan')
+                ->where('MaBL', $binhLuanItem->MaBL)
+                ->get(); // Lấy ảnh cho mỗi bình luận cụ thể
+            $binhLuanItem->anhbinhluan = $anhBL; // Gán ảnh vào bình luận
+            return $binhLuanItem;
+        });
+
+        // Trả về kết quả đã gắn ảnh vào bình luận
+        return [
+            'binhluan' => $binhLuanWithImages
+        ];
     }
 
 

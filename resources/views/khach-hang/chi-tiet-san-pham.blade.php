@@ -223,30 +223,52 @@
                     <!-- Hiển thị bình luận -->
                     @if(count($list_bl) > 0  )
                         <div class="comments-list">
-                            @foreach($list_bl->sortByDesc('NgayTaoBL') as $bl)
-                                <div class="comment-item border-bottom mb-3 pb-2">
-                                    <div class="d-flex justify-content-between align-items-start">
-                                        <div>
-                                            <strong>{{ $bl->HoTen }}</strong> <small class="text-muted">{{ $bl->NgayTaoBL }}</small>
-                                            <br>
-                                            <span class="text-warning">{{ str_repeat('★', $bl->DanhGia) }}</span>
-                                        </div>
+                            @foreach($list_bl['binhluan'] as $item) <!-- Lặp qua Collection binhluan -->
+                            <div class="comment-item border-bottom mb-3 pb-2">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <strong>{{ $item->HoTen }}</strong> <small class="text-muted">{{ $item->NgayTaoBL }}</small>
+                                        <br>
+                                        <span class="text-warning">{{ str_repeat('★', $item->DanhGia) }}</span>
                                     </div>
-                                    <p class="mt-2">{{ $bl->NoiDungDG }}</p>
-
-                                    @if($bl->TenAnhBL)
-                                        @php
-                                            $images = explode(',', $bl->TenAnhBL);
-                                        @endphp
-                                        <div class="mt-2 d-flex flex-wrap flexbox">
-                                            @foreach($images as $image)
-                                                <img src="{{ asset('asset/img-binh-luan/' . trim($image)) }}" alt="Comment Image" class="img-thumbnail me-2" style="max-width: 150px; max-height: 150px;">
-                                            @endforeach
-                                        </div>
-                                    @endif
                                 </div>
+                                <p class="mt-2">{{ $item->NoiDungDG }}</p>
+
+                                <!-- Hiển thị ảnh cho bình luận này -->
+                                <div class="row g-2 comment-img">
+                                    @foreach($item->anhbinhluan as $anh) <!-- Lặp qua ảnh của mỗi bình luận -->
+                                    <div class="col-4 col-md-3 col-lg-2">
+                                        <img src="{{ asset('asset/img-binh-luan/'.$anh->TenAnhBL) }}" alt="Ảnh bình luận" class="img-fluid rounded-3 border" style="height: 150px; object-fit: cover;">
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
                             @endforeach
                         </div>
+
+                        {{--                        <div class="comments-list">--}}
+{{--                            @foreach($list_bl['binhluan'] as $item) <!-- Lặp qua Collection binhluan -->--}}
+{{--                            <div class="comment-item border-bottom mb-3 pb-2">--}}
+{{--                                <div class="d-flex justify-content-between align-items-start">--}}
+{{--                                    <div>--}}
+{{--                                        <strong>{{ $item->HoTen }}</strong> <small class="text-muted">{{ $item->NgayTaoBL }}</small>--}}
+{{--                                        <br>--}}
+{{--                                        <span class="text-warning">{{ str_repeat('★', $item->DanhGia) }}</span>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <p class="mt-2">{{ $item->NoiDungDG }}</p>--}}
+
+{{--                                <!-- Thêm phần hiển thị ảnh bình luận -->--}}
+{{--                                <div class="row g-2 comment-img">--}}
+{{--                                    @foreach($list_bl['anhbinhluan'] as $anh)--}}
+{{--                                        <div class="col-4 col-md-3 col-lg-2">--}}
+{{--                                            <img src="{{ asset('asset/img-binh-luan/'.$anh->TenAnhBL) }}" alt="Ảnh bình luận" class="img-fluid rounded-3 border" style="height: 150px; object-fit: cover;">--}}
+{{--                                        </div>--}}
+{{--                                    @endforeach--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            @endforeach--}}
+{{--                        </div>--}}
                     @else
                         <p>Chưa có bình luận nào cho sản phẩm này.</p>
                     @endif
@@ -406,22 +428,73 @@
         });
 
 
+        // const fileArray = [];
+        // const input = document.getElementById('file');
+        //
+        // input.addEventListener('change', function (event) {
+        //     const fileList = document.getElementById('fileList');
+        //
+        //     for (let i = 0; i < input.files.length; i++) {
+        //         fileArray.push(input.files[i]);
+        //     }
+        //
+        //     updateFileList();
+        // });
+        //
+        // function updateFileList() {
+        //     const dataTransfer = new DataTransfer();
+        //     fileArray.forEach(file => dataTransfer.items.add(file));
+        //     input.files = dataTransfer.files;
+        //
+        //     const fileList = document.getElementById('fileList');
+        //     fileList.innerHTML = '';
+        //     fileArray.forEach((file, index) => {
+        //         const li = document.createElement('li');
+        //         li.className =
+        //             'mb-3 d-flex justify-content-between align-items-center text-truncate file-list-item';
+        //         let displayName = file.name;
+        //         const extension = displayName.split('.').pop();
+        //         const baseName = displayName.substring(0, displayName.lastIndexOf('.'));
+        //
+        //         if (baseName.length > 30) {
+        //             displayName = baseName.substring(0, 25) + '...' + '.' + extension;
+        //         } else {
+        //             displayName = baseName + '.' + extension;
+        //         }
+        //
+        //         li.textContent = displayName + ' ';
+        //
+        //         const removeBtn = document.createElement('button');
+        //         removeBtn.textContent = 'Remove';
+        //         removeBtn.className = 'text-right btn btn-danger btn-sm ms-2';
+        //         removeBtn.onclick = function () {
+        //             fileArray.splice(index, 1);
+        //             updateFileList();
+        //         };
+        //
+        //         li.appendChild(removeBtn);
+        //         fileList.appendChild(li);
+        //     });
+        // }
+
+
         const fileArray = [];
         const input = document.getElementById('file');
 
         input.addEventListener('change', function () {
             const fileList = document.getElementById('fileList');
-            const allowedExtensions = ['jpg', 'jpeg', 'png'];
-            fileArray.length = 0; // Clear the array
 
+            // Duyệt qua các tệp đã chọn
             for (let i = 0; i < input.files.length; i++) {
                 const file = input.files[i];
                 const fileExtension = file.name.split('.').pop().toLowerCase();
 
-                if (!allowedExtensions.includes(fileExtension)) {
-                    toastr.error("Chỉ được tải lên các file có định dạng: jpg, jpeg, png", "Lỗi");
-                    continue; // Skip invalid file
+                // Kiểm tra định dạng tệp
+                if (!['jpg', 'jpeg', 'png'].includes(fileExtension)) {
+                    toastr.error('Chỉ được tải lên các file có định dạng: jpg, jpeg, png', "Error");
+                    continue; // Bỏ qua tệp không hợp lệ
                 }
+
                 fileArray.push(file);
             }
 
@@ -438,10 +511,10 @@
             fileArray.forEach((file, index) => {
                 const li = document.createElement('li');
                 li.className = 'mb-3 d-flex justify-content-between align-items-center text-truncate file-list-item';
-
                 let displayName = file.name;
                 const extension = displayName.split('.').pop();
                 const baseName = displayName.substring(0, displayName.lastIndexOf('.'));
+
                 if (baseName.length > 30) {
                     displayName = baseName.substring(0, 25) + '...' + '.' + extension;
                 } else {
@@ -451,8 +524,8 @@
                 li.textContent = displayName + ' ';
 
                 const removeBtn = document.createElement('button');
-                removeBtn.textContent = 'Xóa';
-                removeBtn.className = 'btn btn-danger btn-sm ms-2';
+                removeBtn.textContent = 'Remove';
+                removeBtn.className = 'text-right btn btn-danger btn-sm ms-2';
                 removeBtn.onclick = function () {
                     fileArray.splice(index, 1);
                     updateFileList();
@@ -466,12 +539,7 @@
         $('#formGuiBL').submit(function (e) {
             e.preventDefault();
 
-            const formData = new FormData(this);
-            fileArray.forEach(file => formData.append('files[]', file));
-
-            // Add the current date to NgayTaoBL
-            const currentDate = new Date().toISOString().split('T')[0];
-            formData.append('NgayTaoBL', currentDate);
+            var formData = new FormData(this);
 
             $.ajax({
                 url: '{{ route('them-binh-luan') }}',
@@ -482,24 +550,31 @@
                 success: function (response) {
                     if (response.success) {
                         $('#modal').modal('hide');
-                        toastr.success(response.message, "Thành công");
+                        toastr.success(response.message, "Successful");
                         setTimeout(function () {
                             location.reload();
                         }, 500);
                     } else {
-                        toastr.error(response.message, "Lỗi");
+                        toastr.error(response.message, "Error");
                     }
                 },
                 error: function (xhr) {
-                    const response = xhr.responseJSON;
-                    if (xhr.status === 400) {
-                        toastr.error(response.message, "Lỗi");
-                    } else {
-                        toastr.error("Có lỗi xảy ra", "Lỗi");
+                    if (xhr.status === 422) { // Xử lý lỗi xác thực
+                        var errors = xhr.responseJSON.errors;
+                        for (var field in errors) {
+                            if (errors.hasOwnProperty(field)) {
+                                toastr.error(errors[field][0], "Error");
+                            }
+                        }
+                    } else if (xhr.status === 400) { // Lỗi khác với mã 400
+                        toastr.error(xhr.responseJSON.message, "Error");
+                    } else { // Các lỗi khác
+                        toastr.error("An error occurred", "Error");
                     }
                 }
             });
         });
+
 
 
     </script>

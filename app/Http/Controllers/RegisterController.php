@@ -82,6 +82,16 @@ class RegisterController extends Controller
             ], 400);
         }
 
+        // Kiểm tra email đã có trong hệ thống chưa
+        $existingEmail = AuthModel::where('Email', $request->Email)->first();
+        if ($existingEmail) {
+            return response()->json([
+                'success' => false,
+                'status' => 400,
+                'message' => 'Email đã tồn tại, vui lòng chọn email khác',
+            ], 400);
+        }
+
         // Băm password
         $hashedPassword = Hash::make($request->MatKhau);
 
