@@ -85,6 +85,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
             Route::get('/danh-sach',[QuanLyDonHangController::class,'getView'])->name('danh-sach-don-hang');
             Route::post('/updateTT/{id}', [QuanLyDonHangController::class, 'updateTTDH'])->name('update-trang-thai-don-hang');
             Route::post('/loc-trang-thai-don-hang', [QuanLyDonHangController::class, 'filterDonHang'])->name('loc-trang-thai-don-hang');
+            Route::get('/in-don-hang/{id}',[QuanLyDonHangController::class,'InDH'])->name('in-don-hang');
         });
 
         //Trạng thái đơn hàng

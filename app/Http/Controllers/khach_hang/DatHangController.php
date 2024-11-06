@@ -25,6 +25,7 @@ class DatHangController extends Controller
 
         $dathang = new DatHang();
         $list_don_hang = $dathang -> getdonhang();
+        
         // $list_san_pham = $dathang -> getsanpham();
 //        $list_san_pham = $dathang -> getsanpham();
         $list_pttt = $dathang -> getpttt();
@@ -38,6 +39,7 @@ class DatHangController extends Controller
 
         // Group sản phẩm theo MaSP
         $grouped_products = $list_chitiet_giohang->groupBy('MaSP');
+        // dd($grouped_products);
 
         // Tạo mảng để lưu dữ liệu cho view
         // Tạo mảng để lưu dữ liệu cho view
@@ -77,6 +79,10 @@ class DatHangController extends Controller
         'SDT' => 'required|string|max:15',
         'DiaChiGiaoHang' => 'required|string|max:255',
         'TongTien' => 'required|numeric',
+        'TienHang' => 'required|numeric',
+        'TienVC' => 'required|numeric',
+        'GiamTienHang' => 'required|numeric',
+        'GiamTienVC' => 'required|numeric',
         'MaPTTT' => 'nullable|string',
         'MaVC' => 'nullable|string',
         'MaKM' => 'nullable|string',
@@ -95,6 +101,10 @@ class DatHangController extends Controller
         $donHang->TenKH = $request->input('TenKH');
         $donHang->SDT = $request->input('SDT');
         $donHang->GhiChu = $request->input('GhiChu');
+        $donHang->TienHang = $request->input('TienHang');
+        $donHang->TienVC = $request->input('TienVC');
+        $donHang->GiamTienHang = $request->input('GiamTienHang');
+        $donHang->GiamTienVC = $request->input('GiamTienVC');
         $donHang->TongTien = $request->input('TongTien');
         $donHang->DiaChiGiaoHang = $request->input('DiaChiGiaoHang');
         $donHang->MaPTTT = $request->input('MaPTTT');
@@ -125,6 +135,42 @@ class DatHangController extends Controller
                 ->decrement('SoLuongTonKho', $item->SLSanPham);
         }
 
+        // Cập nhật số lượng mã khuyến mãi và ẩn nếu số lượng về 0
+        if ($donHang->MaKM) {
+            DB::table('khuyenmai')
+                ->where('MaKM', $donHang->MaKM)
+                ->decrement('SoLuongMa');
+
+            // Kiểm tra nếu số lượng mã khuyến mãi về 0
+            $soLuongMaKM = DB::table('khuyenmai')
+                ->where('MaKM', $donHang->MaKM)
+                ->value('SoLuongMa');
+
+            if ($soLuongMaKM <= 0) {
+                DB::table('khuyenmai')
+                    ->where('MaKM', $donHang->MaKM)
+                    ->update(['TrangThaiMa' => 'ẩn']); // Giả sử bạn có cột 'TrangThaiMa'
+            }
+        }
+
+        // Cập nhật số lượng mã vận chuyển và ẩn nếu số lượng về 0
+        if ($donHang->MaKMVC) {
+            DB::table('khuyenmaivc')
+                ->where('MaKMVC', $donHang->MaKMVC)
+                ->decrement('SoLuongMa');
+
+            // Kiểm tra nếu số lượng mã vận chuyển về 0
+            $soLuongMaVC = DB::table('khuyenmaivc')
+                ->where('MaKMVC', $donHang->MaKMVC)
+                ->value('SoLuongMa');
+
+            if ($soLuongMaVC <= 0) {
+                DB::table('khuyenmaivc')
+                    ->where('MaKMVC', $donHang->MaKMVC)
+                    ->update(['TrangThaiMa' => 'ẩn']); // Giả sử bạn có cột 'TrangThaiMa'
+            }
+        }
+        
         // Bước 5: Xóa giỏ hàng
         DB::table('chitietgiohang')->delete();
 
@@ -136,10 +182,10 @@ class DatHangController extends Controller
     } catch (\Exception $e) {
         // Rollback giao dịch nếu có lỗi xảy ra
         DB::rollBack();
-
+    
         // Ghi lại chi tiết lỗi vào log
         Log::error('Error in thanhToan: ' . $e->getMessage());
-
+    
         // Xử lý lỗi
         return response()->json(['success' => false, 'message' => 'Có lỗi xảy ra, vui lòng thử lại.', 'error' => $e->getMessage()], 500);
     }

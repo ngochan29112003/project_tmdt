@@ -71,16 +71,19 @@
                 <div id="productCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="{{ asset('asset/img-product/pc_case_xigmatek_-_26_e36ac54740974ec88f65ca6eedfd10a2_1024x1024.webp') }}" class="d-block w-100 rounded" alt="Image 1">
+                            <img src="{{ asset('asset/img-product/' . $list_sanpham->AnhSP) }}" class="d-block w-100 rounded" alt="Ảnh chủ đề">
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('asset/img-product/pc_case_xigmatek_-_24_936cc341c90748bfa4fa7363b114291b_1024x1024.webp') }}" class="d-block w-100 rounded" alt="Image 2">
+                            <img src="{{ asset('asset/img-product/' . $list_sanpham->AnhCT1) }}" class="d-block w-100 rounded" alt="Ảnh chi tiết 1">
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('asset/img-product/pc_case_xigmatek_-_23_c6832c0dded9424e83cd361ffce6c901_1024x1024.webp') }}" class="d-block w-100 rounded" alt="Image 3">
+                            <img src="{{ asset('asset/img-product/' . $list_sanpham->AnhCT2) }}" class="d-block w-100 rounded" alt="Ảnh chi tiết 2">
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('asset/img-product/pc_case_xigmatek_-_22_e4c822262b3d4946a6f427d02adebf8b_1024x1024.webp') }}" class="d-block w-100 rounded" alt="Image 4">
+                            <img src="{{ asset('asset/img-product/' . $list_sanpham->AnhCT3) }}" class="d-block w-100 rounded" alt="Ảnh chi tiết 3">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('asset/img-product/' . $list_sanpham->AnhCT4) }}" class="d-block w-100 rounded" alt="Ảnh chi tiết 4">
                         </div>
                     </div>
                     <button class="carousel-control-prev btn btn-dark rounded-circle shadow-sm" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
@@ -95,47 +98,49 @@
 
                 <!-- Thumbnails -->
                 <div class="d-flex justify-content-center gap-2 flex-wrap">
-                    <img src="{{ asset('asset/img-product/pc_case_xigmatek_-_26_e36ac54740974ec88f65ca6eedfd10a2_1024x1024.webp') }}" class="img-thumbnail border-0" alt="Thumbnail 1" style="width: 80px; cursor: pointer;" onclick="changeImage(0)">
-                    <img src="{{ asset('asset/img-product/pc_case_xigmatek_-_24_936cc341c90748bfa4fa7363b114291b_1024x1024.webp') }}" class="img-thumbnail border-0" alt="Thumbnail 2" style="width: 80px; cursor: pointer;" onclick="changeImage(1)">
-                    <img src="{{ asset('asset/img-product/pc_case_xigmatek_-_23_c6832c0dded9424e83cd361ffce6c901_1024x1024.webp') }}" class="img-thumbnail border-0" alt="Thumbnail 3" style="width: 80px; cursor: pointer;" onclick="changeImage(2)">
-                    <img src="{{ asset('asset/img-product/pc_case_xigmatek_-_22_e4c822262b3d4946a6f427d02adebf8b_1024x1024.webp') }}" class="img-thumbnail border-0" alt="Thumbnail 4" style="width: 80px; cursor: pointer;" onclick="changeImage(3)">
+                    <img src="{{ asset('asset/img-product/' . $list_sanpham->AnhCT1) }}" class="img-thumbnail border-0" alt="Ảnh chi tiết 1" style="width: 80px; cursor: pointer;" onclick="changeImage(0)">
+                    <img src="{{ asset('asset/img-product/' . $list_sanpham->AnhCT2) }}" class="img-thumbnail border-0" alt="Ảnh chi tiết 2" style="width: 80px; cursor: pointer;" onclick="changeImage(1)">
+                    <img src="{{ asset('asset/img-product/' . $list_sanpham->AnhCT3) }}" class="img-thumbnail border-0" alt="Ảnh chi tiết 3" style="width: 80px; cursor: pointer;" onclick="changeImage(2)">
+                    <img src="{{ asset('asset/img-product/' . $list_sanpham->AnhCT4) }}" class="img-thumbnail border-0" alt="Ảnh chi tiết 4" style="width: 80px; cursor: pointer;" onclick="changeImage(3)">
                 </div>
             </div>
 
             <!-- Product Details -->
-            <div class="col-md-7">
-                <h1 class="fw-bold text-danger">PC GVN Intel i5-12400F / VGA RX 6500XT (H610)</h1>
-                <p class="text-muted">2 đánh giá | <a href="#comments" class="text-danger">Xem đánh giá</a></p>
-                <p class="text-danger fs-3 fw-bold">11.990.000₫ <span class="badge bg-danger ms-2">-8%</span></p>
+             @if($list_sanpham)
+                <div class="col-md-7">
+                    <h1 class="fw-bold text-danger">{{$list_sanpham->TenSP}}</h1>
+                    <p class="text-muted">2 đánh giá | <a href="#comments" class="text-danger">Xem đánh giá</a></p>
+                    <p class="text-danger fs-3 fw-bold">{{number_format($list_sanpham->GiaBan, 0, ',', '.') }}₫ <span class="badge bg-danger ms-2">-8%</span></p>
 
-                <div class="bg-light p-3 mb-3 rounded shadow-sm">
-                    <p class="mb-1"><strong>Quà tặng khuyến mãi:</strong></p>
-                    <ul class="ps-3 mb-0">
-                        <li>Giảm 100k khi mua kèm PC + màn hình</li>
+                    <div class="bg-light p-3 mb-3 rounded shadow-sm">
+                        <p class="mb-1"><strong>Quà tặng khuyến mãi:</strong></p>
+                        <ul class="ps-3 mb-0">
+                            <li>Giảm 100k khi mua kèm PC + màn hình</li>
+                        </ul>
+                    </div>
+
+                    <button class="btn btn-danger mb-3" data-masp = "{{ $list_sanpham->MaSP }}" onclick = "addToCart(this);">Thêm vào giỏ hàng</button>
+
+                    <!-- Product Specifications -->
+                    <div class="bg-light p-3 rounded mb-4 shadow-sm">
+                        <h5 class="fw-bold">Thông tin sản phẩm</h5>
+                        <ul class="list-unstyled">
+                            <li><strong>CPU:</strong>{{$list_ctsp->CPU}}</li>
+                            <li><strong>RAM:</strong> {{$list_ctsp->Ram}}</li>
+                            <li><strong>Storage:</strong> {{$list_ctsp->Storage}}</li>
+                            <li><strong>Graphics:</strong> {{$list_ctsp->Graphics}}</li>
+                        </ul>
+                    </div>
+
+                    <p><strong>Ưu đãi đặc biệt:</strong></p>
+                    <ul class="ps-3">
+                        <li>Bảo hành <a>{{$list_sanpham->ThoiGianBaoHanh}}</a></li>
+                        <li>Hỗ trợ lắp đặt miễn phí.</li>
+                        <li>Khuyến mãi giảm giá kèm sản phẩm.</li>
                     </ul>
                 </div>
-
-                <button class="btn btn-danger mb-3">Mua Ngay</button>
-                <button class="btn btn-outline-danger mb-3">Trả Góp 0%</button>
-
-                <!-- Product Specifications -->
-                <div class="bg-light p-3 rounded mb-4 shadow-sm">
-                    <h5 class="fw-bold">Thông tin sản phẩm</h5>
-                    <ul class="list-unstyled">
-                        <li><strong>CPU:</strong> Intel Core i5</li>
-                        <li><strong>RAM:</strong> 16GB</li>
-                        <li><strong>Storage:</strong> 512GB SSD</li>
-                        <li><strong>Graphics:</strong> RX 6500XT</li>
-                    </ul>
-                </div>
-
-                <p><strong>Ưu đãi đặc biệt:</strong></p>
-                <ul class="ps-3">
-                    <li>Bảo hành 36 tháng.</li>
-                    <li>Hỗ trợ lắp đặt miễn phí.</li>
-                    <li>Khuyến mãi giảm giá kèm sản phẩm.</li>
-                </ul>
-            </div>
+             @endif
+            
         </div>
 
         <div class="row mt-4">
@@ -146,15 +151,15 @@
                     <div class="row">
                         <div class="col-md-6">
                             <ul class="list-unstyled">
-                                <li><strong>CPU:</strong> Intel Core i5-12400F</li>
-                                <li><strong>RAM:</strong> 16GB DDR4</li>
-                                <li><strong>Storage:</strong> 512GB SSD</li>
-                                <li><strong>Graphics:</strong> RX 6500XT</li>
+                                <li><strong>CPU:</strong>{{$list_ctsp->CPU}}</li>
+                                <li><strong>RAM:</strong> {{$list_ctsp->Ram}}</li>
+                                <li><strong>Storage:</strong> {{$list_ctsp->Storage}}</li>
+                                <li><strong>Graphics:</strong> {{$list_ctsp->Graphics}}</li>
                             </ul>
                         </div>
                         <div class="col-md-6">
                             <ul class="list-unstyled">
-                                <li><strong>Chế độ bảo hành:</strong> 36 tháng</li>
+                                <li><strong>Chế độ bảo hành:</strong> {{$list_sanpham->ThoiGianBaoHanh}}</li>
                                 <li><strong>Hỗ trợ lắp đặt:</strong> Miễn phí</li>
                                 <li><strong>Khuyến mãi:</strong> Giảm giá kèm sản phẩm</li>
                                 <li><strong>Thích hợp cho:</strong> Game thủ và công việc văn phòng</li>
@@ -164,10 +169,7 @@
                     <div class="mt-3">
                         <p><strong>Mô tả sản phẩm:</strong></p>
                         <p>
-                            PC GVN Intel i5-12400F là một trong những lựa chọn tối ưu cho người dùng yêu thích công nghệ. Với cấu hình mạnh mẽ, sản phẩm này không chỉ phù hợp cho game thủ mà còn đáp ứng tốt cho nhu cầu làm việc văn phòng, chỉnh sửa video, và nhiều tác vụ đòi hỏi hiệu suất cao khác.
-                        </p>
-                        <p>
-                            Thiết kế hiện đại và tản nhiệt hiệu quả giúp máy luôn vận hành mượt mà, mang đến trải nghiệm tuyệt vời cho người dùng. Bạn sẽ không phải lo lắng về việc máy bị nóng khi hoạt động trong thời gian dài.
+                            {{$list_ctsp->MoTaSP}}
                         </p>
                     </div>
                 </div>
@@ -501,6 +503,57 @@
             });
         });
 
+        ///thêm giỏ hàng
+        function addToCart(buttonElement) {
+        var loggedIn = @json(session()->has('MaTK')); // Kiểm tra đăng nhập từ session PHP
+
+        if (loggedIn) {
+          var productId = buttonElement.getAttribute('data-masp');
+          $.ajax({
+            url: '{{ route('them-gio-hang') }}',
+            type: 'POST',
+            data: {
+              MaSP: productId,
+              _token: '{{ csrf_token() }}' // CSRF token cho bảo mật
+            },
+            success: function(response) {
+              Swal.fire({
+                title: 'Thành công!',
+                text: response.message,
+                icon: 'success',
+                timer: 3000,
+                showConfirmButton: false
+              });
+              setTimeout(function () {
+                location.reload(); // Chuyển hướng người dùng
+              }, 1000);
+
+            },
+            error: function(error) {
+              Swal.fire({
+                title: 'Lỗi!',
+                text: 'Không thể thêm sản phẩm vào giỏ hàng.',
+                icon: 'error',
+                timer: 3000,
+                showConfirmButton: false
+              });
+            }
+          });
+        } else {
+          Swal.fire({
+            title: 'Yêu cầu đăng nhập',
+            text: 'Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Đăng nhập',
+            cancelButtonText: 'Hủy'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = "{{ route('index.login') }}";
+            }
+          });
+        }
+      }
 
     </script>
 @endsection

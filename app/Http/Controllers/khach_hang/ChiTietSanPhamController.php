@@ -19,8 +19,11 @@ class ChiTietSanPhamController extends Controller
         $list_anh_bl = $model_BL->getAnhBL();
         $list_bl = $model_BL->getBinhLuan($id);
         $list_sp = $model_SP->getChiTietSP($id);
-//        dd($list_bl);
-        return view('khach-hang.chi-tiet-san-pham', compact('list_bl','list_sp','list_anh_bl'));
+        $list_sanpham=$model_SP->getTTSP($id);
+        $list_ctsp=$model_SP->getctsp($id);
+        // dd($list_sanpham);
+        return view('khach-hang.chi-tiet-san-pham', 
+        compact('list_bl','list_sp','list_anh_bl', 'list_sanpham', 'list_ctsp'));
     }
     public function addBinhLuan(Request $request)
     {
