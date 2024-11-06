@@ -25,9 +25,7 @@ class DatHangController extends Controller
 
         $dathang = new DatHang();
         $list_don_hang = $dathang -> getdonhang();
-        
         // $list_san_pham = $dathang -> getsanpham();
-//        $list_san_pham = $dathang -> getsanpham();
         $list_pttt = $dathang -> getpttt();
         $list_dvvc = $dathang -> getdvvc();
         $list_khuyenmai = $dathang -> getkhuyenmai($MaTK);
@@ -106,14 +104,18 @@ class DatHangController extends Controller
         $donHang->GiamTienHang = $request->input('GiamTienHang');
         $donHang->GiamTienVC = $request->input('GiamTienVC');
         $donHang->TongTien = $request->input('TongTien');
+        $donHang->TienHang = $request->input('TienHang');
+        $donHang->TienVC = $request->input('TienVC');
+        $donHang->GiamTienHang = $request->input('GiamTienHang');
+        $donHang->GiamTienVC = $request->input('GiamTienVC');
         $donHang->DiaChiGiaoHang = $request->input('DiaChiGiaoHang');
         $donHang->MaPTTT = $request->input('MaPTTT');
         $donHang->MaTK = $MaTK;
-        $donHang->MaKM = $request->input('MaKM');
-        $donHang->MaKMVC = $request->input('MaKMVC');
+        $donHang->MaKM = $request->input('MaKM') ?? null;
+        $donHang->MaKMVC = $request->input('MaKMVC') ?? null;
         $donHang->MaVC = $request->input('MaVC');
-        $donHang->MaTT = 1; // Mặc định
-        $donHang->NgayTaoDH = Carbon::now(); // Lấy ngày hiện tại
+        $donHang->MaTT = 1; // Mặc định trạng thái
+        $donHang->NgayTaoDH = Carbon::now(); // Ngày tạo đơn hàng
         $donHang->save();
 
         // Bước 2: Lấy MaDH vừa mới tạo
@@ -170,7 +172,6 @@ class DatHangController extends Controller
                     ->update(['TrangThaiMa' => 'ẩn']); // Giả sử bạn có cột 'TrangThaiMa'
             }
         }
-        
         // Bước 5: Xóa giỏ hàng
         DB::table('chitietgiohang')->delete();
 

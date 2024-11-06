@@ -76,7 +76,7 @@ class QuanLyDonHangController extends Controller
                 ->join('taikhoan', 'taikhoan.MaTK', '=', 'donhang.MaTK')
                 ->leftjoin('khuyenmai', 'khuyenmai.MaKM', '=', 'donhang.MaKM')
                 ->leftjoin('khuyenmaivc', 'khuyenmaivc.MaKMVC', '=', 'donhang.MaKMVC')
-                ->join('trangthai', 'trangthai.MaTT', '=', 'donhang.MaTT')
+                ->join('trangthai', 'trangthai.MaTT','=', 'donhang.MaTT')
                 ->where('donhang.MaTT', $trangThaiId)
                 ->select(
                     'donhang.MaDH',
