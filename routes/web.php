@@ -31,6 +31,8 @@ Route::get('/register',[RegisterController::class,'getViewRegister'])->name('ind
 Route::post('/register/add',[RegisterController::class,'addAccount'])->name('add-account');
 Route::get('/login',[LoginController::class,'getViewLogin'])->name('index.login');
 Route::get('/reset-password',[ResetPassWordController::class,'getViewResetPassWord'])->name('get-reset-password');
+Route::post('/send-verification-code', [ResetPassWordController::class, 'sendVerificationCode'])->name('send.verification.code');
+Route::post('/update-password', [ResetPassWordController::class, 'updatePassword'])->name('update.password');
 Route::post('/login',[LoginController::class,'loginAction'])->name('login-action');
 Route::get('/logout', [LoginController::class, 'logoutAction'])->name('logout');
 
