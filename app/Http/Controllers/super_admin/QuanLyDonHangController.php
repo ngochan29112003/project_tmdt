@@ -76,7 +76,7 @@ class QuanLyDonHangController extends Controller
                 ->join('taikhoan', 'taikhoan.MaTK', '=', 'donhang.MaTK')
                 ->leftjoin('khuyenmai', 'khuyenmai.MaKM', '=', 'donhang.MaKM')
                 ->leftjoin('khuyenmaivc', 'khuyenmaivc.MaKMVC', '=', 'donhang.MaKMVC')
-                ->join('trangthai', 'trangthai.MaTT','=', 'donhang.MaTT')
+                ->join('trangthai', 'trangthai.MaTT', '=', 'donhang.MaTT')
                 ->where('donhang.MaTT', $trangThaiId)
                 ->select(
                     'donhang.MaDH',
@@ -170,12 +170,15 @@ class QuanLyDonHangController extends Controller
                 'donvivanchuyen.TenDonViVC'
             )
             ->first();
-    
+
         // Kiểm tra nếu đơn hàng tồn tại
         if (!$donHang) {
             return ['success' => false, 'message' => 'Đơn hàng không tồn tại.'];
         }
     
+
+        // Lấy chi tiết đơn hàng trực tiếp theo MaDH
+        $chitietdonhang = QuanLyCTDH::where('MaDH', $id)->get();
         // Lấy chi tiết đơn hàng trực tiếp theo MaDH
         $chitietdonhang = QuanLyCTDH::where('MaDH', $id)->get();
     
@@ -186,7 +189,10 @@ class QuanLyDonHangController extends Controller
         <head>
             <title>Đơn Hàng</title>
             <style>
+
                 body { font-family: DejaVu Sans; }
+                body { font-family: DejaVu Sans; }
+
                 h3 { text-align: center; }
                 table { width: 100%; border-collapse: collapse; margin-top: 20px; }
                 th, td { border: 1px solid black; padding: 8px; text-align: left; }
@@ -212,6 +218,9 @@ class QuanLyDonHangController extends Controller
         
         foreach ($chitietdonhang as $item) {
             // Lấy thông tin sản phẩm tương ứng với MaSP
+
+            $sanPham = SanPhamModel::where('MaSP', $item->MaSP)->first();
+            $tenSP = $sanPham ? $sanPham->TenSP : 'N/A';
             $sanPham = SanPhamModel::where('MaSP', $item->MaSP)->first();
             $tenSP = $sanPham ? $sanPham->TenSP : 'N/A';
             $html .= "
@@ -227,7 +236,7 @@ class QuanLyDonHangController extends Controller
             </table>
         </body>
         </html>";
-    
+        return $html;
         return $html;
     }
 }

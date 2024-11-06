@@ -339,12 +339,20 @@
             });
         });
 
+
         //Nhấn nút đặt hàng
+
+        //Nhấn nút thanh toán
+
         $('#confirmPaymentButton').on('click', function () {
             // Lấy các giá trị từ giao diện
             const tenKH = $('#name-phone').text().split(' - ')[0];
             const sdt = $('#name-phone').text().split(' - ')[1];
             const diaChiGiaoHang = $('#address').text();
+            const tienHang = $('#tongtienhang').text().replace('₫', '').replace(/\./g, '');
+            const tienVC = $('#tongtienvc').text().replace('₫', '').replace(/\./g, '');
+            const giamTienHang = $('#giamtienhang').text().replace('₫', '').replace(/\./g, '');
+            const giamTienVC = $('#giamtienvc').text().replace('₫', '').replace(/\./g, '');
             const tongTien = $('#tongthanhtoan').text().replace('₫', '').replace(/\./g, '');
             const tongTienHang = $('#tongtienhang').text().replace('₫', '').replace(/\./g, '');
             const tongTienVC = $('#tongtienvc').text().replace('₫', '').replace(/\./g, '');
@@ -364,6 +372,10 @@
                     TenKH: tenKH,
                     SDT: sdt,
                     DiaChiGiaoHang: diaChiGiaoHang,
+                    TienHang:tienHang,
+                    TienVC: tienVC,
+                    GiamTienHang:giamTienHang,
+                    GiamTienVC:giamTienVC,
                     TongTien: tongTien,
                     TienHang:tongTienHang,
                     TienVC: tongTienVC,
@@ -379,12 +391,23 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 dataType: 'json',
-                success: function (response) {
-                    if (response.success) {
-                        window.location.href = '{{route('tra-cuu-don-hang')}}';
-                    } else {
-                        alert(response.message);
-                    }
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire({
+                                title: 'Đặt hàng thành công!',
+                                text: response.message,
+                                icon: 'success',
+                                timer: 2000, // Hiển thị alert trong 5 giây
+                                showConfirmButton: false
+                            });
+
+                            // Sử dụng setTimeout để đợi 5 giây (5000 ms) trước khi chuyển hướng
+                            setTimeout(function() {
+                                window.location.href = "{{ route('tra-cuu-don-hang') }}";
+                            }, 2000);
+                        } else {
+                            alert(response.message);
+                        }
                 },
                 error: function (error) {
                     alert('Có lỗi xảy ra, vui lòng thử lại.');
@@ -393,6 +416,43 @@
                 }
             });
         });
+
+
+        {{--function dathang(buttonElement) {--}}
+        {{--    if (loggedIn) {--}}
+        {{--        var productId = buttonElement.getAttribute('data-masp');--}}
+        {{--        $.ajax({--}}
+        {{--            url: '{{ route('tra-cuu-don-hang') }}',--}}
+        {{--            type: 'POST',--}}
+        {{--            data: {--}}
+        {{--                MaSP: productId,--}}
+        {{--                _token: '{{ csrf_token() }}' // CSRF token cho bảo mật--}}
+        {{--            },--}}
+        {{--            success: function(response) {--}}
+        {{--                Swal.fire({--}}
+        {{--                    title: 'Đặt hàng thành công!',--}}
+        {{--                    text: response.message,--}}
+        {{--                    icon: 'success',--}}
+        {{--                    timer: 3000,--}}
+        {{--                    showConfirmButton: false--}}
+        {{--                });--}}
+        {{--                setTimeout(function () {--}}
+        {{--                    location.reload(); // Chuyển hướng người dùng--}}
+        {{--                }, 1000);--}}
+
+        {{--            },--}}
+        {{--            error: function(error) {--}}
+        {{--                Swal.fire({--}}
+        {{--                    title: 'Lỗi!',--}}
+        {{--                    text: 'Không thể đặt hàng.',--}}
+        {{--                    icon: 'error',--}}
+        {{--                    timer: 3000,--}}
+        {{--                    showConfirmButton: false--}}
+        {{--                });--}}
+        {{--            }--}}
+        {{--        });--}}
+        {{--    }--}}
+        {{--}--}}
     </script>
 
 @endsection

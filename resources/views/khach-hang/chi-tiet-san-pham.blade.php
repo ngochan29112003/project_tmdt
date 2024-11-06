@@ -17,6 +17,7 @@
             transform: translateY(-50%); /* Căn chỉnh giữa theo chiều dọc */
         }
 
+
         /* Hiển thị các nút khi rê chuột vào carousel */
         #productCarousel:hover .carousel-control-prev,
         #productCarousel:hover .carousel-control-next {
@@ -72,6 +73,125 @@
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <img src="{{ asset('asset/img-product/' . $list_sanpham->AnhSP) }}" class="d-block w-100 rounded" alt="Ảnh chủ đề">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('asset/img-product/' . $list_sanpham->AnhCT1) }}" class="d-block w-100 rounded" alt="Ảnh chi tiết 1">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('asset/img-product/' . $list_sanpham->AnhCT2) }}" class="d-block w-100 rounded" alt="Ảnh chi tiết 2">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('asset/img-product/' . $list_sanpham->AnhCT3) }}" class="d-block w-100 rounded" alt="Ảnh chi tiết 3">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('asset/img-product/' . $list_sanpham->AnhCT4) }}" class="d-block w-100 rounded" alt="Ảnh chi tiết 4">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev btn btn-dark rounded-circle shadow-sm" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next btn btn-dark rounded-circle shadow-sm" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+                <!-- Thumbnails -->
+                <div class="d-flex justify-content-center gap-2 flex-wrap">
+                    <img src="{{ asset('asset/img-product/' . $list_sanpham->AnhCT1) }}" class="img-thumbnail border-0" alt="Ảnh chi tiết 1" style="width: 80px; cursor: pointer;" onclick="changeImage(0)">
+                    <img src="{{ asset('asset/img-product/' . $list_sanpham->AnhCT2) }}" class="img-thumbnail border-0" alt="Ảnh chi tiết 2" style="width: 80px; cursor: pointer;" onclick="changeImage(1)">
+                    <img src="{{ asset('asset/img-product/' . $list_sanpham->AnhCT3) }}" class="img-thumbnail border-0" alt="Ảnh chi tiết 3" style="width: 80px; cursor: pointer;" onclick="changeImage(2)">
+                    <img src="{{ asset('asset/img-product/' . $list_sanpham->AnhCT4) }}" class="img-thumbnail border-0" alt="Ảnh chi tiết 4" style="width: 80px; cursor: pointer;" onclick="changeImage(3)">
+                </div>
+            </div>
+
+            <!-- Product Details -->
+             @if($list_sanpham)
+                <div class="col-md-7">
+                    <h1 class="fw-bold text-danger">{{$list_sanpham->TenSP}}</h1>
+                    <p class="text-muted">2 đánh giá | <a href="#comments" class="text-danger">Xem đánh giá</a></p>
+                    <p class="text-danger fs-3 fw-bold">{{number_format($list_sanpham->GiaBan, 0, ',', '.') }}₫ <span class="badge bg-danger ms-2">-8%</span></p>
+
+                    <div class="bg-light p-3 mb-3 rounded shadow-sm">
+                        <p class="mb-1"><strong>Quà tặng khuyến mãi:</strong></p>
+                        <ul class="ps-3 mb-0">
+                            <li>Giảm 100k khi mua kèm PC + màn hình</li>
+                        </ul>
+                    </div>
+
+                    <button class="btn btn-danger mb-3" data-masp = "{{ $list_sanpham->MaSP }}" onclick = "addToCart(this);">Thêm vào giỏ hàng</button>
+
+                    <!-- Product Specifications -->
+                    <div class="bg-light p-3 rounded mb-4 shadow-sm">
+                        <h5 class="fw-bold">Thông tin sản phẩm</h5>
+                        <ul class="list-unstyled">
+                            <li><strong>CPU:</strong>{{$list_ctsp->CPU}}</li>
+                            <li><strong>RAM:</strong> {{$list_ctsp->Ram}}</li>
+                            <li><strong>Storage:</strong> {{$list_ctsp->Storage}}</li>
+                            <li><strong>Graphics:</strong> {{$list_ctsp->Graphics}}</li>
+                        </ul>
+                    </div>
+
+                    <p><strong>Ưu đãi đặc biệt:</strong></p>
+                    <ul class="ps-3">
+                        <li>Bảo hành <a>{{$list_sanpham->ThoiGianBaoHanh}}</a></li>
+                        <li>Hỗ trợ lắp đặt miễn phí.</li>
+                        <li>Khuyến mãi giảm giá kèm sản phẩm.</li>
+                    </ul>
+                </div>
+             @endif
+            
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-8">
+                <div class="bg-light p-4 rounded mb-4 shadow-sm " style="width: 1300px">
+                    <h2 class="fw-bold">Thông tin chi tiết</h2>
+                    <p class="fw-bold">PC GVN Intel i5-12400F</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><strong>CPU:</strong>{{$list_ctsp->CPU}}</li>
+                                <li><strong>RAM:</strong> {{$list_ctsp->Ram}}</li>
+                                <li><strong>Storage:</strong> {{$list_ctsp->Storage}}</li>
+                                <li><strong>Graphics:</strong> {{$list_ctsp->Graphics}}</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><strong>Chế độ bảo hành:</strong> {{$list_sanpham->ThoiGianBaoHanh}}</li>
+                                <li><strong>Hỗ trợ lắp đặt:</strong> Miễn phí</li>
+                                <li><strong>Khuyến mãi:</strong> Giảm giá kèm sản phẩm</li>
+                                <li><strong>Thích hợp cho:</strong> Game thủ và công việc văn phòng</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <p><strong>Mô tả sản phẩm:</strong></p>
+                        <p>
+                            {{$list_ctsp->MoTaSP}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="bg-light p-4 rounded shadow-sm">
+                    <h2 class="fw-bold mb-3">Sản phẩm tương tự</h2>
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+                        <div class="col">
+                            <div class="card h-100 shadow-sm border-0">
+                                <img src="{{ asset('asset/img-product/pc_case_xigmatek_-_23_c6832c0dded9424e83cd361ffce6c901_1024x1024.webp') }}" class="card-img-top" alt="Similar Product 1">
+                                <div class="card-body">
+                                    <h5 class="card-title">PC GVN Intel i5-11400</h5>
+                                    <p class="card-text text-danger fw-bold">9.990.000₫</p>
+                                    <button class="btn btn-danger">Xem chi tiết</button>
+                                </div>
+                            </div>
                         </div>
                         <div class="carousel-item">
                             <img src="{{ asset('asset/img-product/' . $list_sanpham->AnhCT1) }}" class="d-block w-100 rounded" alt="Ảnh chi tiết 1">
@@ -430,54 +550,6 @@
         });
 
 
-        // const fileArray = [];
-        // const input = document.getElementById('file');
-        //
-        // input.addEventListener('change', function (event) {
-        //     const fileList = document.getElementById('fileList');
-        //
-        //     for (let i = 0; i < input.files.length; i++) {
-        //         fileArray.push(input.files[i]);
-        //     }
-        //
-        //     updateFileList();
-        // });
-        //
-        // function updateFileList() {
-        //     const dataTransfer = new DataTransfer();
-        //     fileArray.forEach(file => dataTransfer.items.add(file));
-        //     input.files = dataTransfer.files;
-        //
-        //     const fileList = document.getElementById('fileList');
-        //     fileList.innerHTML = '';
-        //     fileArray.forEach((file, index) => {
-        //         const li = document.createElement('li');
-        //         li.className =
-        //             'mb-3 d-flex justify-content-between align-items-center text-truncate file-list-item';
-        //         let displayName = file.name;
-        //         const extension = displayName.split('.').pop();
-        //         const baseName = displayName.substring(0, displayName.lastIndexOf('.'));
-        //
-        //         if (baseName.length > 30) {
-        //             displayName = baseName.substring(0, 25) + '...' + '.' + extension;
-        //         } else {
-        //             displayName = baseName + '.' + extension;
-        //         }
-        //
-        //         li.textContent = displayName + ' ';
-        //
-        //         const removeBtn = document.createElement('button');
-        //         removeBtn.textContent = 'Remove';
-        //         removeBtn.className = 'text-right btn btn-danger btn-sm ms-2';
-        //         removeBtn.onclick = function () {
-        //             fileArray.splice(index, 1);
-        //             updateFileList();
-        //         };
-        //
-        //         li.appendChild(removeBtn);
-        //         fileList.appendChild(li);
-        //     });
-        // }
 
 
         const fileArray = [];
@@ -485,18 +557,17 @@
 
         input.addEventListener('change', function () {
             const fileList = document.getElementById('fileList');
+            const allowedExtensions = ['jpg', 'jpeg', 'png'];
+            fileArray.length = 0; // Clear the array
 
-            // Duyệt qua các tệp đã chọn
             for (let i = 0; i < input.files.length; i++) {
                 const file = input.files[i];
                 const fileExtension = file.name.split('.').pop().toLowerCase();
 
-                // Kiểm tra định dạng tệp
-                if (!['jpg', 'jpeg', 'png'].includes(fileExtension)) {
-                    toastr.error('Chỉ được tải lên các file có định dạng: jpg, jpeg, png', "Error");
-                    continue; // Bỏ qua tệp không hợp lệ
+                if (!allowedExtensions.includes(fileExtension)) {
+                    toastr.error("Chỉ được tải lên các file có định dạng: jpg, jpeg, png", "Lỗi");
+                    continue; // Skip invalid file
                 }
-
                 fileArray.push(file);
             }
 
@@ -513,10 +584,10 @@
             fileArray.forEach((file, index) => {
                 const li = document.createElement('li');
                 li.className = 'mb-3 d-flex justify-content-between align-items-center text-truncate file-list-item';
+
                 let displayName = file.name;
                 const extension = displayName.split('.').pop();
                 const baseName = displayName.substring(0, displayName.lastIndexOf('.'));
-
                 if (baseName.length > 30) {
                     displayName = baseName.substring(0, 25) + '...' + '.' + extension;
                 } else {
@@ -526,8 +597,8 @@
                 li.textContent = displayName + ' ';
 
                 const removeBtn = document.createElement('button');
-                removeBtn.textContent = 'Remove';
-                removeBtn.className = 'text-right btn btn-danger btn-sm ms-2';
+                removeBtn.textContent = 'Xóa';
+                removeBtn.className = 'btn btn-danger btn-sm ms-2';
                 removeBtn.onclick = function () {
                     fileArray.splice(index, 1);
                     updateFileList();
@@ -541,7 +612,12 @@
         $('#formGuiBL').submit(function (e) {
             e.preventDefault();
 
-            var formData = new FormData(this);
+            const formData = new FormData(this);
+            fileArray.forEach(file => formData.append('files[]', file));
+
+            // Add the current date to NgayTaoBL
+            const currentDate = new Date().toISOString().split('T')[0];
+            formData.append('NgayTaoBL', currentDate);
 
             $.ajax({
                 url: '{{ route('them-binh-luan') }}',
@@ -552,26 +628,20 @@
                 success: function (response) {
                     if (response.success) {
                         $('#modal').modal('hide');
-                        toastr.success(response.message, "Successful");
+                        toastr.success(response.message, "Thành công");
                         setTimeout(function () {
                             location.reload();
                         }, 500);
                     } else {
-                        toastr.error(response.message, "Error");
+                        toastr.error(response.message, "Lỗi");
                     }
                 },
                 error: function (xhr) {
-                    if (xhr.status === 422) { // Xử lý lỗi xác thực
-                        var errors = xhr.responseJSON.errors;
-                        for (var field in errors) {
-                            if (errors.hasOwnProperty(field)) {
-                                toastr.error(errors[field][0], "Error");
-                            }
-                        }
-                    } else if (xhr.status === 400) { // Lỗi khác với mã 400
-                        toastr.error(xhr.responseJSON.message, "Error");
-                    } else { // Các lỗi khác
-                        toastr.error("An error occurred", "Error");
+                    const response = xhr.responseJSON;
+                    if (xhr.status === 400) {
+                        toastr.error(response.message, "Lỗi");
+                    } else {
+                        toastr.error("Có lỗi xảy ra", "Lỗi");
                     }
                 }
             });
@@ -628,7 +698,6 @@
           });
         }
       }
-
 
     </script>
 @endsection

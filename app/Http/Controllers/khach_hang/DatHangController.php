@@ -172,6 +172,7 @@ class DatHangController extends Controller
                     ->update(['TrangThaiMa' => 'ẩn']); // Giả sử bạn có cột 'TrangThaiMa'
             }
         }
+        
         // Bước 5: Xóa giỏ hàng
         DB::table('chitietgiohang')->delete();
 
