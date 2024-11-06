@@ -15,6 +15,10 @@ class SanPhamModel extends Model
     protected $fillable=[
       'TenSP',
       'AnhSP',
+      'AnhCT1',
+      'AnhCT2',
+      'AnhCT3',
+      'AnhCT4',
       'GiaBan',
       'SoLuongTonKho',
       'NgayTaoSP',
@@ -32,6 +36,15 @@ class SanPhamModel extends Model
             ->join('danhmucsanpham','danhmucsanpham.MaDM','=','sanpham.MaDM')
             ->join('hangsanxuat','hangsanxuat.MaHSX','sanpham.MaHSX')
             ->get();
+    }
+
+    public function getTTSP($id)
+    {
+    return DB::table('sanpham')
+        ->join('danhmucsanpham', 'danhmucsanpham.MaDM', '=', 'sanpham.MaDM')
+        ->join('hangsanxuat', 'hangsanxuat.MaHSX', '=', 'sanpham.MaHSX')
+        ->where('sanpham.MaSP', $id) // Lọc theo MaSP
+        ->first(); // Chỉ lấy một sản phẩm duy nhất
     }
 
     public function getdanhmuc()
@@ -74,4 +87,22 @@ class SanPhamModel extends Model
             ->get();
     }
 
+<<<<<<< Updated upstream
+=======
+    public function getChiTietSP($id)
+    {
+        return DB::table('sanpham')
+            ->where('MaSP','=' ,$id)
+            ->first();
+    }
+
+    public function getctsp($id)
+    {
+        return DB::table('sanpham')
+            ->join('chitietsanpham', 'chitietsanpham.MaSP', '=', 'sanpham.MaSP')
+            ->where('chitietsanpham.MaSP','=' ,$id)
+            ->first();
+    }
+
+>>>>>>> Stashed changes
 }

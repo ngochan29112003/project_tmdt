@@ -117,7 +117,7 @@ class QuanLyDonHangController extends Controller
             $html.='<td>' . number_format($item->GiamTienHang, 0, ',', '.') . '</td>';
             $html.='<td>' . number_format($item->GiamTienVC, 0, ',', '.') . '</td>';
             $html .= '<td class="text-center align-middle">';
-            $html .= '  <a href="{{ route(\'export-don-hang\', $item->MaDH) }}" title="Xuất đơn hàng">
+            $html .= '<a href="' . route('in-don-hang', $item->MaDH) . '" title="Xuất đơn hàng">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-arrow-right text-danger">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path d="M14 3v4a1 1 0 0 0 1 1h4" />
@@ -159,6 +159,7 @@ class QuanLyDonHangController extends Controller
     }
     
     public function ChuyenLenh($id) {
+<<<<<<< Updated upstream
         $donhangModel = new QuanLyDonHangModel();
         
         // Lấy danh sách đơn hàng
@@ -166,14 +167,32 @@ class QuanLyDonHangController extends Controller
         
         // Tìm đơn hàng theo ID
         $donHang = $listdh->firstWhere('MaDH', $id);
+=======
+        // Thực hiện join để lấy thông tin từ các bảng liên quan
+        $donHang = DB::table('donhang')
+            ->join('phuongthucthanhtoan', 'phuongthucthanhtoan.MaPTTT', '=', 'donhang.MaPTTT')
+            ->join('donvivanchuyen', 'donvivanchuyen.MaVC', '=', 'donhang.MaVC')
+            ->where('donhang.MaDH', $id)
+            ->select(
+                'donhang.*',
+                'phuongthucthanhtoan.TenPTTT',
+                'donvivanchuyen.TenDonViVC'
+            )
+            ->first();
+>>>>>>> Stashed changes
     
         // Kiểm tra nếu đơn hàng tồn tại
         if (!$donHang) {
             return ['success' => false, 'message' => 'Đơn hàng không tồn tại.'];
         }
     
+<<<<<<< Updated upstream
         // Lấy chi tiết đơn hàng
         $chitietdonhang = QuanLyCTDH::where('MaDH', $id)->get(); 
+=======
+        // Lấy chi tiết đơn hàng trực tiếp theo MaDH
+        $chitietdonhang = QuanLyCTDH::where('MaDH', $id)->get();
+>>>>>>> Stashed changes
     
         // Tạo HTML cho view trực tiếp
         $html = " 
@@ -182,7 +201,11 @@ class QuanLyDonHangController extends Controller
         <head>
             <title>Đơn Hàng</title>
             <style>
+<<<<<<< Updated upstream
                 body{font-family: DejaVu Sans;}
+=======
+                body { font-family: DejaVu Sans; }
+>>>>>>> Stashed changes
                 h3 { text-align: center; }
                 table { width: 100%; border-collapse: collapse; margin-top: 20px; }
                 th, td { border: 1px solid black; padding: 8px; text-align: left; }
@@ -208,9 +231,14 @@ class QuanLyDonHangController extends Controller
         
         foreach ($chitietdonhang as $item) {
             // Lấy thông tin sản phẩm tương ứng với MaSP
+<<<<<<< Updated upstream
             $sanPham = SanPhamModel::where('MaSP', $item->MaSP)->first(); // Giả sử SanPham là model cho bảng sản phẩm
 
             $tenSP = $sanPham ? $sanPham->TenSP : 'N/A'; // Nếu không tìm thấy sản phẩm thì đặt là 'N/A'
+=======
+            $sanPham = SanPhamModel::where('MaSP', $item->MaSP)->first();
+            $tenSP = $sanPham ? $sanPham->TenSP : 'N/A';
+>>>>>>> Stashed changes
             $html .= "
                 <tr>
                     <td>{$tenSP}</td>
@@ -225,6 +253,10 @@ class QuanLyDonHangController extends Controller
         </body>
         </html>";
     
+<<<<<<< Updated upstream
         return $html; // Trả về nội dung HTML cho PDF
+=======
+        return $html;
+>>>>>>> Stashed changes
     }
 }

@@ -169,7 +169,7 @@
     </div>
 @endsection
 @section('scripts')
-    <script>
+<script>
       var table = $('#tableDonHang').DataTable({
         "language": {
           "emptyTable": "Không có dữ liệu trong bảng",

@@ -16,6 +16,7 @@ class QuanLyDonHangModel extends Model
     public function getDonHang()
     {
         return DB::table('donhang')
+<<<<<<< Updated upstream
             ->join('phuongthucthanhtoan', 'phuongthucthanhtoan.MaPTTT', '=', 'donhang.MaPTTT')
             ->join('donvivanchuyen', 'donvivanchuyen.MaVC', '=', 'donhang.MaVC')
             ->join('taikhoan', 'taikhoan.MaTK', '=', 'donhang.MaTK')
@@ -23,6 +24,15 @@ class QuanLyDonHangModel extends Model
             ->leftjoin('khuyenmaivc', 'khuyenmaivc.MaKMVC', '=', 'donhang.MaKMVC')
             ->join('trangthai', 'trangthai.MaTT','=', 'donhang.MaTT')
             ->select(
+=======
+        ->join('phuongthucthanhtoan', 'phuongthucthanhtoan.MaPTTT', '=', 'donhang.MaPTTT')
+        ->join('donvivanchuyen', 'donvivanchuyen.MaVC', '=', 'donhang.MaVC')
+        ->join('taikhoan', 'taikhoan.MaTK', '=', 'donhang.MaTK')
+        ->leftjoin('khuyenmai', 'khuyenmai.MaKM', '=', 'donhang.MaKM')
+        ->leftjoin('khuyenmaivc', 'khuyenmaivc.MaKMVC', '=', 'donhang.MaKMVC')
+        ->join('trangthai', 'trangthai.MaTT','=', 'donhang.MaTT')
+        ->select(
+>>>>>>> Stashed changes
                 'donhang.MaDH',
                 'phuongthucthanhtoan.TenPTTT',
                 'donvivanchuyen.TenDonViVC',
