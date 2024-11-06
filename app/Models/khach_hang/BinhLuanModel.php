@@ -43,10 +43,11 @@ class BinhLuanModel extends Model
 //        ];
 //    }
 
-    public function getBinhLuan()
+    public function getBinhLuan($id)
     {
         $binhLuan = DB::table('binhluan')
             ->join('taikhoan', 'taikhoan.MaTK', '=', 'binhluan.MaTK')
+            ->where('binhluan.MaSP',$id)
             ->orderBy('NgayTaoBL', 'DESC') // Đổi từ DESC sang ASC
             ->get();
 
