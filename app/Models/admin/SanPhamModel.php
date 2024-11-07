@@ -81,4 +81,20 @@ class SanPhamModel extends Model
             ->first();
     }
 
+    public function getTTSP($id)
+    {
+        return DB::table('sanpham')
+            ->join('danhmucsanpham', 'danhmucsanpham.MaDM', '=', 'sanpham.MaDM')
+            ->join('hangsanxuat', 'hangsanxuat.MaHSX', '=', 'sanpham.MaHSX')
+            ->where('sanpham.MaSP', $id) // Lọc theo MaSP
+            ->first(); // Chỉ lấy một sản phẩm duy nhất
+    }
+
+    public function getctsp($id)
+    {
+        return DB::table('sanpham')
+            ->join('chitietsanpham', 'chitietsanpham.MaSP', '=', 'sanpham.MaSP')
+            ->where('chitietsanpham.MaSP','=' ,$id)
+            ->first();
+    }
 }

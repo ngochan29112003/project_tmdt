@@ -8,6 +8,18 @@
                         TRANG QUẢN LÝ DANH MỤC SẢN PHẨM </h2>
                 </div>
             </div>
+{{--            <div class = "row mt-2">--}}
+{{--                <div class="col-3">--}}
+{{--                    <div class="form-floating w-100">--}}
+{{--                        <select class="form-select" id="floatingSelect" onchange="filterByRole(this.value)">--}}
+{{--                            <option value="" selected>Hiện tất cả</option>--}}
+{{--                            <option value="Laptop">Laptop</option>--}}
+{{--                            <option value="RAM">RAM</option>--}}
+{{--                        </select>--}}
+{{--                        <label for="floatingSelect">Lựa chọn loại sản phẩm hiển thị</label>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
             <div class="row mt-2">
                 <div class="col-md-9 d-flex align-items-center gap-2 justify-content-start">
@@ -19,7 +31,7 @@
                         </svg>
                         Thêm mới
                     </button>
-                    <a href="#" class="btn btn-success d-flex align-items-center text-white btn-export">
+                    <a href="{{route('export-danh-muc')}}" class="btn btn-success d-flex align-items-center text-white btn-export">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-spreadsheet">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M14 3v4a1 1 0 0 0 1 1h4" />
@@ -46,6 +58,7 @@
                                 <tr>
                                     <th>STT</th>
                                     <th>Tên danh mục</th>
+                                    <th>Tên hãng sản xuất</th>
                                     <th>Trạng thái danh mục</th>
                                     <th class = "text-center">Action</th>
                                 </tr>
@@ -56,6 +69,7 @@
                                     <tr>
                                         <td>{{ $stt++ }}</td>
                                         <td>{{ $item->TenDM}}</td>
+                                        <td>{{ $item->TenHSX}}</td>
                                         <td>
                                             @if($item->TrangThaiDM === "Ẩn")
                                                 <span class = "badge bg-danger text-white p-2">Ẩn</span>
@@ -106,9 +120,17 @@
                     <form id="Formdanhmuc" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-12 mb-3">
                                 <label for="TenDM" class="form-label">Tên danh mục</label>
                                 <input type="text" class="form-control" name="TenDM" id="TenDM" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="MaHSX" class="form-label">Tên hãng sản xuất</label>
+                                <select class="form-select" name="MaHSX" id="MaHSX">
+                                    @foreach ($list_hang_sx as $item)
+                                        <option value="{{ $item->MaHSX}}">{{ $item->TenHSX}} </option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="TrangThaiDM" class="form-label">Trạng thái danh mục</label>
@@ -140,9 +162,17 @@
                     <form id="Formeditdanhmuc" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-12 mb-3">
                                 <label for="TenDM" class="form-label">Tên danh mục</label>
                                 <input type="text" class="form-control" name="TenDM" id="edit_TenDM" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="MaHSX" class="form-label">Tên hãng sản xuất</label>
+                                <select class="form-select" name="MaHSX" id="edit_MaHSX">
+                                    @foreach ($list_hang_sx as $item)
+                                        <option value="{{ $item->MaHSX}}">{{ $item->TenHSX}} </option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="TrangThaiDM" class="form-label">Trạng thái danh mục</label>
@@ -257,6 +287,7 @@
               success: function (response) {
                   var data = response.danhmuc;
                   $('#edit_TenDM').val(data.TenDM);
+                  $('#edit_MaHSX').val(data.MaHSX);
                   $('#edit_TrangThaiDM').val(data.TrangThaiDM);
                   $('#Modaleditdanhmuc').modal('show');
               },
@@ -292,5 +323,46 @@
               }
           });
       });
+
+      {{--function filterByRole(productName) {--}}
+      {{--    $.ajax({--}}
+      {{--        url: '{{ route('filter-danh-muc') }}',--}}
+      {{--        method: 'GET',--}}
+      {{--        data: { productName: productName },--}}
+      {{--        success: function(response) {--}}
+      {{--            var tableBody = $('#tableDanhMuc tbody');--}}
+      {{--            tableBody.empty();--}}
+
+      {{--            response.data.forEach(function(item, index) {--}}
+      {{--                // Kiểm tra nếu có hãng sản xuất và hiển thị tên hãng--}}
+      {{--                var tenHSX = item.hangsanxuat ? item.hangsanxuat.TenHSX : 'Không có thông tin';--}}
+
+      {{--                tableBody.append(`--}}
+      {{--              <tr>--}}
+      {{--                  <td>${index + 1}</td>--}}
+      {{--                  <td>${item.TenDM}</td>--}}
+      {{--                  <td>${tenHSX}</td> <!-- Hiển thị tên hãng -->--}}
+      {{--                  <td>--}}
+      {{--                      ${item.TrangThaiDM === "Ẩn" ? '<span class="badge bg-danger text-white p-2">Ẩn</span>' : '<span class="badge bg-success text-white p-2">Hiện</span>'}--}}
+      {{--                  </td>--}}
+      {{--                  <td class="text-center align-middle">--}}
+      {{--                      <button class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none edit-btn" data-id="${item.MaDM}">--}}
+      {{--                          <!-- Icon Edit -->--}}
+      {{--                      </button>--}}
+      {{--                      |--}}
+      {{--                      <button class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn" data-id="${item.MaDM}">--}}
+      {{--                          <!-- Icon Delete -->--}}
+      {{--                      </button>--}}
+      {{--                  </td>--}}
+      {{--              </tr>--}}
+      {{--          `);--}}
+      {{--            });--}}
+      {{--        },--}}
+      {{--        error: function(xhr) {--}}
+      {{--            toastr.error("Không thể lọc dữ liệu", "Lỗi");--}}
+      {{--        }--}}
+      {{--    });--}}
+      {{--}--}}
+
     </script>
 @endsection

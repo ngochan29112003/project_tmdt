@@ -47,6 +47,15 @@
         ->join('giohang','giohang.MaGH','=','chitietgiohang.MaGH')
         ->where('MaTK', session('MaTK'))
         ->sum('chitietgiohang.SLSanPham');
+
+$DMSP_HSX = DB::table('danhmucsanpham as d')
+    ->join('hangsanxuat as h', 'd.MaHSX', '=', 'h.MaHSX')
+    ->select('d.TenDM', DB::raw('GROUP_CONCAT(h.TenHSX) AS HangSanXuat'))
+    ->where('d.TrangThaiDM', '=', 'Hiện')
+    ->where('h.TrangThaiHSX', '=', 'Hiện')
+    ->groupBy('d.TenDM')
+    ->get();
+// dd($DMSP_HSX);
 ?>
 <body>
     <script src="{{asset('dist/js/demo-theme.min.js?1692870487')}}"></script>
@@ -172,6 +181,27 @@
                                                 </svg>
                                             </span> <span class="nav-link-title"> Trang chủ </span> </a>
                                     </li>
+{{--                                    @foreach($DMSP_HSX as $item)--}}
+{{--                                        <li class="nav-item dropdown">--}}
+{{--                                            <a class="nav-link dropdown-toggle" href="#navbar-help"--}}
+{{--                                               data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"--}}
+{{--                                               aria-expanded="false">--}}
+{{--                                                <span class="nav-link-title">{{ $item->TenDM }}</span>--}}
+{{--                                            </a>--}}
+{{--                                            <div class="dropdown-menu">--}}
+{{--                                                @if(!empty($item->HangSanXuat))--}}
+{{--                                                    @foreach(explode(',', $item->HangSanXuat) as $hangSX) <!-- Loại bỏ khoảng trắng sau dấu phẩy -->--}}
+{{--                                                    <a class="dropdown-item" href="#">--}}
+{{--                                                        {{ $hangSX }}--}}
+{{--                                                    </a>--}}
+{{--                                                    @endforeach--}}
+{{--                                                @else--}}
+{{--                                                    <span class="dropdown-item">Không có hãng nào</span>--}}
+{{--                                                @endif--}}
+{{--                                            </div>--}}
+{{--                                        </li>--}}
+{{--                                    @endforeach--}}
+
                                     <li class="nav-item">
                                         <a class="nav-link dropdown-toggle" href="#navbar-help"
                                             data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"

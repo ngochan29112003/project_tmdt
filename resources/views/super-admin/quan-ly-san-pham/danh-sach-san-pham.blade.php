@@ -124,7 +124,7 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="AnhSP" class="form-label">Ảnh sản phẩm</label>
-                                <input type="text" class="form-control" name="AnhSP" id="AnhSP" required>
+                                <input type="file" class="form-control" name="AnhSP" id="AnhSP" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="GiaBan" class="form-label">Giá bán</label>

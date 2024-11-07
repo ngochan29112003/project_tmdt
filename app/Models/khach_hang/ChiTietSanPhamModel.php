@@ -10,4 +10,5 @@ class ChiTietSanPhamModel extends Model
     use HasFactory;
 
 
+
 }

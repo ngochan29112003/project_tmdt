@@ -17,9 +17,11 @@ class QuanLyDonHangController extends Controller
         $qltt = new TrangThaiModel();
         $list_tt = $qltt->gettt();
 
-        return view('super-admin.quan-ly-don-hang.danh-sach-don-hang', 
+        return view('super-admin.quan-ly-don-hang.danh-sach-don-hang',
         compact('list_donhang', 'list_tt'));
     }
+
+
 
     public function show()
     {
@@ -38,13 +40,13 @@ class QuanLyDonHangController extends Controller
     {
         // Tìm đơn hàng theo ID
         $ttdh = QuanLyDonHangModel::findOrFail($id);
-        
+
         // Lấy giá trị mới từ request
         $newMaTT = $request->input('MaTT');
 
         // Kiểm tra xem MaTT mới có tồn tại trong bảng trangthai không
         $existingStatus = TrangThaiModel::find($newMaTT);
-        
+
         if (!$existingStatus) {
             return response()->json(['success' => false, 'message' => 'Trạng thái không hợp lệ.']);
         }
@@ -55,8 +57,6 @@ class QuanLyDonHangController extends Controller
 
         return response()->json(['success' => true, 'message' => 'Cập nhật trạng thái thành công']);
     }
-
-
 
     public function filterDonHang(Request $request)
     {
@@ -69,7 +69,8 @@ class QuanLyDonHangController extends Controller
                 ->join('phuongthucthanhtoan', 'phuongthucthanhtoan.MaPTTT', '=', 'donhang.MaPTTT')
                 ->join('donvivanchuyen', 'donvivanchuyen.MaVC', '=', 'donhang.MaVC')
                 ->join('taikhoan', 'taikhoan.MaTK', '=', 'donhang.MaTK')
-                ->join('khuyenmai', 'khuyenmai.MaKM', '=', 'donhang.MaKM')
+                ->leftjoin('khuyenmai', 'khuyenmai.MaKM', '=', 'donhang.MaKM')
+                ->leftjoin('khuyenmaivc', 'khuyenmaivc.MaKMVC', '=', 'donhang.MaKMVC')
                 ->join('trangthai', 'trangthai.MaTT', '=', 'donhang.MaTT')
                 ->where('donhang.MaTT', $trangThaiId)
                 ->select(
@@ -80,8 +81,12 @@ class QuanLyDonHangController extends Controller
                     'donhang.TenKH',
                     'donhang.SDT',
                     'donhang.DiaChiGiaoHang',
-                    'donhang.NgayTaoDH',
-                    'donhang.TongTien',
+                    'donhang.NgayTaoDH',  // Lấy ngày tạo đơn hàng
+                    'donhang.TienHang',
+                    'donhang.TienVC',
+                    'donhang.GiamTienHang',
+                    'donhang.GiamTienVC',
+                    'donhang.TongTien',  // Lấy tổng tiền
                     'donhang.MaTT',
                     'trangthai.MaTT',
                     'trangthai.TenTT'
@@ -101,9 +106,13 @@ class QuanLyDonHangController extends Controller
             $html .= '<td>' . $item->DiaChiGiaoHang . '</td>';
             $html .= '<td>' . $item->TenPTTT . '</td>';
             $html .= '<td>' . $item->TenDonViVC . '</td>';
-            $html .= '<td>' . $item->TongTien . '</td>';
+            $html .= '<td>' . number_format($item->TongTien, 0, ',', '.') . '</td>';
+            $html.='<td>' . number_format($item->TienHang, 0, ',', '.') . '</td>';
+            $html.='<td>' . number_format($item->TienVC, 0, ',', '.') . '</td>';
+            $html.='<td>' . number_format($item->GiamTienHang, 0, ',', '.') . '</td>';
+            $html.='<td>' . number_format($item->GiamTienVC, 0, ',', '.') . '</td>';
             $html .= '<td class="text-center align-middle">';
-            $html .= '  <a href="{{ route(\'export-don-hang\', $item->MaDH) }}" title="Xuất đơn hàng">
+            $html .= '<a href="' . route('in-don-hang', $item->MaDH) . '" title="Xuất đơn hàng">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-arrow-right text-danger">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path d="M14 3v4a1 1 0 0 0 1 1h4" />

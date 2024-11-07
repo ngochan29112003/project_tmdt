@@ -45,51 +45,59 @@
                         <div class="table-responsive p-2">
                             <table id="tableDonHang" class="table table-vcenter card-table table-striped">
                                 <thead>
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>Tên khách hàng</th>
-                                        <th>Số điện thoại</th>
-                                        <th>Địa chỉ giao hàng</th>
-                                        <th>PTTT</th>
-                                        <th>Đơn vị vận chuyển</th>
-                                        <th>Tổng tiền</th>
-                                        <th>Xuất đơn hàng</th>
-                                        <th>Trạng thái đơn hàng</th>
-                                    </tr>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên khách hàng</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Địa chỉ giao hàng</th>
+                                    <th>PTTT</th>
+                                    <th>Đơn vị vận chuyển</th>
+                                    <th>Tiền hàng</th>
+                                    <th>Tiền vận chuyển</th>
+                                    <th>Giảm tiền hàng</th>
+                                    <th>Giảm tiền hàng</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Xuất đơn hàng</th>
+                                    <th>Trạng thái đơn hàng</th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    @php($stt = 1)
-                                    @foreach($list_donhang as $item)
-                                        <tr>
-                                            <td>{{$stt++}}</td>
-                                            <td>{{$item->TenKH}}</td>
-                                            <td>{{$item->SDT}}</td>
-                                            <td>{{$item->DiaChiGiaoHang}}</td>
-                                            <td>{{$item->TenPTTT}}</td>
-                                            <td>{{$item->TenDonViVC}}</td>
-                                            <td>{{$item->TongTien}}</td>
-                                            <td class="text-center align-middle">
-                                                <a href="">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-arrow-right text-danger">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                                                        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-                                                        <path d="M9 15h6" />
-                                                        <path d="M12.5 17.5l2.5 -2.5l-2.5 -2.5" />
-                                                    </svg>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <select class="form-select change-status" data-id="{{ $item->MaDH }}"> <!-- Sử dụng MaDH làm data-id -->
-                                                    @foreach($list_tt as $trangThai)
-                                                        <option value="{{ $trangThai->MaTT }}" {{ $item->MaTT == $trangThai->MaTT ? 'selected' : '' }}>
-                                                            {{ $trangThai->TenTT }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                @php($stt = 1)
+                                @foreach($list_donhang as $item)
+                                    <tr>
+                                        <td>{{$stt++}}</td>
+                                        <td>{{$item->TenKH}}</td>
+                                        <td>{{$item->SDT}}</td>
+                                        <td>{{$item->DiaChiGiaoHang}}</td>
+                                        <td>{{$item->TenPTTT}}</td>
+                                        <td>{{$item->TenDonViVC}}</td>
+                                        <td>{{number_format($item->TienHang, 0, ',', '.')}}</td>
+                                        <td>{{number_format($item->TienVC, 0, ',', '.')}}</td>
+                                        <td>{{number_format($item->GiamTienHang, 0, ',', '.')}}</td>
+                                        <td>{{number_format($item->GiamTienVC, 0, ',', '.')}}</td>
+                                        <td>{{number_format($item->TongTien, 0, ',', '.')}}</td>
+                                        <td class="text-center align-middle">
+                                            <a target="_blank" href="{{ route('in-don-hang', $item->MaDH) }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-arrow-right text-danger">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                                                    <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+                                                    <path d="M9 15h6" />
+                                                    <path d="M12.5 17.5l2.5 -2.5l-2.5 -2.5" />
+                                                </svg>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <select class="form-select change-status" data-id="{{ $item->MaDH }}"> <!-- Sử dụng MaDH làm data-id -->
+                                                @foreach($list_tt as $trangThai)
+                                                    <option value="{{ $trangThai->MaTT }}" {{ $item->MaTT == $trangThai->MaTT ? 'selected' : '' }}>
+                                                        {{ $trangThai->TenTT }}
+                                                    </option>
+                                        @endforeach
+                                            </select>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -174,68 +182,90 @@
       });
 
       $(document).ready(function () {
-    // Lắng nghe sự kiện thay đổi trên select trạng thái
-    $('#filter-status').on('change', function () {
-        var trangThaiId = $(this).val(); // Lấy trạng thái mới được chọn
-        var url = "{{ route('loc-trang-thai-don-hang') }}"; // Route đã định nghĩa
+          // Hàm để ẩn các option nhỏ hơn trạng thái hiện tại
+          function hideLowerStatusOptions() {
+              $('#tableDonHang tbody tr').each(function () {
+                  var $row = $(this);
+                  var currentMaTT = parseInt($row.find('.change-status').val()); // Lấy mã trạng thái hiện tại
 
-        $.ajax({
-            url: url,
-            method: 'POST',
-            data: {
-                trangThaiId: trangThaiId,
-                _token: '{{ csrf_token() }}' // Thêm CSRF token
-            },
-            success: function (response) {
-                // Cập nhật lại nội dung bảng
-                $('#tableDonHang tbody').html(response.html); 
-            },
-            error: function (xhr) {
-                toastr.error("Có lỗi xảy ra khi lọc.", "Operation Failed");
-            }
-        });
-    });
+                  // Lặp qua từng option trong select để ẩn các option nhỏ hơn currentMaTT
+                  $row.find('.change-status option').each(function () {
+                      var optionMaTT = parseInt($(this).val());
 
-    // Lắng nghe sự kiện thay đổi trên trạng thái đơn hàng
-    $('#tableDonHang').on('change', '.change-status', function () {
-        var ttdhid = $(this).data('id'); // Lấy ID của trạng thái đơn hàng
-        var newStatus = $(this).val(); // Lấy trạng thái mới được chọn
-        var url = "{{ route('update-trang-thai-don-hang', ':id') }}".replace(':id', ttdhid);
+                      if (optionMaTT < currentMaTT) {
+                          $(this).hide(); // Ẩn các trạng thái có mã nhỏ hơn trạng thái hiện tại
+                      } else {
+                          $(this).show(); // Hiển thị các trạng thái còn lại
+                      }
+                  });
+              });
+          }
 
-        var formData = new FormData();
-        formData.append('_token', '{{ csrf_token() }}'); // Thêm CSRF token
-        formData.append('MaTT', newStatus); // Thêm trạng thái mới
+          // Lắng nghe sự kiện thay đổi trên select trạng thái
+          $('#filter-status').on('change', function () {
+              var trangThaiId = $(this).val();
+              console.log("Selected Status ID: ", trangThaiId); // Kiểm tra giá trị được chọn
+              var url = "{{ route('loc-trang-thai-don-hang') }}";
 
-        $.ajax({
-            url: url,
-            method: 'POST',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function (response) {
-                if (response.success) {
-                    toastr.success(response.message, "Cập nhật thành công");
+              $.ajax({
+                  url: url,
+                  method: 'POST',
+                  data: {
+                      trangThaiId: trangThaiId,
+                      _token: '{{ csrf_token() }}'
+                  },
+                  success: function (response) {
+                      console.log(response); // Kiểm tra phản hồi từ server
+                      $('#tableDonHang tbody').html(response.html);
+                      hideLowerStatusOptions(); // Gọi hàm để ẩn trạng thái nhỏ hơn sau khi nhận phản hồi
+                  },
+                  error: function (xhr) {
+                      toastr.error("Có lỗi xảy ra khi lọc.", "Operation Failed");
+                  }
+              });
+          });
 
-                    // Kiểm tra trạng thái lọc
-                    var currentFilterStatus = $('#filter-status').val();
-                    if (currentFilterStatus) {
-                        // Nếu có lọc, xóa dòng tương ứng
-                        $('#tableDonHang tbody tr').each(function () {
-                            var rowStatus = $(this).find('.change-status').val();
-                            if ($(this).find('.change-status').data('id') == ttdhid) {
-                                $(this).remove(); // Xóa dòng tương ứng
-                            }
-                        });
-                    }
-                } else {
-                    toastr.error("Cập nhật không thành công.", "Operation Failed");
-                }
-            },
-            error: function (xhr) {
-                toastr.error("Có lỗi xảy ra khi cập nhật.", "Operation Failed");
-            }
-        });
-    });
-});
+          // Xử lý khi thay đổi trạng thái trong bảng
+          $('#tableDonHang').on('change', '.change-status', function () {
+              var ttdhid = $(this).data('id');
+              var newStatus = $(this).val();
+              var url = "{{ route('update-trang-thai-don-hang', ':id') }}".replace(':id', ttdhid);
+
+              var formData = new FormData();
+              formData.append('_token', '{{ csrf_token() }}');
+              formData.append('MaTT', newStatus);
+
+              $.ajax({
+                  url: url,
+                  method: 'POST',
+                  data: formData,
+                  contentType: false,
+                  processData: false,
+                  success: function (response) {
+                      if (response.success) {
+                          toastr.success(response.message, "Cập nhật thành công");
+                          // Kiểm tra trạng thái lọc
+                          var currentFilterStatus = $('#filter-status').val();
+                          if (currentFilterStatus) {
+                              // Nếu có lọc, xóa dòng tương ứng
+                              $('#tableDonHang tbody tr').each(function () {if ($(this).find('.change-status').data('id') == ttdhid) {
+                                  $(this).remove(); // Xóa dòng tương ứng
+                              }
+                              });
+                          }
+                          hideLowerStatusOptions(); // Gọi hàm để ẩn trạng thái nhỏ hơn sau khi thay đổi thành công
+                      } else {
+                          toastr.error("Cập nhật không thành công.", "Operation Failed");
+                      }
+                  },
+                  error: function (xhr) {
+                      toastr.error("Có lỗi xảy ra khi cập nhật.", "Operation Failed");
+                  }
+              });
+          });
+
+          // Gọi hàm để ẩn trạng thái nhỏ hơn khi trang được tải lần đầu
+          hideLowerStatusOptions();
+      });
     </script>
 @endsection

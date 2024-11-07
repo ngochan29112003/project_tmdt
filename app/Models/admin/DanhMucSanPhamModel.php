@@ -14,11 +14,20 @@ class DanhMucSanPhamModel extends Model
     protected $fillable=[
         'TenDM',
         'TrangThaiDM',
+        'MaHSX'
     ];
     public $timestamps = false;
 
     public function danhmucSP()
     {
-        return DB::table('danhmucsanpham')->get();
+        return DB::table('danhmucsanpham')
+            ->join('hangsanxuat', 'hangsanxuat.MaHSX', '=', 'danhmucsanpham.MaHSX')
+            ->get();
+    }
+
+    public function gethangsanxuat()
+    {
+        return DB::table('hangsanxuat')
+            ->get();
     }
 }

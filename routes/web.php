@@ -60,6 +60,9 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
             Route::delete('/delete/{id}',[QuanLyDanhMucController::class,'deleteDanhMuc'])->name('delete-danh-muc');
             Route::get('/edit/{id}', [QuanLyDanhMucController::class, 'editDanhMuc'])->name('edit-danh-muc');
             Route::post('/update/{id}', [QuanLyDanhMucController::class, 'updateDanhMuc'])->name('update-danh-muc');
+            Route::get('/super-admin/danh-muc/filter', [QuanLyDanhMucController::class, 'filterDanhMuc'])->name('filter-danh-muc');
+            Route::get('/export', [QuanLyDanhMucController::class, 'exportDanhMuc'])->name('export-danh-muc');
+
         });
 
         // Hãng sản xuất
@@ -69,6 +72,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
             Route::delete('/delete/{id}',[QuanLyHangSanXuatController::class,'deleteHangSanXuat'])->name('delete-hang-san-xuat');
             Route::get('/edit/{id}', [QuanLyHangSanXuatController::class, 'editHangSanXuat'])->name('edit-hang-san-xuat');
             Route::post('/update/{id}', [QuanLyHangSanXuatController::class, 'updateHangSanXuat'])->name('update-hang-san-xuat');
+            Route::get('/export', [QuanLyHangSanXuatController::class, 'exportHSX'])->name('export-hang-san-xuat');
         });
 
         // Sản phẩm
@@ -85,6 +89,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
             Route::get('/danh-sach',[QuanLyDonHangController::class,'getView'])->name('danh-sach-don-hang');
             Route::post('/updateTT/{id}', [QuanLyDonHangController::class, 'updateTTDH'])->name('update-trang-thai-don-hang');
             Route::post('/loc-trang-thai-don-hang', [QuanLyDonHangController::class, 'filterDonHang'])->name('loc-trang-thai-don-hang');
+            Route::get('/in-don-hang/{id}',[QuanLyDonHangController::class,'InDH'])->name('in-don-hang');
         });
 
         //Trạng thái đơn hàng

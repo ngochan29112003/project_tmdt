@@ -18,6 +18,10 @@ class DatHang extends Model
          'SDT',
          'MaSP',
          'GhiChu',
+         'TienHang',
+         'TienVC',
+         'GiamTienHang',
+         'GiamTienVC',
          'TongTien',
          'DiaChiGiaoHang',
          'NgayTaoDH',
@@ -33,10 +37,11 @@ class DatHang extends Model
     public function getdonhang()
     {
         return DB::table('donhang')
-            ->join('phuongthucthanhtoan', 'phuongthucthanhtoan.MaPTTT', '=', 'donhang.MaPTTT')
-            ->join('taikhoan', 'taikhoan.MaTK', '=', 'donhang.MaTK')
-            ->join('khuyenmai', 'khuyenmai.MaKM', '=', 'donhang.MaKM')
-            ->join('donvivanchuyen', 'donvivanchuyen.MaVC', '=', 'donhang.MaVC')
+            ->join('phuongthucthanhtoan','phuongthucthanhtoan.MaPTTT','=','donhang.MaPTTT')
+            ->join('taikhoan','taikhoan.MaTK','=','donhang.MaTK')
+            ->leftjoin('khuyenmai','khuyenmai.MaKM','=','donhang.MaKM')
+            ->leftjoin('khuyenmaivc','khuyenmaivc.MaKMVC','=','donhang.MaKMVC')
+            ->join('donvivanchuyen','donvivanchuyen.MaVC','=','donhang.MaVC')
             ->get();
     }
 
@@ -71,6 +76,7 @@ class DatHang extends Model
     {
         return DB::table('donvivanchuyen')->get();
     }
+
 
 }
 
