@@ -76,7 +76,7 @@
                                         <td>{{ $stt++ }}</td>
                                         <td>{{ $taiKhoan->HoTen }}</td>
                                         <td>{{ $taiKhoan->NgaySinh }}</td>
-                                        <td>{{ $taiKhoan->GioiTinh == 1 ? 'Nam' : 'Nữ' }}</td>
+                                        <td>{{ $taiKhoan->GioiTinh }}</td>
                                         <td>{{ $taiKhoan->SDT }}</td>
                                         <td>{{ $taiKhoan->DiaChi }}</td>
                                         <td>{{ $taiKhoan['vaitro']->ten_vai_tro }}</td>

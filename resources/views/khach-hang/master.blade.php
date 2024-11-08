@@ -48,13 +48,13 @@
         ->where('MaTK', session('MaTK'))
         ->sum('chitietgiohang.SLSanPham');
 
-$DMSP_HSX = DB::table('danhmucsanpham as d')
-    ->join('hangsanxuat as h', 'd.MaHSX', '=', 'h.MaHSX')
-    ->select('d.TenDM', DB::raw('GROUP_CONCAT(h.TenHSX) AS HangSanXuat'))
-    ->where('d.TrangThaiDM', '=', 'Hiện')
-    ->where('h.TrangThaiHSX', '=', 'Hiện')
-    ->groupBy('d.TenDM')
-    ->get();
+    //$DMSP_HSX = DB::table('danhmucsanpham as d')
+    //    ->join('hangsanxuat as h', 'd.MaHSX', '=', 'h.MaHSX')
+    //    ->select('d.TenDM', DB::raw('GROUP_CONCAT(h.TenHSX) AS HangSanXuat'))
+    //    ->where('d.TrangThaiDM', '=', 'Hiện')
+    //    ->where('h.TrangThaiHSX', '=', 'Hiện')
+    //    ->groupBy('d.TenDM')
+    //    ->get();
 // dd($DMSP_HSX);
 ?>
 <body>
