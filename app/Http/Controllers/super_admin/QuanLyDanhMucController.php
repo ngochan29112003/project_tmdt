@@ -135,4 +135,34 @@ class QuanLyDanhMucController extends Controller
         $writer->save('php://output');
     }
 
+    public function hienDanhMuc(Request $request)
+    {
+        // Find the account by ID
+        $model = DanhMucSanPhamModel::find($request->id);
+
+        if ($model) {
+            $model->TrangThaiDM = 0;
+            $model->save();
+
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false]);
+    }
+
+    public function anDanhMuc(Request $request)
+    {
+        // Find the account by ID
+        $model = DanhMucSanPhamModel::find($request->id);
+
+        if ($model) {
+            $model->TrangThaiDM = 1;
+            $model->save();
+
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false]);
+    }
+
 }

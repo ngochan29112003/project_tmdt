@@ -49,7 +49,7 @@ class SanPhamModel extends Model
         return DB::table('sanpham')
             ->join('danhmucsanpham','danhmucsanpham.MaDM','=','sanpham.MaDM')
             ->join('hangsanxuat','hangsanxuat.MaHSX','sanpham.MaHSX')
-            ->where('sanpham.MaDM','=',5)
+            ->where('sanpham.MaDM','=',30)
             ->take(8)
             ->get();
     }
@@ -59,7 +59,7 @@ class SanPhamModel extends Model
         return DB::table('sanpham')
             ->join('danhmucsanpham','danhmucsanpham.MaDM','=','sanpham.MaDM')
             ->join('hangsanxuat','hangsanxuat.MaHSX','sanpham.MaHSX')
-            ->where('sanpham.MaDM','=',5)
+            ->where('sanpham.MaDM','=',30)
             ->take(4)
             ->get();
     }
@@ -69,7 +69,7 @@ class SanPhamModel extends Model
         return DB::table('sanpham')
             ->join('danhmucsanpham','danhmucsanpham.MaDM','=','sanpham.MaDM')
             ->join('hangsanxuat','hangsanxuat.MaHSX','sanpham.MaHSX')
-            ->where('sanpham.MaDM','=',5)
+            ->where('sanpham.MaDM','=',30)
             ->take(4)
             ->get();
     }
