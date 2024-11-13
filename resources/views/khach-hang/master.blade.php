@@ -48,13 +48,9 @@
         ->where('MaTK', session('MaTK'))
         ->sum('chitietgiohang.SLSanPham');
 
-    //$DMSP_HSX = DB::table('danhmucsanpham as d')
-    //    ->join('hangsanxuat as h', 'd.MaHSX', '=', 'h.MaHSX')
-    //    ->select('d.TenDM', DB::raw('GROUP_CONCAT(h.TenHSX) AS HangSanXuat'))
-    //    ->where('d.TrangThaiDM', '=', 'Hiện')
-    //    ->where('h.TrangThaiHSX', '=', 'Hiện')
-    //    ->groupBy('d.TenDM')
-    //    ->get();
+    $dm = DB::table('danhmucsanpham')
+        ->where('TrangThaiDM','=',0)
+        ->get();
 // dd($DMSP_HSX);
 ?>
 <body>
@@ -165,7 +161,7 @@
                     <div class="container-xl">
                         <div class="row flex-fill align-items-center">
                             <div class="col">
-                                <ul class="navbar-nav">
+                                <ul class="navbar-nav flex-wrap">
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{route('home-page')}}" role="button"
                                             aria-expanded="false">
@@ -181,244 +177,223 @@
                                                 </svg>
                                             </span> <span class="nav-link-title"> Trang chủ </span> </a>
                                     </li>
-{{--                                    @foreach($DMSP_HSX as $item)--}}
-{{--                                        <li class="nav-item dropdown">--}}
-{{--                                            <a class="nav-link dropdown-toggle" href="#navbar-help"--}}
-{{--                                               data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"--}}
-{{--                                               aria-expanded="false">--}}
-{{--                                                <span class="nav-link-title">{{ $item->TenDM }}</span>--}}
+{{--                                    <li class="nav-item">--}}
+{{--                                        <a class="nav-link dropdown-toggle" href="#navbar-help"--}}
+{{--                                            data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"--}}
+{{--                                            aria-expanded="false">--}}
+{{--                                            <span class="nav-link-icon d-md-none d-lg-inline-block">--}}
+{{--                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"--}}
+{{--                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"--}}
+{{--                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"--}}
+{{--                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-device-laptop">--}}
+{{--                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />--}}
+{{--                                                    <path d="M3 19l18 0" />--}}
+{{--                                                    <path--}}
+{{--                                                        d="M5 6m0 1a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1z" />--}}
+{{--                                                </svg>--}}
+{{--                                            </span> <span class="nav-link-title"> Laptop </span> </a>--}}
+{{--                                    </li>--}}
+                                    @foreach($dm as $item)
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#navbar-help"
+                                               data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"
+                                               aria-expanded="false">
+                                            <span class="nav-link-icon d-md-none d-lg-inline-block text-end">
+                                                <i class="{{$item->icon}}"></i>
+                                            </span> <span class="nav-link-title">{{$item->TenDM}}</span> </a>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="">
+
+                                                </a> <a class="dropdown-item" href="">
+
+                                                </a> <a class="dropdown-item" href="">
+
+                                                </a>
+                                            </div>
+                                        </li>
+                                    @endforeach
+{{--                                    <li class="nav-item dropdown">--}}
+{{--                                        <a class="nav-link dropdown-toggle" href="#navbar-help"--}}
+{{--                                            data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"--}}
+{{--                                            aria-expanded="false">--}}
+{{--                                            <span class="nav-link-icon d-md-none d-lg-inline-block">--}}
+{{--                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"--}}
+{{--                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"--}}
+{{--                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"--}}
+{{--                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-device-imac">--}}
+{{--                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />--}}
+{{--                                                    <path--}}
+{{--                                                        d="M3 4a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1v-12z" />--}}
+{{--                                                    <path d="M3 13h18" />--}}
+{{--                                                    <path d="M8 21h8" />--}}
+{{--                                                    <path d="M10 17l-.5 4" />--}}
+{{--                                                    <path d="M14 17l.5 4" />--}}
+{{--                                                </svg>--}}
+{{--                                            </span> <span class="nav-link-title">Màn hình máy tính</span> </a>--}}
+{{--                                        <div class="dropdown-menu">--}}
+{{--                                            <a class="dropdown-item" href="">--}}
+
+{{--                                            </a> <a class="dropdown-item" href="">--}}
+
+{{--                                            </a> <a class="dropdown-item" href="">--}}
+
 {{--                                            </a>--}}
-{{--                                            <div class="dropdown-menu">--}}
-{{--                                                @if(!empty($item->HangSanXuat))--}}
-{{--                                                    @foreach(explode(',', $item->HangSanXuat) as $hangSX) <!-- Loại bỏ khoảng trắng sau dấu phẩy -->--}}
-{{--                                                    <a class="dropdown-item" href="#">--}}
-{{--                                                        {{ $hangSX }}--}}
-{{--                                                    </a>--}}
-{{--                                                    @endforeach--}}
-{{--                                                @else--}}
-{{--                                                    <span class="dropdown-item">Không có hãng nào</span>--}}
-{{--                                                @endif--}}
-{{--                                            </div>--}}
-{{--                                        </li>--}}
-{{--                                    @endforeach--}}
+{{--                                        </div>--}}
+{{--                                    </li>--}}
+{{--                                    <li class="nav-item dropdown">--}}
+{{--                                        <a class="nav-link dropdown-toggle" href="#navbar-help"--}}
+{{--                                            data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"--}}
+{{--                                            aria-expanded="false">--}}
+{{--                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"--}}
+{{--                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"--}}
+{{--                                                 stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"--}}
+{{--                                                 class="icon icon-tabler icons-tabler-outline icon-tabler-cpu">--}}
+{{--                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />--}}
+{{--                                                <path d="M5 5m0 1a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1z" />--}}
+{{--                                                <path d="M9 9h6v6h-6z" />--}}
+{{--                                                <path d="M3 10h2" />--}}
+{{--                                                <path d="M3 14h2" />--}}
+{{--                                                <path d="M10 3v2" />--}}
+{{--                                                <path d="M14 3v2" />--}}
+{{--                                                <path d="M21 10h-2" />--}}
+{{--                                                <path d="M21 14h-2" />--}}
+{{--                                                <path d="M14 21v-2" />--}}
+{{--                                                <path d="M10 21v-2" />--}}
+{{--                                            </svg>--}}
 
-                                    <li class="nav-item">
-                                        <a class="nav-link dropdown-toggle" href="#navbar-help"
-                                            data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"
-                                            aria-expanded="false">
-                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-device-laptop">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path d="M3 19l18 0" />
-                                                    <path
-                                                        d="M5 6m0 1a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1z" />
-                                                </svg>
-                                            </span> <span class="nav-link-title"> Laptop </span> </a>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#navbar-help"
-                                            data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"
-                                            aria-expanded="false">
-                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-devices-pc">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path d="M3 5h6v14h-6z" />
-                                                    <path d="M12 9h10v7h-10z" />
-                                                    <path d="M14 19h6" />
-                                                    <path d="M17 16v3" />
-                                                    <path d="M6 13v.01" />
-                                                    <path d="M6 16v.01" />
-                                                </svg>
-                                            </span> <span class="nav-link-title">PC</span> </a>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#navbar-help"
-                                            data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"
-                                            aria-expanded="false">
-                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-device-imac">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path
-                                                        d="M3 4a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1v-12z" />
-                                                    <path d="M3 13h18" />
-                                                    <path d="M8 21h8" />
-                                                    <path d="M10 17l-.5 4" />
-                                                    <path d="M14 17l.5 4" />
-                                                </svg>
-                                            </span> <span class="nav-link-title">Màn hình máy tính</span> </a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="">
+{{--                                            <span class="nav-link-title">Bộ nhớ lưu trữ</span> </a>--}}
+{{--                                        <div class="dropdown-menu">--}}
+{{--                                            <a class="dropdown-item" href="">--}}
 
-                                            </a> <a class="dropdown-item" href="">
+{{--                                            </a> <a class="dropdown-item" href="">--}}
 
-                                            </a> <a class="dropdown-item" href="">
+{{--                                            </a> <a class="dropdown-item" href="">--}}
 
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#navbar-help"
-                                            data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"
-                                            aria-expanded="false">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                 stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"
-                                                 class="icon icon-tabler icons-tabler-outline icon-tabler-cpu">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                <path d="M5 5m0 1a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1z" />
-                                                <path d="M9 9h6v6h-6z" />
-                                                <path d="M3 10h2" />
-                                                <path d="M3 14h2" />
-                                                <path d="M10 3v2" />
-                                                <path d="M14 3v2" />
-                                                <path d="M21 10h-2" />
-                                                <path d="M21 14h-2" />
-                                                <path d="M14 21v-2" />
-                                                <path d="M10 21v-2" />
-                                            </svg>
+{{--                                            </a>--}}
+{{--                                        </div>--}}
+{{--                                    </li>--}}
+{{--                                    <li class="nav-item dropdown">--}}
+{{--                                        <a class="nav-link dropdown-toggle" href="#navbar-help"--}}
+{{--                                            data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"--}}
+{{--                                            aria-expanded="false">--}}
+{{--                                            <span class="nav-link-icon d-md-none d-lg-inline-block">--}}
+{{--                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"--}}
+{{--                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"--}}
+{{--                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"--}}
+{{--                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-keyboard">--}}
+{{--                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />--}}
+{{--                                                    <path--}}
+{{--                                                        d="M2 6m0 2a2 2 0 0 1 2 -2h16a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-16a2 2 0 0 1 -2 -2z" />--}}
+{{--                                                    <path d="M6 10l0 .01" />--}}
+{{--                                                    <path d="M10 10l0 .01" />--}}
+{{--                                                    <path d="M14 10l0 .01" />--}}
+{{--                                                    <path d="M18 10l0 .01" />--}}
+{{--                                                    <path d="M6 14l0 .01" />--}}
+{{--                                                    <path d="M18 14l0 .01" />--}}
+{{--                                                    <path d="M10 14l4 .01" />--}}
+{{--                                                </svg>--}}
+{{--                                            </span> <span class="nav-link-title">--}}
+{{--                                                Bàn phím--}}
+{{--                                            </span> </a>--}}
+{{--                                        <div class="dropdown-menu">--}}
+{{--                                            <a class="dropdown-item" href="">--}}
 
-                                            <span class="nav-link-title">Bộ nhớ lưu trữ</span> </a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="">
+{{--                                            </a> <a class="dropdown-item" href="">--}}
 
-                                            </a> <a class="dropdown-item" href="">
+{{--                                            </a> <a class="dropdown-item" href="">--}}
 
-                                            </a> <a class="dropdown-item" href="">
+{{--                                            </a>--}}
+{{--                                        </div>--}}
+{{--                                    </li>--}}
+{{--                                    <li class="nav-item dropdown">--}}
+{{--                                        <a class="nav-link dropdown-toggle" href="#navbar-help"--}}
+{{--                                            data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"--}}
+{{--                                            aria-expanded="false">--}}
+{{--                                            <span class="nav-link-icon d-md-none d-lg-inline-block">--}}
+{{--                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"--}}
+{{--                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"--}}
+{{--                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"--}}
+{{--                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-mouse-2">--}}
+{{--                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />--}}
+{{--                                                    <path--}}
+{{--                                                        d="M6 3m0 4a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-4a4 4 0 0 1 -4 -4z" />--}}
+{{--                                                    <path d="M12 3v7" />--}}
+{{--                                                    <path d="M6 10h12" />--}}
+{{--                                                </svg>--}}
+{{--                                            </span> <span class="nav-link-title">--}}
+{{--                                                Chuột - Lót chuột--}}
+{{--                                            </span> </a>--}}
+{{--                                        <div class="dropdown-menu">--}}
+{{--                                            <a class="dropdown-item" href="">--}}
 
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#navbar-help"
-                                            data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"
-                                            aria-expanded="false">
-                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-keyboard">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path
-                                                        d="M2 6m0 2a2 2 0 0 1 2 -2h16a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-16a2 2 0 0 1 -2 -2z" />
-                                                    <path d="M6 10l0 .01" />
-                                                    <path d="M10 10l0 .01" />
-                                                    <path d="M14 10l0 .01" />
-                                                    <path d="M18 10l0 .01" />
-                                                    <path d="M6 14l0 .01" />
-                                                    <path d="M18 14l0 .01" />
-                                                    <path d="M10 14l4 .01" />
-                                                </svg>
-                                            </span> <span class="nav-link-title">
-                                                Bàn phím
-                                            </span> </a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="">
+{{--                                            </a> <a class="dropdown-item" href="">--}}
 
-                                            </a> <a class="dropdown-item" href="">
+{{--                                            </a> <a class="dropdown-item" href="">--}}
 
-                                            </a> <a class="dropdown-item" href="">
+{{--                                            </a>--}}
+{{--                                        </div>--}}
+{{--                                    </li>--}}
+{{--                                    <li class="nav-item dropdown">--}}
+{{--                                        <a class="nav-link dropdown-toggle" href="#navbar-help"--}}
+{{--                                            data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"--}}
+{{--                                            aria-expanded="false">--}}
+{{--                                            <span class="nav-link-icon d-md-none d-lg-inline-block">--}}
+{{--                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"--}}
+{{--                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"--}}
+{{--                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"--}}
+{{--                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-headset">--}}
+{{--                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />--}}
+{{--                                                    <path d="M4 14v-3a8 8 0 1 1 16 0v3" />--}}
+{{--                                                    <path d="M18 19c0 1.657 -2.686 3 -6 3" />--}}
+{{--                                                    <path--}}
+{{--                                                        d="M4 14a2 2 0 0 1 2 -2h1a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-1a2 2 0 0 1 -2 -2v-3z" />--}}
+{{--                                                    <path--}}
+{{--                                                        d="M15 14a2 2 0 0 1 2 -2h1a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-1a2 2 0 0 1 -2 -2v-3z" />--}}
+{{--                                                </svg>--}}
+{{--                                            </span> <span class="nav-link-title">--}}
+{{--                                                Tai nghe - Loa--}}
+{{--                                            </span> </a>--}}
+{{--                                        <div class="dropdown-menu">--}}
+{{--                                            <a class="dropdown-item" href="">--}}
 
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#navbar-help"
-                                            data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"
-                                            aria-expanded="false">
-                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-mouse-2">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path
-                                                        d="M6 3m0 4a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-4a4 4 0 0 1 -4 -4z" />
-                                                    <path d="M12 3v7" />
-                                                    <path d="M6 10h12" />
-                                                </svg>
-                                            </span> <span class="nav-link-title">
-                                                Chuột - Lót chuột
-                                            </span> </a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="">
+{{--                                            </a> <a class="dropdown-item" href="">--}}
 
-                                            </a> <a class="dropdown-item" href="">
+{{--                                            </a> <a class="dropdown-item" href="">--}}
 
-                                            </a> <a class="dropdown-item" href="">
+{{--                                            </a>--}}
+{{--                                        </div>--}}
+{{--                                    </li>--}}
+{{--                                    <li class="nav-item dropdown">--}}
+{{--                                        <a class="nav-link dropdown-toggle" href="#navbar-help"--}}
+{{--                                           data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"--}}
+{{--                                           aria-expanded="false">--}}
+{{--                                            <span class="nav-link-icon d-md-none d-lg-inline-block">--}}
+{{--                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"--}}
+{{--                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"--}}
+{{--                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"--}}
+{{--                                                     class="icon icon-tabler icons-tabler-outline icon-tabler-device-gamepad-2">--}}
+{{--                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />--}}
+{{--                                                    <path--}}
+{{--                                                        d="M12 5h3.5a5 5 0 0 1 0 10h-5.5l-4.015 4.227a2.3 2.3 0 0 1 -3.923 -2.035l1.634 -8.173a5 5 0 0 1 4.904 -4.019h3.4z" />--}}
+{{--                                                    <path--}}
+{{--                                                        d="M14 15l4.07 4.284a2.3 2.3 0 0 0 3.925 -2.023l-1.6 -8.232" />--}}
+{{--                                                    <path d="M8 9v2" />--}}
+{{--                                                    <path d="M7 10h2" />--}}
+{{--                                                    <path d="M14 10h2" />--}}
+{{--                                                </svg>--}}
+{{--                                            </span> <span class="nav-link-title">--}}
+{{--                                                Phụ kiện--}}
+{{--                                            </span> </a>--}}
+{{--                                        <div class="dropdown-menu">--}}
+{{--                                            <a class="dropdown-item" href="">--}}
 
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#navbar-help"
-                                            data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"
-                                            aria-expanded="false">
-                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-headset">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path d="M4 14v-3a8 8 0 1 1 16 0v3" />
-                                                    <path d="M18 19c0 1.657 -2.686 3 -6 3" />
-                                                    <path
-                                                        d="M4 14a2 2 0 0 1 2 -2h1a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-1a2 2 0 0 1 -2 -2v-3z" />
-                                                    <path
-                                                        d="M15 14a2 2 0 0 1 2 -2h1a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-1a2 2 0 0 1 -2 -2v-3z" />
-                                                </svg>
-                                            </span> <span class="nav-link-title">
-                                                Tai nghe - Loa
-                                            </span> </a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="">
+{{--                                            </a> <a class="dropdown-item" href="">--}}
 
-                                            </a> <a class="dropdown-item" href="">
+{{--                                            </a> <a class="dropdown-item" href="">--}}
 
-                                            </a> <a class="dropdown-item" href="">
-
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#navbar-help"
-                                            data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"
-                                            aria-expanded="false">
-                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-device-gamepad-2">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path
-                                                        d="M12 5h3.5a5 5 0 0 1 0 10h-5.5l-4.015 4.227a2.3 2.3 0 0 1 -3.923 -2.035l1.634 -8.173a5 5 0 0 1 4.904 -4.019h3.4z" />
-                                                    <path
-                                                        d="M14 15l4.07 4.284a2.3 2.3 0 0 0 3.925 -2.023l-1.6 -8.232" />
-                                                    <path d="M8 9v2" />
-                                                    <path d="M7 10h2" />
-                                                    <path d="M14 10h2" />
-                                                </svg>
-                                            </span> <span class="nav-link-title">
-                                                Phụ kiện
-                                            </span> </a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="">
-
-                                            </a> <a class="dropdown-item" href="">
-
-                                            </a> <a class="dropdown-item" href="">
-
-                                            </a>
-                                        </div>
-                                    </li>
+{{--                                            </a>--}}
+{{--                                        </div>--}}
+{{--                                    </li>--}}
                                 </ul>
                             </div>
                         </div>

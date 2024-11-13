@@ -57,7 +57,6 @@
                                 <tr>
                                     <th>STT</th>
                                     <th>Tên danh mục</th>
-                                    <th>Tên hãng sản xuất</th>
                                     <th>Trạng thái danh mục</th>
                                     <th class = "text-center">Action</th>
                                 </tr>
@@ -68,15 +67,21 @@
                                     <tr>
                                         <td>{{ $stt++ }}</td>
                                         <td>{{ $item->TenDM}}</td>
-                                        <td>{{ $item->TenHSX}}</td>
                                         <td>
-                                            @if($item->TrangThaiDM === "Ẩn")
-                                                <span class = "badge bg-danger text-white p-2">Ẩn</span>
+                                            @if($item->TrangThaiDM === 1)
+                                                <span class = "badge bg-danger text-white unlock-badge" data-id = "{{ $item->MaDM }}" style = "cursor:pointer;">Ẩn</span>
                                             @else
-                                                <span class = "badge bg-success text-white p-2">Hiện</span>
+                                                <span class = "badge bg-success text-white lock-badge" data-id = "{{ $item->MaDM }}" style = "cursor:pointer;">Hiện</span>
                                             @endif
                                         </td>
                                         <td class="text-center align-middle">
+                                            <button class="btn p-0  btn-primary border-0 bg-transparent text-danger shadow-none edit-btn" data-id="{{ $item->MaDM }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="blue" class="bi bi-eye" viewBox="0 0 16 16">
+                                                    <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                                                    <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                                                </svg>
+                                            </button>
+                                            |
                                             <button class="btn p-0  btn-primary border-0 bg-transparent text-danger shadow-none edit-btn" data-id="{{ $item->MaDM }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="m-0 icon icon-tabler icons-tabler-outline icon-tabler-pencil">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -186,6 +191,44 @@
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UnLock Modal -->
+    <div class = "modal fade" id = "unlockModal" tabindex = "-1" aria-labelledby = "unlockModalLabel" aria-hidden = "true">
+        <div class = "modal-dialog">
+            <div class = "modal-content">
+                <div class = "modal-header">
+                    <h5 class = "modal-title" id = "unlockModalLabel">Hiện danh mục</h5>
+                    <button type = "button" class = "btn-close" data-bs-dismiss = "modal" aria-label = "Close"></button>
+                </div>
+                <div class = "modal-body">
+                    Bạn có hiện danh mục này không ?
+                </div>
+                <div class = "modal-footer">
+                    <button type = "button" class = "btn btn-secondary" data-bs-dismiss = "modal">Huỷ</button>
+                    <button type = "button" class = "btn btn-primary" id = "confirmUnlock">Hiện</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lock Modal -->
+    <div class="modal fade" id="lockModal" tabindex="-1" aria-labelledby="lockModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="lockModalLabel">Ẩn danh mục</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc muốn ẩn danh mục này không ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                    <button type="button" class="btn btn-danger" id="confirmLock">Ẩn</button>
                 </div>
             </div>
         </div>
@@ -321,6 +364,74 @@
                   toastr.error("Lỗi");
               }
           });
+      });
+
+      // Khi click vào badge mở khóa
+      $(document).on('click', '.unlock-badge', function() {
+          unlockUserId = $(this).data('id');
+          $('#unlockModal').modal('show');
+      });
+
+      // Xác nhận mở khóa tài khoản
+      $('#confirmUnlock').on('click', function() {
+          if (unlockUserId) {
+              $.ajax({
+                  url: "{{ route('hien-danh-muc') }}",
+                  type: 'POST',
+                  data: {
+                      _token: '{{ csrf_token() }}',
+                      id: unlockUserId
+                  },
+                  success: function(response) {
+                      if (response.success) {
+                          $('#unlockModal').modal('hide');
+                          toastr.success('Hiện danh mục thành công.');
+                          setTimeout(function() {
+                              location.reload();
+                          }, 2000);
+                      } else {
+                          toastr.error('Có lỗi xảy ra khi hiện danh mục.');
+                      }
+                  },
+                  error: function() {
+                      toastr.error('Có lỗi xảy ra khi hiện danh mục.');
+                  }
+              });
+          }
+      });
+
+      // Khi click vào badge khóa
+      $(document).on('click', '.lock-badge', function() {
+          lockUserId = $(this).data('id');
+          $('#lockModal').modal('show');
+      });
+
+      // Xác nhận khóa tài khoản
+      $('#confirmLock').on('click', function() {
+          if (lockUserId) {
+              $.ajax({
+                  url: "{{ route('an-danh-muc') }}",
+                  type: 'POST',
+                  data: {
+                      _token: '{{ csrf_token() }}',
+                      id: lockUserId
+                  },
+                  success: function(response) {
+                      if (response.success) {
+                          $('#lockModal').modal('hide');
+                          toastr.success('Ẩn danh mục thành công.');
+                          setTimeout(function() {
+                              location.reload();
+                          }, 2000);
+                      } else {
+                          toastr.error('Có lỗi xảy ra khi ẩn danh mục.');
+                      }
+                  },
+                  error: function() {
+                      toastr.error('Có lỗi xảy ra khi ẩn danh mục.');
+                  }
+              });
+          }
       });
 
       {{--function filterByRole(productName) {--}}

@@ -9,7 +9,7 @@ use App\Http\Controllers\khach_hang\TraCuuDonHangController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\super_admin\PhuongThucThanhToanController;
-use App\Http\Controllers\super_admin\QuanLyAdminController;
+use App\Http\Controllers\super_admin\QuanLyQuyenAdminController;
 use App\Http\Controllers\super_admin\QuanLyBaiDangController;
 use App\Http\Controllers\super_admin\QuanLyBaoCaoController;
 use App\Http\Controllers\super_admin\QuanLyBinhLuanController;
@@ -53,9 +53,12 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
             Route::get('filter-accounts', [QuanLyTaiKhoanController::class, 'filterAccounts'])->name('super-admin.filter-accounts');
         });
 
-        //Quản lý admin
-        Route::group(['prefix' => '/tai-khoan-admin'], function () {
-            Route::get('/danh-sach',[QuanLyAdminController::class,'getView'])->name('danh-sach-admin');
+        //Phân quyền admin
+        Route::group(['prefix' => '/phan-quyen-admin'], function () {
+            Route::get('/danh-sach',[QuanLyQuyenAdminController::class,'getView'])->name('danh-sach-phan-quyen-admin');
+            Route::get('/danh-sach/{id}',[QuanLyQuyenAdminController::class,'getViewPhanQuyen'])->name('phan-quyen-admin');
+            Route::post('/phan-quyen-admin/update', [QuanLyQuyenAdminController::class, 'updatePermissions'])->name('phan-quyen-admin.update');
+            Route::post('/phan-quyen-admin/update-single', [QuanLyQuyenAdminController::class, 'updateSinglePermission'])->name('phan-quyen-admin.update-single');
         });
 
         // Danh mục
@@ -67,6 +70,9 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
             Route::post('/update/{id}', [QuanLyDanhMucController::class, 'updateDanhMuc'])->name('update-danh-muc');
             Route::get('/super-admin/danh-muc/filter', [QuanLyDanhMucController::class, 'filterDanhMuc'])->name('filter-danh-muc');
             Route::get('/export', [QuanLyDanhMucController::class, 'exportDanhMuc'])->name('export-danh-muc');
+            Route::post('/hien', [QuanLyDanhMucController::class, 'hienDanhMuc'])->name('hien-danh-muc');
+            Route::post('/an', [QuanLyDanhMucController::class, 'anDanhMuc'])->name('an-danh-muc');
+
 
         });
 

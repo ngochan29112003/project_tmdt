@@ -14,14 +14,13 @@ class DanhMucSanPhamModel extends Model
     protected $fillable=[
         'TenDM',
         'TrangThaiDM',
-        'MaHSX'
+        'icon'
     ];
     public $timestamps = false;
 
     public function danhmucSP()
     {
         return DB::table('danhmucsanpham')
-            ->join('hangsanxuat', 'hangsanxuat.MaHSX', '=', 'danhmucsanpham.MaHSX')
             ->get();
     }
 
