@@ -19,7 +19,7 @@
                         </svg>
                         Thêm mới
                     </button>
-                    <a href="#" class="btn btn-success d-flex align-items-center text-white btn-export">
+                    <a href="{{route('export-san-pham')}}" class="btn btn-success d-flex align-items-center text-white btn-export">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-spreadsheet">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M14 3v4a1 1 0 0 0 1 1h4" />
@@ -201,7 +201,7 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="AnhSP" class="form-label">Ảnh sản phẩm</label>
-                                <input type="text" class="form-control" name="AnhSP" id="edit_AnhSP" required>
+                                <input type="file" class="form-control" name="AnhSP" id="edit_AnhSP" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="GiaBan" class="form-label">Giá bán</label>

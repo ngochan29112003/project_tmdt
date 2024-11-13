@@ -13,6 +13,7 @@ use App\Http\Controllers\super_admin\QuanLyAdminController;
 use App\Http\Controllers\super_admin\QuanLyBaiDangController;
 use App\Http\Controllers\super_admin\QuanLyBaoCaoController;
 use App\Http\Controllers\super_admin\QuanLyBinhLuanController;
+use App\Http\Controllers\super_admin\QuanLyCTSPController;
 use App\Http\Controllers\super_admin\TraLoiBinhLuanController;
 use App\Http\Controllers\super_admin\QuanLyDanhMucController;
 use App\Http\Controllers\super_admin\QuanLyDonHangController;
@@ -86,9 +87,19 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
             Route::get('/edit/{id}', [QuanLySanPhamController::class, 'editSanPham'])->name('edit-san-pham');
             Route::post('/update/{id}', [QuanLySanPhamController::class, 'updateSanPham'])->name('update-san-pham');
             Route::delete('/delete/{id}',[QuanLySanPhamController::class,'deleteSP'])->name('delete-san-pham');
+            Route::get('/export', [QuanLySanPhamController::class, 'exportSanPham'])->name('export-san-pham');
         });
 
-        // Đơn hàng
+        // Chi tiết sản phẩm
+        Route::group(['prefix' => '/chi-tiet-san-pham'], function () {
+            Route::get('/danh-sach', [QuanLyCTSPController::class, 'getView'])->name('danh-sach-chi-tiet-san-pham');
+            Route::post('/add', [QuanLyCTSPController::class, 'addCTSP'])->name('add-chi-tiet-san-pham');
+            Route::get('/edit/{id}', [QuanLyCTSPController::class, 'editCTSP'])->name('edit-chi-tiet-san-pham');
+            Route::post('/update/{id}', [QuanLyCTSPController::class, 'updateCTSP'])->name('update-chi-tiet-san-pham');
+            Route::delete('/delete/{id}', [QuanLyCTSPController::class, 'deleteCTSP'])->name('delete-chi-tiet-san-pham');
+        });
+
+            // Đơn hàng
         Route::group(['prefix' => '/don-hang'], function () {
             Route::get('/danh-sach',[QuanLyDonHangController::class,'getView'])->name('danh-sach-don-hang');
             Route::post('/updateTT/{id}', [QuanLyDonHangController::class, 'updateTTDH'])->name('update-trang-thai-don-hang');

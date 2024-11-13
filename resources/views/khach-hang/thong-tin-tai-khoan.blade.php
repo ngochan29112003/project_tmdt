@@ -43,7 +43,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="text-end">
                             <button type="submit" class="btn btn-danger">Lưu thay đổi</button>
                         </div>
@@ -80,6 +79,7 @@
                 }
             });
     });
+
 
         //Lưu lại dữ liệu khi chỉnh sửa
         $('#Formthongtintk').submit(function (e) {

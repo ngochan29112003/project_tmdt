@@ -1,5 +1,17 @@
 @extends('super-admin.master')
 @section('contents')
+    <style>
+        /* Đặt khung tìm kiếm ở góc phải */
+        .dataTables_filter {
+        float: right; /* Đẩy khung tìm kiếm sang phải */
+        text-align: right;
+        }
+
+        .dataTables_filter label {
+        font-weight: normal;
+        }
+    </style>
+
     <div class = "page-header d-print-none">
         <div class = "container-xl">
             <div class = "row g-2 align-items-center">
@@ -186,13 +198,15 @@
           function hideLowerStatusOptions() {
               $('#tableDonHang tbody tr').each(function () {
                   var $row = $(this);
-                  var currentMaTT = parseInt($row.find('.change-status').val()); // Lấy mã trạng thái hiện tại
+                  var currentMaTT = parseInt($row.find('.change-status').val());
 
-                  // Lặp qua từng option trong select để ẩn các option nhỏ hơn currentMaTT
                   $row.find('.change-status option').each(function () {
                       var optionMaTT = parseInt($(this).val());
 
-                      if (optionMaTT < currentMaTT) {
+                      // Kiểm tra điều kiện để ẩn trạng thái "hủy" nếu không phải đang xử lý
+                      if (optionMaTT === 7 && currentMaTT !== 1) {
+                          $(this).hide(); // Ẩn trạng thái "hủy" nếu không phải "đang xử lý"
+                      } else if (optionMaTT < currentMaTT) {
                           $(this).hide(); // Ẩn các trạng thái có mã nhỏ hơn trạng thái hiện tại
                       } else {
                           $(this).show(); // Hiển thị các trạng thái còn lại

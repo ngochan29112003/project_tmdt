@@ -20,7 +20,6 @@
 {{--                    </div>--}}
 {{--                </div>--}}
 {{--            </div>--}}
-
             <div class="row mt-2">
                 <div class="col-md-9 d-flex align-items-center gap-2 justify-content-start">
                     <button class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#Modaladddanhmuc">

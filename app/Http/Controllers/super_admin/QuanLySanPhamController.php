@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 
 use App\Models\admin\SanPhamModel;
 use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+
 class QuanLySanPhamController extends Controller
 {
     public function getView()
@@ -84,5 +88,55 @@ class QuanLySanPhamController extends Controller
             'success' => true,
             'sanpham' => $sanpham,
         ]);
+    }
+
+    public function exportSanPham()
+    {
+        $inputFileName = public_path('excel/bangsanphamexport.xlsx');
+
+        $inputFileType = IOFactory::identify($inputFileName);
+
+        $objReader = IOFactory::createReader($inputFileType);
+
+        $excel = $objReader->load($inputFileName);
+
+        $excel->setActiveSheetIndex(0);
+        $excel->getDefaultStyle()->getFont()->setName('Times New Roman');
+
+        $stt = 1;
+        $cell = $excel->getActiveSheet();
+
+        $model = new SanPhamModel();
+        $leave_report = $model->getSanPham();
+        $num_row = 2;
+
+        foreach ($leave_report as $row) {
+            $cell->setCellValue('A' . $num_row, $stt++);
+            $cell->setCellValue('B' . $num_row, $row->TenSP);
+            $cell->setCellValue('C' . $num_row, $row->GiaBan);
+            $cell->setCellValue('D' . $num_row, $row->SoLuongTonKho);
+            $cell->setCellValue('E' . $num_row, $row->MoTaChiTiet);
+            $cell->setCellValue('F' . $num_row, $row->ThoiGianBaoHanh);
+            $cell->setCellValue('G' . $num_row, $row->TenDM);
+            $cell->setCellValue('H' . $num_row, $row->TenHSX);
+
+            $borderStyle = $cell->getStyle('A' . $num_row . ':H' . $num_row)->getBorders();
+            $borderStyle->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
+            $cell->getStyle('A' . $num_row . ':H' . $num_row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
+
+            $num_row++;
+        }
+        foreach (range('A', 'H') as $columnID) {
+            $excel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+        }
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        $filename = "danh-sach-danh-muc" . '.xlsx';
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+        // Xóa tất cả buffer trước khi xuất dữ liệu
+        ob_end_clean();
+
+        $writer = IOFactory::createWriter($excel, 'Xlsx');
+        $writer->save('php://output');
     }
 }

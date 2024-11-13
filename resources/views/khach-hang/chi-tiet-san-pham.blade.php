@@ -62,6 +62,11 @@
         .star i.bi-star-fill {
             color: red; /* Màu đỏ khi ngôi sao được đánh giá */
         }
+
+        pre {
+            font-family: inherit; /* Kế thừa font chữ từ parent */
+            font-size: inherit; /* Kế thừa cỡ chữ từ parent */
+        }
     </style>
     <div class="container my-5">
         <div class="row">
@@ -121,18 +126,13 @@
 
                     <button class="btn btn-danger mb-3" data-masp = "{{ $list_sanpham->MaSP }}" onclick = "addToCart(this);">Thêm vào giỏ hàng</button>
 
-
                     <!-- Product Specifications -->
-                    <div class="bg-light p-3 rounded mb-4 shadow-sm">
-                        <h5 class="fw-bold">Thông tin sản phẩm</h5>
-                        <ul class="list-unstyled">
-                            <li><strong>CPU:</strong>{{$list_ctsp->CPU}}</li>
-                            <li><strong>RAM:</strong> {{$list_ctsp->Ram}}</li>
-                            <li><strong>Storage:</strong> {{$list_ctsp->Storage}}</li>
-                            <li><strong>Graphics:</strong> {{$list_ctsp->Graphics}}</li>
-                        </ul>
+                    <div class="bg-white p-3 rounded mb-4 shadow-sm">
+                        <h5 class="fw-bold mb-3" style="font-size: 1rem; white-space: pre-line; line-height: 1.5;">Thông tin sản phẩm</h5>
+                        <div style="font-size: 1rem; white-space: pre-line; line-height: 1.5;">
+                            {!! nl2br(e($list_ctsp->ThongTinKyThuat)) !!}
+                        </div>
                     </div>
-
                     <p><strong>Ưu đãi đặc biệt:</strong></p>
                     <ul class="ps-3">
                         <li>Bảo hành <a>{{$list_sanpham->ThoiGianBaoHanh}}</a></li>
@@ -147,17 +147,8 @@
         <div class="row mt-4">
             <div class="col-md-8">
                 <div class="bg-light p-4 rounded mb-4 shadow-sm " style="width: 1300px">
-                    <h2 class="fw-bold">Thông tin chi tiết</h2>
                     <p class="fw-bold">PC GVN Intel i5-12400F</p>
                     <div class="row">
-                        <div class="col-md-6">
-                            <ul class="list-unstyled">
-                                <li><strong>CPU:</strong>{{$list_ctsp->CPU}}</li>
-                                <li><strong>RAM:</strong> {{$list_ctsp->Ram}}</li>
-                                <li><strong>Storage:</strong> {{$list_ctsp->Storage}}</li>
-                                <li><strong>Graphics:</strong> {{$list_ctsp->Graphics}}</li>
-                            </ul>
-                        </div>
                         <div class="col-md-6">
                             <ul class="list-unstyled">
                                 <li><strong>Chế độ bảo hành:</strong> {{$list_sanpham->ThoiGianBaoHanh}}</li>
@@ -177,6 +168,45 @@
             </div>
         </div>
 
+{{--        <!-- <div class="row mt-4">--}}
+{{--            <div class="col-md-12">--}}
+{{--                <div class="bg-light p-4 rounded shadow-sm">--}}
+{{--                    <h2 class="fw-bold mb-3">Sản phẩm tương tự</h2>--}}
+{{--                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">--}}
+{{--                        <div class="col">--}}
+{{--                            <div class="card h-100 shadow-sm border-0">--}}
+{{--                                <img src="{{ asset('asset/img-product/pc_case_xigmatek_-_23_c6832c0dded9424e83cd361ffce6c901_1024x1024.webp') }}" class="card-img-top" alt="Similar Product 1">--}}
+{{--                                <div class="card-body">--}}
+{{--                                    <h5 class="card-title">PC GVN Intel i5-11400</h5>--}}
+{{--                                    <p class="card-text text-danger fw-bold">9.990.000₫</p>--}}
+{{--                                    <button class="btn btn-danger">Xem chi tiết</button>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="col">--}}
+{{--                            <div class="card h-100 shadow-sm border-0">--}}
+{{--                                <img src="{{ asset('asset/img-product/pc_case_xigmatek_-_24_936cc341c90748bfa4fa7363b114291b_1024x1024.webp') }}" class="card-img-top" alt="Similar Product 2">--}}
+{{--                                <div class="card-body">--}}
+{{--                                    <h5 class="card-title">PC GVN AMD Ryzen 5</h5>--}}
+{{--                                    <p class="card-text text-danger fw-bold">10.490.000₫</p>--}}
+{{--                                    <button class="btn btn-danger">Xem chi tiết</button>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="col">--}}
+{{--                            <div class="card h-100 shadow-sm border-0">--}}
+{{--                                <img src="{{ asset('asset/img-product/pc_case_xigmatek_-_22_e4c822262b3d4946a6f427d02adebf8b_1024x1024.webp') }}" class="card-img-top" alt="Similar Product 3">--}}
+{{--                                <div class="card-body">--}}
+{{--                                    <h5 class="card-title">PC GVN Intel i7-12700F</h5>--}}
+{{--                                    <p class="card-text text-danger fw-bold">15.490.000₫</p>--}}
+{{--                                    <button class="btn btn-danger">Xem chi tiết</button>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div> -->--}}
 
 
 

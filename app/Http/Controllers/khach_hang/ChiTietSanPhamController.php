@@ -14,12 +14,6 @@ class ChiTietSanPhamController extends Controller
 {
     public function getViewChiTietSP($id)
     {
-//        $model_BL = new BinhLuanModel();
-//        $model_SP = new SanPhamModel();
-//        $list_bl = $model_BL->getBinhLuan($id);
-//        $list_sp = $model_SP->getChiTietSP($id);
-////        dd($list_bl);
-//        return view('khach-hang.chi-tiet-san-pham', compact('list_bl','list_sp'));
         $model_BL = new BinhLuanModel();
         $model_SP = new SanPhamModel();
         $list_bl = $model_BL->getBinhLuan($id);
