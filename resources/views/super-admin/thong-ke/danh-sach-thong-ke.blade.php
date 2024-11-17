@@ -12,7 +12,7 @@
                     </a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a href="{{ route('admin.reports') }}" class="nav-link text-dark">
+                    <a href="#" class="nav-link text-dark">
                         <i class="bi bi-bar-chart-fill me-2"></i>Thống kê báo cáo
                     </a>
                 </li>
@@ -22,31 +22,31 @@
         <!-- Main Content -->
         <main class="col-md-9 p-4">
             <h1 class="fw-bold text-danger">Báo cáo thống kê</h1>
-            
+
             <!-- Tổng quan báo cáo -->
             <div class="row">
                 <div class="col-md-3">
                     <div class="card shadow-sm p-3 mb-4 bg-light">
                         <h4>Tổng số tài khoản</h4>
-                        <p class="fw-bold">{{ $totalAccounts }}</p>
+                        <p class="fw-bold">1,200</p> <!-- Dữ liệu tĩnh có thể thay bằng dữ liệu động -->
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card shadow-sm p-3 mb-4 bg-light">
                         <h4>Tổng số đơn hàng</h4>
-                        <p class="fw-bold">{{ $totalOrders }}</p>
+                        <p class="fw-bold">850</p> <!-- Dữ liệu tĩnh -->
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card shadow-sm p-3 mb-4 bg-light">
                         <h4>Tổng số sản phẩm</h4>
-                        <p class="fw-bold">{{ $totalProducts }}</p>
+                        <p class="fw-bold">500</p> <!-- Dữ liệu tĩnh -->
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card shadow-sm p-3 mb-4 bg-light">
                         <h4>Tổng doanh thu</h4>
-                        <p class="fw-bold">{{ number_format($totalRevenue, 0, ',', '.') }} VND</p>
+                        <p class="fw-bold">1,500,000 VND</p> <!-- Dữ liệu tĩnh -->
                     </div>
                 </div>
             </div>
@@ -62,13 +62,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($customerReport as $key => $customer)
-                        <tr>
-                            <td>{{ $key + 1 }}</td>
-                            <td>{{ $customer->name }}</td>
-                            <td>{{ $customer->orders_count }}</td>
-                        </tr>
-                    @endforeach
+                    <tr>
+                        <td>1</td>
+                        <td>Nguyễn Văn A</td>
+                        <td>25</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Trần Thị B</td>
+                        <td>18</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Lê Văn C</td>
+                        <td>15</td>
+                    </tr>
                 </tbody>
             </table>
 
@@ -83,13 +91,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($productReport as $key => $product)
-                        <tr>
-                            <td>{{ $key + 1 }}</td>
-                            <td>{{ $product->name }}</td>
-                            <td>{{ $product->orders_count }}</td>
-                        </tr>
-                    @endforeach
+                    <tr>
+                        <td>1</td>
+                        <td>Sản phẩm A</td>
+                        <td>120</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Sản phẩm B</td>
+                        <td>110</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Sản phẩm C</td>
+                        <td>95</td>
+                    </tr>
                 </tbody>
             </table>
 
@@ -103,12 +119,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($monthlyReport as $report)
-                        <tr>
-                            <td>{{ $report->month }}</td>
-                            <td>{{ number_format($report->revenue, 0, ',', '.') }} VND</td>
-                        </tr>
-                    @endforeach
+                    <tr>
+                        <td>Tháng 1</td>
+                        <td>150,000 VND</td>
+                    </tr>
+                    <tr>
+                        <td>Tháng 2</td>
+                        <td>180,000 VND</td>
+                    </tr>
+                    <tr>
+                        <td>Tháng 3</td>
+                        <td>200,000 VND</td>
+                    </tr>
                 </tbody>
             </table>
 
@@ -122,12 +144,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($quarterlyReport as $report)
-                        <tr>
-                            <td>{{ $report->quarter }}</td>
-                            <td>{{ number_format($report->revenue, 0, ',', '.') }} VND</td>
-                        </tr>
-                    @endforeach
+                    <tr>
+                        <td>Quý 1</td>
+                        <td>500,000 VND</td>
+                    </tr>
+                    <tr>
+                        <td>Quý 2</td>
+                        <td>600,000 VND</td>
+                    </tr>
                 </tbody>
             </table>
 
@@ -141,15 +165,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($yearlyReport as $report)
-                        <tr>
-                            <td>{{ $report->year }}</td>
-                            <td>{{ number_format($report->revenue, 0, ',', '.') }} VND</td>
-                        </tr>
-                    @endforeach
+                    <tr>
+                        <td>2024</td>
+                        <td>1,200,000 VND</td>
+                    </tr>
+                    <tr>
+                        <td>2023</td>
+                        <td>1,000,000 VND</td>
+                    </tr>
                 </tbody>
             </table>
-
         </main>
     </div>
 </div>
