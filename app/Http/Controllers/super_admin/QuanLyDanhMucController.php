@@ -5,6 +5,7 @@ namespace App\Http\Controllers\super_admin;
 use App\Http\Controllers\Controller;
 
 use App\Models\admin\DanhMucSanPhamModel;
+use App\Models\admin\QuanLyVanChuyenModel;
 use Illuminate\Http\Request;
 class QuanLyDanhMucController extends Controller
 {

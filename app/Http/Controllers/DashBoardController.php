@@ -10,7 +10,7 @@ class DashBoardController extends Controller
     public function getViewDashBoardSuperAdmin()
     {
 
-        return view('super-admin.master');
+        return view('super-admin.thong-ke.danh-sach-thong-ke');
     }
 
     public function getViewDashBoardUser()

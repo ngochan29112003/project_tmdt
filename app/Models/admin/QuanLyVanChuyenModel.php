@@ -10,13 +10,20 @@ class QuanLyVanChuyenModel extends Model
 {
     use HasFactory;
 
-    protected $table = 'thongtinvanchuyen';
-    protected $primaryKey = 'MaTTVC';
+    protected $table = 'donvivanchuyen';
+    protected $primaryKey = 'MaVC';
+
+    protected $fillable=[
+        'TenDonViVC',
+        'TienVC',
+        'TrangThaiVC',
+    ];
+
     public $timestamps = false;
-    public function getVanChuyen()
+    public function getDonViVanChuyen()
     {
-        return DB::table('thongtinvanchuyen')
-            ->join('donvivanchuyen', 'donvivanchuyen.MaVC', '=', 'thongtinvanchuyen.MaVC')
+        return DB::table('donvivanchuyen')
+            // ->join('donvivanchuyen', 'donvivanchuyen.MaVC', '=', 'thongtinvanchuyen.MaVC')
             ->get();
     }
 }

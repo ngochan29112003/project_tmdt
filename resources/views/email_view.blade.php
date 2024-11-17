@@ -31,7 +31,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>Mã xác nhận của bạn là: {{ $verificationCode }}</h1>
+    <h1>Mã xác nhận của bạn là: {{ $code  }}</h1>
     <p>Mã này có hiệu lực trong vòng 3 phút.</p>
     <p>Chúc bạn một ngày tốt lành!<br>
         Nếu bạn không yêu cầu thay đổi mật khẩu, vui lòng bỏ qua email này.</p>
