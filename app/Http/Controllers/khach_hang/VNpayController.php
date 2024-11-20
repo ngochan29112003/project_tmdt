@@ -117,7 +117,21 @@ class VNpayController extends Controller
         }
     }
 
+    public function HuyDon(Request $request, $id)
+    {
 
+            // Tìm đơn hàng theo ID
+            $order = VNpayModel::find($id);
+            // dd($order);
+            // Kiểm tra nếu đơn hàng không tồn tại
+            if (!$order) {
+                return response()->json(['success' => false, 'message' => 'Đơn hàng không tồn tại']);
+            }
+
+            $order->MaTT = 6; // Đặt trạng thái là "Hủy"
+            $order->save();
+            return response()->json(['success' => true, 'message' => 'Hủy đơn hàng thành công']);
+    }
 
 
 }

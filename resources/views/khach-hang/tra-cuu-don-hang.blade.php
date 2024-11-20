@@ -213,6 +213,9 @@
             orders.forEach(function (order) {
                 var formattedTotal = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(order.TongTien);
 
+                var thanhToanStatusClass = order.ThanhToan.trim() === '1' ? 'paid-status' : 'unpaid-status';
+                var thanhToanStatusText = order.ThanhToan.trim() === '1' ? 'Đã thanh toán' : 'Chưa thanh toán';
+
                 orderListHtml += `
                     <div class="order-item border rounded p-4 mb-4 shadow-sm">
                         <div class="row">
@@ -225,9 +228,20 @@
                                 <p><strong>PTTT:</strong> ${order.TenPTTT}</p>
                                 <p><strong>Ngày mua:</strong> ${order.NgayTaoDH}</p>
                                 <p><strong>Tổng tiền:</strong> ${formattedTotal}</p>
+                                <p class="${thanhToanStatusClass}"><strong>Trạng thái thanh toán:</strong> ${thanhToanStatusText}</p>
                             </div>
                         </div>
                         <hr class="my-3">
+                        ${order.TenPTTT === 'Thanh toán trực tuyến' && order.ThanhToan === '0' ? `
+                        <form action="{{ route('thanh-toan-vnpay') }}" method="POST">
+                            @csrf
+                            <input type="hidden" id="ma_don_hang" name="redirect" value="${order.MaDH}">
+                            <button type="submit" class="btn btn-primary">Thanh toán Online</button>
+                        </form>
+                        ` : ''}
+                         ${(order.MaTT === 1 || order.MaTT === 2) && order.ThanhToan === '0' ? `
+                        <button class="btn btn-danger mt-2 cancel-order-btn" data-id="${order.MaDH}">Hủy đơn</button>
+                        ` : ''}
                     </div>
                     `;
             });
@@ -267,6 +281,9 @@
                             <button type="submit" class="btn btn-primary">Thanh toán Online</button>
                         </form>
                         ` : ''}
+                         ${(order.MaTT === 1 || order.MaTT === 2) && order.ThanhToan === '0' ? `
+                        <button class="btn btn-danger mt-2 cancel-order-btn" data-id="${order.MaDH}">Hủy đơn</button>
+                        ` : ''}
                     </div>
                     `;
             });
@@ -274,5 +291,49 @@
             $('#no-orders').hide();  // Hide "no orders" message
         }
     });
+
+    $('#order-list').on('click', '.cancel-order-btn', function () {
+    var maDH = $(this).data('id'); // Lấy mã đơn hàng từ nút
+    var orderItem = $(this).closest('.order-item'); // Lấy phần tử đơn hàng
+
+    // Hiển thị thông báo xác nhận với Swal
+    Swal.fire({
+        title: 'Bạn có chắc chắn?',
+        text: "Bạn có muốn hủy đơn hàng này không?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, cancel it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Gửi yêu cầu AJAX để hủy đơn hàng
+            $.ajax({
+                url: '{{ route('huy-don-hang', ':id') }}'.replace(':id', maDH),
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function (response) {
+                    if (response.success) {
+                        toastr.success(response.message, "Đã hủy đơn hàng thành công");
+
+                        // Xóa hoặc cập nhật trạng thái đơn hàng trên giao diện
+                        orderItem.remove();
+                        if ($('#order-list').children().length === 0) {
+                            $('#no-orders').show(); // Hiển thị thông báo nếu không còn đơn hàng
+                        }
+                    } else {
+                        toastr.error(response.message, "Hủy đơn không thành công");
+                    }
+                },
+                error: function (xhr) {
+                    toastr.error("Đã xảy ra lỗi khi hủy đơn hàng", "Error");
+                }
+            });
+        }
+    });
+});
+
 </script>
 @endsection

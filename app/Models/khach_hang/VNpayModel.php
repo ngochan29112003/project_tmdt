@@ -13,6 +13,7 @@ class VNpayModel extends Model
     protected $table = 'donhang'; // Bảng donhang trong cơ sở dữ liệu
     protected $primaryKey = 'MaDH'; // Khóa chính của bảng rotected $primaryKey = 'MaDH'; // Khóa chính của bảng
 
+    public $timestamps = false;
     // Phương thức lấy TongTien từ donhang bằng MaDH
     public static function layTongTienTheoMaDH($maDH)
     {

@@ -169,7 +169,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         //Thanh toán VNpay
         Route::post('/home/tra-cuu-don-hang/thanh-toan', [VNpayController::class, 'ThanhToanVNpay'])->name('thanh-toan-vnpay');
         Route::get('/home/tra-cuu-don-hang/ket-qua', [VNpayController::class, 'ketQuaThanhToan'])->name('vnpay.callback');
-
+        Route::post('/home/tra-cuu-don-hang//update{id}', [VNpayController::class, 'HuyDon'])->name('huy-don-hang');
 
 
         
