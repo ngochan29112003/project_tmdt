@@ -135,16 +135,4 @@ class DashBoardModel extends Model
             ->orderBy('SoLuongDaBan', 'desc') // Sắp xếp giảm dần theo số lượng đã bán
             ->get();
     }
-
-    public function getEmail($matk)
-    {
-        return DB::table('taikhoan')
-            ->where('MaTK', '=', $matk)
-            ->get('Email');
-    }
-
-    public function getMaKM()
-    {
-        return DB::table('khuyenmai')->get();
-    }
 }

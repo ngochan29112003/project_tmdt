@@ -47,7 +47,6 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::post('/get-thong-ke', [DashBoardController::class, 'getThongKe'])->name('get-thong-ke');
         Route::get('/excel-export-khach-hang', [DashBoardController::class, 'getExportKH'])->name('excel-export-khach-hang');
         Route::get('/excel-export-san-pham', [DashBoardController::class, 'getExportSP'])->name('excel-export-san-pham');
-        Route::post('/gui-ma-khuyen-mai', [DashBoardController::class, 'guiMaKM'])->name('gui-ma-khuyen-mai');
         
 
 

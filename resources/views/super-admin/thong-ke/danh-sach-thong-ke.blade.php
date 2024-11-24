@@ -4,21 +4,19 @@
     <!-- Header Section -->
     <div class="row justify-content-between align-items-center mb-5">
         <div class="col flex-shrink-0 mb-5 mb-md-0">
-            <h1 class="display-7 mb-0">Thống kê</h1>
+            <h1 class="display-7 mb-0">TRANG QUẢN LÝ THỐNG KÊ</h1>
         </div>
         <div class="col-12 col-md-auto">
             <div class="col-12 col-md-auto">
-                <div class="d-flex gap-3">
-                    <select class="mw-100 form-select custom-select" id="LoaiThongKe" aria-label="Sales from"
-                        style="width: 200px;">
+                <div class="d-flex gap-4">
+                    <select class="mw-10 form-select custom-select" id="LoaiThongKe" aria-label="Sales from" style="width: auto;">
                         <option value="Tất cả" selected>Tất cả</option>
-                        <option value="Tháng">Tháng gần nhất</option>
-                        <option value="Quý">Quý gần nhất</option>
-                        <option value="Năm">Năm gần nhất</option>
+                        <option value="Tháng">Tháng (1 tháng gần nhất)</option>
+                        <option value="Quý">Quý (3 tháng gần nhất)</option>
+                        <option value="Năm">Năm (12 tháng gần nhất)</option>
                     </select>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -159,40 +157,11 @@
     <!-- Bảng khách hàng -->
     <div class="card card-raised mb-5">
         <div class="card-header bg-primary text-white px-4">
-            <h2 class="card-title text-white mb-0">Khách hàng</h2>
+            <h2 class="card-title text-white mb-0">Thống kê khách hàng</h2>
         </div>
-        <div class="card-body p-4">
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            <th class="col-1 text-center font-weight-bold" style="font-size: 1rem;">STT</th>
-                            <th class="col-3 text-center font-weight-bold" style="font-size: 1rem;">Họ và tên</th>
-                            <th class="col-2 text-center font-weight-bold" style="font-size: 1rem;">SĐT</th>
-                            <th class="col-2 text-center font-weight-bold" style="font-size: 1rem;">Số đơn đã đạt</th>
-                            <th class="col-3 text-center font-weight-bold" style="font-size: 1rem;">Số tiền đã mua (VNĐ)
-                            </th>
-                            
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php($stt = 1)
-                        @foreach($list_kh as $item)
-                            <tr>
-                                <td class="text-center">{{$stt++}}</td>
-                                <td class="text-start">{{$item->HoTen}}</td>
-                                <td class="text-start">{{$item->SDT}}</td>
-                                <td class="text-end">{{$item->SoDonDaMua}}</td>
-                                <td class="text-end">{{number_format($item->TongTienDaMua, 0, ',', '.')}} VNĐ</td>
-                                
-                            </tr>
-                        @endforeach
-
-                    </tbody>
-                </table>
-                <div class="card-footer bg-transparent">
+        <div class="card-footer bg-transparent">
                     <a href="{{route('excel-export-khach-hang')}}"
-                        class="btn btn-success d-flex align-items-center text-white btn-export">
+                        class="btn btn-success align-items-center text-white btn-export">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="icon icon-tabler icons-tabler-outline icon-tabler-file-spreadsheet">
@@ -206,6 +175,33 @@
                         Xuất file Excel
                     </a>
                 </div>
+        <div class="card-body p-2">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="col-1 text-center font-weight-bold" style="font-size: 1rem;">STT</th>
+                            <th class="col-3 text-center font-weight-bold" style="font-size: 1rem;">Họ và tên</th>
+                            <th class="col-2 text-center font-weight-bold" style="font-size: 1rem;">SĐT</th>
+                            <th class="col-2 text-center font-weight-bold" style="font-size: 1rem;">Số đơn đã đạt</th>
+                            <th class="col-3 text-center font-weight-bold" style="font-size: 1rem;">Số tiền đã mua (VNĐ)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php($stt = 1)
+                        @foreach($list_kh as $item)
+                            <tr>
+                                <td class="text-center">{{$stt++}}</td>
+                                <td class="text-start">{{$item->HoTen}}</td>
+                                <td class="text-end">{{$item->SDT}}</td>
+                                <td class="text-end">{{$item->SoDonDaMua}}</td>
+                                <td class="text-end">{{number_format($item->TongTienDaMua, 0, ',', '.')}} VNĐ</td>
+                            </tr>
+                        @endforeach
+
+                    </tbody>
+                </table>
+                
             </div>
         </div>
     </div>
@@ -213,8 +209,24 @@
     <!-- Bảng sản phẩm -->
     <div class="card card-raised mb-5">
         <div class="card-header bg-primary text-white px-4">
-            <h2 class="card-title text-white mb-0">Sản phẩm</h2>
+            <h2 class="card-title text-white mb-0">Thống kê sản phẩm</h2>
         </div>
+        <div class="card-footer bg-transparent">
+                    <a href="{{route('excel-export-san-pham')}}"
+                        class="btn btn-success align-items-center text-white btn-export">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-file-spreadsheet">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                            <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+                            <path d="M8 11h8v7h-8z" />
+                            <path d="M8 15h8" />
+                            <path d="M11 11v7" />
+                        </svg>
+                        Xuất file Excel
+                    </a>
+                </div>
         <div class="card-body p-4">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered">
@@ -222,8 +234,7 @@
                         <tr>
                             <th class="col-1 text-center font-weight-bold" style="font-size: 1rem;">STT</th>
                             <th class="col-4 text-center font-weight-bold" style="font-size: 1rem;">Tên sản phẩm</th>
-                            <th class="col-2 text-center font-weight-bold" style="font-size: 1rem;">Số lượng tồn kho
-                            </th>
+                            <th class="col-2 text-center font-weight-bold" style="font-size: 1rem;">Số lượng tồn kho</th>
                             <th class="col-2 text-center font-weight-bold" style="font-size: 1rem;">Số lượng đã bán</th>
                         </tr>
                     </thead>
@@ -245,22 +256,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                <div class="card-footer bg-transparent">
-                    <a href="{{route('excel-export-san-pham')}}"
-                        class="btn btn-success d-flex align-items-center text-white btn-export">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="icon icon-tabler icons-tabler-outline icon-tabler-file-spreadsheet">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                            <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-                            <path d="M8 11h8v7h-8z" />
-                            <path d="M8 15h8" />
-                            <path d="M11 11v7" />
-                        </svg>
-                        Xuất file Excel
-                    </a>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -286,48 +282,6 @@
                             $('.card-body .display-5:eq(1)').text(response.tong_sp);
                             $('.card-body .display-5:eq(2)').text(response.tong_dh);
                             $('.card-body .display-6 span').text(response.tong_tien);
-
-                            // Cập nhật bảng khách hàng
-                            var tableKH = $('.table:eq(0) tbody');
-                            tableKH.empty();
-                            var stt = 1;
-                            response.list_kh.forEach(function (item) {
-                                var tongTien = new Intl.NumberFormat('vi-VN').format(item.TongTienDaMua);
-                                var row = '<tr>' +
-                                    '<td class="text-center">' + stt++ + '</td>' +
-                                    '<td class="text-start">' + item.HoTen + '</td>' +
-                                    '<td class="text-start">' + item.SDT + '</td>' +
-                                    '<td class="text-end">' + item.SoDonDaMua + '</td>' +
-                                    '<td class="text-end">' + tongTien + ' VNĐ</td>' +
-                                    '<td class="text-center">' +
-                                    
-                                    '</tr>';
-                                tableKH.append(row);
-                            });
-
-                            // Lắng nghe sự kiện nút gửi mã giảm giá
-                            $('.send-discount-code').click(function () {
-                                var matk = $(this).data('matk');  // Lấy MaTK từ button hoặc phần tử
-                                $.ajax({
-                                    url: '{{ route("gui-ma-khuyen-mai") }}',  // Route gửi mã khuyến mãi
-                                    type: 'POST',
-                                    data: {
-                                        _token: '{{ csrf_token() }}',  // Thêm CSRF token
-                                        MaTK: matk  // Truyền MaTK vào request
-                                    },
-                                    success: function (response) {
-                                        if (response.success) {
-                                            alert('Mã giảm giá đã được gửi thành công!');
-                                        } else {
-                                            alert('Có lỗi xảy ra khi gửi mã giảm giá: ' + response.message);
-                                        }
-                                    },
-                                    error: function () {
-                                        alert('Có lỗi xảy ra khi gửi mã giảm giá.');
-                                    }
-                                });
-                            });
-
                         }
                     },
                     error: function (xhr, status, error) {
@@ -336,7 +290,5 @@
                 });
             });
         });
-
-
     </script>
     @endsection
