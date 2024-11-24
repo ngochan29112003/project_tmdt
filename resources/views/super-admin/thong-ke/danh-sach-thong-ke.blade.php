@@ -4,16 +4,17 @@
     <!-- Header Section -->
     <div class="row justify-content-between align-items-center mb-5">
         <div class="col flex-shrink-0 mb-5 mb-md-0">
-            <h1 class="display-7 mb-0">Dashboard</h1>
+            <h1 class="display-7 mb-0">Thống kê</h1>
         </div>
         <div class="col-12 col-md-auto">
             <div class="col-12 col-md-auto">
                 <div class="d-flex gap-3">
-                    <select class="mw-100 form-select custom-select" id="salesFrom" aria-label="Sales from"
+                    <select class="mw-100 form-select custom-select" id="LoaiThongKe" aria-label="Sales from"
                         style="width: 200px;">
-                        <option value="0" selected>Tháng</option>
-                        <option value="1">Quý</option>
-                        <option value="2">Năm</option>
+                        <option value="Tất cả" selected>Tất cả</option>
+                        <option value="Tháng">Tháng gần nhất</option>
+                        <option value="Quý">Quý gần nhất</option>
+                        <option value="Năm">Năm gần nhất</option>
                     </select>
                 </div>
             </div>
@@ -29,8 +30,9 @@
                 <div class="card-body d-flex flex-column justify-content-between">
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <div class="me-2">
-                            <div class="display-5 text-white">101</div>
-                            <div class="card-text">Khách hàng</div>
+                            <div class="card-text">Tài khoản</div>
+                            <div class="display-5 text-white">{{$tong_tk}}</div>
+
                         </div>
                         <div class="icon-circle bg-white text-primary d-flex justify-content-center align-items-center"
                             style="width: 50px; height: 50px; border-radius: 50%;">
@@ -40,7 +42,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="card-text">
+                    <!-- <div class="card-text">
                         <div class="d-inline-flex align-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
                                 class="bi bi-arrow-up" viewBox="0 0 16 16">
@@ -50,7 +52,7 @@
                             <div class="caption fw-500 me-2">3%</div>
                             <div class="caption">so với tháng trước</div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -61,8 +63,9 @@
                 <div class="card-body d-flex flex-column justify-content-between">
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <div class="me-2">
-                            <div class="display-5 text-white">120</div>
                             <div class="card-text">Sản phẩm</div>
+                            <div class="display-5 text-white">{{$tong_sp}}</div>
+
                         </div>
                         <div class="icon-circle bg-white text-warning d-flex justify-content-center align-items-center"
                             style="width: 50px; height: 50px; border-radius: 50%;">
@@ -73,7 +76,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="card-text">
+                    <!-- <div class="card-text">
                         <div class="d-inline-flex align-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
                                 class="bi bi-arrow-down" viewBox="0 0 16 16">
@@ -83,7 +86,7 @@
                             <div class="caption fw-500 me-2">3%</div>
                             <div class="caption">so với tháng trước</div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -94,8 +97,9 @@
                 <div class="card-body d-flex flex-column justify-content-between">
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <div class="me-2">
-                            <div class="display-5 text-white">50</div>
-                            <div class="card-text">Đơn hàng</div>
+                            <div class="card-text">Đơn hàng thành công</div>
+                            <div class="display-5 text-white">{{$tong_dh}}</div>
+
                         </div>
                         <div class="icon-circle bg-white text-secondary d-flex justify-content-center align-items-center"
                             style="width: 50px; height: 50px; border-radius: 50%;">
@@ -106,7 +110,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="card-text">
+                    <!-- <div class="card-text">
                         <div class="d-inline-flex align-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
                                 class="bi bi-arrow-up" viewBox="0 0 16 16">
@@ -116,7 +120,7 @@
                             <div class="caption fw-500 me-2">3%</div>
                             <div class="caption">so với tháng trước</div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -127,14 +131,15 @@
                 <div class="card-body p-3 d-flex flex-column justify-content-between">
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <div class="me-2">
+                            <div class="card-text">Doanh thu</div>
                             <div class="display-6 text-white text-wrap text-break">
-                                <span>1.000.000.000</span>
+                                <span>{{$tong_tien}}</span>
                                 VNĐ
                             </div>
-                            <div class="card-text">Doanh thu</div>
+
                         </div>
                     </div>
-                    <div class="card-text">
+                    <!-- <div class="card-text">
                         <div class="d-inline-flex align-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
                                 class="bi bi-currency-exchange" viewBox="0 0 16 16">
@@ -144,176 +149,194 @@
                             <div class="caption fw-500 me-2">3%</div>
                             <div class="caption">so với tháng trước</div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
     </div>
     <!-- -------------------------------------------------------------- -->
 
-    <!-- Biểu đồ phân tích doanh thu -->
-    <div class="row gx-5">
-        <!-- Biểu đồ phân tích doanh thu -->
-        <div class="col-lg-8 mb-5">
-            <div class="card card-raised h-100">
-                <div class="card-header bg-primary text-white px-4">
-                    <h2 class="card-title text-white mb-0">Biểu đồ tăng trưởng</h2>
-                </div>
-                <div class="card-body p-4">
-                    <canvas id="dashboardBarChart"></canvas>
-                </div>
-                <div class="card-footer bg-transparent">
-                    <a href="#!" class="text-primary">Xuất báo cáo</a>
-                </div>
-            </div>
+    <!-- Bảng khách hàng -->
+    <div class="card card-raised mb-5">
+        <div class="card-header bg-primary text-white px-4">
+            <h2 class="card-title text-white mb-0">Khách hàng</h2>
         </div>
+        <div class="card-body p-4">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="col-1 text-center font-weight-bold" style="font-size: 1rem;">STT</th>
+                            <th class="col-3 text-center font-weight-bold" style="font-size: 1rem;">Họ và tên</th>
+                            <th class="col-2 text-center font-weight-bold" style="font-size: 1rem;">SĐT</th>
+                            <th class="col-2 text-center font-weight-bold" style="font-size: 1rem;">Số đơn đã đạt</th>
+                            <th class="col-3 text-center font-weight-bold" style="font-size: 1rem;">Số tiền đã mua (VNĐ)
+                            </th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php($stt = 1)
+                        @foreach($list_kh as $item)
+                            <tr>
+                                <td class="text-center">{{$stt++}}</td>
+                                <td class="text-start">{{$item->HoTen}}</td>
+                                <td class="text-start">{{$item->SDT}}</td>
+                                <td class="text-end">{{$item->SoDonDaMua}}</td>
+                                <td class="text-end">{{number_format($item->TongTienDaMua, 0, ',', '.')}} VNĐ</td>
+                                
+                            </tr>
+                        @endforeach
 
-
-        <!-- Biểu đồ sản phẩm -->
-        <div class="col-lg-4 mb-5">
-            <div class="card card-raised h-100">
-                <div class="card-header bg-primary text-white px-4">
-                    <h2 class="card-title text-white mb-0">Biểu đồ tổng sản phẩm</h2>
-                </div>
-                <div class="card-body p-4">
-                    <canvas id="myPieChart"></canvas>
-                </div>
+                    </tbody>
+                </table>
                 <div class="card-footer bg-transparent">
-                    <a href="#!" class="text-primary">Xuất báo cáo</a>
+                    <a href="{{route('excel-export-khach-hang')}}"
+                        class="btn btn-success d-flex align-items-center text-white btn-export">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-file-spreadsheet">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                            <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+                            <path d="M8 11h8v7h-8z" />
+                            <path d="M8 15h8" />
+                            <path d="M11 11v7" />
+                        </svg>
+                        Xuất file Excel
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Bảng khách hàng -->
+    <!-- Bảng sản phẩm -->
     <div class="card card-raised mb-5">
         <div class="card-header bg-primary text-white px-4">
-            <h2 class="card-title text-white mb-0">Lịch sử mua hàng của khách hàng</h2>
+            <h2 class="card-title text-white mb-0">Sản phẩm</h2>
         </div>
         <div class="card-body p-4">
-            <div class="card-footer bg-transparent">
-                <a href="#!" class="text-primary">Xuất báo cáo</a>
-            </div>
             <div class="table-responsive">
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th class="col-2">STT</th>
-                            <th class="col-2">Họ và tên</th>
-                            <th class="col-2">SĐT</th>
-                            <th class="col-3">Số đơn đã đạt</th>
-                            <th class="col-3">Số tiền đã mua</th>
+                            <th class="col-1 text-center font-weight-bold" style="font-size: 1rem;">STT</th>
+                            <th class="col-4 text-center font-weight-bold" style="font-size: 1rem;">Tên sản phẩm</th>
+                            <th class="col-2 text-center font-weight-bold" style="font-size: 1rem;">Số lượng tồn kho
+                            </th>
+                            <th class="col-2 text-center font-weight-bold" style="font-size: 1rem;">Số lượng đã bán</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Unity Pugh</td>
-                            <td>9958</td>
-                            <td>10</td>
-                            <td>500,000 VND</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Theodore Duran</td>
-                            <td>8971</td>
-                            <td>15</td>
-                            <td>1,200,000 VND</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Kylie Bishop</td>
-                            <td>3147</td>
-                            <td>8</td>
-                            <td>350,000 VND</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Willow Gilliam</td>
-                            <td>3497</td>
-                            <td>12</td>
-                            <td>700,000 VND</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Blossom Dickerson</td>
-                            <td>5018</td>
-                            <td>5</td>
-                            <td>250,000 VND</td>
-                        </tr>
-                        <!-- Thêm dữ liệu nếu cần -->
+                        @php($stt = 1)
+                        @foreach($list_sp as $item)
+                            <tr>
+                                <td class="text-center">{{$stt++}}</td>
+                                <td class="text-start">{{$item->TenSP}}</td>
+                                <td class="text-end">
+                                    @if($item->SoLuongTonKho < 0)
+                                        0
+                                    @else
+                                        {{$item->SoLuongTonKho}}
+                                    @endif
+                                </td>
+                                <td class="text-end">{{$item->SoLuongDaBan}}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
+                <div class="card-footer bg-transparent">
+                    <a href="{{route('excel-export-san-pham')}}"
+                        class="btn btn-success d-flex align-items-center text-white btn-export">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-file-spreadsheet">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                            <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+                            <path d="M8 11h8v7h-8z" />
+                            <path d="M8 15h8" />
+                            <path d="M11 11v7" />
+                        </svg>
+                        Xuất file Excel
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
     @endsection
     @section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Dữ liệu cho biểu đồ tăng trưởng qua từng ngày
-        var ctx = document.getElementById('dashboardBarChart').getContext('2d');
-        var dashboardBarChart = new Chart(ctx, {
-            type: 'line', // Sử dụng biểu đồ đường
-            data: {
-                labels: ['21/11/2024', '22/11/2024', '23/11/2024', '24/11/2024', '25/11/2024', '26/11/2024', '27/11/2024', '28/11/2024', '29/11/2024', '30/11/2024'], // Các ngày
-                datasets: [{
-                    label: 'Đơn hàng đã bán',
-                    data: [2, 3, 5, 7, 8, 6, 10, 11, 9, 15], // Số đơn hàng đã bán theo từng ngày
-                    borderColor: 'rgba(54, 162, 235, 1)', // Màu của đường đơn hàng
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)', // Màu nền
-                    fill: false, // Không có nền phía dưới đường
-                    tension: 0.1
-                }, {
-                    label: 'Sản phẩm mới',
-                    data: [1, 2, 4, 6, 5, 8, 6, 7, 9, 21], // Số sản phẩm mới thêm vào từng ngày
-                    borderColor: 'rgba(255, 99, 132, 1)', // Màu của đường sản phẩm mới
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)', // Màu nền
-                    fill: false, // Không có nền phía dưới đường
-                    tension: 0.1
-                }, {
-                    label: 'Khách hàng mới',
-                    data: [1, 2, 3, 10, 3, 5, 6, 7, 8, 9], // Số khách hàng mới mỗi ngày
-                    borderColor: 'rgba(153, 102, 255, 1)', // Màu của đường khách hàng mới
-                    backgroundColor: 'rgba(153, 102, 255, 0.2)', // Màu nền
-                    fill: false, // Không có nền phía dưới đường
-                    tension: 0.1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
+        $(document).ready(function () {
+            // Lắng nghe sự kiện khi người dùng chọn loại thống kê
+            $('#LoaiThongKe').change(function () {
+                var loaiThongKe = $(this).val();
+                $.ajax({
+                    url: '{{ route("get-thong-ke") }}',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',  // Thêm token ở đây
+                        LoaiThongKe: loaiThongKe
                     },
-                    tooltip: {
-                        enabled: true
-                    }
-                },
-                scales: {
-                    x: {
-                        beginAtZero: true
+                    success: function (response) {
+                        if (response.success) {
+                            // Cập nhật các số liệu thống kê và bảng
+                            $('.card-body .display-5:eq(0)').text(response.tong_tk);
+                            $('.card-body .display-5:eq(1)').text(response.tong_sp);
+                            $('.card-body .display-5:eq(2)').text(response.tong_dh);
+                            $('.card-body .display-6 span').text(response.tong_tien);
+
+                            // Cập nhật bảng khách hàng
+                            var tableKH = $('.table:eq(0) tbody');
+                            tableKH.empty();
+                            var stt = 1;
+                            response.list_kh.forEach(function (item) {
+                                var tongTien = new Intl.NumberFormat('vi-VN').format(item.TongTienDaMua);
+                                var row = '<tr>' +
+                                    '<td class="text-center">' + stt++ + '</td>' +
+                                    '<td class="text-start">' + item.HoTen + '</td>' +
+                                    '<td class="text-start">' + item.SDT + '</td>' +
+                                    '<td class="text-end">' + item.SoDonDaMua + '</td>' +
+                                    '<td class="text-end">' + tongTien + ' VNĐ</td>' +
+                                    '<td class="text-center">' +
+                                    
+                                    '</tr>';
+                                tableKH.append(row);
+                            });
+
+                            // Lắng nghe sự kiện nút gửi mã giảm giá
+                            $('.send-discount-code').click(function () {
+                                var matk = $(this).data('matk');  // Lấy MaTK từ button hoặc phần tử
+                                $.ajax({
+                                    url: '{{ route("gui-ma-khuyen-mai") }}',  // Route gửi mã khuyến mãi
+                                    type: 'POST',
+                                    data: {
+                                        _token: '{{ csrf_token() }}',  // Thêm CSRF token
+                                        MaTK: matk  // Truyền MaTK vào request
+                                    },
+                                    success: function (response) {
+                                        if (response.success) {
+                                            alert('Mã giảm giá đã được gửi thành công!');
+                                        } else {
+                                            alert('Có lỗi xảy ra khi gửi mã giảm giá: ' + response.message);
+                                        }
+                                    },
+                                    error: function () {
+                                        alert('Có lỗi xảy ra khi gửi mã giảm giá.');
+                                    }
+                                });
+                            });
+
+                        }
                     },
-                    y: {
-                        beginAtZero: true
+                    error: function (xhr, status, error) {
+                        alert('Có lỗi xảy ra khi tải dữ liệu.');
                     }
-                }
-            }
+                });
+            });
         });
 
-        // Biểu đồ tròn cho sản phẩm
-        var ctxPie = document.getElementById('myPieChart').getContext('2d');
-        var myPieChart = new Chart(ctxPie, {
-            type: 'pie',
-            data: {
-                labels: ['Đã bán', 'Tồn kho'],
-                datasets: [{
-                    data: [70, 30], // Dữ liệu cho sản phẩm đã bán và chưa bán
-                    backgroundColor: ['#36A2EB', '#FF6384']
-                }]
-            }
-        });
+
     </script>
-
     @endsection

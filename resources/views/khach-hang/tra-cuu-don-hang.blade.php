@@ -232,7 +232,7 @@
                             </div>
                         </div>
                         <hr class="my-3">
-                        ${order.TenPTTT === 'Thanh toán trực tuyến' && order.ThanhToan === '0' ? `
+                        ${order.TenPTTT === 'Thanh toán trực tuyến' && order.ThanhToan === '0' && order.MaTT != 6 ? `
                         <form action="{{ route('thanh-toan-vnpay') }}" method="POST">
                             @csrf
                             <input type="hidden" id="ma_don_hang" name="redirect" value="${order.MaDH}">
@@ -274,7 +274,7 @@
                             </div>
                         </div>
                         <hr class="my-3">
-                        ${order.TenPTTT === 'Thanh toán trực tuyến' && order.ThanhToan === '0' ? `
+                        ${order.TenPTTT === 'Thanh toán trực tuyến' && order.ThanhToan === '0' && order.MaTT != 6 ? `
                         <form action="{{ route('thanh-toan-vnpay') }}" method="POST">
                             @csrf
                             <input type="hidden" id="ma_don_hang" name="redirect" value="${order.MaDH}">

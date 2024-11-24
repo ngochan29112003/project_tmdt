@@ -42,7 +42,14 @@ Route::get('/logout', [LoginController::class, 'logoutAction'])->name('logout');
 
 Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::group(['prefix' => '/super-admin'], function () {
-        Route::get('/home', [DashBoardController::class, 'getViewDashBoardSuperAdmin'])->name('super-admin-home');
+        //Dashboard
+        Route::get('/home', [DashBoardController::class, 'getViewDashBoard'])->name('super-admin-home');
+        Route::post('/get-thong-ke', [DashBoardController::class, 'getThongKe'])->name('get-thong-ke');
+        Route::get('/excel-export-khach-hang', [DashBoardController::class, 'getExportKH'])->name('excel-export-khach-hang');
+        Route::get('/excel-export-san-pham', [DashBoardController::class, 'getExportSP'])->name('excel-export-san-pham');
+        Route::post('/gui-ma-khuyen-mai', [DashBoardController::class, 'guiMaKM'])->name('gui-ma-khuyen-mai');
+        
+
 
         // Tài khoản
         Route::group(['prefix' => '/tai-khoan'], function () {
@@ -172,7 +179,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::post('/home/tra-cuu-don-hang//update{id}', [VNpayController::class, 'HuyDon'])->name('huy-don-hang');
 
 
-        
+
 
         // Giỏ hàng
         Route::group(['prefix' => '/gio-hang'], function () {
@@ -197,11 +204,11 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::group(['prefix' => '/don-hang'], function () {
             Route::get('/', [DatHangController::class, 'getDonHang'])->name('don-hang');
             Route::post('/thanh-toan', [DatHangController::class, 'thanhToan'])->name('thanh-toan');
-            
+
         });
 
         //Tra cứu đơn hàng
-        
+
 
         //Account
         Route::group(['prefix' => '/thong-tin-tai-khoan'], function () {
