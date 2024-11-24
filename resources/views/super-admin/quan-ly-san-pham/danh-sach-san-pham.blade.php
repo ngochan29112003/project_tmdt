@@ -47,6 +47,7 @@
                                     <th>STT</th>
                                     <th>Loại sản phẩm</th>
                                     <th>Tên sản phẩm</th>
+                                    <th>Ảnh sản phẩm</th>
                                     <th>Mô tả chi tiết</th>
                                     <th>Tên hãng</th>
                                     <th>Giá bán</th>
@@ -63,6 +64,9 @@
                                         <td>{{ $stt++ }}</td>
                                         <td>{{ $item->TenDM}}</td>
                                         <td>{{ $item->TenSP}}</td>
+                                        <td>
+                                            <img src="{{ asset('asset/img-product/'.$item->AnhSP) }}" alt="Image">
+                                        </td>
                                         <td>{{ $item->MoTaChiTiet}}</td>
                                         <td>{{ $item->TenHSX}}</td>
                                         <td>{{ $item->GiaBan}}</td>
@@ -125,6 +129,22 @@
                             <div class="col-md-6 mb-3">
                                 <label for="AnhSP" class="form-label">Ảnh sản phẩm</label>
                                 <input type="file" class="form-control" name="AnhSP" id="AnhSP" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="AnhSP" class="form-label">Ảnh phụ 1</label>
+                                <input type="file" class="form-control" name="AnhCT1" id="AnhSP" >
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="AnhSP" class="form-label">Ảnh phụ 2</label>
+                                <input type="file" class="form-control" name="AnhCT2" id="AnhSP" >
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="AnhSP" class="form-label">Ảnh phụ 3</label>
+                                <input type="file" class="form-control" name="AnhCT3" id="AnhSP" >
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="AnhSP" class="form-label">Ảnh phụ 4</label>
+                                <input type="file" class="form-control" name="AnhCT4" id="AnhSP" >
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="GiaBan" class="form-label">Giá bán</label>
@@ -202,6 +222,22 @@
                             <div class="col-md-6 mb-3">
                                 <label for="AnhSP" class="form-label">Ảnh sản phẩm</label>
                                 <input type="file" class="form-control" name="AnhSP" id="edit_AnhSP" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="AnhSP" class="form-label">Ảnh Phụ 1</label>
+                                <input type="file" class="form-control" name="AnhCT1" id="edit_AnhCT1" >
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="AnhSP" class="form-label">Ảnh Phụ 2</label>
+                                <input type="file" class="form-control" name="AnhCT2" id="edit_AnhCT2" >
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="AnhSP" class="form-label">Ảnh Phụ 3</label>
+                                <input type="file" class="form-control" name="AnhCT3" id="edit_AnhCT3" >
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="AnhSP" class="form-label">Ảnh Phụ 4</label>
+                                <input type="file" class="form-control" name="AnhCT4" id="edit_AnhCT4" >
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="GiaBan" class="form-label">Giá bán</label>
@@ -356,6 +392,10 @@
                   var data = response.sanpham;
                   $('#edit_TenSP').val(data.TenSP);
                   $('#edit_AnhSP').val(data.AnhSP);
+                  $('#edit_AnhCT1').val(data.AnhCT1);
+                  $('#edit_AnhCT2').val(data.AnhCT2);
+                  $('#edit_AnhCT3').val(data.AnhCT3);
+                  $('#edit_AnhCT4').val(data.AnhCT4);
                   $('#edit_GiaBan').val(data.GiaBan);
                   $('#edit_SoLuongTonKho').val(data.SoLuongTonKho);
                   $('#edit_NgayTaoSP').val(data.NgayTaoSP);

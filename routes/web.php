@@ -9,6 +9,7 @@ use App\Http\Controllers\khach_hang\TraCuuDonHangController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\super_admin\PhuongThucThanhToanController;
+use App\Http\Controllers\super_admin\QuanLyKhuyenMaiVCController;
 use App\Http\Controllers\super_admin\QuanLyQuyenAdminController;
 use App\Http\Controllers\super_admin\QuanLyBaiDangController;
 use App\Http\Controllers\super_admin\QuanLyBaoCaoController;
@@ -34,6 +35,9 @@ Route::post('/login',[LoginController::class,'loginAction'])->name('login-action
 Route::get('/logout', [LoginController::class, 'logoutAction'])->name('logout');
 
 Route::get('/chi-tiet-san-pham/{id}', [ChiTietSanPhamController::class, 'getViewChiTietSP'])->name('chi-tiet-san-pham');
+Route::post('/tim-kiem', [DashBoardController::class, 'search'])->name('search');
+Route::get('/san-pham-tim-kiem', [DashBoardController::class, 'getViewSearch'])->name('view-search');
+
 
 Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::group(['prefix' => '/super-admin'], function () {
@@ -73,6 +77,10 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
             Route::post('/hien', [QuanLyDanhMucController::class, 'hienDanhMuc'])->name('hien-danh-muc');
             Route::post('/an', [QuanLyDanhMucController::class, 'anDanhMuc'])->name('an-danh-muc');
 
+            Route::post('/add-hang-san-xuat', [QuanLyDanhMucController::class, 'addHangSanXuat'])->name('add-hang-san-xuat-trongdm');
+            Route::get('/get-category-name/{id}', [QuanLyDanhMucController::class, 'getCategoryName'])->name('get-category-name');
+            Route::get('/get-danh-muc-by-id/{id}', [QuanLyDanhMucController::class, 'getDanhMucById'])->name('get-danh-muc-by-id');
+
 
         });
 
@@ -106,6 +114,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         });
 
             // Đơn hàng
+        // Đơn hàng
         Route::group(['prefix' => '/don-hang'], function () {
             Route::get('/danh-sach',[QuanLyDonHangController::class,'getView'])->name('danh-sach-don-hang');
             Route::post('/updateTT/{id}', [QuanLyDonHangController::class, 'updateTTDH'])->name('update-trang-thai-don-hang');
@@ -163,6 +172,16 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
             Route::delete('/delete/{id}',[QuanLyKhuyenMaiController::class,'deleteKM'])->name('delete-khuyen-mai');
         });
 
+        //Khuyến mãi vận chuyển
+        Route::group(['prefix' => '/khuyen-mai-vc'], function () {
+            Route::get('/danh-sach',[QuanLyKhuyenMaiVCController::class,'getView'])->name('danh-sach-khuyen-mai-vc');
+            Route::post('/add',[QuanLyKhuyenMaiVCController::class,'addKhuyenMaiVC'])->name('add-khuyen-mai-vc');
+            Route::get('/edit/{id}', [QuanLyKhuyenMaiVCController::class, 'editKhuyenMaiVC'])->name('edit-khuyen-mai-vc');
+            Route::post('/update/{id}', [QuanLyKhuyenMaiVCController::class, 'updateKhuyenMaiVC'])->name('update-khuyen-mai-vc');
+            Route::delete('/delete/{id}',[QuanLyKhuyenMaiVCController::class,'deleteKMVC'])->name('delete-khuyen-mai-vc');
+        });
+
+
         // Báo cáo
         Route::group(['prefix' => '/bao-cao'], function () {
             Route::get('/danh-sach',[QuanLyBaoCaoController::class,'getView'])->name('danh-sach-bao-cao');
@@ -201,7 +220,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::group(['prefix'=> '/thong-tin-tai-khoan'], function () {
             Route::get('/', [ThongTinTaiKhoanController::class, 'getViewTaiKhoan'])->name('thong-tin-tai-khoan');
             Route::get('/edit{id}', [ThongTinTaiKhoanController::class, 'editTaiKhoan'])->name('edit-thong-tin-tai-khoan');
-            Route::post('/update{id}', [ThongTinTaiKhoanController::class, 'updateTTTaiKhoan'])->name('update-thong-tin-tai-khoan');
+            Route::post('/update{id}', [ThongTinTaiKhoanController::class, 'updateTTTK'])->name('update-thong-tin-tai-khoan');
         });
     });
 

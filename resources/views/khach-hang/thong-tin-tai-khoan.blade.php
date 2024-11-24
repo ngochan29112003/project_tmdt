@@ -1,93 +1,131 @@
 @extends('khach-hang.master')
 @section('contents')
-    <div class="page-body">
-        <div class="container-xl d-flex justify-content-center">
-            <div class="card w-75">
-                <div class="card-body">
-                    <form id="Formthongtintk" enctype="multipart/form-data">
-                        @csrf
-                        <div class="container p-4 rounded shadow-sm" style="background-color: #f8f9fa;">
-                            <h1 class="mb-4 text-danger">Thông Tin Tài Khoản</h1>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label for="AnhDaiDien" class="form-label">Ảnh đại diện</label>
-                                    <input type="file" class="form-control" name="AnhDaiDien" id="edit_AnhDaiDien">
+    <section class="section profile">
+        <div class="container">
+            <div class="row">
+                <!-- Profile Card -->
+                <div class="col-lg-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body text-center">
+                            <img src="{{ asset('asset/img/' . $taikhoan->AnhDaiDien) }}" alt="Avatar" class="rounded-circle mb-3" style="width: 120px; height: 120px; object-fit: cover;">
+                            <h3 class="mb-1">{{ $taikhoan->HoTen }}</h3>
+                            <p class="text-muted">{{ $taikhoan->Email }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs Content -->
+                <div class="col-lg-8">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <ul class="nav nav-tabs" id="profileTab" role="tablist">
+                                <li class="nav-item">
+                                    <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab">Tổng Quan</button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link" id="edit-tab" data-bs-toggle="tab" data-bs-target="#edit" type="button" role="tab">Chỉnh Sửa Hồ Sơ</button>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content pt-3" id="profileTabContent">
+                                <!-- Overview Tab -->
+                                <div class="tab-pane fade show active" id="overview" role="tabpanel">
+                                    <h3 class="fw-bold">Chi Tiết Hồ Sơ</h3>
+                                    <div class="row py-2">
+                                        <div class="col-md-4 fw-semibold">Họ và Tên:</div>
+                                        <div class="col-md-8">{{ $taikhoan->HoTen }}</div>
+                                    </div>
+                                    <div class="row py-2">
+                                        <div class="col-md-4 fw-semibold">Giới Tính:</div>
+                                        <div class="col-md-8">{{ $taikhoan->GioiTinh }}</div>
+                                    </div>
+                                    <div class="row py-2">
+                                        <div class="col-md-4 fw-semibold">Ngày Sinh:</div>
+                                        <div class="col-md-8">{{ $taikhoan->NgaySinh }}</div>
+                                    </div>
+                                    <div class="row py-2">
+                                        <div class="col-md-4 fw-semibold">Địa Chỉ:</div>
+                                        <div class="col-md-8">{{ $taikhoan->DiaChi }}</div>
+                                    </div>
+                                    <div class="row py-2">
+                                        <div class="col-md-4 fw-semibold">Số Điện Thoại:</div>
+                                        <div class="col-md-8">{{ $taikhoan->SDT }}</div>
+                                    </div>
+                                    <div class="row py-2">
+                                        <div class="col-md-4 fw-semibold">Email:</div>
+                                        <div class="col-md-8">{{ $taikhoan->Email }}</div>
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="HoTen" class="form-label">Họ tên</label>
-                                    <input type="text" class="form-control" name="HoTen" id="edit_HoTen" required>
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="NgaySinh" class="form-label">Ngày sinh</label>
-                                    <input type="date" class="form-control" name="NgaySinh" id="edit_NgaySinh" required>
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="GioiTinh" class="form-label">Giới tính</label>
-                                    <select class="form-select" name="GioiTinh" id="edit_GioiTinh" required>
-                                        <option value="" disabled selected>Chọn giới tính</option>
-                                        <option value="Nam">Nam</option>
-                                        <option value="Nữ">Nữ</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="SDT" class="form-label">Số điện thoại</label>
-                                    <input type="number" class="form-control" name="SDT" id="edit_SDT" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="Email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" name="Email" id="edit_Email" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="DiaChi" class="form-label">Địa chỉ</label>
-                                    <input type="text" class="form-control" name="DiaChi" id="edit_DiaChi" required>
+
+                                <!-- Edit Tab -->
+                                <div class="tab-pane fade" id="edit" role="tabpanel">
+                                    <h3 class="fw-bold">Chỉnh Sửa Hồ Sơ</h3>
+                                    <form id="Formedit" enctype="multipart/form-data" >
+                                        @csrf
+                                        <div class="row mb-3">
+                                            <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Ảnh Đại Diện</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input hidden name="MaTK" value="{{$taikhoan->MaTK}}">
+                                                <!-- Hiển thị ảnh đại diện, nếu có -->
+                                                <img src="{{ asset('asset/img/' . ($taikhoan->AnhDaiDien ?? 'default.jpg')) }}"
+                                                     alt="Profile" class="rounded-circle mb-3"
+                                                     style="width: 120px; height: 120px; object-fit: cover;" id="profileImagePreview">
+                                                <div class="pt-2">
+                                                    <input type="file" name="AnhDaiDien" id="profileImageInput" style="display: none;" onchange="previewImage();">
+                                                    <a href="#" class="btn btn-primary btn-sm" title="Tải ảnh đại diện mới" onclick="document.getElementById('profileImageInput').click();">
+                                                        <i class="bi bi-upload"></i> Tải ảnh
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="HoTen" class="form-label">Họ và Tên</label>
+                                            <input type="text" name="HoTen" class="form-control" value="{{ $taikhoan->HoTen }}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="GioiTinh" class="form-label">Giới Tính</label>
+                                            <select name="GioiTinh" class="form-select">
+                                                <option value="Nam" {{ $taikhoan->GioiTinh == 'Nam' ? 'selected' : '' }}>Nam</option>
+                                                <option value="Nữ" {{ $taikhoan->GioiTinh == 'Nữ' ? 'selected' : '' }}>Nữ</option>
+                                                <option value="Khác" {{ $taikhoan->GioiTinh == 'Khác' ? 'selected' : '' }}>Khác</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="NgaySinh" class="form-label">Ngày Sinh</label>
+                                            <input type="date" name="NgaySinh" class="form-control" value="{{ $taikhoan->NgaySinh }}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="DiaChi" class="form-label">Địa Chỉ</label>
+                                            <input type="text" name="DiaChi" class="form-control" value="{{ $taikhoan->DiaChi }}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="SDT" class="form-label">Số Điện Thoại</label>
+                                            <input type="tel" name="SDT" class="form-control" value="{{ $taikhoan->SDT }}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Email" class="form-label">Email</label>
+                                            <input type="email" name="Email" class="form-control" value="{{ $taikhoan->Email }}">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Lưu Thay Đổi</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                        <div class="text-end">
-                            <button type="submit" class="btn btn-danger">Lưu thay đổi</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 @endsection
-
 @section('scripts')
     <script>
-        $(document).ready(function() {
-            var TaiKhoan = "{{ session('MaTK') }}"; // lấy MaTK từ session
-
-            var url = "{{ route('edit-thong-tin-tai-khoan', ':id') }}";
-            url = url.replace(':id', TaiKhoan);
-
-            $.ajax({
-                url: url,
-                method: 'GET',
-                success: function (response) {
-                    var data = response.taikhoan;
-                    $('#edit_AnhDaiDien').val(data.AnhDaiDien);
-                    $('#edit_HoTen').val(data.HoTen);
-                    $('#edit_NgaySinh').val(data.NgaySinh);
-                    $('#edit_GioiTinh').val(data.GioiTinh);
-                    $('#edit_SDT').val(data.SDT);
-                    $('#edit_DiaChi').val(data.DiaChi);
-                    $('#edit_Email').val(data.Email);
-                },
-                error: function (xhr) {
-                    console.log("Error: " + xhr.responseText);
-                }
-            });
-    });
-
-
         //Lưu lại dữ liệu khi chỉnh sửa
-        $('#Formthongtintk').submit(function (e) {
+        $('#Formedit').submit(function (e) {
             e.preventDefault();
-            var tttkid = $(this).data('id');
-            var url = "{{ route('update-thong-tin-tai-khoan', ':id') }}";
-            url = url.replace(':id', tttkid);
+
+            var url = "{{ route('update-thong-tin-tai-khoan', ':id') }}".replace(':id', {{ $taikhoan->MaTK }});
             var formData = new FormData(this);
+
             $.ajax({
                 url: url,
                 method: 'POST',
@@ -96,16 +134,50 @@
                 processData: false,
                 success: function (response) {
                     if (response.success) {
-                        toastr.success(response.response, "Cập nhật thành công");
-                        setTimeout(function () {
-                            location.reload()
-                        }, 500);
+                        toastr.success(response.response, 'Thành Công');
+                        setTimeout(() => location.reload(), 500);
+                    } else {
+                        toastr.error('Có lỗi xảy ra. Vui lòng kiểm tra lại thông tin.', 'Lỗi');
                     }
                 },
                 error: function (xhr) {
-                    toastr.error("Lỗi");
+                    if (xhr.status === 422) {
+                        let errors = xhr.responseJSON.errors;
+                        for (const [field, messages] of Object.entries(errors)) {
+                            toastr.error(messages.join('<br>'), 'Lỗi');
+                        }
+                    } else {
+                        setTimeout(() => location.reload(), 500);
+                        // toastr.error('Có lỗi xảy ra. Vui lòng thử lại.', 'Lỗi');
+                    }
                 }
             });
         });
     </script>
+    <script>
+        function previewImage() {
+            const fileInput = document.getElementById('profileImageInput');
+            const file = fileInput.files[0];
+            const imagePreview = document.getElementById('profileImagePreview');
+
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    imagePreview.src = e.target.result;
+                    toastr.success(`Thay ảnh đại diện thành công`, 'Thông Báo');
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Xử lý sự kiện xóa ảnh
+        document.getElementById('deleteProfileImageBtn').addEventListener('click', function() {
+            const imagePreview = document.querySelector('img');
+            imagePreview.src = "{{ asset('assets/img/default.jpg') }}";  // Đặt lại ảnh mặc định hoặc ảnh ban đầu
+            document.getElementById('profileImageInput').value = '';  // Xóa giá trị input file
+        });
+    </script>
 @endsection
+

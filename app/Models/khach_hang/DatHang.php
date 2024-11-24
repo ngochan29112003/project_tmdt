@@ -2,9 +2,9 @@
 
 namespace App\Models\khach_hang;
 
-use DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use function Laravel\Prompts\select;
 
 class DatHang extends Model
@@ -61,16 +61,19 @@ class DatHang extends Model
     public function getkhuyenmai($MaTK)
     {
         return DB::table('khuyenmai')
-        ->where('MaTK', $MaTK)
-        ->get();
+            ->where('MaTK', $MaTK) // Điều kiện lọc theo MaTK
+            ->where('TrangThaiMa', 'hiện') // Điều kiện lọc theo TrangThaiMa là 'hiện'
+            ->get();
     }
 
     public function getkhuyenmaivc($MaTK)
     {
         return DB::table('khuyenmaivc')
-        ->where('MaTK', $MaTK)
-        ->get();
+            ->where('MaTK', $MaTK) // Điều kiện lọc theo MaTK
+            ->where('TrangThaiMa', 'hiện') // Điều kiện lọc theo TrangThaiMa là 'hiện'
+            ->get();
     }
+
 
     public function getdvvc()
     {

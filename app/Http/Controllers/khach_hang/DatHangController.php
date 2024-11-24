@@ -110,6 +110,7 @@ class DatHangController extends Controller
             $donHang->MaTT = 1; // Mặc định
             $donHang->NgayTaoDH = Carbon::now(); // Lấy ngày hiện tại
             $donHang->save();
+
             // Bước 2: Lấy MaDH vừa mới tạo
             $MaDH = $donHang->MaDH;
 
@@ -129,38 +130,71 @@ class DatHangController extends Controller
                     ->decrement('SoLuongTonKho', $item->SLSanPham);
             }
 
-            // Cập nhật số lượng mã khuyến mãi và ẩn nếu số lượng về 0
+            // Cập nhật số lượng mã khuyến mãi và ẩn nếu số lượng về 0 hoặc ngày hết hạn
             if ($donHang->MaKM) {
-                DB::table('khuyenmai')
+                $khuyenMai = DB::table('khuyenmai')
                     ->where('MaKM', $donHang->MaKM)
-                    ->decrement('SoLuongMa');
+                    ->first();
 
-                // Kiểm tra nếu số lượng mã khuyến mãi về 0
-                $soLuongMaKM = DB::table('khuyenmai')
-                    ->where('MaKM', $donHang->MaKM)
-                    ->value('SoLuongMa');
+                if ($khuyenMai) {
+                    // Kiểm tra ngày hiện tại có nằm trong khoảng NgayBD và NgayKT
+                    $currentDate = Carbon::now();
+                    if ($currentDate->greaterThanOrEqualTo($khuyenMai->NgayBD) && $currentDate->lessThanOrEqualTo($khuyenMai->NgayKT)) {
+                        // Nếu mã còn hiệu lực, cập nhật số lượng
+                        DB::table('khuyenmai')
+                            ->where('MaKM', $donHang->MaKM)
+                            ->decrement('SoLuongMa');
+                    } else {
+                        // Nếu mã hết hiệu lực, ẩn mã khuyến mãi
+                        DB::table('khuyenmai')
+                            ->where('MaKM', $donHang->MaKM)
+                            ->update(['TrangThaiMa' => 'ẩn']);
+                    }
 
-                if ($soLuongMaKM <= 0) {
-                    DB::table('khuyenmai')
+                    // Kiểm tra nếu số lượng mã khuyến mãi về 0 và ẩn nếu cần
+                    $soLuongMaKM = DB::table('khuyenmai')
                         ->where('MaKM', $donHang->MaKM)
-                        ->update(['TrangThaiMa' => 'ẩn']); // Giả sử bạn có cột 'TrangThaiMa'
+                        ->value('SoLuongMa');
+
+                    if ($soLuongMaKM <= 0) {
+                        DB::table('khuyenmai')
+                            ->where('MaKM', $donHang->MaKM)
+                            ->update(['TrangThaiMa' => 'ẩn']);
+                    }
                 }
             }
-            // Cập nhật số lượng mã vận chuyển và ẩn nếu số lượng về 0
+
+// Cập nhật số lượng mã vận chuyển và ẩn nếu số lượng về 0 hoặc ngày hết hạn
             if ($donHang->MaKMVC) {
-                DB::table('khuyenmaivc')
+                $khuyenMaiVC = DB::table('khuyenmaivc')
                     ->where('MaKMVC', $donHang->MaKMVC)
-                    ->decrement('SoLuongMa');
+                    ->first();
 
-                // Kiểm tra nếu số lượng mã vận chuyển về 0
-                $soLuongMaVC = DB::table('khuyenmaivc')
-                    ->where('MaKMVC', $donHang->MaKMVC)
-                    ->value('SoLuongMa');
+                if ($khuyenMaiVC) {
+                    // Kiểm tra ngày hiện tại có nằm trong khoảng NgayBD và NgayKT
+                    $currentDate = Carbon::now();
+                    if ($currentDate->greaterThanOrEqualTo($khuyenMaiVC->NgayBD) && $currentDate->lessThanOrEqualTo($khuyenMaiVC->NgayKT)) {
+                        // Nếu mã còn hiệu lực, cập nhật số lượng
+                        DB::table('khuyenmaivc')
+                            ->where('MaKMVC', $donHang->MaKMVC)
+                            ->decrement('SoLuongMa');
+                    } else {
+                        // Nếu mã hết hiệu lực, ẩn mã vận chuyển
+                        DB::table('khuyenmaivc')
+                            ->where('MaKMVC', $donHang->MaKMVC)
+                            ->update(['TrangThaiMa' => 'ẩn']);
+                    }
 
-                if ($soLuongMaVC <= 0) {
-                    DB::table('khuyenmaivc')
+                    // Kiểm tra nếu số lượng mã vận chuyển về 0 và ẩn nếu cần
+                    $soLuongMaVC = DB::table('khuyenmaivc')
                         ->where('MaKMVC', $donHang->MaKMVC)
-                        ->update(['TrangThaiMa' => 'ẩn']); // Giả sử bạn có cột 'TrangThaiMa'
+                        ->value('SoLuongMa');
+
+                    if ($soLuongMaVC <= 0) {
+                        DB::table('khuyenmaivc')
+                            ->where('MaKMVC', $donHang->MaKMVC)
+                            ->update(['TrangThaiMa' => 'ẩn']);
+                    }
                 }
             }
 
@@ -183,6 +217,7 @@ class DatHangController extends Controller
             return response()->json(['success' => false, 'message' => 'Có lỗi xảy ra, vui lòng thử lại.', 'error' => $e->getMessage()], 500);
         }
     }
+
 
 
     public function getctgh()

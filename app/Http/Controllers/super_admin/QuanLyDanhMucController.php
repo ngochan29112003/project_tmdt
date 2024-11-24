@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\admin\DanhMucSanPhamModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
@@ -17,9 +18,12 @@ class QuanLyDanhMucController extends Controller
         $danh_muc_sp = new DanhMucSanPhamModel();
         $list_danh_muc = $danh_muc_sp->danhmucSP();
         $list_hang_sx = $danh_muc_sp->gethangsanxuat();
+
+
         return view('super-admin.quan-ly-danh-muc.danh-sach-danh-muc',
-        compact('list_danh_muc', 'list_hang_sx'));
+            compact('list_danh_muc', 'list_hang_sx'));
     }
+
 
     public function addDanhMuc(Request $request)
     {
@@ -75,20 +79,6 @@ class QuanLyDanhMucController extends Controller
             'danhmuc' => $danhmuc,
         ]);
     }
-//    public function filterDanhMuc(Request $request)
-//    {
-//        $productName = $request->get('productName');
-//
-//        if ($productName) {
-//            // Lọc theo Tên sản phẩm nếu có giá trị
-//            $dataDM = DanhMucSanPhamModel::where('TenDM', 'LIKE', '%' . $productName . '%')->get();
-//        } else {
-//            // Hiển thị tất cả nếu không chọn tên sản phẩm
-//            $dataDM = DanhMucSanPhamModel::all();
-//        }
-//
-//        return response()->json(['data' => $dataDM]);
-//    }
 
     public function exportDanhMuc()
     {
@@ -165,4 +155,67 @@ class QuanLyDanhMucController extends Controller
         return response()->json(['success' => false]);
     }
 
+    public function getCategoryName($id)
+    {
+        // Tìm danh mục sản phẩm theo id
+        $category = DanhMucSanPhamModel::find($id);
+
+        // Lấy danh sách hãng sản xuất liên quan đến danh mục
+        $list_dmhsx = DB::table('danhmuchsx')
+            ->join('danhmucsanpham', 'danhmuchsx.danh_muc', '=', 'danhmucsanpham.MaDM')
+            ->join('hangsanxuat', 'danhmuchsx.hang_san_xuat', '=', 'hangsanxuat.MaHSX')
+            ->where('danh_muc', '=', $id)
+            ->get();
+
+        // Kiểm tra danh mục có tồn tại
+        if ($category) {
+            return response()->json([
+                'success' => true,
+                'name' => $category->TenDM,
+                'list_dmhsx' => $list_dmhsx // Thêm danh sách hãng sản xuất vào phản hồi
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Danh mục không tồn tại',
+                'list_dmhsx' => [] // Trả về mảng rỗng nếu không có dữ liệu
+            ]);
+        }
+    }
+
+
+    public function addHangSanXuat(Request $request)
+    {
+        // Xác thực dữ liệu đầu vào
+        $request->validate([
+            'category_id' => 'required|exists:danhmucsanpham,MaDM', // Kiểm tra MaDM tồn tại
+            'hang_san_xuat' => 'required|exists:hangsanxuat,MaHSX', // Kiểm tra MaHSX tồn tại
+        ]);
+
+        // Kiểm tra xem dữ liệu đã tồn tại chưa
+        $exists = DB::table('danhmuchsx')
+            ->where('danh_muc', $request->category_id)
+            ->where('hang_san_xuat', $request->hang_san_xuat)
+            ->exists();
+
+        if ($exists) {
+            // Trả về thông báo nếu đã tồn tại
+            return response()->json([
+                'success' => false,
+                'message' => 'Hãng sản xuất đã tồn tại trong danh mục này!',
+            ]);
+        }
+
+        // Thêm dữ liệu vào bảng danhmuchsx nếu không trùng
+        DB::table('danhmuchsx')->insert([
+            'danh_muc' => $request->category_id, // MaDM từ form
+            'hang_san_xuat' => $request->hang_san_xuat, // MaHSX từ form
+        ]);
+
+        // Trả về phản hồi thành công
+        return response()->json([
+            'success' => true,
+            'message' => 'Thêm hãng sản xuất vào danh mục thành công!',
+        ]);
+    }
 }

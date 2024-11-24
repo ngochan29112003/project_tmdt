@@ -5,7 +5,7 @@
             <div class = "row g-2 align-items-center">
                 <div class = "col">
                     <h2 class = "page-title">
-                        TRANG QUẢN LÝ DANH SÁCH KHUYẾN MÃI </h2>
+                        TRANG QUẢN LÝ DANH SÁCH KHUYẾN MÃI VẬN CHUYỂN</h2>
                 </div>
             </div>
 
@@ -61,14 +61,14 @@
                                     <tr>
                                         <td>{{ $stt++ }}</td>
                                         <td>{{ $item->HoTen}}</td>
-                                        <td>{{ $item->TenKM}}</td>
+                                        <td>{{ $item->TenKMVC}}</td>
                                         <td>{{ $item->DieuKien}}</td>
                                         <td>{{ $item->PhanTramGiam}}</td>
                                         <td>{{ $item->NgayBD}}</td>
                                         <td>{{ $item->NgayKT}}</td>
                                         <td>{{$item->TrangThaiMa}}</td>
                                         <td class="text-center align-middle">
-                                            <button class="btn p-0  btn-primary border-0 bg-transparent text-danger shadow-none edit-btn" data-id="{{ $item->MaKM }}">
+                                            <button class="btn p-0  btn-primary border-0 bg-transparent text-danger shadow-none edit-btn" data-id="{{ $item->MaKMVC }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="m-0 icon icon-tabler icons-tabler-outline icon-tabler-pencil">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                     <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
@@ -76,7 +76,7 @@
                                                 </svg>
                                             </button>
                                             |
-                                            <button class="btn p-0 m-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn" data-id="{{ $item->MaKM }}">
+                                            <button class="btn p-0 m-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn" data-id="{{ $item->MaKMVC }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="m-0 icon icon-tabler icons-tabler-outline icon-tabler-trash">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                     <path d="M4 7l16 0" />
@@ -97,7 +97,6 @@
             </div>
         </div>
     </div>
-
 
     <!-- ======= Modal thêm (tìm hiểu Modal này trên BS5) ======= -->
     <div class="modal fade" id="Modal">
@@ -123,7 +122,7 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="TenKM" class="form-label">Tên khuyến mãi</label>
-                                <input type="text" class="form-control" name="TenKM" id="TenKM" required>
+                                <input type="text" class="form-control" name="TenKMVC" id="TenKMVC" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="DieuKien" class="form-label">Điều kiện</label>
@@ -183,7 +182,7 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="TenKM" class="form-label">Tên khuyến mãi</label>
-                                <input type="text" class="form-control" name="TenKM" id="edit_TenKM" required>
+                                <input type="text" class="form-control" name="TenKMVC" id="edit_TenKMVC" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="DieuKien" class="form-label">Điều kiện</label>
@@ -222,22 +221,22 @@
 @endsection
 @section('scripts')
     <script>
-      var table = $('#table').DataTable({
-        "language": {
-          "emptyTable": "Không có dữ liệu trong bảng",
-          "search": "Tìm kiếm:",
-          "lengthMenu": "Hiển thị _MENU_ danh mục mỗi trang",
-          "zeroRecords": "Không tìm thấy kết quả",
-          "infoEmpty": "Không có dữ liệu"
+        var table = $('#table').DataTable({
+            "language": {
+                "emptyTable": "Không có dữ liệu trong bảng",
+                "search": "Tìm kiếm:",
+                "lengthMenu": "Hiển thị _MENU_ danh mục mỗi trang",
+                "zeroRecords": "Không tìm thấy kết quả",
+                "infoEmpty": "Không có dữ liệu"
 
-        }
-      });
+            }
+        });
 
         $('#Form').submit(function (e) {
             e.preventDefault();
 
             $.ajax({
-                url: '{{ route('add-khuyen-mai') }}',
+                url: '{{ route('add-khuyen-mai-vc') }}',
                 method: 'POST',
                 data: $(this).serialize(),
                 success: function (response) {
@@ -266,7 +265,7 @@
         });
 
         $('#table').on('click', '.delete-btn', function () {
-            var MaKM = $(this).data('id');
+            var MaKMVC = $(this).data('id');
             var row = $(this).closest('tr');
 
             Swal.fire({
@@ -280,7 +279,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '{{ route('delete-khuyen-mai', ':id') }}'.replace(':id', MaKM),
+                        url: '{{ route('delete-khuyen-mai-vc', ':id') }}'.replace(':id', MaKMVC),
                         method: 'DELETE',
                         data: {
                             _token: '{{ csrf_token() }}'
@@ -310,7 +309,7 @@
             var MaKM = $(this).data('id');
 
             $('#Formeditkhuyenmai').data('id', MaKM);
-            var url = "{{ route('edit-khuyen-mai', ':id') }}";
+            var url = "{{ route('edit-khuyen-mai-vc', ':id') }}";
             url = url.replace(':id', MaKM);
             $.ajax({
                 url: url,
@@ -318,7 +317,7 @@
                 success: function (response) {
                     var data = response.khuyenmai;
                     $('#edit_MaTK').val(data.MaTK);
-                    $('#edit_TenKM').val(data.TenKM);
+                    $('#edit_TenKMVC').val(data.TenKMVC);
                     $('#edit_DieuKien').val(data.DieuKien);
                     $('#edit_PhanTramGiam').val(data.PhanTramGiam);
                     $('#edit_GiaTriToiDa').val(data.GiaTriToiDa);
@@ -336,7 +335,7 @@
         $('#Formeditkhuyenmai').submit(function (e) {
             e.preventDefault();
             var khuyenmaiid = $(this).data('id');
-            var url = "{{ route('update-khuyen-mai', ':id') }}";
+            var url = "{{ route('update-khuyen-mai-vc', ':id') }}";
             url = url.replace(':id', khuyenmaiid);
             var formData = new FormData(this);
             $.ajax({

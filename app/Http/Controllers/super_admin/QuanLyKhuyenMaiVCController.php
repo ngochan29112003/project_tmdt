@@ -3,27 +3,26 @@
 namespace App\Http\Controllers\super_admin;
 
 use App\Http\Controllers\Controller;
-
-use App\Models\admin\QuanLyKhuyenMai;
-use App\Models\admin\QuanLyTaiKhoan;
+use App\Models\admin\QuanLyKhuyenMaiVC;
 use Illuminate\Http\Request;
-class QuanLyKhuyenMaiController extends Controller
+
+class QuanLyKhuyenMaiVCController extends Controller
 {
     public function getView()
     {
-        $quanlykhuyenmaiModel = new QuanLyKhuyenMai();
-        $list_khuyen_mai= $quanlykhuyenmaiModel->getkhuyenmai();
+        $quanlykhuyenmaiModel = new QuanLyKhuyenMaiVC();
+        $list_khuyen_mai= $quanlykhuyenmaiModel->getkhuyenmaivc();
         $list_tai_khoan = $quanlykhuyenmaiModel->getTK();
-        return view('super-admin.quan-ly-khuyen-mai.danh-sach-khuyen-mai',
-        compact('list_khuyen_mai','list_tai_khoan'));
+        return view('super-admin.quan-ly-khuyen-mai-vc.danh-sach-khuyen-mai-vc',
+            compact('list_khuyen_mai','list_tai_khoan'));
     }
 
-    public function addKhuyenMai(Request $request)
+    public function addKhuyenMaiVC(Request $request)
     {
         // Validate request data
         $validate = $request->validate([
             'MaTK' => 'required|string',
-            'TenKM' => 'required|string',
+            'TenKMVC' => 'required|string',
             'DieuKien' => 'required|string',
             'PhanTramGiam' => 'required|string',
             'GiaTriToiDa' => 'required|string',
@@ -38,9 +37,9 @@ class QuanLyKhuyenMaiController extends Controller
 
             foreach ($taiKhoanIds as $MaTK) {
                 // Create promotion for each account
-                QuanLyKhuyenMai::create([
+                QuanLyKhuyenMaiVC::create([
                     'MaTK' => $MaTK,
-                    'TenKM' => $validate['TenKM'],
+                    'TenKMVC' => $validate['TenKMVC'],
                     'DieuKien' => $validate['DieuKien'],
                     'PhanTramGiam' => $validate['PhanTramGiam'],
                     'GiaTriToiDa' => $validate['GiaTriToiDa'],
@@ -51,7 +50,7 @@ class QuanLyKhuyenMaiController extends Controller
             }
         } else {
             // Otherwise, create the promotion for the selected account
-            QuanLyKhuyenMai::create($validate);
+            QuanLyKhuyenMaiVC::create($validate);
         }
 
         return response()->json([
@@ -61,10 +60,9 @@ class QuanLyKhuyenMaiController extends Controller
         ]);
     }
 
-
-    function deleteKM($id)
+    function deleteKMVC($id)
     {
-        $km = QuanLyKhuyenMai::findOrFail($id);
+        $km = QuanLyKhuyenMaiVC::findOrFail($id);
 
         $km->delete();
 
@@ -74,19 +72,19 @@ class QuanLyKhuyenMaiController extends Controller
         ]);
     }
 
-    public function editKhuyenMai($id)
+    public function editKhuyenMaiVC($id)
     {
-        $khuyenmai = QuanLyKhuyenMai::findOrFail($id);
+        $khuyenmai = QuanLyKhuyenMaiVC::findOrFail($id);
         return response()->json([
             'khuyenmai' => $khuyenmai
         ]);
     }
 
-    public function updateKhuyenMai(Request $request, $id)
+    public function updateKhuyenMaiVC(Request $request, $id)
     {
         $validated = $request->validate([
             'MaTK'=>'int',
-            'TenKM'=>'string',
+            'TenKMVC'=>'string',
             'DieuKien'=>'string',
             'PhanTramGiam'=>'string',
             'GiaTriToiDa'=>'string',
@@ -94,7 +92,7 @@ class QuanLyKhuyenMaiController extends Controller
             'NgayBD'=>'date',
             'NgayKT'=>'date',
         ]);
-        $khuyenmai = QuanLyKhuyenMai::findOrFail($id);
+        $khuyenmai = QuanLyKhuyenMaiVC::findOrFail($id);
         $khuyenmai->update($validated);
 
         return response()->json([

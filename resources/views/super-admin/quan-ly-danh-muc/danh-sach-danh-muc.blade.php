@@ -75,7 +75,7 @@
                                             @endif
                                         </td>
                                         <td class="text-center align-middle">
-                                            <button class="btn p-0  btn-primary border-0 bg-transparent text-danger shadow-none edit-btn" data-id="{{ $item->MaDM }}">
+                                            <button class="btn p-0  btn-primary border-0 bg-transparent text-danger shadow-none view-btn" data-id="{{ $item->MaDM }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="blue" class="bi bi-eye" viewBox="0 0 16 16">
                                                     <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
                                                     <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
@@ -117,30 +117,23 @@
         <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Thêm danh mục</h4>
+                    <h4 class="modal-title">Thêm danh mục </h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="Formdanhmuc" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-md-12 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="TenDM" class="form-label">Tên danh mục</label>
                                 <input type="text" class="form-control" name="TenDM" id="TenDM" required>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="MaHSX" class="form-label">Tên hãng sản xuất</label>
-                                <select class="form-select" name="MaHSX" id="MaHSX">
-                                    @foreach ($list_hang_sx as $item)
-                                        <option value="{{ $item->MaHSX}}">{{ $item->TenHSX}} </option>
-                                    @endforeach
-                                </select>
-                            </div>
+
                             <div class="col-md-6 mb-3">
                                 <label for="TrangThaiDM" class="form-label">Trạng thái danh mục</label>
                                 <select class="form-select" name="TrangThaiDM" id="TrangThaiDM">
-                                    <option value="Hiện">Hiện</option>
-                                    <option value="Ẩn">Ẩn</option>
+                                    <option value="0">Hiện</option>
+                                    <option value="1">Ẩn</option>
                                 </select>
                             </div>
                         </div>
@@ -159,24 +152,16 @@
         <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Thêm danh mục</h4>
+                    <h4 class="modal-title">Sửa danh mục</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="Formeditdanhmuc" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-md-12 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="TenDM" class="form-label">Tên danh mục</label>
                                 <input type="text" class="form-control" name="TenDM" id="edit_TenDM" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="MaHSX" class="form-label">Tên hãng sản xuất</label>
-                                <select class="form-select" name="MaHSX" id="edit_MaHSX">
-                                    @foreach ($list_hang_sx as $item)
-                                        <option value="{{ $item->MaHSX}}">{{ $item->TenHSX}} </option>
-                                    @endforeach
-                                </select>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="TrangThaiDM" class="form-label">Trạng thái danh mục</label>
@@ -191,6 +176,86 @@
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="Modalviewhsx">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Danh sách hãng sản xuất trong danh mục </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!-- Nút Thêm mới ở dưới và căn trái -->
+                <div class="modal-body">
+                    <button class="btn btn-primary btn-sm d-flex align-items-center mb-3" data-bs-toggle="modal" data-bs-target="#Modaladdhangsanxuat">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M12 5l0 14" />
+                            <path d="M5 12l14 0" />
+                        </svg>
+                        Thêm mới
+                    </button>
+
+                    <!-- Danh sách hãng sản xuất -->
+                    <div class="table-responsive p-2">
+                        <table id="tableHangSanXuat" class="table table-vcenter card-table table-striped">
+                            <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên hãng sản xuất</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @php $stt = 1; @endphp
+{{--                            @foreach($list_dmhsx as $item)--}}
+{{--                                <tr>--}}
+{{--                                    <td>{{ $stt++ }}</td>--}}
+{{--                                    <td>{{ $item->TenHSX }}</td>--}}
+{{--                                </tr>--}}
+{{--                            @endforeach--}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======= Modal thêm (tìm hiểu Modal này trên BS5) ======= -->
+    <div class="modal fade" id="Modaladdhangsanxuat">
+        <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Thêm HSX trong danh mục</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="Formhangsanxuat" enctype="multipart/form-data">
+                        @csrf
+                        <!-- Input ẩn để lưu ID danh mục -->
+                        <input type="hidden" id="category_id" name="category_id">
+
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label for="hang_san_xuat" class="form-label">Tên hãng sản xuất</label>
+                                <select class="form-select" name="hang_san_xuat" id="hang_san_xuat">
+                                    @foreach ($list_hang_sx as $item)
+                                        <option value="{{ $item->MaHSX }}">{{ $item->TenHSX }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary">Thêm</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        </div>
+                    </form>
+
+
                 </div>
             </div>
         </div>
@@ -215,6 +280,7 @@
         </div>
     </div>
 
+
     <!-- Lock Modal -->
     <div class="modal fade" id="lockModal" tabindex="-1" aria-labelledby="lockModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -233,6 +299,8 @@
             </div>
         </div>
     </div>
+
+
 @endsection
 @section('scripts')
     <script>
@@ -245,6 +313,43 @@
           "infoEmpty": "Không có dữ liệu"
 
         }
+      });
+
+      $('#Formhangsanxuat').submit(function(e) {
+          e.preventDefault();
+
+          $.ajax({
+              url: '{{ route('add-hang-san-xuat-trongdm') }}',
+              method: 'POST',
+              data: $(this).serialize(),
+              success: function(response) {
+                  if (response.success) {
+                      $('#Modaladdhangsanxuat').modal('hide');
+                      toastr.success(response.message, "Thành công");
+                      setTimeout(function() {
+                          location.reload();
+                      }, 500);
+                  } else {
+                      toastr.error(response.message, "Lỗi");
+                  }
+              },
+              error: function(xhr) {
+                  toastr.error("Đã xảy ra lỗi", "Lỗi");
+              }
+          });
+      });
+
+
+      // Khi người dùng click vào button với class .view-btn
+      $('.view-btn').click(function() {
+          // Lấy id của danh mục từ thuộc tính data-id của button
+          var id = $(this).data('id');
+
+          // Mở modal
+          $('#Modalviewhsx').modal('show');
+
+          // Bạn có thể sử dụng id ở đây để làm các thao tác như load thông tin vào modal
+          console.log(id); // Chỉ để kiểm tra id của danh mục
       });
 
       $('#Formdanhmuc').submit(function (e) {
@@ -434,7 +539,60 @@
           }
       });
 
-      {{--function filterByRole(productName) {--}}
+      $('.view-btn').click(function() {
+          var id = $(this).data('id');
+          var url = '{{ route('get-category-name', ['id' => ':id']) }}'.replace(':id', id);
+
+          $.ajax({
+              url: url,
+              method: 'GET',
+              success: function(response) {
+                  if (response.success) {
+                      // Cập nhật tiêu đề modal Modalviewhsx
+                      $('#Modalviewhsx .modal-title').html('Danh sách hãng sản xuất trong danh mục <span style="color: red;">' + response.name + '</span>');
+
+                      // Cập nhật tiêu đề modal Modaladdhangsanxuat
+                      $('#Modaladdhangsanxuat .modal-title').html('Thêm HSX trong danh mục <span style="color: red;">' + response.name + '</span>');
+
+                      // Lưu ID danh mục vào input ẩn trong Modaladdhangsanxuat
+                      $('#Modaladdhangsanxuat #category_id').val(id);
+
+                      // Xóa nội dung cũ trong bảng
+                      $('#tableHangSanXuat tbody').empty();
+
+                      // Duyệt qua danh sách và thêm dữ liệu vào bảng
+                      if (response.list_dmhsx.length > 0) {
+                          $.each(response.list_dmhsx, function(index, item) {
+                              $('#tableHangSanXuat tbody').append(`
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${item.TenHSX}</td>
+                            </tr>
+                        `);
+                          });
+                      } else {
+                          $('#tableHangSanXuat tbody').append(`
+                        <tr>
+                            <td colspan="2" class="text-center">Không có hãng sản xuất nào</td>
+                        </tr>
+                    `);
+                      }
+
+                      // Hiển thị modal Modalviewhsx
+                      $('#Modalviewhsx').modal('show');
+                  } else {
+                      toastr.error(response.message, "Lỗi");
+                  }
+              },
+              error: function(xhr) {
+                  toastr.error("Đã xảy ra lỗi", "Lỗi");
+              }
+          });
+      });
+
+
+    </script>
+    {{--function filterByRole(productName) {--}}
       {{--    $.ajax({--}}
       {{--        url: '{{ route('filter-danh-muc') }}',--}}
       {{--        method: 'GET',--}}
@@ -474,5 +632,5 @@
       {{--    });--}}
       {{--}--}}
 
-    </script>
+
 @endsection

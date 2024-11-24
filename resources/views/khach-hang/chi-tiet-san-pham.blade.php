@@ -124,7 +124,10 @@
                         </ul>
                     </div>
 
-                    <button class="btn btn-danger mb-3" data-masp = "{{ $list_sanpham->MaSP }}" onclick = "addToCart(this);">Thêm vào giỏ hàng</button>
+                    <!-- //Thêm vào giỏ hàng -->
+                    <button class="btn btn-danger mb-3" data-masp="{{ $list_sanpham->MaSP }}" onclick="addToCart(this);" id="add-to-cart-{{ $list_sanpham->MaSP }}" {{ $list_sanpham->SoLuongTonKho == 0 ? 'disabled' : '' }}>Thêm vào giỏ hàng</button>
+                    <span id="product-quantity-{{ $list_sanpham->MaSP }}" class="product-quantity">Số lượng: {{ $list_sanpham->SoLuongTonKho }}</span>
+
 
                     <!-- Product Specifications -->
                     <div class="bg-white p-3 rounded mb-4 shadow-sm">
@@ -576,6 +579,9 @@
 
             if (loggedIn) {
                 var productId = buttonElement.getAttribute('data-masp');
+                var quantityElement = document.getElementById(`product-quantity-${productId}`);
+                var addButton = document.getElementById(`add-to-cart-${productId}`);
+
                 $.ajax({
                     url: '{{ route('them-gio-hang') }}',
                     type: 'POST',
@@ -591,10 +597,22 @@
                             timer: 3000,
                             showConfirmButton: false
                         });
-                        setTimeout(function () {
-                            location.reload(); // Chuyển hướng người dùng
-                        }, 1000);
 
+                        // Cập nhật số lượng sản phẩm
+                        var currentQuantity = parseInt(quantityElement.textContent.split(": ")[1]);
+                        var newQuantity = currentQuantity - 1;
+                        quantityElement.textContent = `Số lượng: ${newQuantity}`;
+
+                        // Khóa nút nếu số lượng về 0
+                        if (newQuantity <= 0) {
+                            addButton.disabled = true;
+                            addButton.classList.add('disabled');
+                        }
+
+                        // Reload trang nếu cần thiết
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1000);
                     },
                     error: function(error) {
                         Swal.fire({
@@ -621,6 +639,7 @@
                 });
             }
         }
+
 
     </script>
 @endsection

@@ -5,8 +5,13 @@ namespace App\Http\Controllers\super_admin;
 use App\Http\Controllers\Controller;
 use App\Models\admin\QuanLyDonHangModel;
 use App\Models\admin\TrangThaiModel;
+use App\Models\admin\QuanLyPTTT;
+use App\Models\admin\QuanLyCTDH;
+use App\Models\admin\QuanLyVC;
+use App\Models\admin\SanPhamModel;
 use DB;
 use Illuminate\Http\Request;
+use PDF;
 
 class QuanLyDonHangController extends Controller
 {
@@ -18,10 +23,8 @@ class QuanLyDonHangController extends Controller
         $list_tt = $qltt->gettt();
 
         return view('super-admin.quan-ly-don-hang.danh-sach-don-hang',
-        compact('list_donhang', 'list_tt'));
+            compact('list_donhang', 'list_tt'));
     }
-
-
 
     public function show()
     {
@@ -57,6 +60,7 @@ class QuanLyDonHangController extends Controller
 
         return response()->json(['success' => true, 'message' => 'Cập nhật trạng thái thành công']);
     }
+
 
     public function filterDonHang(Request $request)
     {
@@ -134,5 +138,111 @@ class QuanLyDonHangController extends Controller
         }
 
         return response()->json(['html' => $html]);
+    }
+
+    public function InDH($id) {
+        // Gọi hàm ChuyenLenh để lấy nội dung HTML
+        $html = $this->ChuyenLenh($id);
+
+        // Kiểm tra xem hàm trả về nội dung HTML hợp lệ
+        if (is_array($html) && isset($html['success']) && !$html['success']) {
+            return response()->json($html); // Trả về JSON nếu có lỗi
+        }
+
+        // Tạo PDF
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($html);
+
+        // Trả về file PDF
+        return $pdf->download('don_hang_' . $id . '.pdf');
+    }
+
+    public function ChuyenLenh($id) {
+        // Thực hiện join để lấy thông tin từ các bảng liên quan
+        $donHang = DB::table('donhang')
+            ->join('phuongthucthanhtoan', 'phuongthucthanhtoan.MaPTTT', '=', 'donhang.MaPTTT')
+            ->join('donvivanchuyen', 'donvivanchuyen.MaVC', '=', 'donhang.MaVC')
+            ->where('donhang.MaDH', $id)
+            ->select(
+                'donhang.*',
+                'phuongthucthanhtoan.TenPTTT',
+                'donvivanchuyen.TenDonViVC'
+            )
+            ->first();
+
+        // Kiểm tra nếu đơn hàng tồn tại
+        if (!$donHang) {
+            return ['success' => false, 'message' => 'Đơn hàng không tồn tại.'];
+        }
+
+        // Lấy chi tiết đơn hàng trực tiếp theo MaDH
+        $chitietdonhang = QuanLyCTDH::where('MaDH', $id)->get();
+
+        // Tạo HTML cho view trực tiếp
+        $html = "
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>ĐƠN HÀNG PCSTORE</title>
+            <style>
+                body { font-family: DejaVu Sans; }
+                h3 { text-align: center; }
+                table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+                th, td { border: 1px solid black; padding: 8px; text-align: left; }
+            </style>
+        </head>
+        <body>
+            <h3>ĐƠN HÀNG</h3>
+            <p>Tên Khách Hàng: {$donHang->TenKH}</p>
+            <p>Số Điện Thoại: (+84){$donHang->SDT}</p>
+            <p>Địa Chỉ: {$donHang->DiaChiGiaoHang}</p>
+            <p>Phương Thức Thanh Toán: " . htmlentities($donHang->TenPTTT) . "</p>
+            <p>Đơn Vị Vận Chuyển: " . htmlentities($donHang->TenDonViVC) . "</p>
+            <p>Tổng Tiền: " . number_format($donHang->TongTien, 0, ',', '.') . " VNĐ</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên Sản Phẩm</th>
+                        <th>Số Lượng</th>
+                        <th>Giá Bán</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>";
+
+        $totalThanhTien = 0;
+        $stt = 1;
+
+        foreach ($chitietdonhang as $item) {
+            // Lấy thông tin sản phẩm tương ứng với MaSP
+            $sanPham = SanPhamModel::where('MaSP', $item->MaSP)->first();
+            $tenSP = $sanPham ? $sanPham->TenSP : 'N/A';
+            $thanhTien = $item->SoLuong * $item->GiaBan;
+            $totalThanhTien += $thanhTien;
+
+            $html .= "
+                    <tr>
+                        <td>{$stt}</td>
+                        <td>{$tenSP}</td>
+                        <td>{$item->SoLuong}</td>
+                        <td>" . number_format($item->GiaBan, 0, ',', '.') . " VNĐ</td>
+                        <td>" . number_format($thanhTien, 0, ',', '.') . " VNĐ</td>
+                    </tr>";
+            $stt++;
+        }
+        $html .= "
+                        </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan='4' style='text-align: right; font-weight: bold;'>Tổng Cộng:</td>
+                                    <td>" . number_format($totalThanhTien, 0, ',', '.') . " VNĐ</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </body>
+            </html>";
+
+        return $html;
     }
 }

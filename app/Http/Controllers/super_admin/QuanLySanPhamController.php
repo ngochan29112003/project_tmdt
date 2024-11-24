@@ -24,10 +24,10 @@ class QuanLySanPhamController extends Controller
 
     public function addSanPham(Request $request)
     {
-//         dd($request);
+//        dd($request);
         $validate = $request->validate([
             'TenSP'=> 'string',
-            'AnhSP' => 'string',
+            'AnhSP' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'GiaBan' => 'string',
             'SoLuongTonKho' => 'string',
             'NgayTaoSP' => 'date',
@@ -36,16 +36,32 @@ class QuanLySanPhamController extends Controller
             'ThoiGianBaoHanh' => 'string',
             'MaDM' => 'int',
             'MaHSX' => 'int',
+            'AnhCT1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'AnhCT2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'AnhCT3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'AnhCT4' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-
-        SanPhamModel::create($validate);
-        return response()->json([
-            'success' => true,
-            'status' => 200,
-            'message' => 'Thêm thành công!',
-        ]);
+        // Lấy tên tệp ảnh
+        if ($request->hasFile('sanpham')) {
+            $file = $request->file('sanpham');
+            if ($file->isValid()) {
+                $fileName = time() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('asset/img-product'), $fileName);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'File không hợp lệ!',
+                ]);
+            }
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Chưa chọn tệp!',
+            ]);
+        }
     }
+
 
     function deleteSP($id)
     {
@@ -71,7 +87,7 @@ class QuanLySanPhamController extends Controller
     {
         $validated = $request->validate([
             'TenSP'=> 'string',
-            'AnhSP' => 'string',
+            'AnhSP' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'GiaBan' => 'string',
             'SoLuongTonKho' => 'string',
             'NgayTaoSP' => 'date',
@@ -80,6 +96,14 @@ class QuanLySanPhamController extends Controller
             'ThoiGianBaoHanh' => 'string',
             'MaDM' => 'int',
             'MaHSX' => 'int',
+            'AnhCT1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'AnhCT2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'AnhCT3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'AnhCT4' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ],[
+                'AnhDaiDien.image' => 'Tệp tải lên phải là một hình ảnh hợp lệ.',
+                'AnhDaiDien.mimes' => 'Hình ảnh phải thuộc các định dạng: jpeg, png, jpg, gif.',
+                'AnhDaiDien.max' => 'Dung lượng hình ảnh không được vượt quá 2MB.',
         ]);
         $sanpham = SanPhamModel::findOrFail($id);
         $sanpham->update($validated);

@@ -113,8 +113,8 @@
                             <div class="col-md-6 mb-3">
                                 <label for="TrangThaiHSX" class="form-label">Trạng thái hãng sản xuất</label>
                                 <select class="form-select" name="TrangThaiHSX" id="TrangThaiHSX">
-                                    <option value="Hiện">Hiện</option>
-                                    <option value="Ẩn">Ẩn</option>
+                                    <option value="0">Hiện</option>
+                                    <option value="1">Ẩn</option>
                                 </select>
                             </div>
                         </div>

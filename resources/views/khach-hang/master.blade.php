@@ -67,9 +67,10 @@
                         <img src="{{asset('asset/img/logo.png')}}" height="60" alt=" "> </a>
                 </h1>
 
-                <form class="d-flex mx-auto col-8 col-md-6 col-lg-5" role="search">
+                <form class="d-flex mx-auto col-8 col-md-6 col-lg-5" id="search-form" enctype="multipart/form-data">
+                    @csrf
                     <div class="input-group">
-                        <input class="form-control" type="search" placeholder="Bạn cần tìm gì?" aria-label="Search"
+                        <input class="form-control" type="search" name="query" placeholder="Bạn cần tìm gì?" aria-label="Search"
                                style="border-radius: 20px 0 0 20px; box-shadow: none; border: 1px solid #ddd;">
                         <button class="btn btn-light" type="submit"
                                 style="border-radius: 0 20px 20px 0; border: 1px solid #ddd; border-left: 0;">
@@ -105,6 +106,7 @@
                                     </span>
                                     <span class="ms-1 text-white fw-bold fs-5">Tra cứu đơn hàng</span> </a>
                             </div>
+
                             <div class="col">
                                 <a href="{{route('gio-hang')}}"
                                     class="cart-icon text-decoration-none d-flex align-items-center">
@@ -519,6 +521,43 @@
         });
       });
     </script>
+
+    <script>
+        $('#search-form').submit(function (e) {
+            e.preventDefault();
+            var url = "{{ route('search') }}"; // URL cho request AJAX
+            var formData = new FormData(this);
+
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.success) {
+                        toastr.success("Tìm kiếm thành công, chuyển hướng...");
+                        // Chuyển hướng đến trang kết quả tìm kiếm
+                        window.location.href = response.redirect;
+                    }
+                },
+                error: function (xhr) {
+                    if (xhr.status === 422) {
+                        let errors = xhr.responseJSON;
+                        toastr.error(errors.message || "Vui lòng nhập từ khóa tìm kiếm!");
+                    } else if (xhr.status === 404) {
+                        let errors = xhr.responseJSON;
+                        toastr.error(errors.message || "Không tìm thấy sản phẩm!");
+                    } else {
+                        toastr.error("Có lỗi xảy ra, vui lòng thử lại.");
+                    }
+                }
+            });
+        });
+
+    </script>
+
+
 
 
 

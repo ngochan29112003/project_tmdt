@@ -13,16 +13,20 @@ class SanPhamModel extends Model
     protected $table = 'sanpham';
     protected $primaryKey = 'MaSP';
     protected $fillable=[
-      'TenSP',
-      'AnhSP',
-      'GiaBan',
-      'SoLuongTonKho',
-      'NgayTaoSP',
-      'TrangThaiSP',
-      'MoTaChiTiet',
-      'ThoiGianBaoHanh',
-      'MaDM',
-      'MaHSX',
+        'TenSP',
+        'AnhSP',
+        'GiaBan',
+        'SoLuongTonKho',
+        'NgayTaoSP',
+        'TrangThaiSP',
+        'MoTaChiTiet',
+        'ThoiGianBaoHanh',
+        'MaDM',
+        'MaHSX',
+        'AnhCT1',
+        'AnhCT2',
+        'AnhCT3',
+        'AnhCT4',
     ];
     public $timestamps = false;
 

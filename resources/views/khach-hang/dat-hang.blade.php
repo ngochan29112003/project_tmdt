@@ -84,13 +84,45 @@
             </div>
 
             <!-- Khung 5: Mã khuyến mãi -->
+            <!-- Khung 5: Mã khuyến mãi -->
             <div class="card mb-4">
                 <div class="card-body">
                     <h3><i class="bi bi-ticket-perforated text-danger me-2"></i>Mã khuyến mãi</h3>
                     <select class="form-select mb-3 khuyenmai" id="khuyenmai">
                         <option value="">-- Chọn mã khuyến mãi --</option>
                         @foreach($list_khuyenmai as $khuyenmai)
-                            <option value="{{ $khuyenmai->MaKM }}" data-phantram="{{ $khuyenmai->PhanTramGiam }}" data-giamtoida="{{ $khuyenmai->GiaTriToiDa }}">{{ $khuyenmai->TenKM }}</option>
+                            @php
+                                // Kiểm tra điều kiện "không có"
+                                $hienThiKM = $khuyenmai->DieuKien == "không có";
+
+                                // Nếu Điều Kiện là một số, kiểm tra có sản phẩm nào trong giỏ hàng khớp không
+                                if (!$hienThiKM && is_numeric($khuyenmai->DieuKien)) {
+                                    foreach ($list_chitiet_giohang as $item) {
+                                        if ($item->MaSP == $khuyenmai->DieuKien) {
+                                            $hienThiKM = true;
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                // Kiểm tra xem tài khoản có đơn hàng chưa
+                                if (!$hienThiKM) {
+                                    $taiKhoanCoDonHang = DB::table('donhang')
+                                                        ->where('MaTK', $khuyenmai->MaTK)
+                                                        ->exists();
+
+                                    // Nếu tài khoản chưa có đơn hàng, sẽ hiển thị mã khuyến mãi dành cho người mới
+                                    if (!$taiKhoanCoDonHang && $khuyenmai->DieuKien == "người mới") {
+                                        $hienThiKM = true;
+                                    }
+                                }
+                            @endphp
+
+                            @if($hienThiKM)
+                                <option value="{{ $khuyenmai->MaKM }}" data-phantram="{{ $khuyenmai->PhanTramGiam }}" data-giamtoida="{{ $khuyenmai->GiaTriToiDa }}">
+                                    {{ $khuyenmai->TenKM }}
+                                </option>
+                            @endif
                         @endforeach
                     </select>
                     <h3><i class="bi bi-ticket-perforated text-danger me-2"></i>Mã miễn vận chuyển</h3>
@@ -102,6 +134,8 @@
                     </select>
                 </div>
             </div>
+
+
 
             <!-- Khung 6: chi tiết thanh toán -->
             <div class="card mb-4">
@@ -178,6 +212,9 @@
                                 <div class="col-12">
                                     <label for="address" class="form-label">Địa chỉ</label>
                                     <input type="text" class="form-control" id="address-input" required>
+                                    <select class="form-select mb-3 tinh" id="tinh">
+                                        <option value="">-- Chọn tỉnh --</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="text-end mt-4">
@@ -217,7 +254,7 @@
             });
         });
 
-        //Giảm giá khuyến mãi
+        // Giảm giá khuyến mãi
         document.getElementById('khuyenmai').addEventListener('change', function() {
             // Lấy tổng tiền hàng
             const tongTienHang = parseFloat(document.getElementById('tongtienhang').innerText.replace(/\./g, '').replace('₫', '').trim()) || 0;
@@ -242,9 +279,9 @@
             }
         });
 
-        //Giảm giá vận chuyển
+        // Giảm giá vận chuyển
         document.getElementById('khuyenmaivc').addEventListener('change', function() {
-            // Lấy tổng tiền hàng
+            // Lấy tổng tiền vận chuyển
             const tongTienVC = parseFloat(document.getElementById('tongtienvc').innerText.replace(/\./g, '').replace('₫', '').trim()) || 0;
             const selectedOption = this.options[this.selectedIndex];
 
@@ -253,16 +290,16 @@
                 const phanTramGiam = parseFloat(selectedOption.getAttribute('data-phantram')) || 0;
                 const giamToiDa = parseFloat(selectedOption.getAttribute('data-giamtoida')) || 0;
 
-                // Tính giảm tiền hàng
+                // Tính giảm tiền vận chuyển
                 const giamTienVC = (tongTienVC * phanTramGiam) / 100;
 
-                // Kiểm tra xem giảm tiền hàng có vượt quá giá trị tối đa hay không
+                // Kiểm tra xem giảm tiền vận chuyển có vượt quá giá trị tối đa hay không
                 const giamTienHienTai = giamTienVC > giamToiDa ? giamToiDa : giamTienVC;
 
-                // Cập nhật giá trị giảm tiền hàng trong view
+                // Cập nhật giá trị giảm tiền vận chuyển trong view
                 document.getElementById('giamtienvc').innerText = new Intl.NumberFormat('vi-VN').format(giamTienHienTai) + '₫';
             } else {
-                // Nếu không có mã khuyến mãi được chọn
+                // Nếu không có mã miễn vận chuyển được chọn
                 document.getElementById('giamtienvc').innerText = '0₫';
             }
         });
@@ -501,6 +538,26 @@
                 }
             });
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchProvinces();
+        });
+
+        function fetchProvinces() {
+            fetch("https://provinces.open-api.vn/api/p/")
+                .then(response => response.json())
+                .then(data => {
+                    const select = document.getElementById("tinh");
+                    data.forEach(province => {
+                        const option = document.createElement("option");
+                        option.textContent = province.name;
+                        select.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error("Lỗi khi lấy danh sách tỉnh:", error);
+                });
+        }
     </script>
 
 @endsection

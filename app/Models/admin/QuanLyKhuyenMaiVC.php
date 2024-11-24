@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class QuanLyKhuyenMai extends Model
+class QuanLyKhuyenMaiVC extends Model
 {
     use HasFactory;
-    protected $table="khuyenmai";
-    protected $primaryKey='MaKM';
+    protected $table="khuyenmaivc";
+    protected $primaryKey='MaKMVC';
 
     protected $fillable = [
         'MaTK',
-        'TenKM',
+        'TenKMVC',
         'DieuKien',
         'PhanTramGiam',
         'GiaTriToiDa',
@@ -22,17 +22,16 @@ class QuanLyKhuyenMai extends Model
         'NgayBD',
         'NgayKT',
     ];
-
     public $timestamps = false;
 
-    public function getkhuyenmai()
+    public function getkhuyenmaivc()
     {
         $currentDate = now(); // Lấy ngày hiện tại
 
         // Lấy tất cả các khuyến mãi
-        $khuyenMaiList = DB::table('khuyenmai')
-            ->join('taikhoan', 'taikhoan.MaTK', '=', 'khuyenmai.MaTK')
-            ->select('khuyenmai.*', 'taikhoan.HoTen')
+        $khuyenMaiList = DB::table('khuyenmaivc')
+            ->join('taikhoan', 'taikhoan.MaTK', '=', 'khuyenmaivc.MaTK')
+            ->select('khuyenmaivc.*', 'taikhoan.HoTen')
             ->get();
 
         foreach ($khuyenMaiList as $item) {
@@ -44,18 +43,17 @@ class QuanLyKhuyenMai extends Model
             }
 
             // Cập nhật vào cơ sở dữ liệu
-            DB::table('khuyenmai')
-                ->where('MaKM', $item->MaKM)
+            DB::table('khuyenmaivc')
+                ->where('MaKMVC', $item->MaKMVC)
                 ->update(['TrangThaiMa' => $item->TrangThaiMa]);
         }
 
         return $khuyenMaiList; // Trả về danh sách khuyến mãi với trạng thái đã được cập nhật
     }
 
-
     public function getTK(){
         return DB::table('taikhoan')
-        ->where('taikhoan.VaiTro','=',3)
-        ->get();
+            ->get();
     }
+
 }

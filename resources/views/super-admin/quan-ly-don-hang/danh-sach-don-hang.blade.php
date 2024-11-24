@@ -1,17 +1,5 @@
 @extends('super-admin.master')
 @section('contents')
-    <style>
-        /* Đặt khung tìm kiếm ở góc phải */
-        .dataTables_filter {
-        float: right; /* Đẩy khung tìm kiếm sang phải */
-        text-align: right;
-        }
-
-        .dataTables_filter label {
-        font-weight: normal;
-        }
-    </style>
-
     <div class = "page-header d-print-none">
         <div class = "container-xl">
             <div class = "row g-2 align-items-center">
@@ -21,7 +9,7 @@
                 </div>
             </div>
             <div class="row mt-2">
-                <div class="col-md-9 d-flex align-items-center gap-2 justify-content-start">
+                <!-- <div class="col-md-9 d-flex align-items-center gap-2 justify-content-start">
                     <a class="btn btn-danger d-flex align-items-center text-white btn-export">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-export">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -30,7 +18,7 @@
                         </svg>
                         Xuất file PDF
                     </a>
-                </div>
+                </div> -->
 
                 <div class="col-3">
                     <div class="form-floating w-100">
@@ -105,7 +93,7 @@
                                                     <option value="{{ $trangThai->MaTT }}" {{ $item->MaTT == $trangThai->MaTT ? 'selected' : '' }}>
                                                         {{ $trangThai->TenTT }}
                                                     </option>
-                                        @endforeach
+                                                @endforeach
                                             </select>
                                         </td>
                                     </tr>
@@ -182,104 +170,103 @@
 @endsection
 @section('scripts')
     <script>
-      var table = $('#tableDonHang').DataTable({
-        "language": {
-          "emptyTable": "Không có dữ liệu trong bảng",
-          "search": "Tìm kiếm:",
-          "lengthMenu": "Hiển thị _MENU_ danh mục mỗi trang",
-          "zeroRecords": "Không tìm thấy kết quả",
-          "infoEmpty": "Không có dữ liệu"
+        var table = $('#tableDonHang').DataTable({
+            "language": {
+                "emptyTable": "Không có dữ liệu trong bảng",
+                "search": "Tìm kiếm:",
+                "lengthMenu": "Hiển thị _MENU_ danh mục mỗi trang",
+                "zeroRecords": "Không tìm thấy kết quả",
+                "infoEmpty": "Không có dữ liệu"
 
-        }
-      });
+            }
+        });
 
-      $(document).ready(function () {
-          // Hàm để ẩn các option nhỏ hơn trạng thái hiện tại
-          function hideLowerStatusOptions() {
-              $('#tableDonHang tbody tr').each(function () {
-                  var $row = $(this);
-                  var currentMaTT = parseInt($row.find('.change-status').val());
+        $(document).ready(function () {
+            // Hàm để ẩn các option nhỏ hơn trạng thái hiện tại
+            function hideLowerStatusOptions() {
+                $('#tableDonHang tbody tr').each(function () {
+                    var $row = $(this);
+                    var currentMaTT = parseInt($row.find('.change-status').val()); // Lấy mã trạng thái hiện tại
 
-                  $row.find('.change-status option').each(function () {
-                      var optionMaTT = parseInt($(this).val());
+                    // Lặp qua từng option trong select để ẩn các option nhỏ hơn currentMaTT
+                    $row.find('.change-status option').each(function () {
+                        var optionMaTT = parseInt($(this).val());
 
-                      // Kiểm tra điều kiện để ẩn trạng thái "hủy" nếu không phải đang xử lý
-                      if (optionMaTT === 7 && currentMaTT !== 1) {
-                          $(this).hide(); // Ẩn trạng thái "hủy" nếu không phải "đang xử lý"
-                      } else if (optionMaTT < currentMaTT) {
-                          $(this).hide(); // Ẩn các trạng thái có mã nhỏ hơn trạng thái hiện tại
-                      } else {
-                          $(this).show(); // Hiển thị các trạng thái còn lại
-                      }
-                  });
-              });
-          }
+                        if (optionMaTT < currentMaTT) {
+                            $(this).hide(); // Ẩn các trạng thái có mã nhỏ hơn trạng thái hiện tại
+                        } else {
+                            $(this).show(); // Hiển thị các trạng thái còn lại
+                        }
+                    });
+                });
+            }
 
-          // Lắng nghe sự kiện thay đổi trên select trạng thái
-          $('#filter-status').on('change', function () {
-              var trangThaiId = $(this).val();
-              console.log("Selected Status ID: ", trangThaiId); // Kiểm tra giá trị được chọn
-              var url = "{{ route('loc-trang-thai-don-hang') }}";
+            // Lắng nghe sự kiện thay đổi trên select trạng thái
+            $('#filter-status').on('change', function () {
+                var trangThaiId = $(this).val();
+                console.log("Selected Status ID: ", trangThaiId); // Kiểm tra giá trị được chọn
+                var url = "{{ route('loc-trang-thai-don-hang') }}";
 
-              $.ajax({
-                  url: url,
-                  method: 'POST',
-                  data: {
-                      trangThaiId: trangThaiId,
-                      _token: '{{ csrf_token() }}'
-                  },
-                  success: function (response) {
-                      console.log(response); // Kiểm tra phản hồi từ server
-                      $('#tableDonHang tbody').html(response.html);
-                      hideLowerStatusOptions(); // Gọi hàm để ẩn trạng thái nhỏ hơn sau khi nhận phản hồi
-                  },
-                  error: function (xhr) {
-                      toastr.error("Có lỗi xảy ra khi lọc.", "Operation Failed");
-                  }
-              });
-          });
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    data: {
+                        trangThaiId: trangThaiId,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function (response) {
+                        console.log(response); // Kiểm tra phản hồi từ server
+                        $('#tableDonHang tbody').html(response.html);
+                        hideLowerStatusOptions(); // Gọi hàm để ẩn trạng thái nhỏ hơn sau khi nhận phản hồi
+                    },
+                    error: function (xhr) {
+                        toastr.error("Có lỗi xảy ra khi lọc.", "Operation Failed");
+                    }
+                });
+            });
 
-          // Xử lý khi thay đổi trạng thái trong bảng
-          $('#tableDonHang').on('change', '.change-status', function () {
-              var ttdhid = $(this).data('id');
-              var newStatus = $(this).val();
-              var url = "{{ route('update-trang-thai-don-hang', ':id') }}".replace(':id', ttdhid);
+            // Xử lý khi thay đổi trạng thái trong bảng
+            $('#tableDonHang').on('change', '.change-status', function () {
+                var ttdhid = $(this).data('id');
+                var newStatus = $(this).val();
+                var url = "{{ route('update-trang-thai-don-hang', ':id') }}".replace(':id', ttdhid);
 
-              var formData = new FormData();
-              formData.append('_token', '{{ csrf_token() }}');
-              formData.append('MaTT', newStatus);
+                var formData = new FormData();
+                formData.append('_token', '{{ csrf_token() }}');
+                formData.append('MaTT', newStatus);
 
-              $.ajax({
-                  url: url,
-                  method: 'POST',
-                  data: formData,
-                  contentType: false,
-                  processData: false,
-                  success: function (response) {
-                      if (response.success) {
-                          toastr.success(response.message, "Cập nhật thành công");
-                          // Kiểm tra trạng thái lọc
-                          var currentFilterStatus = $('#filter-status').val();
-                          if (currentFilterStatus) {
-                              // Nếu có lọc, xóa dòng tương ứng
-                              $('#tableDonHang tbody tr').each(function () {if ($(this).find('.change-status').data('id') == ttdhid) {
-                                  $(this).remove(); // Xóa dòng tương ứng
-                              }
-                              });
-                          }
-                          hideLowerStatusOptions(); // Gọi hàm để ẩn trạng thái nhỏ hơn sau khi thay đổi thành công
-                      } else {
-                          toastr.error("Cập nhật không thành công.", "Operation Failed");
-                      }
-                  },
-                  error: function (xhr) {
-                      toastr.error("Có lỗi xảy ra khi cập nhật.", "Operation Failed");
-                  }
-              });
-          });
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        if (response.success) {
+                            toastr.success(response.message, "Cập nhật thành công");
+                            // Kiểm tra trạng thái lọc
+                            var currentFilterStatus = $('#filter-status').val();
+                            if (currentFilterStatus) {
+                                // Nếu có lọc, xóa dòng tương ứng
+                                $('#tableDonHang tbody tr').each(function () {
+                                    if ($(this).find('.change-status').data('id') == ttdhid) {
+                                        $(this).remove(); // Xóa dòng tương ứng
+                                    }
+                                });
+                            }
+                            hideLowerStatusOptions(); // Gọi hàm để ẩn trạng thái nhỏ hơn sau khi thay đổi thành công
+                        } else {
+                            toastr.error("Cập nhật không thành công.", "Operation Failed");
+                        }
+                    },
+                    error: function (xhr) {
+                        toastr.error("Có lỗi xảy ra khi cập nhật.", "Operation Failed");
+                    }
+                });
+            });
 
-          // Gọi hàm để ẩn trạng thái nhỏ hơn khi trang được tải lần đầu
-          hideLowerStatusOptions();
-      });
+            // Gọi hàm để ẩn trạng thái nhỏ hơn khi trang được tải lần đầu
+            hideLowerStatusOptions();
+        });
     </script>
 @endsection

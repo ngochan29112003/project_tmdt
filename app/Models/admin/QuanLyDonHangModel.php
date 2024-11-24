@@ -13,7 +13,6 @@ class QuanLyDonHangModel extends Model
     protected $table = 'donhang';
     protected $primaryKey = 'MaDH';
     public $timestamps = false;
-
     public function getDonHang()
     {
         return DB::table('donhang')
@@ -22,7 +21,7 @@ class QuanLyDonHangModel extends Model
             ->join('taikhoan', 'taikhoan.MaTK', '=', 'donhang.MaTK')
             ->leftjoin('khuyenmai', 'khuyenmai.MaKM', '=', 'donhang.MaKM')
             ->leftjoin('khuyenmaivc', 'khuyenmaivc.MaKMVC', '=', 'donhang.MaKMVC')
-            ->join('trangthai', 'trangthai.MaTT', '=', 'donhang.MaTT')
+            ->join('trangthai', 'trangthai.MaTT','=', 'donhang.MaTT')
             ->select(
                 'donhang.MaDH',
                 'phuongthucthanhtoan.TenPTTT',
