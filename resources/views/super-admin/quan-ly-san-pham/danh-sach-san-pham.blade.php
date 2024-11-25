@@ -65,7 +65,11 @@
                                         <td>{{ $item->TenDM}}</td>
                                         <td>{{ $item->TenSP}}</td>
                                         <td>
-                                            <img src="{{ asset('asset/img-product/'.$item->AnhSP) }}" alt="Image">
+                                            @if($item->AnhSP)
+                                                <img src="{{ asset('asset/img-product/' . $item->AnhSP) }}" alt="Product Image" style="width: 100px; height: 100px;">
+                                            @else
+                                                <span>No image</span>
+                                            @endif
                                         </td>
                                         <td>{{ $item->MoTaChiTiet}}</td>
                                         <td>{{ $item->TenHSX}}</td>
@@ -110,191 +114,184 @@
         </div>
     </div>
 
-    <!-- ======= Modal thêm (tìm hiểu Modal này trên BS5) ======= -->
-    <div class="modal fade" id="Modaladdsanpham">
-        <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Thêm sản phẩm</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="Formsanpham" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="TenSP" class="form-label">Tên sản phẩm</label>
-                                <input type="text" class="form-control" name="TenSP" id="TenSP" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="AnhSP" class="form-label">Ảnh sản phẩm</label>
-                                <input type="file" class="form-control" name="AnhSP" id="AnhSP" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="AnhSP" class="form-label">Ảnh phụ 1</label>
-                                <input type="file" class="form-control" name="AnhCT1" id="AnhSP" >
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="AnhSP" class="form-label">Ảnh phụ 2</label>
-                                <input type="file" class="form-control" name="AnhCT2" id="AnhSP" >
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="AnhSP" class="form-label">Ảnh phụ 3</label>
-                                <input type="file" class="form-control" name="AnhCT3" id="AnhSP" >
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="AnhSP" class="form-label">Ảnh phụ 4</label>
-                                <input type="file" class="form-control" name="AnhCT4" id="AnhSP" >
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="GiaBan" class="form-label">Giá bán</label>
-                                <input type="text" class="form-control" name="GiaBan" id="GiaBan" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="SoLuongTonKho" class="form-label">Số lượng</label>
-                                <input type="number" class="form-control" name="SoLuongTonKho" id="SoLuongTonKho" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="NgayTaoSP" class="form-label">Ngày tạo sản phẩm</label>
-                                <input type="date" class="form-control" name="NgayTaoSP" id="NgayTaoSP" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="ThoiGianBaoHanh" class="form-label">Thời gian bảo hành</label>
-                                <input type="text" class="form-control" name="ThoiGianBaoHanh" id="ThoiGianBaoHanh" required>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <label for="MoTaChiTiet" class="form-label">Mô tả chi tiết</label>
-                                <input type="text" class="form-control" name="MoTaChiTiet" id="MoTaChiTiet" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="HangSanXuat" class="form-label">Hãng sản xuất</label>
-                                <select class="form-select" name="MaHSX" id="HangSanXuat">
-                                    <option value="" disabled selected>Chọn hãng</option>
-                                    @foreach ($list_hang_sx as $item)
-                                        <option value="{{ $item->MaHSX}}">{{ $item->TenHSX}} </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="DanhMucSP" class="form-label">Danh mục sản phẩm</label>
-                                <select class="form-select" name="MaDM" id="DanhMucSP">
-                                    <option value="" disabled selected>Chọn danh mục</option>
-                                    @foreach ($list_danh_muc as $item)
-                                        <option value="{{ $item->MaDM}}">{{ $item->TenDM}} </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <label for="TrangThaiSP" class="form-label">Trạng thái sản phẩm</label>
-                                <select class="form-select" name="TrangThaiSP" id="TrangThaiSP">
-                                    <option value="Ẩn">Ẩn</option>
-                                    <option value="Hiện">Hiện</option>
-                                </select>
-                            </div>
+<!-- ======= Modal thêm (tìm hiểu Modal này trên BS5) ======= -->
+<div class="modal fade" id="Modaladdsanpham">
+    <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Thêm sản phẩm</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="Formsanpham" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="TenSP" class="form-label">Tên sản phẩm</label>
+                            <input type="text" class="form-control" name="TenSP" id="TenSP" required>
                         </div>
-                        <div class="text-end">
-                            <button type="submit" class="btn btn-primary">Thêm</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <div class="col-md-6 mb-3">
+                            <label for="AnhSP" class="form-label">Ảnh sản phẩm</label>
+                            <input type="file" class="form-control" name="AnhSP" id="AnhSP" required>
                         </div>
-                    </form>
-                </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="AnhCT1" class="form-label">Ảnh phụ 1</label>
+                            <input type="file" class="form-control" name="AnhCT1" id="AnhCT1">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="AnhCT2" class="form-label">Ảnh phụ 2</label>
+                            <input type="file" class="form-control" name="AnhCT2" id="AnhCT2" >
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="AnhCT3" class="form-label">Ảnh phụ 3</label>
+                            <input type="file" class="form-control" name="AnhCT3" id="AnhCT3" >
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="AnhCT4" class="form-label">Ảnh phụ 4</label>
+                            <input type="file" class="form-control" name="AnhCT4" id="AnhCT4" >
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="GiaBan" class="form-label">Giá bán</label>
+                            <input type="text" class="form-control" name="GiaBan" id="GiaBan" >
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="SoLuongTonKho" class="form-label">Số lượng</label>
+                            <input type="number" class="form-control" name="SoLuongTonKho" id="SoLuongTonKho" >
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="NgayTaoSP" class="form-label">Ngày tạo sản phẩm</label>
+                            <input type="date" class="form-control" name="NgayTaoSP" id="NgayTaoSP" >
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="ThoiGianBaoHanh" class="form-label">Thời gian bảo hành</label>
+                            <input type="text" class="form-control" name="ThoiGianBaoHanh" id="ThoiGianBaoHanh" >
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="MoTaChiTiet" class="form-label">Mô tả chi tiết</label>
+                            <input type="text" class="form-control" name="MoTaChiTiet" id="MoTaChiTiet" >
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="HangSanXuat" class="form-label">Hãng sản xuất</label>
+                            <select class="form-select" name="MaHSX" id="HangSanXuat">
+                                <option value="" disabled selected>Chọn hãng</option>
+                                @foreach ($list_hang_sx as $item)
+                                    <option value="{{ $item->MaHSX}}">{{ $item->TenHSX}} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="DanhMucSP" class="form-label">Danh mục sản phẩm</label>
+                            <select class="form-select" name="MaDM" id="DanhMucSP">
+                                <option value="" disabled selected>Chọn danh mục</option>
+                                @foreach ($list_danh_muc as $item)
+                                    <option value="{{ $item->MaDM}}">{{ $item->TenDM}} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="TrangThaiSP" class="form-label">Trạng thái sản phẩm</label>
+                            <select class="form-select" name="TrangThaiSP" id="TrangThaiSP">
+                                <option value="Ẩn">Ẩn</option>
+                                <option value="Hiện">Hiện</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary">Thêm</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
 
-<!-- Model Sua -->
-    <div class="modal fade" id="Modaleditsanpham">
-        <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Thêm sản phẩm</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="Formeditsanpham" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="TenSP" class="form-label">Tên sản phẩm</label>
-                                <input type="text" class="form-control" name="TenSP" id="edit_TenSP" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="AnhSP" class="form-label">Ảnh sản phẩm</label>
-                                <input type="file" class="form-control" name="AnhSP" id="edit_AnhSP" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="AnhSP" class="form-label">Ảnh Phụ 1</label>
-                                <input type="file" class="form-control" name="AnhCT1" id="edit_AnhCT1" >
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="AnhSP" class="form-label">Ảnh Phụ 2</label>
-                                <input type="file" class="form-control" name="AnhCT2" id="edit_AnhCT2" >
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="AnhSP" class="form-label">Ảnh Phụ 3</label>
-                                <input type="file" class="form-control" name="AnhCT3" id="edit_AnhCT3" >
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="AnhSP" class="form-label">Ảnh Phụ 4</label>
-                                <input type="file" class="form-control" name="AnhCT4" id="edit_AnhCT4" >
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="GiaBan" class="form-label">Giá bán</label>
-                                <input type="text" class="form-control" name="GiaBan" id="edit_GiaBan" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="SoLuongTonKho" class="form-label">Số lượng</label>
-                                <input type="number" class="form-control" name="SoLuongTonKho" id="edit_SoLuongTonKho" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="NgayTaoSP" class="form-label">Ngày tạo sản phẩm</label>
-                                <input type="date" class="form-control" name="NgayTaoSP" id="edit_NgayTaoSP" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="ThoiGianBaoHanh" class="form-label">Thời gian bảo hành</label>
-                                <input type="text" class="form-control" name="ThoiGianBaoHanh" id="edit_ThoiGianBaoHanh" required>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <label for="MoTaChiTiet" class="form-label">Mô tả chi tiết</label>
-                                <input type="text" class="form-control" name="MoTaChiTiet" id="edit_MoTaChiTiet" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="HangSanXuat" class="form-label">Hãng sản xuất</label>
-                                <select class="form-select" name="MaHSX" id="edit_HangSanXuat">
-                                    <option value="" disabled selected>Chọn hãng</option>
-                                    @foreach ($list_hang_sx as $item)
-                                        <option value="{{ $item->MaHSX}}">{{ $item->TenHSX}} </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="DanhMucSP" class="form-label">Danh mục sản phẩm</label>
-                                <select class="form-select" name="MaDM" id="edit_DanhMucSP">
-                                    <option value="" disabled selected>Chọn danh mục</option>
-                                    @foreach ($list_danh_muc as $item)
-                                        <option value="{{ $item->MaDM}}">{{ $item->TenDM}} </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <label for="TrangThaiSP" class="form-label">Trạng thái sản phẩm</label>
-                                <select class="form-select" name="TrangThaiSP" id="edit_TrangThaiSP">
-                                    <option value="" disabled selected>Chọn trạng thái</option>
-                                    <option value="Hiện">Hiện</option>
-                                    <option value="Ẩn">Ẩn</option>
-                                </select>
-                            </div>
+{{--Modal sửa--}}
+<div class="modal fade" id="Modaleditsanpham">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Sửa sản phẩm</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="Formeditsanpham" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label for="TenSP" class="form-label">Tên sản phẩm</label>
+                            <input type="text" class="form-control" name="TenSP" id="edit_TenSP" required>
                         </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="AnhSP" class="form-label">Ảnh sản phẩm</label>
+                            <div id="current_AnhSP" class="mb-2"></div>
+                            <input type="file" class="form-control" name="AnhSP" id="edit_AnhSP">
+                        </div>
+                        <!-- Các trường ảnh phụ -->
+                        @foreach (['AnhCT1', 'AnhCT2', 'AnhCT3', 'AnhCT4'] as $key)
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ $key }}" class="form-label">Ảnh phụ {{ substr($key, -1) }}</label>
+                                <div id="current_{{ $key }}" class="mb-2"></div>
+                                <input type="file" class="form-control" name="{{ $key }}" id="{{ $key }}">
+                            </div>
+                        @endforeach
+                        <div class="col-md-6 mb-3">
+                            <label for="GiaBan" class="form-label">Giá bán</label>
+                            <input type="text" class="form-control" name="GiaBan" id="edit_GiaBan" >
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="SoLuongTonKho" class="form-label">Số lượng</label>
+                            <input type="number" class="form-control" name="SoLuongTonKho" id="edit_SoLuongTonKho" >
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="NgayTaoSP" class="form-label">Ngày tạo sản phẩm</label>
+                            <input type="date" class="form-control" name="NgayTaoSP" id="edit_NgayTaoSP" >
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="ThoiGianBaoHanh" class="form-label">Thời gian bảo hành</label>
+                            <input type="text" class="form-control" name="ThoiGianBaoHanh" id="edit_ThoiGianBaoHanh" >
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="MoTaChiTiet" class="form-label">Mô tả chi tiết</label>
+                            <input type="text" class="form-control" name="MoTaChiTiet" id="edit_MoTaChiTiet" >
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="HangSanXuat" class="form-label">Hãng sản xuất</label>
+                            <select class="form-select" name="MaHSX" id="edit_HangSanXuat">
+                                <option value="" disabled selected>Chọn hãng</option>
+                                @foreach ($list_hang_sx as $item)
+                                    <option value="{{ $item->MaHSX}}">{{ $item->TenHSX}} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="DanhMucSP" class="form-label">Danh mục sản phẩm</label>
+                            <select class="form-select" name="MaDM" id="edit_DanhMucSP">
+                                <option value="" disabled selected>Chọn danh mục</option>
+                                @foreach ($list_danh_muc as $item)
+                                    <option value="{{ $item->MaDM}}">{{ $item->TenDM}} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="TrangThaiSP" class="form-label">Trạng thái sản phẩm</label>
+                            <select class="form-select" name="TrangThaiSP" id="edit_TrangThaiSP">
+                                <option value="Ẩn">Ẩn</option>
+                                <option value="Hiện">Hiện</option>
+                            </select>
+                        </div>
+                    </div>
                         <div class="text-end">
-                            <button type="submit" class="btn btn-primary">Sửa</button>
+                            <button type="submit" class="btn btn-primary">Lưu</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
+    </div
+
 @endsection
 @section('scripts')
     <script>
@@ -309,26 +306,31 @@
         }
       });
 
+
       $('#Formsanpham').submit(function (e) {
           e.preventDefault();
 
+          var formData = new FormData(this);  // Tạo đối tượng FormData từ form
+
           $.ajax({
-              url: '{{ route('add-san-pham') }}',
+              url: '{{ route('add-san-pham') }}',  // Đảm bảo route này đúng
               method: 'POST',
-              data: $(this).serialize(),
+              data: formData,
+              processData: false,  // Không xử lý dữ liệu (để gửi tệp)
+              contentType: false,  // Không gửi kiểu content type
               success: function (response) {
                   if (response.success) {
                       $('#Modaladdsanpham').modal('hide');
                       toastr.success(response.message, "Successful");
                       setTimeout(function () {
-                          location.reload()
+                          location.reload();
                       }, 500);
                   } else {
                       toastr.error(response.message, "Error");
                   }
               },
               error: function (xhr) {
-                  toastr.error(response.message, "Error");
+                  toastr.error("An error occurred", "Error");
                   if (xhr.status === 400) {
                       var response = xhr.responseJSON;
                       toastr.error(response.message, "Error");
@@ -338,6 +340,7 @@
               }
           });
       });
+
 
       $('#tableSanPham').on('click', '.delete-btn', function () {
           var MaSP = $(this).data('id');
@@ -381,21 +384,15 @@
       //Hiện chi tiết của dữ liệu
       $('#tableSanPham').on('click', '.edit-btn', function () {
           var MaSP = $(this).data('id');
-
           $('#Formeditsanpham').data('id', MaSP);
-          var url = "{{ route('edit-san-pham', ':id') }}";
-          url = url.replace(':id', MaSP);
+          var url = "{{ route('edit-san-pham', ':id') }}".replace(':id', MaSP);
+
           $.ajax({
               url: url,
               method: 'GET',
               success: function (response) {
                   var data = response.sanpham;
                   $('#edit_TenSP').val(data.TenSP);
-                  $('#edit_AnhSP').val(data.AnhSP);
-                  $('#edit_AnhCT1').val(data.AnhCT1);
-                  $('#edit_AnhCT2').val(data.AnhCT2);
-                  $('#edit_AnhCT3').val(data.AnhCT3);
-                  $('#edit_AnhCT4').val(data.AnhCT4);
                   $('#edit_GiaBan').val(data.GiaBan);
                   $('#edit_SoLuongTonKho').val(data.SoLuongTonKho);
                   $('#edit_NgayTaoSP').val(data.NgayTaoSP);
@@ -404,20 +401,36 @@
                   $('#edit_ThoiGianBaoHanh').val(data.ThoiGianBaoHanh);
                   $('#edit_DanhMucSP').val(data.MaDM);
                   $('#edit_HangSanXuat').val(data.MaHSX);
+
+                  // Hiển thị ảnh hiện tại
+                  if (data.AnhSP) {
+                      $('#current_AnhSP').html(
+                          `<img src="/${data.AnhSP}" alt="Ảnh chính" class="img-thumbnail" width="100">`
+                      );
+                  }
+                  ['AnhCT1', 'AnhCT2', 'AnhCT3', 'AnhCT4'].forEach(function (key, index) {
+                      if (data[key]) {
+                          $(`#current_${key}`).html(
+                              `<img src="/${data[key]}" alt="Ảnh phụ ${index + 1}" class="img-thumbnail" width="100">`
+                          );
+                      }
+                  });
+
                   $('#Modaleditsanpham').modal('show');
               },
-              error: function (xhr) {
+              error: function () {
+                  toastr.error("Không thể tải dữ liệu sản phẩm.");
               }
           });
       });
 
-      //Lưu lại dữ liệu khi chỉnh sửa
+      // Xử lý submit form sửa sản phẩm
       $('#Formeditsanpham').submit(function (e) {
           e.preventDefault();
           var sanphamid = $(this).data('id');
-          var url = "{{ route('update-san-pham', ':id') }}";
-          url = url.replace(':id', sanphamid);
+          var url = "{{ route('update-san-pham', ':id') }}".replace(':id', sanphamid);
           var formData = new FormData(this);
+
           $.ajax({
               url: url,
               method: 'POST',
@@ -427,17 +440,23 @@
               success: function (response) {
                   if (response.success) {
                       $('#Modaleditsanpham').modal('hide');
-                      toastr.success(response.response, "Sửa thành công");
+                      toastr.success(response.response);
+
+                      // Cập nhật dữ liệu trong danh sách
+                      var row = $(`#row_${response.sanpham.id}`);
+                      row.find('.sanpham-name').text(response.sanpham.TenSP);
+                      row.find('.sanpham-price').text(response.sanpham.GiaBan);
+                      row.find('.sanpham-img').attr('src', `/${response.sanpham.AnhSP}`);
+
                       setTimeout(function () {
-                          location.reload()
+                          location.reload(); // Tải lại trang nếu cần
                       }, 500);
                   }
               },
-              error: function (xhr) {
-                  toastr.error("Lỗi");
+              error: function () {
+                  toastr.error("Có lỗi xảy ra khi cập nhật sản phẩm.");
               }
           });
       });
-
     </script>
 @endsection

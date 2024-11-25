@@ -18,50 +18,124 @@ class QuanLySanPhamController extends Controller
         $list_sp = $San_Pham->getSanPham();
         $list_danh_muc = $San_Pham->getdanhmuc();
         $list_hang_sx = $San_Pham->gethangsx();
+//        dd($San_Pham->toArray());
         return view('super-admin.quan-ly-san-pham.danh-sach-san-pham',
         compact('list_sp','list_danh_muc','list_hang_sx'));
     }
 
+
     public function addSanPham(Request $request)
     {
-//        dd($request);
+        // 1. Xác thực dữ liệu
         $validate = $request->validate([
-            'TenSP'=> 'string',
+            'TenSP' => 'string|required',
             'AnhSP' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'GiaBan' => 'string',
-            'SoLuongTonKho' => 'string',
-            'NgayTaoSP' => 'date',
-            'TrangThaiSP' => 'string',
-            'MoTaChiTiet' => 'string',
-            'ThoiGianBaoHanh' => 'string',
-            'MaDM' => 'int',
-            'MaHSX' => 'int',
             'AnhCT1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'AnhCT2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'AnhCT3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'AnhCT4' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'GiaBan' => 'string|required',
+            'SoLuongTonKho' => 'integer|required',
+            'NgayTaoSP' => 'date|required',
+            'TrangThaiSP' => 'string|required',
+            'MoTaChiTiet' => 'string|required',
+            'ThoiGianBaoHanh' => 'string|required',
+            'MaDM' => 'integer|required',
+            'MaHSX' => 'integer|required',
         ]);
 
-        // Lấy tên tệp ảnh
-        if ($request->hasFile('sanpham')) {
-            $file = $request->file('sanpham');
+        // 2. Xử lý file upload
+        $fileNameAnhSP = null;
+        $fileNameAnhCT1 = null;
+
+        // Xử lý ảnh chính (AnhSP)
+        if ($request->hasFile('AnhSP')) {
+            $file = $request->file('AnhSP');
             if ($file->isValid()) {
-                $fileName = time() . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('asset/img-product'), $fileName);
+                $fileNameAnhSP = time() . '_AnhSP.' . $file->getClientOriginalExtension();
+                $file->move(public_path('asset/img-product'), $fileNameAnhSP);
             } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'File không hợp lệ!',
-                ]);
+                return response()->json(['success' => false, 'message' => 'File ảnh chính không hợp lệ!'], 400);
             }
+        }
+
+        // Xử lý ảnh phụ 1 (AnhCT1)
+        if ($request->hasFile('AnhCT1')) {
+            $file = $request->file('AnhCT1');
+            if ($file->isValid()) {
+                $fileNameAnhCT1 = time() . '_AnhCT1.' . $file->getClientOriginalExtension();
+                $file->move(public_path('asset/img-product'), $fileNameAnhCT1);
+            } else {
+                return response()->json(['success' => false, 'message' => 'File ảnh phụ không hợp lệ!'], 400);
+            }
+        }
+
+        // Xử lý ảnh phụ 2 (AnhCT2)
+        if ($request->hasFile('AnhCT2')) {
+            $file = $request->file('AnhCT2');
+            if ($file->isValid()) {
+                $fileNameAnhCT2 = time() . '_AnhCT2.' . $file->getClientOriginalExtension();
+                $file->move(public_path('asset/img-product'), $fileNameAnhCT2);
+            } else {
+                return response()->json(['success' => false, 'message' => 'File ảnh phụ không hợp lệ!'], 400);
+            }
+        }
+
+        // Xử lý ảnh phụ 3 (AnhCT3)
+        if ($request->hasFile('AnhCT3')) {
+            $file = $request->file('AnhCT3');
+            if ($file->isValid()) {
+                $fileNameAnhCT3 = time() . '_AnhCT3.' . $file->getClientOriginalExtension();
+                $file->move(public_path('asset/img-product'), $fileNameAnhCT3);
+            } else {
+                return response()->json(['success' => false, 'message' => 'File ảnh phụ không hợp lệ!'], 400);
+            }
+        }
+
+        // Xử lý ảnh phụ 4 (AnhCT4)
+        if ($request->hasFile('AnhCT4')) {
+            $file = $request->file('AnhCT4');
+            if ($file->isValid()) {
+                $fileNameAnhCT4 = time() . '_AnhCT4.' . $file->getClientOriginalExtension();
+                $file->move(public_path('asset/img-product'), $fileNameAnhCT4);
+            } else {
+                return response()->json(['success' => false, 'message' => 'File ảnh phụ không hợp lệ!'], 400);
+            }
+        }
+
+
+        // 3. Tạo sản phẩm mới
+        $sanPham = new SanPhamModel([
+            'TenSP' => $request->TenSP,
+            'AnhSP' => $fileNameAnhSP,
+            'AnhCT1' => $fileNameAnhCT1,
+            'AnhCT2' => $fileNameAnhCT2,
+            'AnhCT3' => $fileNameAnhCT3,
+            'AnhCT4' => $fileNameAnhCT4,
+            'GiaBan' => $request->GiaBan,
+            'SoLuongTonKho' => $request->SoLuongTonKho,
+            'NgayTaoSP' => $request->NgayTaoSP,
+            'ThoiGianBaoHanh' => $request->ThoiGianBaoHanh,
+            'MoTaChiTiet' => $request->MoTaChiTiet,
+            'TrangThaiSP' => $request->TrangThaiSP,
+            'MaDM' => $request->MaDM,
+            'MaHSX' => $request->MaHSX,
+        ]);
+
+        if ($sanPham->save()) {
+            return response()->json([
+                'success' => true,
+                'status' => 200,
+                'message' => 'Thêm thành công',
+            ], 200);
         } else {
             return response()->json([
                 'success' => false,
-                'message' => 'Chưa chọn tệp!',
-            ]);
+                'status' => 500,
+                'message' => 'Thêm không thành công',
+            ], 500);
         }
     }
-
 
     function deleteSP($id)
     {
@@ -86,33 +160,66 @@ class QuanLySanPhamController extends Controller
     public function updateSanPham(Request $request, $id)
     {
         $validated = $request->validate([
-            'TenSP'=> 'string',
+            'TenSP' => 'required|string',
             'AnhSP' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'GiaBan' => 'string',
-            'SoLuongTonKho' => 'string',
-            'NgayTaoSP' => 'date',
-            'TrangThaiSP' => 'string',
-            'MoTaChiTiet' => 'string',
-            'ThoiGianBaoHanh' => 'string',
-            'MaDM' => 'int',
-            'MaHSX' => 'int',
+            'GiaBan' => 'required|string',
+            'SoLuongTonKho' => 'required|string',
+            'NgayTaoSP' => 'required|date',
+            'TrangThaiSP' => 'required|string',
+            'MoTaChiTiet' => 'nullable|string',
+            'ThoiGianBaoHanh' => 'nullable|string',
+            'MaDM' => 'required|int',
+            'MaHSX' => 'required|int',
             'AnhCT1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'AnhCT2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'AnhCT3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'AnhCT4' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            ],[
-                'AnhDaiDien.image' => 'Tệp tải lên phải là một hình ảnh hợp lệ.',
-                'AnhDaiDien.mimes' => 'Hình ảnh phải thuộc các định dạng: jpeg, png, jpg, gif.',
-                'AnhDaiDien.max' => 'Dung lượng hình ảnh không được vượt quá 2MB.',
         ]);
+
         $sanpham = SanPhamModel::findOrFail($id);
+
+        // Xử lý ảnh chính
+        if ($request->hasFile('AnhSP')) {
+            $file = $request->file('AnhSP');
+            if ($file->isValid()) {
+                $fileNameAnhSP = time() . '_AnhSP.' . $file->getClientOriginalExtension();
+                $file->move(public_path('asset/img-product'), $fileNameAnhSP);
+
+                if ($sanpham->AnhSP && file_exists(public_path($sanpham->AnhSP))) {
+                    unlink(public_path($sanpham->AnhSP));
+                }
+
+                $validated['AnhSP'] = $fileNameAnhSP;
+            }
+        }
+
+        // Xử lý ảnh phụ
+        foreach (['AnhCT1', 'AnhCT2', 'AnhCT3', 'AnhCT4'] as $key) {
+            if ($request->hasFile($key)) {
+                $file = $request->file($key);
+                if ($file->isValid()) {
+                    $fileName = time() . '_' . $key . '.' . $file->getClientOriginalExtension();
+                    $file->move(public_path('asset/img-product'), $fileName);
+
+                    if ($sanpham->{$key} && file_exists(public_path($sanpham->{$key}))) {
+                        unlink(public_path($sanpham->{$key}));
+                    }
+
+                    $validated[$key] = $fileName;
+                }
+            }
+        }
+
         $sanpham->update($validated);
 
         return response()->json([
             'success' => true,
+            'response' => 'Cập nhật sản phẩm thành công!',
             'sanpham' => $sanpham,
         ]);
     }
+
+
 
     public function exportSanPham()
     {
