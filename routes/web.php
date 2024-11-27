@@ -4,6 +4,7 @@ use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\khach_hang\ChiTietSanPhamController;
 use App\Http\Controllers\khach_hang\GioHangController;
 use App\Http\Controllers\khach_hang\DatHangController;
+use App\Http\Controllers\khach_hang\NhomSanPhamController;
 use App\Http\Controllers\khach_hang\ThongTinTaiKhoanController;
 use App\Http\Controllers\khach_hang\TraCuuDonHangController;
 use App\Http\Controllers\khach_hang\VNpayController;
@@ -27,7 +28,6 @@ use App\Http\Controllers\super_admin\QuanLySanPhamController;
 use App\Http\Controllers\super_admin\QuanLyTaiKhoanController;
 use App\Http\Controllers\super_admin\QuanLyVanChuyenController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 
 Route::get('/',[DashBoardController::class,'getViewDashBoardUser'])->name('home-page');
 Route::get('/register',[RegisterController::class,'getViewRegister'])->name('index.register');
@@ -44,7 +44,7 @@ Route::get('/logout', [LoginController::class, 'logoutAction'])->name('logout');
 Route::get('/chi-tiet-san-pham/{id}', [ChiTietSanPhamController::class, 'getViewChiTietSP'])->name('chi-tiet-san-pham');
 Route::post('/tim-kiem', [DashBoardController::class, 'search'])->name('search');
 Route::get('/san-pham-tim-kiem', [DashBoardController::class, 'getViewSearch'])->name('view-search');
-
+Route::get('/san-pham/{category}/{manufacturer}', [NhomSanPhamController::class, 'show'])->name('nhom-san-pham');
 
 Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::group(['prefix' => '/super-admin'], function () {
@@ -57,7 +57,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::group(['prefix' => '/tai-khoan'], function () {
             Route::get('/danh-sach',[QuanLyTaiKhoanController::class,'getView'])->name('danh-sach-tai-khoan');
             Route::get('/danh-sach-admin',[QuanLyTaiKhoanController::class,'getViewTaiKhoanAd'])->name('tai-khoan-admin');
-            Route::post('/danh-sach-admin/add',[QuanLyTaiKhoanController::class,'addTaiKhoanAd'])->name('tai-khoan-admin-add');            Route::get('/edit/{id}', [QuanLyDanhMucController::class, 'editDanhMuc'])->name('edit-danh-muc');
+            Route::post('/danh-sach-admin/add',[QuanLyTaiKhoanController::class,'addTaiKhoanAd'])->name('tai-khoan-admin-add');
+            Route::get('/edit/{id}', [QuanLyDanhMucController::class, 'editDanhMuc'])->name('edit-danh-muc');
             Route::get('/danh-sach-admin/edit/{id}', [QuanLyTaiKhoanController::class, 'editTaiKhoanAd'])->name('tai-khoan-admin-edit');
             Route::post('/danh-sach-admin/update/{id}', [QuanLyTaiKhoanController::class, 'updateTaiKhoanAd'])->name('tai-khoan-admin-update');
             Route::delete('/danh-sach-admin/delete/{id}', [QuanLyTaiKhoanController::class, 'deleteTaiKhoanAd'])->name('tai-khoan-admin-delete');
@@ -124,7 +125,6 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
             Route::delete('/delete/{id}', [QuanLyCTSPController::class, 'deleteCTSP'])->name('delete-chi-tiet-san-pham');
         });
 
-            // Đơn hàng
         // Đơn hàng
         Route::group(['prefix' => '/don-hang'], function () {
             Route::get('/danh-sach',[QuanLyDonHangController::class,'getView'])->name('danh-sach-don-hang');
@@ -233,7 +233,6 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
 
         });
 
-
         //Đơn hàng
         Route::group(['prefix' => '/don-hang'], function () {
             Route::get('/', [DatHangController::class, 'getDonHang'])->name('don-hang');
@@ -247,10 +246,96 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
             Route::get('/edit{id}', [ThongTinTaiKhoanController::class, 'editTaiKhoan'])->name('edit-thong-tin-tai-khoan');
             Route::post('/update{id}', [ThongTinTaiKhoanController::class, 'updateTTTK'])->name('update-thong-tin-tai-khoan');
         });
+
+        //Nhóm sản phẩm
+
     });
 
     Route::group(['prefix' => '/admin'], function () {
         Route::get('/home',[DashBoardController::class,'getViewDashBoardSAdmin'])->name('admin-home');
+
+        // Bình luận
+        Route::group(['prefix' => '/binh-luan'], function () {
+            Route::get('/danh-sach', [App\Http\Controllers\admin\QuanLyBinhLuanController::class, 'getView'])->name('admin-danh-sach-binh-luan');
+            Route::get('/filter-binh-luan', [App\Http\Controllers\admin\QuanLyBinhLuanController::class, 'filterBinhLuan'])->name('admin-filter-binh-luan');
+            Route::post('/binh-luan/duyet/{id}', [App\Http\Controllers\admin\QuanLyBinhLuanController::class, 'duyetBinhLuan'])->name('admin-duyet-binh-luan');
+            Route::delete('/binh-luan/xoa/{id}', [App\Http\Controllers\admin\QuanLyBinhLuanController::class, 'xoaBinhLuan'])->name('admin-xoa-binh-luan');
+        });
+
+        // Danh mục
+        Route::group(['prefix' => '/danh-muc'], function () {
+            Route::get('/danh-sach',[App\Http\Controllers\admin\QuanLyDanhMucController::class,'getView'])->name('admin-danh-sach-danh-muc');
+            Route::post('/add',[App\Http\Controllers\admin\QuanLyDanhMucController::class,'addDanhMuc'])->name('admin-add-danh-muc');
+            Route::delete('/delete/{id}',[App\Http\Controllers\admin\QuanLyDanhMucController::class,'deleteDanhMuc'])->name('admin-delete-danh-muc');
+            Route::get('/edit/{id}', [App\Http\Controllers\admin\QuanLyDanhMucController::class, 'editDanhMuc'])->name('admin-edit-danh-muc');
+            Route::post('/update/{id}', [App\Http\Controllers\admin\QuanLyDanhMucController::class, 'updateDanhMuc'])->name('admin-update-danh-muc');
+            Route::get('/super-admin/danh-muc/filter', [App\Http\Controllers\admin\QuanLyDanhMucController::class, 'filterDanhMuc'])->name('admin-filter-danh-muc');
+            Route::get('/export', [App\Http\Controllers\admin\QuanLyDanhMucController::class, 'exportDanhMuc'])->name('admin-export-danh-muc');
+            Route::post('/hien', [App\Http\Controllers\admin\QuanLyDanhMucController::class, 'hienDanhMuc'])->name('admin-hien-danh-muc');
+            Route::post('/an', [App\Http\Controllers\admin\QuanLyDanhMucController::class, 'anDanhMuc'])->name('admin-an-danh-muc');
+
+            Route::post('/add-hang-san-xuat', [App\Http\Controllers\admin\QuanLyDanhMucController::class, 'addHangSanXuat'])->name('admin-add-hang-san-xuat-trongdm');
+            Route::get('/get-category-name/{id}', [App\Http\Controllers\admin\QuanLyDanhMucController::class, 'getCategoryName'])->name('admin-get-category-name');
+            Route::get('/get-danh-muc-by-id/{id}', [App\Http\Controllers\admin\QuanLyDanhMucController::class, 'getDanhMucById'])->name('admin-get-danh-muc-by-id');
+
+        });
+
+        // Đơn hàng
+        Route::group(['prefix' => '/don-hang'], function () {
+            Route::get('/danh-sach',[App\Http\Controllers\admin\QuanLyDonHangController::class,'getView'])->name('admin-danh-sach-don-hang');
+            Route::post('/updateTT/{id}', [App\Http\Controllers\admin\QuanLyDonHangController::class, 'updateTTDH'])->name('admin-update-trang-thai-don-hang');
+            Route::post('/loc-trang-thai-don-hang', [App\Http\Controllers\admin\QuanLyDonHangController::class, 'filterDonHang'])->name('admin-loc-trang-thai-don-hang');
+            Route::get('/in-don-hang/{id}',[App\Http\Controllers\admin\QuanLyDonHangController::class,'InDH'])->name('admin-in-don-hang');
+        });
+
+        // Hãng sản xuất
+        Route::group(['prefix' => '/hang-san-xuat'], function () {
+            Route::get('/danh-sach',[App\Http\Controllers\admin\QuanLyHangSanXuatController::class,'getView'])->name('admin-danh-sach-hang-san-xuat');
+            Route::post('/add',[App\Http\Controllers\admin\QuanLyHangSanXuatController::class,'addHangSanXuat'])->name('admin-add-hang-san-xuat');
+            Route::delete('/delete/{id}',[App\Http\Controllers\admin\QuanLyHangSanXuatController::class,'deleteHangSanXuat'])->name('admin-delete-hang-san-xuat');
+            Route::get('/edit/{id}', [App\Http\Controllers\admin\QuanLyHangSanXuatController::class, 'editHangSanXuat'])->name('admin-edit-hang-san-xuat');
+            Route::post('/update/{id}', [App\Http\Controllers\admin\QuanLyHangSanXuatController::class, 'updateHangSanXuat'])->name('admin-update-hang-san-xuat');
+            Route::get('/export', [App\Http\Controllers\admin\QuanLyHangSanXuatController::class, 'exportHSX'])->name('admin-export-hang-san-xuat');
+        });
+
+        // Khuyến mãi
+        Route::group(['prefix' => '/khuyen-mai'], function () {
+            Route::get('/danh-sach',[App\Http\Controllers\admin\QuanLyKhuyenMaiController::class,'getView'])->name('admin-danh-sach-khuyen-mai');
+            Route::post('/add',[App\Http\Controllers\admin\QuanLyKhuyenMaiController::class,'addKhuyenMai'])->name('admin-add-khuyen-mai');
+            Route::get('/edit/{id}', [App\Http\Controllers\admin\QuanLyKhuyenMaiController::class, 'editKhuyenMai'])->name('admin-edit-khuyen-mai');
+            Route::post('/update/{id}', [App\Http\Controllers\admin\QuanLyKhuyenMaiController::class, 'updateKhuyenMai'])->name('admin-update-khuyen-mai');
+            Route::delete('/delete/{id}',[App\Http\Controllers\admin\QuanLyKhuyenMaiController::class,'deleteKM'])->name('admin-delete-khuyen-mai');
+        });
+
+        //Khuyến mãi vận chuyển
+        Route::group(['prefix' => '/khuyen-mai-vc'], function () {
+            Route::get('/danh-sach',[App\Http\Controllers\admin\QuanLyKhuyenMaiVCController::class,'getView'])->name('admin-danh-sach-khuyen-mai-vc');
+            Route::post('/add',[App\Http\Controllers\admin\QuanLyKhuyenMaiVCController::class,'addKhuyenMaiVC'])->name('admin-add-khuyen-mai-vc');
+            Route::get('/edit/{id}', [App\Http\Controllers\admin\QuanLyKhuyenMaiVCController::class, 'editKhuyenMaiVC'])->name('admin-edit-khuyen-mai-vc');
+            Route::post('/update/{id}', [App\Http\Controllers\admin\QuanLyKhuyenMaiVCController::class, 'updateKhuyenMaiVC'])->name('admin-update-khuyen-mai-vc');
+            Route::delete('/delete/{id}',[App\Http\Controllers\admin\QuanLyKhuyenMaiVCController::class,'deleteKMVC'])->name('admin-delete-khuyen-mai-vc');
+        });
+
+        // Sản phẩm
+        Route::group(['prefix' => '/san-pham'], function () {
+            Route::get('/danh-sach',[App\Http\Controllers\admin\QuanLySanPhamController::class,'getView'])->name('admin-danh-sach-san-pham');
+            Route::post('/add',[App\Http\Controllers\admin\QuanLySanPhamController::class,'addSanPham'])->name('admin-add-san-pham');
+            Route::get('/edit/{id}', [App\Http\Controllers\admin\QuanLySanPhamController::class, 'editSanPham'])->name('admin-edit-san-pham');
+            Route::post('/update/{id}', [App\Http\Controllers\admin\QuanLySanPhamController::class, 'updateSanPham'])->name('admin-update-san-pham');
+            Route::delete('/delete/{id}',[App\Http\Controllers\admin\QuanLySanPhamController::class,'deleteSP'])->name('admin-delete-san-pham');
+            Route::get('/export', [App\Http\Controllers\admin\QuanLySanPhamController::class, 'exportSanPham'])->name('admin-export-san-pham');
+        });
+
+        // Vận chuyển
+        Route::group(['prefix' => '/van-chuyen'], function () {
+            Route::get('/danh-sach', [App\Http\Controllers\admin\QuanLyVanChuyenController::class, 'getView'])->name('admin-danh-sach-van-chuyen');
+            Route::post('/add-van-chuyen', [App\Http\Controllers\admin\QuanLyVanChuyenController::class, 'addVanChuyen'])->name('admin-add-van-chuyen');
+            Route::get('/edit-van-chuyen/{id}', [App\Http\Controllers\admin\QuanLyVanChuyenController::class, 'editVanChuyen'])->name('admin-edit-van-chuyen');
+            Route::post('/update-van-chuyen/{id}', [App\Http\Controllers\admin\QuanLyVanChuyenController::class, 'updateVanChuyen'])->name('admin-update-van-chuyen');
+            Route::delete('/delete-van-chuyen/{id}', [App\Http\Controllers\admin\QuanLyVanChuyenController::class, 'deleteVanChuyen'])->name('admin-delete-van-chuyen');
+        });
+
+
     });
 });
 

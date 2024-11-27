@@ -16,7 +16,14 @@
 
     </style>
 </head>
+<?php
 
+
+$ttDangNhap = \Illuminate\Support\Facades\DB::table('taikhoan')
+    ->where('MaTK', session('MaTK'))
+    ->first();
+//dd($ttDangNhap)
+?>
 <body>
 {{--    <script src="{{asset('dist/js/demo-theme.min.js?1692870487')}}"></script>--}}
     <div class="page">
@@ -37,7 +44,7 @@
                             aria-label="Open user menu">
                             <span class="avatar avatar-sm" style=""></span>
                             <div class="d-none d-xl-block ps-2">
-                                <div>Super Admin</div>
+                                <div>{{$ttDangNhap->HoTen}}</div>
                                 <div class="mt-1 small text-secondary">Quản trị người dùng</div>
                             </div>
                         </a>
@@ -507,8 +514,8 @@
 {{--                                style=""></span>--}}
                             <img class="avatar avatar-m" src="{{asset('asset/img/user.jpg')}}">
                             <div class="d-none d-xl-block ps-2">
-                                <div>Super Admin</div>
-                                <div class="mt-1 small text-secondary">Quản trị người dùng</div>
+                                <div>{{$ttDangNhap->HoTen}}</div>
+                                <div class="mt-1 small text-secondary">Super Admin</div>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
