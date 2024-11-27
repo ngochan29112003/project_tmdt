@@ -272,7 +272,7 @@
                             url: '{{ route("get-thong-ke") }}',
                             type: 'POST',
                             data: {
-                                _token: '{{ csrf_token() }}',  // Thêm token ở đây
+                    p            _token: '{{ csrf_token() }}',  // Thêm token ở đây
                                 LoaiThongKe: loaiThongKe
                             },
                             success: function (response) {
