@@ -11,16 +11,16 @@
                         <h1 class="mb-0 text-danger">ĐỊA CHỈ NHẬN HÀNG</h1>
                     </div>
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
-                    <div class="flex-grow-1" id="address-display">
-                        <span id="name-phone">{{ $list_tai_khoan->HoTen }} - {{ $list_tai_khoan->SDT }}</span><br>
-                        <span id="address">{{ $list_tai_khoan->DiaChi }}</span>
-                        <span class="badge bg-danger text-white ms-2">Mặc định</span>
+                        <div class="flex-grow-1" id="address-display">
+                            <span id="name-phone">{{ $list_tai_khoan->HoTen }} - {{ $list_tai_khoan->SDT }}</span><br>
+                            <span id="address">{{ $list_tai_khoan->DiaChi }}</span>
+                            <span class="badge bg-danger text-white ms-2">Mặc định</span>
+                        </div>
+                        <button class="btn btn-outline-dark btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#Modaladddiachi"
+                                data-name="{{ $list_tai_khoan->HoTen }}" data-phone="{{ $list_tai_khoan->SDT }}" data-address="{{ $list_tai_khoan->DiaChi }}">
+                            <i class="bi bi-pencil me-1"></i> Thay đổi
+                        </button>
                     </div>
-                    <button class="btn btn-outline-dark btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#Modaladddiachi"
-                        data-name="{{ $list_tai_khoan->HoTen }}" data-phone="{{ $list_tai_khoan->SDT }}" data-address="{{ $list_tai_khoan->DiaChi }}">
-                        <i class="bi bi-pencil me-1"></i> Thay đổi
-                    </button>
-                </div>
                 </div>
             </div>
 
@@ -29,28 +29,28 @@
                 <div class="card-body table-responsive" >
                     <table class="table table-hover ">
                         <thead>
-                            <tr>
-                                <th>Sản phẩm</th>
-                                <th>Giá</th>
-                                <th>Số lượng</th>
-                                <th>Tổng tiền</th>
-                            </tr>
+                        <tr>
+                            <th>Sản phẩm</th>
+                            <th>Giá</th>
+                            <th>Số lượng</th>
+                            <th>Tổng tiền</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            @foreach($products as $product)
-                                <tr>
+                        @foreach($products as $product)
+                            <tr>
 
-                                    <td>
-                                        <a href="">
-                                            <img class="dathang-img" src="{{ $product['AnhSP'] }}" alt="{{ $product['TenSP'] }}">
-                                        </a>
-                                        {{ $product['TenSP'] }}
-                                    </td> <!-- Hiển thị tên sản phẩm -->
-                                    <td>{{ number_format($product['GiaBan'], 0, ',', '.') }}₫</td>
-                                    <td>{{ $product['SLSanPham'] }}</td>
-                                    <td class="item-total">{{ number_format($product['Total'], 0, ',', '.') }}₫</td>
-                                </tr>
-                            @endforeach
+                                <td>
+                                    <a href="">
+                                        <img class="dathang-img" src="{{ $product['AnhSP'] }}" alt="{{ $product['TenSP'] }}">
+                                    </a>
+                                    {{ $product['TenSP'] }}
+                                </td> <!-- Hiển thị tên sản phẩm -->
+                                <td>{{ number_format($product['GiaBan'], 0, ',', '.') }}₫</td>
+                                <td>{{ $product['SLSanPham'] }}</td>
+                                <td class="item-total">{{ number_format($product['Total'], 0, ',', '.') }}₫</td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                     <input type="text" class="form-control mt-3" id="note" placeholder="Nhập ghi chú ở đây">
@@ -83,7 +83,6 @@
                 </div>
             </div>
 
-            <!-- Khung 5: Mã khuyến mãi -->
             <!-- Khung 5: Mã khuyến mãi -->
             <div class="card mb-4">
                 <div class="card-body">
@@ -135,8 +134,6 @@
                 </div>
             </div>
 
-
-
             <!-- Khung 6: chi tiết thanh toán -->
             <div class="card mb-4">
                 <div class="card-body">
@@ -172,60 +169,60 @@
 
 
     <!-- Modal Xác nhận thanh toán -->
-<div class="modal fade" id="confirmPaymentModal" tabindex="-1" aria-labelledby="confirmPaymentModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmPaymentModalLabel">Xác nhận thanh toán</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Bạn có chắc chắn muốn thanh toán không?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <button type="button" class="btn btn-danger" id="confirmPaymentButton">Xác nhận</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <!-- Modal Thêm địa chỉ -->
-        <div class="modal fade" id="Modaladddiachi" tabindex="-1" aria-labelledby="ModaladddiachiLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="ModaladddiachiLabel">Thay đổi địa chỉ nhận hàng</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="changeAddressForm">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label for="name" class="form-label">Họ tên</label>
-                                    <input type="text" class="form-control" id="name" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="phone" class="form-label">Số điện thoại</label>
-                                    <input type="tel" class="form-control" id="phone" required pattern="[0-9]{10}">
-                                </div>
-                                <div class="col-12">
-                                    <label for="address" class="form-label">Địa chỉ</label>
-                                    <input type="text" class="form-control" id="address-input" required>
-                                    <select class="form-select mb-3 tinh" id="tinh">
-                                        <option value="">-- Chọn tỉnh --</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="text-end mt-4">
-                                <button type="submit" class="btn btn-primary">Thay đổi</button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                            </div>
-                        </form>
-                    </div>
+    <div class="modal fade" id="confirmPaymentModal" tabindex="-1" aria-labelledby="confirmPaymentModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmPaymentModalLabel">Xác nhận thanh toán</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn thanh toán không?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-danger" id="confirmPaymentButton">Xác nhận</button>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Modal Thêm địa chỉ -->
+    <div class="modal fade" id="Modaladddiachi" tabindex="-1" aria-labelledby="ModaladddiachiLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModaladddiachiLabel">Thay đổi địa chỉ nhận hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="changeAddressForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="name" class="form-label">Họ tên</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label">Số điện thoại</label>
+                                <input type="tel" class="form-control" id="phone" required pattern="[0-9]{10}">
+                            </div>
+                            <div class="col-12">
+                                <label for="address" class="form-label">Địa chỉ</label>
+                                <input type="text" class="form-control" id="address-input" required>
+                                <select class="form-select mb-3 tinh" id="tinh">
+                                    <option value="">-- Chọn tỉnh --</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="text-end mt-4">
+                            <button type="submit" class="btn btn-primary">Thay đổi</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -246,13 +243,68 @@
         });
 
         // Tính tiền vận chuyển
-        document.querySelectorAll('input[name="MaVC"]').forEach((radio) => {
-            radio.addEventListener('change', function() {
-                // Get the TienVC from the selected radio button
-                const tienvc = this.getAttribute('data-tienvc');
-                document.getElementById('tongtienvc').innerText = new Intl.NumberFormat('vi-VN').format(tienvc) + '₫'; // Format and display the value
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchProvinces();
+
+            // Thêm sự kiện khi modal được mở để tính phí khi chọn tỉnh hoặc MaVC
+            const modal = document.getElementById('Modaladddiachi'); // Thay 'modal-id' bằng ID của modal
+            modal.addEventListener('shown.bs.modal', function() {
+                document.getElementById('tinh').addEventListener('change', calculateShipping);
+                document.querySelectorAll('input[name="MaVC"]').forEach((radio) => {
+                    radio.addEventListener('change', calculateShipping);
+                });
             });
         });
+
+        function fetchProvinces() {
+            fetch("https://provinces.open-api.vn/api/p/")
+                .then(response => response.json())
+                .then(data => {
+                    const select = document.getElementById("tinh");
+                    data.forEach(province => {
+                        const option = document.createElement("option");
+                        option.value = province.code;
+                        option.textContent = province.name;
+                        select.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error("Lỗi khi lấy danh sách tỉnh:", error);
+                });
+        }
+
+        function calculateShipping() {
+            const tinhkcData = <?php echo json_encode($list_kc); ?>;
+            const selectedProvince = document.getElementById('tinh').value;
+            const selectedMaVC = document.querySelector('input[name="MaVC"]:checked');
+            if (!selectedMaVC) return;
+
+            const mavc = selectedMaVC.value;
+            let tienthuc;
+
+            if (selectedProvince === "Tỉnh Vĩnh Long") {
+                if (mavc == 1) {
+                    tienthuc = 20000;
+                } else if (mavc == 2) {
+                    tienthuc = 40000;
+                } else if (mavc == 3) {
+                    tienthuc = 70000;
+                }
+            }else {
+                // Tìm tỉnh trong tinhkcData dựa trên selectedProvince
+                const provinceData = tinhkcData.find(item => item.TenVT === selectedProvince);
+
+                if (provinceData && provinceData.SoKM) {
+                    const tienVC = selectedMaVC.getAttribute('data-tienvc');
+                    tienthuc = tienVC * provinceData.SoKM;
+                } else {
+                    console.error("Không tìm thấy tỉnh hoặc SoKM.");
+                    return;
+                }
+            }
+
+            document.getElementById('tongtienvc').innerText = new Intl.NumberFormat('vi-VN').format(tienthuc) + '₫';
+        }
 
         // Giảm giá khuyến mãi
         document.getElementById('khuyenmai').addEventListener('change', function() {
@@ -341,7 +393,7 @@
             });
         });
 
-        //Nhấn nút thay đổi trong modal
+        // Nhấn nút thay đổi trong modal
         document.addEventListener('DOMContentLoaded', function() {
             const modal = document.getElementById('Modaladddiachi');
             const changeAddressForm = document.getElementById('changeAddressForm');
@@ -358,6 +410,7 @@
                 document.getElementById('address-input').value = address;
             });
 
+
             // Khi nhấn "Thay đổi" trong modal, cập nhật nội dung trên giao diện
             changeAddressForm.addEventListener('submit', function(event) {
                 event.preventDefault(); // Ngăn không cho form gửi dữ liệu
@@ -367,111 +420,43 @@
                 const newPhone = document.getElementById('phone').value;
                 const newAddress = document.getElementById('address-input').value;
 
+
+                // Lấy giá trị từ select của tỉnh
+                const provinceSelect = document.getElementById('tinh');
+                const selectedProvince = provinceSelect.options[provinceSelect.selectedIndex].text;
+
+
+                // Kiểm tra dữ liệu
+                if (newName === "") {
+                    alert("Vui lòng nhập họ tên.");
+                    return;
+                }
+
+                if (!/^[0-9]{10}$/.test(newPhone) || newPhone[0] !== "0") {
+                    alert("Số điện thoại phải bao gồm 10 chữ số và bắt đầu bằng 0.");
+                    return;
+                }
+
+                if (newAddress === "") {
+                    alert("Vui lòng nhập địa chỉ.");
+                    return;
+                }
+
+                if (provinceSelect.value === "") {
+                    alert("Vui lòng chọn tỉnh.");
+                    return;
+                }
+                // Cộng địa chỉ với tỉnh
+                const fullAddress = `${newAddress}, ${selectedProvince}`;
+
                 // Cập nhật nội dung hiển thị trên view
                 document.getElementById('name-phone').textContent = `${newName} - ${newPhone}`;
-                document.getElementById('address').textContent = newAddress;
+                document.getElementById('address').textContent = fullAddress;
 
                 // Đóng modal sau khi cập nhật
                 bootstrap.Modal.getInstance(modal).hide();
             });
         });
-
-
-
-
-
-        $('#confirmPaymentButton').on('click', function () {
-    // Lấy các giá trị từ giao diện
-    const tenKH = $('#name-phone').text().split(' - ')[0];
-    const sdt = $('#name-phone').text().split(' - ')[1];
-    const diaChiGiaoHang = $('#address').text();
-    const tongTien = $('#tongthanhtoan').text().replace('₫', '').replace(/\./g, '');
-    const ghiChu = $('#note').val();
-    const maPTTT = $('input[name="MaPTTT"]:checked').val();
-    const maVC = $('input[name="MaVC"]:checked').val();
-    const maKM = $('#khuyenmai').val();
-    const maKMVC = $('#khuyenmaivc').val();
-
-    // Gửi yêu cầu AJAX tới server
-    $.ajax({
-        url: "{{ route('thanh-toan') }}",
-        type: 'POST',
-        data: {
-            TenKH: tenKH,
-            SDT: sdt,
-            DiaChiGiaoHang: diaChiGiaoHang,
-            TongTien: tongTien,
-            GhiChu: ghiChu,
-            MaPTTT: maPTTT,
-            MaVC: maVC,
-            MaKM: maKM,
-            MaKMVC: maKMVC,
-        },
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        dataType: 'json',
-            success: function (response) {
-                if (response.success) {
-                    Swal.fire({
-                        title: 'Đặt hàng thành công!',
-                        text: response.message,
-                        icon: 'success',
-                        timer: 2000, // Hiển thị alert trong 5 giây
-                        showConfirmButton: false
-                    });
-
-                    // Sử dụng setTimeout để đợi 5 giây (5000 ms) trước khi chuyển hướng
-                    setTimeout(function() {
-                        window.location.href = "{{ route('tra-cuu-don-hang') }}";
-                    }, 2000);
-                } else {
-                    alert(response.message);
-                }
-        },
-        error: function (error) {
-            alert('Có lỗi xảy ra, vui lòng thử lại.');
-            console.error('Error response:', error);
-            console.log('Error response text:', error.responseText);
-        }
-    });
-});
-
-        {{--function dathang(buttonElement) {--}}
-        {{--    if (loggedIn) {--}}
-        {{--        var productId = buttonElement.getAttribute('data-masp');--}}
-        {{--        $.ajax({--}}
-        {{--            url: '{{ route('tra-cuu-don-hang') }}',--}}
-        {{--            type: 'POST',--}}
-        {{--            data: {--}}
-        {{--                MaSP: productId,--}}
-        {{--                _token: '{{ csrf_token() }}' // CSRF token cho bảo mật--}}
-        {{--            },--}}
-        {{--            success: function(response) {--}}
-        {{--                Swal.fire({--}}
-        {{--                    title: 'Đặt hàng thành công!',--}}
-        {{--                    text: response.message,--}}
-        {{--                    icon: 'success',--}}
-        {{--                    timer: 3000,--}}
-        {{--                    showConfirmButton: false--}}
-        {{--                });--}}
-        {{--                setTimeout(function () {--}}
-        {{--                    location.reload(); // Chuyển hướng người dùng--}}
-        {{--                }, 1000);--}}
-
-        {{--            },--}}
-        {{--            error: function(error) {--}}
-        {{--                Swal.fire({--}}
-        {{--                    title: 'Lỗi!',--}}
-        {{--                    text: 'Không thể đặt hàng.',--}}
-        {{--                    icon: 'error',--}}
-        {{--                    timer: 3000,--}}
-        {{--                    showConfirmButton: false--}}
-        {{--                });--}}
-        {{--            }--}}
-        {{--        });--}}
-        {{--    }--}}
-        {{--}--}}
 
         //Nhấn nút thanh toán
         $('#confirmPaymentButton').on('click', function () {
@@ -538,6 +523,46 @@
                 }
             });
         });
+
+
+        {{--function dathang(buttonElement) {--}}
+        {{--    if (loggedIn) {--}}
+        {{--        var productId = buttonElement.getAttribute('data-masp');--}}
+        {{--        $.ajax({--}}
+        {{--            url: '{{ route('tra-cuu-don-hang') }}',--}}
+        {{--            type: 'POST',--}}
+        {{--            data: {--}}
+        {{--                MaSP: productId,--}}
+        {{--                _token: '{{ csrf_token() }}' // CSRF token cho bảo mật--}}
+        {{--            },--}}
+        {{--            success: function(response) {--}}
+        {{--                Swal.fire({--}}
+        {{--                    title: 'Đặt hàng thành công!',--}}
+        {{--                    text: response.message,--}}
+        {{--                    icon: 'success',--}}
+        {{--                    timer: 3000,--}}
+        {{--                    showConfirmButton: false--}}
+        {{--                });--}}
+        {{--                setTimeout(function () {--}}
+        {{--                    location.reload(); // Chuyển hướng người dùng--}}
+        {{--                }, 1000);--}}
+
+        {{--            },--}}
+        {{--            error: function(error) {--}}
+        {{--                Swal.fire({--}}
+        {{--                    title: 'Lỗi!',--}}
+        {{--                    text: 'Không thể đặt hàng.',--}}
+        {{--                    icon: 'error',--}}
+        {{--                    timer: 3000,--}}
+        {{--                    showConfirmButton: false--}}
+        {{--                });--}}
+        {{--            }--}}
+        {{--        });--}}
+        {{--    }--}}
+        {{--}--}}
+
+
+
 
         document.addEventListener('DOMContentLoaded', function() {
             fetchProvinces();

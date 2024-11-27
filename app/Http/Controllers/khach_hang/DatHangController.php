@@ -22,9 +22,10 @@ class DatHangController extends Controller
             ->get();
 
 
-
         $dathang = new DatHang();
         $list_don_hang = $dathang -> getdonhang();
+
+        // $list_san_pham = $dathang -> getsanpham();
 //        $list_san_pham = $dathang -> getsanpham();
         $list_pttt = $dathang -> getpttt();
         $list_dvvc = $dathang -> getdvvc();
@@ -37,6 +38,7 @@ class DatHangController extends Controller
 
         // Group sản phẩm theo MaSP
         $grouped_products = $list_chitiet_giohang->groupBy('MaSP');
+        // dd($grouped_products);
 
         // Tạo mảng để lưu dữ liệu cho view
         // Tạo mảng để lưu dữ liệu cho view
@@ -59,10 +61,13 @@ class DatHangController extends Controller
             ];
         }
 
+        $list_kc=DB::table('tinhkc')->get();
         return view('khach-hang.dat-hang', compact(
+            'list_don_hang', 'list_tai_khoan',
+            'list_pttt', 'list_dvvc', 'list_khuyenmai',
             'list_don_hang',  'list_tai_khoan',
             'list_pttt', 'list_dvvc', 'list_khuyenmai',
-            'list_khuyenmaivc', 'products'
+            'list_khuyenmaivc', 'products','list_chitiet_giohang', 'list_kc'
         ));
     }
 
@@ -108,6 +113,7 @@ class DatHangController extends Controller
             $donHang->MaKMVC = $request->input('MaKMVC');
             $donHang->MaVC = $request->input('MaVC');
             $donHang->MaTT = 1; // Mặc định
+            $donHang->ThanhToan = 0;
             $donHang->NgayTaoDH = Carbon::now(); // Lấy ngày hiện tại
             $donHang->save();
 

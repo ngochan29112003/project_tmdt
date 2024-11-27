@@ -188,23 +188,29 @@
                     var $row = $(this);
                     var currentMaTT = parseInt($row.find('.change-status').val()); // Lấy mã trạng thái hiện tại
 
-                    // Lặp qua từng option trong select để ẩn các option nhỏ hơn currentMaTT
+                    // Lặp qua từng option trong select để tùy chỉnh hiển thị
                     $row.find('.change-status option').each(function () {
                         var optionMaTT = parseInt($(this).val());
 
-                        if (optionMaTT < currentMaTT) {
-                            $(this).hide(); // Ẩn các trạng thái có mã nhỏ hơn trạng thái hiện tại
+                        // Logic ẩn/hiển trạng thái
+                        if (currentMaTT === 1) {
+                            $(this).show(); // Hiển thị mọi trạng thái
+                        } else if (optionMaTT < currentMaTT) {
+                            $(this).hide(); // Ẩn các trạng thái nhỏ hơn
+                        } else if (currentMaTT > 1 && optionMaTT === 6) {
+                            $(this).hide(); // Ẩn trạng thái Hủy đơn hàng
                         } else {
-                            $(this).show(); // Hiển thị các trạng thái còn lại
+                            $(this).show(); // Hiển thị các trạng thái lớn hơn hoặc bằng
                         }
                     });
                 });
             }
 
-            // Lắng nghe sự kiện thay đổi trên select trạng thái
+            // Lọc trạng thái đơn hàng
             $('#filter-status').on('change', function () {
-                var trangThaiId = $(this).val();
-                console.log("Selected Status ID: ", trangThaiId); // Kiểm tra giá trị được chọn
+                var trangThaiId = $(this).val(); // Lấy trạng thái được chọn
+                console.log("Selected Status ID: ", trangThaiId); // Debug giá trị
+
                 var url = "{{ route('loc-trang-thai-don-hang') }}";
 
                 $.ajax({
@@ -215,9 +221,9 @@
                         _token: '{{ csrf_token() }}'
                     },
                     success: function (response) {
-                        console.log(response); // Kiểm tra phản hồi từ server
+                        console.log(response); // Debug phản hồi từ server
                         $('#tableDonHang tbody').html(response.html);
-                        hideLowerStatusOptions(); // Gọi hàm để ẩn trạng thái nhỏ hơn sau khi nhận phản hồi
+                        hideLowerStatusOptions(); // Ẩn các trạng thái nhỏ hơn
                     },
                     error: function (xhr) {
                         toastr.error("Có lỗi xảy ra khi lọc.", "Operation Failed");
@@ -225,10 +231,10 @@
                 });
             });
 
-            // Xử lý khi thay đổi trạng thái trong bảng
+            // Cập nhật trạng thái đơn hàng
             $('#tableDonHang').on('change', '.change-status', function () {
-                var ttdhid = $(this).data('id');
-                var newStatus = $(this).val();
+                var ttdhid = $(this).data('id'); // Lấy ID đơn hàng
+                var newStatus = $(this).val(); // Trạng thái mới được chọn
                 var url = "{{ route('update-trang-thai-don-hang', ':id') }}".replace(':id', ttdhid);
 
                 var formData = new FormData();
@@ -244,6 +250,7 @@
                     success: function (response) {
                         if (response.success) {
                             toastr.success(response.message, "Cập nhật thành công");
+
                             // Kiểm tra trạng thái lọc
                             var currentFilterStatus = $('#filter-status').val();
                             if (currentFilterStatus) {
@@ -254,7 +261,7 @@
                                     }
                                 });
                             }
-                            hideLowerStatusOptions(); // Gọi hàm để ẩn trạng thái nhỏ hơn sau khi thay đổi thành công
+                            hideLowerStatusOptions(); // Cập nhật lại các trạng thái hiển thị
                         } else {
                             toastr.error("Cập nhật không thành công.", "Operation Failed");
                         }

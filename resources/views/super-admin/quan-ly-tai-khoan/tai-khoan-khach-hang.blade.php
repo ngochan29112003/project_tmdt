@@ -86,16 +86,9 @@
                                             @endif
                                         </td>
                                         <td class="text-center align-middle">
-                                            <a href="">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-pencil">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
-                                                    <path d="M13.5 6.5l4 4" />
-                                                </svg>
-                                            </a>
-                                            |
-                                            <a href="">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+
+                                            <button class="btn p-0 m-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn" data-id="{{ $taiKhoan->MaTK }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="m-0 icon icon-tabler icons-tabler-outline icon-tabler-trash">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                     <path d="M4 7l16 0" />
                                                     <path d="M10 11l0 6" />
@@ -103,7 +96,7 @@
                                                     <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
                                                     <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
                                                 </svg>
-                                            </a>
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -241,6 +234,43 @@
             }
         });
 
+        $('#tableTaiKhoanKhachHang').on('click', '.delete-btn', function () {
+            var id = $(this).data('id');
+            var row = $(this).closest('tr');
 
+            Swal.fire({
+                title: 'Bạn có chắc chắn ?',
+                text: "Bạn có muốn xóa không ?",
+                icon: 'cảnh báo',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '{{ route('tai-khoan-khach-hang-delete', ':id') }}'.replace(':id', id),
+                        method: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                toastr.success(response.message, "Xóa thành công");
+                                setTimeout(function () {
+                                    location.reload()
+                                }, 500);
+                            } else {
+                                toastr.error("Xóa không thành công.",
+                                    "Operation Failed");
+                            }
+                        },
+                        error: function (xhr) {
+                            toastr.error("An error occurred.", "Operation Failed");
+                        }
+                    });
+                }
+            });
+        });
     </script>
 @endsection

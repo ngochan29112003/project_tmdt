@@ -61,6 +61,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
             Route::get('/danh-sach-admin/edit/{id}', [QuanLyTaiKhoanController::class, 'editTaiKhoanAd'])->name('tai-khoan-admin-edit');
             Route::post('/danh-sach-admin/update/{id}', [QuanLyTaiKhoanController::class, 'updateTaiKhoanAd'])->name('tai-khoan-admin-update');
             Route::delete('/danh-sach-admin/delete/{id}', [QuanLyTaiKhoanController::class, 'deleteTaiKhoanAd'])->name('tai-khoan-admin-delete');
+            Route::delete('/danh-sach-khach-hang/delete/{id}', [QuanLyTaiKhoanController::class, 'deleteTaiKhoanAd'])->name('tai-khoan-khach-hang-delete');
             Route::get('/danh-sach-khach-hang',[QuanLyTaiKhoanController::class,'getViewTaiKhoanKhach'])->name('tai-khoan-khach-hang');
             Route::post('/unlock', [QuanLyTaiKhoanController::class, 'unlockAccount'])->name('unlock.route');
             Route::post('/lock', [QuanLyTaiKhoanController::class, 'lockAccount'])->name('lock.route');

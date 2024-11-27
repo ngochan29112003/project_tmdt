@@ -30,6 +30,7 @@ class DatHang extends Model
          'MaKM',
          'MaKMVC',
          'MaVC',
+         'ThanhToan',
      ];
 
     public $timestamps = false;
