@@ -2,6 +2,7 @@
 
 namespace App\Models\admin;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -52,10 +53,8 @@ class QuanLyKhuyenMai extends Model
         return $khuyenMaiList; // Trả về danh sách khuyến mãi với trạng thái đã được cập nhật
     }
 
-
     public function getTK(){
         return DB::table('taikhoan')
-        ->where('taikhoan.VaiTro','=',3)
-        ->get();
+            ->get();
     }
 }

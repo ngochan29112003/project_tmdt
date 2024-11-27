@@ -13,7 +13,7 @@ class HangSanXuatModel extends Model
     protected $primaryKey = 'MaHSX';
     protected $fillable=[
         'TenHSX',
-        'TrangThaiHSX'
+//        'TrangThaiHSX'
     ];
     public $timestamps = false;
 

@@ -25,7 +25,7 @@ class QuanLyHangSanXuatController extends Controller
 //         dd($request);
         $validate = $request->validate([
             'TenHSX'=> 'string',
-            'TrangThaiHSX' => 'string',
+//            'TrangThaiHSX' => 'string',
         ]);
 
         HangSanXuatModel::create($validate);
@@ -59,7 +59,7 @@ class QuanLyHangSanXuatController extends Controller
     {
         $validated = $request->validate([
             'TenHSX' => 'string',
-            'TrangThaiHSX' => 'string',
+//            'TrangThaiHSX' => 'string',
         ]);
 
         $hangsx = HangSanXuatModel::findOrFail($id);

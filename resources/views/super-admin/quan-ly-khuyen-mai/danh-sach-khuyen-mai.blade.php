@@ -98,7 +98,6 @@
         </div>
     </div>
 
-
     <!-- ======= Modal thêm (tìm hiểu Modal này trên BS5) ======= -->
     <div class="modal fade" id="Modal">
         <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
@@ -127,7 +126,15 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="DieuKien" class="form-label">Điều kiện</label>
-                                <input type="text" class="form-control" name="DieuKien" id="DieuKien" required>
+                                <select class="form-select" name="DieuKien" id="DieuKien">
+                                    <option value="" disabled selected>--Chọn điều kiện--</option>
+                                    <option value="không có">không có</option>
+                                    <option value="người mới">người mới</option>
+                                    @foreach ($list_sp as $sp)
+                                        <option value="{{$sp->MaSP}}">{{$sp->TenSP}}</option>
+                                    @endforeach
+                                </select>
+
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="PhanTramGiam" class="form-label">Phần trăm giảm</label>
@@ -187,7 +194,15 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="DieuKien" class="form-label">Điều kiện</label>
-                                <input type="text" class="form-control" name="DieuKien" id="edit_DieuKien" required>
+                                <select class="form-select" name="DieuKien" id="edit_DieuKien">
+                                    <option value="" disabled selected>--Chọn điều kiện--</option>
+                                    <option value="không có">không có</option>
+                                    <option value="người mới">người mới</option>
+                                    @foreach ($list_sp as $sp)
+                                        <option value="{{$sp->MaSP}}">{{$sp->TenSP}}</option>
+                                    @endforeach
+                                </select>
+
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="PhanTramGiam" class="form-label">Phần trăm giảm</label>
@@ -222,16 +237,16 @@
 @endsection
 @section('scripts')
     <script>
-      var table = $('#table').DataTable({
-        "language": {
-          "emptyTable": "Không có dữ liệu trong bảng",
-          "search": "Tìm kiếm:",
-          "lengthMenu": "Hiển thị _MENU_ danh mục mỗi trang",
-          "zeroRecords": "Không tìm thấy kết quả",
-          "infoEmpty": "Không có dữ liệu"
+        var table = $('#table').DataTable({
+            "language": {
+                "emptyTable": "Không có dữ liệu trong bảng",
+                "search": "Tìm kiếm:",
+                "lengthMenu": "Hiển thị _MENU_ danh mục mỗi trang",
+                "zeroRecords": "Không tìm thấy kết quả",
+                "infoEmpty": "Không có dữ liệu"
 
-        }
-      });
+            }
+        });
 
         $('#Form').submit(function (e) {
             e.preventDefault();
@@ -361,3 +376,4 @@
         });
     </script>
 @endsection
+

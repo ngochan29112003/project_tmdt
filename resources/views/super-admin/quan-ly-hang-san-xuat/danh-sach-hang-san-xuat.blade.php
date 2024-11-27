@@ -46,7 +46,7 @@
                                 <tr>
                                     <th>STT</th>
                                     <th>Tên hãng sản xuất</th>
-                                    <th>Trạng thái hãng sản xuất</th>
+{{--                                    <th>Trạng thái hãng sản xuất</th>--}}
                                     <th class = "text-center">Action</th>
                                 </tr>
                                 </thead>
@@ -56,13 +56,13 @@
                                     <tr>
                                         <td>{{ $stt++ }}</td>
                                         <td>{{ $item->TenHSX}}</td>
-                                        <td>
-                                            @if($item->TrangThaiHSX === "Ẩn")
-                                                <span class = "badge bg-danger text-white p-2">Ẩn</span>
-                                            @else
-                                                <span class = "badge bg-success text-white p-2">Hiện</span>
-                                            @endif
-                                        </td>
+{{--                                        <td>--}}
+{{--                                            @if($item->TrangThaiHSX === "Ẩn")--}}
+{{--                                                <span class = "badge bg-danger text-white p-2">Ẩn</span>--}}
+{{--                                            @else--}}
+{{--                                                <span class = "badge bg-success text-white p-2">Hiện</span>--}}
+{{--                                            @endif--}}
+{{--                                        </td>--}}
                                         <td class="text-center align-middle">
                                             <button class="btn p-0  btn-primary border-0 bg-transparent text-danger shadow-none edit-btn" data-id="{{ $item->MaHSX }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="m-0 icon icon-tabler icons-tabler-outline icon-tabler-pencil">
@@ -106,17 +106,17 @@
                     <form id="Formhangsanxuat" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-12 mb-3">
                                 <label for="TenHSX" class="form-label">Tên hãng sản xuất</label>
                                 <input type="text" class="form-control" name="TenHSX" id="TenHSX" required>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="TrangThaiHSX" class="form-label">Trạng thái hãng sản xuất</label>
-                                <select class="form-select" name="TrangThaiHSX" id="TrangThaiHSX">
-                                    <option value="0">Hiện</option>
-                                    <option value="1">Ẩn</option>
-                                </select>
-                            </div>
+{{--                            <div class="col-md-6 mb-3">--}}
+{{--                                <label for="TrangThaiHSX" class="form-label">Trạng thái hãng sản xuất</label>--}}
+{{--                                <select class="form-select" name="TrangThaiHSX" id="TrangThaiHSX">--}}
+{{--                                    <option value="0">Hiện</option>--}}
+{{--                                    <option value="1">Ẩn</option>--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
                         </div>
                         <div class="text-end">
                             <button type="submit" class="btn btn-primary">Thêm</button>
@@ -140,17 +140,17 @@
                     <form id="FormeditHSX" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-12 mb-3">
                                 <label for="TenHSX" class="form-label">Tên hãng sản xuất</label>
                                 <input type="text" class="form-control" name="TenHSX" id="edit_TenHSX" required>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="TrangThaiHSX" class="form-label">Trạng thái hãng sản xuất</label>
-                                <select class="form-select" name="TrangThaiHSX" id="edit_TrangThaiHSX">
-                                    <option value="Hiện">Hiện</option>
-                                    <option value="Ẩn">Ẩn</option>
-                                </select>
-                            </div>
+{{--                            <div class="col-md-6 mb-3">--}}
+{{--                                <label for="TrangThaiHSX" class="form-label">Trạng thái hãng sản xuất</label>--}}
+{{--                                <select class="form-select" name="TrangThaiHSX" id="edit_TrangThaiHSX">--}}
+{{--                                    <option value="Hiện">Hiện</option>--}}
+{{--                                    <option value="Ẩn">Ẩn</option>--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
                         </div>
                         <div class="text-end">
                             <button type="submit" class="btn btn-primary">Sửa</button>

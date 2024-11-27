@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\admin\QuanLyKhuyenMai;
 use App\Models\admin\QuanLyTaiKhoan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 class QuanLyKhuyenMaiController extends Controller
 {
     public function getView()
@@ -14,8 +16,9 @@ class QuanLyKhuyenMaiController extends Controller
         $quanlykhuyenmaiModel = new QuanLyKhuyenMai();
         $list_khuyen_mai= $quanlykhuyenmaiModel->getkhuyenmai();
         $list_tai_khoan = $quanlykhuyenmaiModel->getTK();
+        $list_sp=DB::table('sanpham')->get();
         return view('super-admin.quan-ly-khuyen-mai.danh-sach-khuyen-mai',
-        compact('list_khuyen_mai','list_tai_khoan'));
+            compact('list_khuyen_mai','list_tai_khoan','list_sp'));
     }
 
     public function addKhuyenMai(Request $request)
@@ -60,7 +63,6 @@ class QuanLyKhuyenMaiController extends Controller
             'message' => 'Thêm thành công!',
         ]);
     }
-
 
     function deleteKM($id)
     {
