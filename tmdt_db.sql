@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 27, 2024 lúc 05:15 PM
+-- Thời gian đã tạo: Th10 27, 2024 lúc 10:18 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -188,8 +188,56 @@ CREATE TABLE `chitietsanpham` (
 --
 
 INSERT INTO `chitietsanpham` (`MaCTSP`, `MaSP`, `NhaCungCap`, `MoTaSP`, `XuatXu`, `ThongTinKyThuat`) VALUES
-(1, 12, 'r', 'r', NULL, NULL),
-(2, 13, 'e', 'e', 'ee', 'ee');
+(1, 12, '123 Đường ABC, www.dell.com, 1900-1234', 'PC Gaming, Máy tính để bàn hiệu suất cao, Chơi game, làm đồ họa', 'Trung Quốc', 'CPU	Intel Core i7-12700F\nRAM	16GB DDR4\nGPU	NVIDIA GeForce GTX 1660\nStorage	1TB HDD + 512GB SSD'),
+(2, 13, '123 Đường ABC, www.dell.com, 1900-1234', 'PC Gaming, Máy tính để bàn hiệu suất cao, Chơi game, làm đồ họa', 'Trung Quốc', 'CPU	Intel Core i7-12700F\nRAM	16GB DDR4\nGPU	NVIDIA GeForce GTX 1660\nStorage	1TB HDD + 512GB SSD'),
+(3, 14, '123 Đường ABC, www.dell.com, 1900-1234', 'PC Gaming, Máy tính để bàn hiệu suất cao, Chơi game, làm đồ họa', 'Trung Quốc', 'CPU	Intel Core i7-12700F\nRAM	16GB DDR4\nGPU	NVIDIA GeForce GTX 1660\nStorage	1TB HDD + 512GB SSD'),
+(4, 15, '123 Đường ABC, www.dell.com, 1900-1234', 'PC Gaming, Máy tính để bàn hiệu suất cao, Chơi game, làm đồ họa', 'Trung Quốc', 'CPU	Intel Core i7-12700F\nRAM	16GB DDR4\nGPU	NVIDIA GeForce GTX 1660\nStorage	1TB HDD + 512GB SSD'),
+(5, 16, '123 Đường ABC, www.dell.com, 1900-1234', 'PC Gaming, Máy tính để bàn hiệu suất cao, Chơi game, làm đồ họa', 'Trung Quốc', 'CPU	Intel Core i7-12700F\nRAM	16GB DDR4\nGPU	NVIDIA GeForce GTX 1660\nStorage	1TB HDD + 512GB SSD'),
+(6, 17, '123 Đường ABC, www.dell.com, 1900-1234', 'PC Gaming, Máy tính để bàn hiệu suất cao, Chơi game, làm đồ họa', 'Trung Quốc', 'CPU	Intel Core i7-12700F\nRAM	16GB DDR4\nGPU	NVIDIA GeForce GTX 1660\nStorage	1TB HDD + 512GB SSD'),
+(7, 18, '123 Đường ABC, www.dell.com, 1900-1234', 'PC Gaming, Máy tính để bàn hiệu suất cao, Chơi game, làm đồ họa', 'Trung Quốc', 'CPU	Intel Core i7-12700F\nRAM	16GB DDR4\nGPU	NVIDIA GeForce GTX 1660\nStorage	1TB HDD + 512GB SSD'),
+(8, 19, '123 Đường ABC, www.dell.com, 1900-1234', 'PC Gaming, Máy tính để bàn hiệu suất cao, Chơi game, làm đồ họa', 'Trung Quốc', 'CPU	Intel Core i7-12700F\nRAM	16GB DDR4\nGPU	NVIDIA GeForce GTX 1660\nStorage	1TB HDD + 512GB SSD'),
+(9, 20, '123 Đường ABC, www.dell.com, 1900-1234', 'PC Gaming, Máy tính để bàn hiệu suất cao, Chơi game, làm đồ họa', 'Trung Quốc', 'CPU	Intel Core i7-12700F\nRAM	16GB DDR4\nGPU	NVIDIA GeForce GTX 1660\nStorage	1TB HDD + 512GB SSD'),
+(10, 22, '123 Đường ABC, www.dell.com, 1900-1234', 'PC Gaming, Máy tính để bàn hiệu suất cao, Chơi game, làm đồ họa', 'Trung Quốc', 'CPU	Intel Core i7-12700F\nRAM	16GB DDR4\nGPU	NVIDIA GeForce GTX 1660\nStorage	1TB HDD + 512GB SSD'),
+(11, 23, '123 Đường ABC, www.dell.com, 1900-1234', 'PC Gaming, Máy tính để bàn hiệu suất cao, Chơi game, làm đồ họa', 'Trung Quốc', 'CPU	Intel Core i7-12700F\nRAM	16GB DDR4\nGPU	NVIDIA GeForce GTX 1660\nStorage	1TB HDD + 512GB SSD'),
+(12, 24, '123 Đường ABC, www.dell.com, 1900-1234', 'PC Gaming, Máy tính để bàn hiệu suất cao, Chơi game, làm đồ họa', 'Trung Quốc', 'CPU	Intel Core i7-12700F\nRAM	16GB DDR4\nGPU	NVIDIA GeForce GTX 1660\nStorage	1TB HDD + 512GB SSD'),
+(13, 25, '123 Đường ABC, www.dell.com, 1900-1234', 'PC Gaming, Máy tính để bàn hiệu suất cao, Chơi game, làm đồ họa', 'Trung Quốc', 'CPU	Intel Core i7-12700F\nRAM	16GB DDR4\nGPU	NVIDIA GeForce GTX 1660\nStorage	1TB HDD + 512GB SSD'),
+(14, 26, '123 Đường ABC, www.dell.com, 1900-1234', 'PC Gaming, Máy tính để bàn hiệu suất cao, Chơi game, làm đồ họa', 'Trung Quốc', 'CPU	Intel Core i7-12700F\nRAM	16GB DDR4\nGPU	NVIDIA GeForce GTX 1660\nStorage	1TB HDD + 512GB SSD'),
+(15, 27, '123 Đường ABC, www.dell.com, 1900-1234', 'PC Gaming, Máy tính để bàn hiệu suất cao, Chơi game, làm đồ họa', 'Trung Quốc', 'CPU	Intel Core i7-12700F\nRAM	16GB DDR4\nGPU	NVIDIA GeForce GTX 1660\nStorage	1TB HDD + 512GB SSD'),
+(16, 28, '123 Đường ABC, www.dell.com, 1900-1234', 'PC Gaming, Máy tính để bàn hiệu suất cao, Chơi game, làm đồ họa', 'Trung Quốc', 'CPU	Intel Core i7-12700F\nRAM	16GB DDR4\nGPU	NVIDIA GeForce GTX 1660\nStorage	1TB HDD + 512GB SSD'),
+(17, 29, '123 Đường ABC, www.dell.com, 1900-1234', 'PC Gaming, Máy tính để bàn hiệu suất cao, Chơi game, làm đồ họa', 'Trung Quốc', 'CPU	Intel Core i7-12700F\nRAM	16GB DDR4\nGPU	NVIDIA GeForce GTX 1660\nStorage	1TB HDD + 512GB SSD'),
+(18, 30, '123 Đường ABC, www.dell.com, 1900-1234', 'PC Gaming, Máy tính để bàn hiệu suất cao, Chơi game, làm đồ họa', 'Trung Quốc', 'CPU	Intel Core i7-12700F\nRAM	16GB DDR4\nGPU	NVIDIA GeForce GTX 1660\nStorage	1TB HDD + 512GB SSD'),
+(19, 31, '123 Đường ABC, www.dell.com, 1900-1234', 'PC Gaming, Máy tính để bàn hiệu suất cao, Chơi game, làm đồ họa', 'Trung Quốc', 'CPU	Intel Core i7-12700F\nRAM	16GB DDR4\nGPU	NVIDIA GeForce GTX 1660\nStorage	1TB HDD + 512GB SSD'),
+(20, 32, '123 Đường ABC, www.dell.com, 1900-1234', 'PC Gaming, Máy tính để bàn hiệu suất cao, Chơi game, làm đồ họa', 'Trung Quốc', 'CPU	Intel Core i7-12700F\nRAM	16GB DDR4\nGPU	NVIDIA GeForce GTX 1660\nStorage	1TB HDD + 512GB SSD'),
+(21, 33, '123 Đường ABC, www.dell.com, 1900-1234', 'Bàn phím cơ RGB, thiết kế chắc chắn, phù hợp cho gaming', 'Trung Quốc', 'Switch: Mechanical, Key Rollover: 6K, Đèn: RGB, Kết nối: USB'),
+(22, 34, '123 Đường ABC, www.dell.com, 1900-1234', 'Bàn phím cơ RGB, thiết kế chắc chắn, phù hợp cho gaming', 'Trung Quốc', 'Switch: Mechanical, Key Rollover: 6K, Đèn: RGB, Kết nối: USB'),
+(23, 35, '123 Đường ABC, www.dell.com, 1900-1234', 'Bàn phím cơ RGB, thiết kế chắc chắn, phù hợp cho gaming', 'Trung Quốc', 'Switch: Mechanical, Key Rollover: 6K, Đèn: RGB, Kết nối: USB'),
+(24, 36, '123 Đường ABC, www.dell.com, 1900-1234', 'Bàn phím cơ RGB, thiết kế chắc chắn, phù hợp cho gaming', 'Trung Quốc', 'Switch: Mechanical, Key Rollover: 6K, Đèn: RGB, Kết nối: USB'),
+(25, 37, '123 Đường ABC, www.dell.com, 1900-1234', 'Bàn phím cơ RGB, thiết kế chắc chắn, phù hợp cho gaming', 'Trung Quốc', 'Switch: Mechanical, Key Rollover: 6K, Đèn: RGB, Kết nối: USB'),
+(26, 38, '123 Đường ABC, www.dell.com, 1900-1234', 'Bàn Chuột quang gaming, thiết kế ergonomic, cảm biến 1600 DPI cơ RGB, thiết kế chắc chắn, phù hợp cho gaming', 'Trung Quốc', 'Switch: Cảm biến: Optical, DPI: 1600, Nút: 6 nút, Kết nối: USB, Key Rollover: 6K, Đèn: RGB, Kết nối: USB'),
+(27, 39, '123 Đường ABC, www.dell.com, 1900-1234', 'Chuột quang gaming, thiết kế ergonomic, cảm biến 1600 DPI', 'Trung Quốc', 'Cảm biến: Optical, DPI: 1600, Nút: 6 nút, Kết nối: USB'),
+(28, 40, '123 Đường ABC, www.dell.com, 1900-1234', 'Chuột quang gaming, thiết kế ergonomic, cảm biến 1600 DPI', 'Trung Quốc', 'Cảm biến: Optical, DPI: 1600, Nút: 6 nút, Kết nối: USB'),
+(29, 41, '123 Đường ABC, www.dell.com, 1900-1234', 'Chuột quang gaming, thiết kế ergonomic, cảm biến 1600 DPI', 'Trung Quốc', 'Cảm biến: Optical, DPI: 1600, Nút: 6 nút, Kết nối: USB'),
+(30, 42, '123 Đường ABC, www.dell.com, 1900-1234', 'Màn hình LED 27 inch, Full HD, thiết kế mỏng, phù hợp cho công việc và giải trí', 'Trung Quốc', 'Độ sáng: 250 cd/m², Tỷ lệ tương phản: 1000:1, Kết nối: HDMI, VGA'),
+(31, 43, '123 Đường ABC, www.dell.com, 1900-1234', 'Màn hình LED 27 inch, Full HD, thiết kế mỏng, phù hợp cho công việc và giải trí', 'Trung Quốc', 'Độ sáng: 250 cd/m², Tỷ lệ tương phản: 1000:1, Kết nối: HDMI, VGA'),
+(32, 44, '123 Đường ABC, www.dell.com, 1900-1234', 'Màn hình LED 27 inch, Full HD, thiết kế mỏng, phù hợp cho công việc và giải trí', 'Trung Quốc', 'Độ sáng: 250 cd/m², Tỷ lệ tương phản: 1000:1, Kết nối: HDMI, VGA'),
+(33, 45, '123 Đường ABC, www.dell.com, 1900-1234', 'Màn hình LED 27 inch, Full HD, thiết kế mỏng, phù hợp cho công việc và giải trí', 'Trung Quốc', 'Độ sáng: 250 cd/m², Tỷ lệ tương phản: 1000:1, Kết nối: HDMI, VGA'),
+(34, 46, '123 Đường ABC, www.dell.com, 1900-1234', 'Laptop 15.6 inch, hiệu suất cao, thiết kế mỏng, phù hợp cho công việc và giải trí', 'Trung Quốc', 'Độ sáng: 250 nits, Kết nối: HDMI, USB-C, Wi-Fi 6, Bluetooth 5.0'),
+(35, 47, '123 Đường ABC, www.dell.com, 1900-1234', 'Laptop 15.6 inch, hiệu suất cao, thiết kế mỏng, phù hợp cho công việc và giải trí', 'Trung Quốc', 'Độ sáng: 250 nits, Kết nối: HDMI, USB-C, Wi-Fi 6, Bluetooth 5.0'),
+(36, 48, '123 Đường ABC, www.dell.com, 1900-1234', 'Laptop 15.6 inch, hiệu suất cao, thiết kế mỏng, phù hợp cho công việc và giải trí', 'Trung Quốc', 'Độ sáng: 250 nits, Kết nối: HDMI, USB-C, Wi-Fi 6, Bluetooth 5.0'),
+(37, 49, '123 Đường ABC, www.dell.com, 1900-1234', 'Laptop 15.6 inch, hiệu suất cao, thiết kế mỏng, phù hợp cho công việc và giải trí', 'Trung Quốc', 'Độ sáng: 250 nits, Kết nối: HDMI, USB-C, Wi-Fi 6, Bluetooth 5.0'),
+(38, 50, '123 Đường ABC, www.dell.com, 1900-1234', 'Tai nghe Bluetooth, âm thanh chất lượng cao, thiết kế không dây', 'Trung Quốc', 'Tần số: 20Hz-20kHz, Pin: 30 giờ nghe, Bluetooth: 5.0, Đệm tai: Nhớ hình'),
+(39, 51, '123 Đường ABC, www.dell.com, 1900-1234', 'Tai nghe Bluetooth, âm thanh chất lượng cao, thiết kế không dây', 'Trung Quốc', 'Tần số: 20Hz-20kHz, Pin: 30 giờ nghe, Bluetooth: 5.0, Đệm tai: Nhớ hình'),
+(40, 52, '123 Đường ABC, www.dell.com, 1900-1234', 'Tai nghe Bluetooth, âm thanh chất lượng cao, thiết kế không dây', 'Trung Quốc', 'Tần số: 20Hz-20kHz, Pin: 30 giờ nghe, Bluetooth: 5.0, Đệm tai: Nhớ hình'),
+(41, 53, '123 Đường ABC, www.dell.com, 1900-1234', '	Loa Bluetooth, âm thanh mạnh mẽ, di động, thiết kế nhỏ gọn', 'Trung Quốc', 'Công suất: 10W, Tần số: 60Hz-20kHz, Pin: 12 giờ, Bluetooth 5.0'),
+(42, 54, '123 Đường ABC, www.dell.com, 1900-1234', '	Loa Bluetooth, âm thanh mạnh mẽ, di động, thiết kế nhỏ gọn', 'Trung Quốc', 'Công suất: 10W, Tần số: 60Hz-20kHz, Pin: 12 giờ, Bluetooth 5.0'),
+(43, 55, '123 Đường ABC, www.dell.com, 1900-1234', 'Bộ vi xử lý Intel Core, hiệu suất cao, tối ưu cho các tác vụ đa nhiệm và gaming', 'Trung Quốc', 'Socket: LGA 1200, TDP: 65W-125W, Công nghệ: 10nm, Hỗ trợ RAM DDR4\n'),
+(44, 56, '123 Đường ABC, www.dell.com, 1900-1234', 'Bộ vi xử lý Intel Core, hiệu suất cao, tối ưu cho các tác vụ đa nhiệm và gaming', 'Trung Quốc', 'Socket: LGA 1200, TDP: 65W-125W, Công nghệ: 10nm, Hỗ trợ RAM DDR4\n'),
+(45, 57, '123 Đường ABC, www.dell.com, 1900-1234', 'Bộ vi xử lý Intel Core, hiệu suất cao, tối ưu cho các tác vụ đa nhiệm và gaming', 'Trung Quốc', 'Socket: LGA 1200, TDP: 65W-125W, Công nghệ: 10nm, Hỗ trợ RAM DDR4\n'),
+(46, 58, '123 Đường ABC, www.dell.com, 1900-1234', 'RAM DDR4 hiệu suất cao, phù hợp cho gaming và làm việc chuyên nghiệp', 'Trung Quốc', 'Điện áp: 1.35V, Latency: CL16, 288-pin DIMM'),
+(47, 59, '123 Đường ABC, www.dell.com, 1900-1234', 'RAM DDR4 hiệu suất cao, phù hợp cho gaming và làm việc chuyên nghiệp', 'Trung Quốc', 'Điện áp: 1.35V, Latency: CL16, 288-pin DIMM'),
+(48, 60, '123 Đường ABC, www.dell.com, 1900-1234', 'RAM DDR4 hiệu suất cao, phù hợp cho gaming và làm việc chuyên nghiệp', 'Trung Quốc', 'Điện áp: 1.35V, Latency: CL16, 288-pin DIMM'),
+(49, 61, '123 Đường ABC, www.dell.com, 1900-1234', 'Tản nhiệt CPU hiệu suất cao, thiết kế tối ưu cho overclocking', 'Trung Quốc', 'Socket hỗ trợ: LGA1151, AM4, TDP: 150W, Quạt: 120mm, 140mm, 1800 RPM'),
+(50, 21, '123 Đường ABC, www.dell.com, 1900-1234', 'PC Gaming, Máy tính để bàn hiệu suất cao, Chơi game, làm đồ họa', 'Trung Quốc', 'CPU	Intel Core i7-12700F\nRAM	16GB DDR4\nGPU	NVIDIA GeForce GTX 1660\nStorage	1TB HDD + 512GB SSD');
 
 -- --------------------------------------------------------
 
@@ -209,7 +257,40 @@ CREATE TABLE `danhmuchsx` (
 
 INSERT INTO `danhmuchsx` (`id`, `danh_muc`, `hang_san_xuat`) VALUES
 (1, 29, 4),
-(3, 30, 6);
+(3, 30, 6),
+(4, 29, 10),
+(5, 29, 33),
+(6, 29, 35),
+(7, 29, 1),
+(8, 29, 8),
+(9, 30, 33),
+(10, 30, 35),
+(11, 32, 27),
+(12, 32, 28),
+(13, 32, 29),
+(14, 36, 12),
+(15, 37, 30),
+(16, 37, 31),
+(17, 37, 32),
+(18, 38, 18),
+(19, 38, 26),
+(20, 39, 1),
+(21, 39, 8),
+(22, 39, 33),
+(23, 39, 10),
+(24, 39, 40),
+(25, 42, 19),
+(26, 40, 36),
+(27, 40, 18),
+(28, 40, 37),
+(29, 40, 19),
+(30, 40, 39),
+(31, 41, 38),
+(32, 41, 19),
+(33, 41, 39),
+(34, 42, 1),
+(35, 42, 25),
+(36, 42, 12);
 
 -- --------------------------------------------------------
 
@@ -234,7 +315,7 @@ INSERT INTO `danhmucsanpham` (`MaDM`, `TenDM`, `icon`, `TrangThaiDM`) VALUES
 (32, 'CPU', 'bi bi-cpu', 0),
 (36, 'Tản nhiệt', 'bi bi-fan', 0),
 (37, 'RAM', 'bi bi-memory', 0),
-(38, 'Lưu trữ', 'bi bi-hdd-stack', 0),
+(38, 'Loa', 'bi bi-hdd-stack', 0),
 (39, 'Màn hình', 'bi bi-display', 0),
 (40, 'Bàn phím', 'bi bi-keyboard', 0),
 (41, 'Chuột', 'bi bi-mouse', 0),
@@ -348,7 +429,6 @@ INSERT INTO `hangsanxuat` (`MaHSX`, `TenHSX`, `TrangThaiHSX`) VALUES
 (6, 'Apple', 'Hiện'),
 (7, 'LG', 'Hiện'),
 (8, 'Acer', 'Hiện'),
-(9, 'MSI', 'Hiện'),
 (10, 'Lenovo', 'Hiện'),
 (11, 'Kingston', 'Hiện'),
 (12, 'Cosair', 'Hiện'),
@@ -363,7 +443,22 @@ INSERT INTO `hangsanxuat` (`MaHSX`, `TenHSX`, `TrangThaiHSX`) VALUES
 (21, 'Microsoft', 'Hiện'),
 (22, 'Steelseries', 'Hiện'),
 (23, 'Glorious', 'Hiện'),
-(24, 'Rapoo', 'Hiện');
+(24, 'Rapoo', 'Hiện'),
+(25, 'HyperX', '0'),
+(26, 'Edifier', '0'),
+(27, 'CPU Intel Core i9', '0'),
+(28, 'CPU Intel Core i7', '0'),
+(29, 'CPU Intel Core i5', '0'),
+(30, 'Ram 8G', '0'),
+(31, 'Ram 16G', '0'),
+(32, 'Ram32G', '0'),
+(33, 'MSI', '0'),
+(35, 'AORUS', '0'),
+(36, 'Vortex', '0'),
+(37, 'Leopold', '0'),
+(38, 'AKKO', '0'),
+(39, 'DareU', '0'),
+(40, 'AOC', '0');
 
 -- --------------------------------------------------------
 
@@ -409,7 +504,7 @@ CREATE TABLE `khuyenmaivc` (
   `SoLuongMa` text NOT NULL,
   `NgayBD` text NOT NULL,
   `NgayKT` text NOT NULL,
-  `TrangThaiMa` int(11) DEFAULT NULL
+  `TrangThaiMa` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -417,9 +512,9 @@ CREATE TABLE `khuyenmaivc` (
 --
 
 INSERT INTO `khuyenmaivc` (`MaKMVC`, `MaTK`, `TenKMVC`, `DieuKien`, `PhanTramGiam`, `GiaTriToiDa`, `SoLuongMa`, `NgayBD`, `NgayKT`, `TrangThaiMa`) VALUES
-(1, 4, 'Mã giảm 100%', '', '100', '35000', '4', '20/10/2024', '30/11/2024', 0),
-(2, 4, 'Mã giảm 50%', '', '50', '20000', '5', '5/11/2024', '20/12/2024', 0),
-(3, 3, 'Mã giảm 50%', '', '50', '20000', '4', '', '', 0);
+(1, 4, 'Mã giảm 100%', '', '100', '35000', '4', '20/10/2024', '30/11/2024', 'hiện'),
+(2, 4, 'Mã giảm 50%', '', '50', '20000', '5', '5/11/2024', '20/12/2024', 'ẩn'),
+(3, 3, 'Mã giảm 50%', '', '50', '20000', '4', '', '', 'ẩn');
 
 -- --------------------------------------------------------
 
@@ -478,7 +573,8 @@ INSERT INTO `phanquyenadmin` (`id`, `MaTK`, `MaQuyen`) VALUES
 (27, 10, 4),
 (29, 9, 6),
 (30, 9, 5),
-(31, 9, 4);
+(31, 9, 4),
+(32, 6, 8);
 
 -- --------------------------------------------------------
 
@@ -520,8 +616,9 @@ INSERT INTO `quyenadmin` (`id`, `TenQuyen`) VALUES
 (3, 'Quản lý sản phẩm'),
 (4, 'Quản lý đơn hàng'),
 (5, 'Quản lý vận chuyển'),
-(6, 'Quản lý bài đăng '),
-(7, 'Quản lý bình luận ');
+(7, 'Quản lý bình luận'),
+(8, 'Khuyến mãi'),
+(9, 'Khuyến mãi vận chuyển');
 
 -- --------------------------------------------------------
 
@@ -552,36 +649,48 @@ CREATE TABLE `sanpham` (
 --
 
 INSERT INTO `sanpham` (`MaSP`, `TenSP`, `AnhSP`, `AnhCT1`, `AnhCT2`, `AnhCT3`, `AnhCT4`, `GiaBan`, `SoLuongTonKho`, `NgayTaoSP`, `TrangThaiSP`, `MoTaChiTiet`, `ThoiGianBaoHanh`, `MaDM`, `MaHSX`) VALUES
-(8, 'ewqe', 'pc_case_xigmatek_-_26_e36ac54740974ec88f65ca6eedfd10a2_medium.png', NULL, NULL, NULL, NULL, '324', '432', '2024-10-18', 'Hiện', '2131', '432', 29, 2),
-(12, 'PC GVN x ASUS Advanced Ai (Intel Core Ultra 9 285K/ VGA RTX 4090)', 'pc_case_xigmatek_-_26_e36ac54740974ec88f65ca6eedfd10a2_medium.png', 'gr701_-_8_cb365132fb6e4bc8a0e87e8811ef585a_medium.png', 'artboard_3_b5ccc140878a433db58322a5adeb8b3c_medium.png', 'pc_gvn_-_amd_-_a21_-_3_c71ab3cdd9bf45cb947b98f4561300b4_medium.png', 'pc_case_xigmatek_-_23_c6832c0dded9424e83cd361ffce6c901_1024x1024.webp', '140000000', '100', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 1),
-(13, 'PC GVN x MSI Dragon ACE (Intel i9-14900K/ VGA RTX 4080 Super)', 'artboard_3_b5ccc140878a433db58322a5adeb8b3c_medium.png', 'pc_case_xigmatek_-_22_e4c822262b3d4946a6f427d02adebf8b_1024x1024.webp', 'pc_case_xigmatek_-_23_c6832c0dded9424e83cd361ffce6c901_1024x1024.webp', 'pc_case_xigmatek_-_26_e36ac54740974ec88f65ca6eedfd10a2_medium.png', 'pc_gvn_-_amd_-_a21_-_3_c71ab3cdd9bf45cb947b98f4561300b4_medium.png', '93990000', '0', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 1),
-(14, 'PC GVN x AORUS XTREME ICE (Intel i9-14900K/ VGA RTX 4080 Super)', 'pc_gvn_x_gigabyte__ice__-_32_e797aed458a94914b78e491d8c7a5ccb_medium.png', NULL, NULL, NULL, NULL, '150000000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 1),
-(15, 'PC GVN x MSI PROJECT ZERO WHITE (Intel i5-14400F/ VGA RTX 4060)', 'thumb_project_zero_c58860d9fa3a409294c17ab45f46f612_medium.png', NULL, NULL, NULL, NULL, '24990000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 1),
-(17, 'PC GVN x MSI PROJECT ZERO WHITE (Intel i5-14400F/ VGA RTX 4060)', 'thumb_project_zero_c58860d9fa3a409294c17ab45f46f612_medium.png', NULL, NULL, NULL, NULL, '24990000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 1),
-(18, 'PC GVN x MSI PROJECT ZERO WHITE (Intel i5-14400F/ VGA RTX 4060)', 'thumb_project_zero_c58860d9fa3a409294c17ab45f46f612_medium.png', NULL, NULL, NULL, NULL, '24990000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 1),
-(19, 'PC GVN x MSI PROJECT ZERO WHITE (Intel i5-14400F/ VGA RTX 4060)', 'thumb_project_zero_c58860d9fa3a409294c17ab45f46f612_medium.png', '1732710522_AnhCT1.png', '1732710522_AnhCT2.png', '1732710522_AnhCT3.png', '1732710522_AnhCT4.png', '24990000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 1),
-(20, 'PC GVN x AORUS XTREME ICE (Intel i9-14900K/ VGA RTX 4080 Super)', 'pc_gvn_x_gigabyte__ice__-_32_e797aed458a94914b78e491d8c7a5ccb_medium.png', '1732710654_AnhCT1.png', '1732710654_AnhCT2.png', '1732710654_AnhCT3.png', '1732710654_AnhCT4.png', '150000000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 1),
-(21, 'PC GVN x AORUS XTREME ICE (Intel i9-14900K/ VGA RTX 4080 Super)', 'pc_gvn_x_gigabyte__ice__-_32_e797aed458a94914b78e491d8c7a5ccb_medium.png', NULL, NULL, NULL, NULL, '150000000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 1),
-(22, 'PC GVN x AORUS XTREME ICE (Intel i9-14900K/ VGA RTX 4080 Super)', 'pc_gvn_x_gigabyte__ice__-_32_e797aed458a94914b78e491d8c7a5ccb_medium.png', NULL, NULL, NULL, NULL, '150000000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 1),
-(23, 'PC GVN x AORUS XTREME ICE (Intel i9-14900K/ VGA RTX 4080 Super)', 'pc_gvn_x_gigabyte__ice__-_32_e797aed458a94914b78e491d8c7a5ccb_medium.png', NULL, NULL, NULL, NULL, '150000000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 1),
-(24, 'PC GVN x MSI Dragon ACE (Intel i9-14900K/ VGA RTX 4080 Super)', 'artboard_3_b5ccc140878a433db58322a5adeb8b3c_medium.png', NULL, NULL, NULL, NULL, '93990000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 1),
-(25, 'PC GVN x MSI Dragon ACE (Intel i9-14900K/ VGA RTX 4080 Super)', 'artboard_3_b5ccc140878a433db58322a5adeb8b3c_medium.png', NULL, NULL, NULL, NULL, '93990000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 1),
-(26, 'PC GVN x MSI Dragon ACE (Intel i9-14900K/ VGA RTX 4080 Super)', 'artboard_3_b5ccc140878a433db58322a5adeb8b3c_medium.png', NULL, NULL, NULL, NULL, '93990000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 1),
-(33, 'Bàn phím Vortex 8700 MultiX Summer Brown Switch', '1732710935_AnhSP.png', '1732710935_AnhCT1.png', '1732710935_AnhCT2.png', '1732710935_AnhCT3.png', '1732710935_AnhCT4.png', '2000000', '1000', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 40, 20),
-(34, 'Bàn phím Logitech G Pro X 60 Light Speed White', '1732711093_AnhSP.png', '1732711093_AnhCT1.png', '1732711093_AnhCT2.png', '1732711093_AnhCT3.png', '1732711093_AnhCT4.png', '3820000', '100', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 40, 1),
-(35, 'Bàn phím Leopold FC750R Bluetooth Blue Grey - Brown MX2A Switch', '1732711291_AnhSP.png', '1732711291_AnhCT1.png', '1732711291_AnhCT2.png', '1732711291_AnhCT3.png', '1732711291_AnhCT4.png', '3550000', '100', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 40, 1),
-(36, 'Bàn phím Razer Huntsman V3 Pro TKL', '1732711552_AnhSP.png', '1732711552_AnhCT1.png', '1732711552_AnhCT2.png', '1732711552_AnhCT3.png', '1732711552_AnhCT4.png', '5345000', '200', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 40, 15),
-(37, 'Bàn phím cơ DareU A98 Pro TM Red Wave Dream switch', '1732711854_AnhSP.png', '1732711854_AnhCT1.png', '1732711854_AnhCT2.png', '1732711854_AnhCT3.png', '1732711854_AnhCT4.png', '2990000', '1', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 40, 7),
-(38, 'Chuột Razer Deathadder Essential White', '1732712128_AnhSP.png', '1732712128_AnhCT1.png', '1732712128_AnhCT2.png', '1732712128_AnhCT3.png', '1732712128_AnhCT4.png', '420000', '150', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 41, 9),
-(39, 'Chuột AKKO Smart 1 Sailor Moon', '1732712513_AnhSP.png', '1732712513_AnhCT1.png', '1732712513_AnhCT2.png', '1732712513_AnhCT3.png', '1732712513_AnhCT4.png', '290000', '20', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 41, 1),
-(40, 'Chuột DareU EM901X RGB Superlight Wireless', '1732712687_AnhSP.png', '1732712687_AnhCT1.png', '1732712687_AnhCT2.png', '1732712687_AnhCT3.png', '1732712687_AnhCT4.png', '790000', '33', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 41, 8),
-(41, 'Màn hình AOC Q24G4E 24\" IPS 2K 180Hz G-Sync chuyên game', '1732712990_AnhSP.png', '1732712990_AnhCT1.png', '1732712990_AnhCT2.png', '1732712990_AnhCT3.png', '1732712990_AnhCT4.png', '4790000', '13', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 40, 8),
-(42, 'Màn hình Lenovo L24i-4A 24\" IPS 100Hz', '1732713228_AnhSP.png', '1732713228_AnhCT1.png', '1732713228_AnhCT2.png', '1732713228_AnhCT3.png', '1732713228_AnhCT4.png', '2490000', '100', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 39, 20),
-(43, 'Màn hình ASUS VY279HGR 27\" IPS 120Hz viền mỏng', '1732713482_AnhSP.png', '1732713482_AnhCT1.png', '1732713482_AnhCT2.png', '1732713482_AnhCT3.png', '1732713482_AnhCT4.png', '2990000', '10', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 39, 6),
-(44, 'Màn hình MSI PRO MP252 25\" IPS 100Hz', '1732713775_AnhSP.png', '1732713775_AnhCT1.png', '1732713775_AnhCT2.png', '1732713775_AnhCT3.png', '1732713775_AnhCT4.png', '2190000', '10', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 39, 7),
+(12, 'PC GVN x ASUS Advanced Ai (Intel Core Ultra 9 285K/ VGA RTX 4090)', 'pc_case_xigmatek_-_26_e36ac54740974ec88f65ca6eedfd10a2_medium.png', 'gr701_-_8_cb365132fb6e4bc8a0e87e8811ef585a_medium.png', 'artboard_3_b5ccc140878a433db58322a5adeb8b3c_medium.png', 'pc_gvn_-_amd_-_a21_-_3_c71ab3cdd9bf45cb947b98f4561300b4_medium.png', 'pc_case_xigmatek_-_23_c6832c0dded9424e83cd361ffce6c901_1024x1024.webp', '140000000', '100', '2024-10-03', 'Hiện', 'chính hãng', '2 năm', 30, 1),
+(13, 'PC GVN x MSI Dragon ACE (Intel i9-14900K/ VGA RTX 4080 Super)', 'artboard_3_b5ccc140878a433db58322a5adeb8b3c_medium.png', 'pc_case_xigmatek_-_22_e4c822262b3d4946a6f427d02adebf8b_1024x1024.webp', 'pc_case_xigmatek_-_23_c6832c0dded9424e83cd361ffce6c901_1024x1024.webp', 'pc_case_xigmatek_-_26_e36ac54740974ec88f65ca6eedfd10a2_medium.png', 'pc_gvn_-_amd_-_a21_-_3_c71ab3cdd9bf45cb947b98f4561300b4_medium.png', '93990000', '0', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 33),
+(14, 'PC GVN x AORUS XTREME ICE (Intel i9-14900K/ VGA RTX 4080 Super)', 'pc_gvn_x_gigabyte__ice__-_32_e797aed458a94914b78e491d8c7a5ccb_medium.png', NULL, NULL, NULL, NULL, '150000000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 35),
+(15, 'PC GVN x MSI PROJECT ZERO WHITE (Intel i5-14400F/ VGA RTX 4060)', 'thumb_project_zero_c58860d9fa3a409294c17ab45f46f612_medium.png', NULL, NULL, NULL, NULL, '24990000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 33),
+(17, 'PC GVN x MSI PROJECT ZERO WHITE (Intel i5-14400F/ VGA RTX 4060)', 'thumb_project_zero_c58860d9fa3a409294c17ab45f46f612_medium.png', NULL, NULL, NULL, NULL, '24990000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 33),
+(18, 'PC GVN x MSI PROJECT ZERO WHITE (Intel i5-14400F/ VGA RTX 4060)', 'thumb_project_zero_c58860d9fa3a409294c17ab45f46f612_medium.png', NULL, NULL, NULL, NULL, '24990000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 33),
+(19, 'PC GVN x MSI PROJECT ZERO WHITE (Intel i5-14400F/ VGA RTX 4060)', 'thumb_project_zero_c58860d9fa3a409294c17ab45f46f612_medium.png', '1732710522_AnhCT1.png', '1732710522_AnhCT2.png', '1732710522_AnhCT3.png', '1732710522_AnhCT4.png', '24990000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 33),
+(20, 'PC GVN x AORUS XTREME ICE (Intel i9-14900K/ VGA RTX 4080 Super)', 'pc_gvn_x_gigabyte__ice__-_32_e797aed458a94914b78e491d8c7a5ccb_medium.png', '1732710654_AnhCT1.png', '1732710654_AnhCT2.png', '1732710654_AnhCT3.png', '1732710654_AnhCT4.png', '150000000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 35),
+(21, 'PC GVN x AORUS XTREME ICE (Intel i9-14900K/ VGA RTX 4080 Super)', 'pc_gvn_x_gigabyte__ice__-_32_e797aed458a94914b78e491d8c7a5ccb_medium.png', NULL, NULL, NULL, NULL, '150000000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 35),
+(22, 'PC GVN x AORUS XTREME ICE (Intel i9-14900K/ VGA RTX 4080 Super)', 'pc_gvn_x_gigabyte__ice__-_32_e797aed458a94914b78e491d8c7a5ccb_medium.png', NULL, NULL, NULL, NULL, '150000000', '100', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 35),
+(23, 'PC GVN x AORUS XTREME ICE (Intel i9-14900K/ VGA RTX 4080 Super)', 'pc_gvn_x_gigabyte__ice__-_32_e797aed458a94914b78e491d8c7a5ccb_medium.png', NULL, NULL, NULL, NULL, '150000000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 35),
+(25, 'PC GVN x MSI Dragon ACE (Intel i9-14900K/ VGA RTX 4080 Super)', 'artboard_3_b5ccc140878a433db58322a5adeb8b3c_medium.png', NULL, NULL, NULL, NULL, '93990000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 33),
+(26, 'PC GVN x MSI Dragon ACE (Intel i9-14900K/ VGA RTX 4080 Super)', 'artboard_3_b5ccc140878a433db58322a5adeb8b3c_medium.png', NULL, NULL, NULL, NULL, '93990000', '5', '2024-10-03', 'Hiện', 'chính hãng', '1 năm', 30, 33),
+(33, 'Bàn phím Vortex 8700 MultiX Summer Brown Switch', '1732710935_AnhSP.png', '1732710935_AnhCT1.png', '1732710935_AnhCT2.png', '1732710935_AnhCT3.png', '1732710935_AnhCT4.png', '2000000', '1000', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 40, 36),
+(34, 'Bàn phím Logitech G Pro X 60 Light Speed White', '1732711093_AnhSP.png', '1732711093_AnhCT1.png', '1732711093_AnhCT2.png', '1732711093_AnhCT3.png', '1732711093_AnhCT4.png', '3820000', '100', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 40, 18),
+(35, 'Bàn phím Leopold FC750R Bluetooth Blue Grey - Brown MX2A Switch', '1732711291_AnhSP.png', '1732711291_AnhCT1.png', '1732711291_AnhCT2.png', '1732711291_AnhCT3.png', '1732711291_AnhCT4.png', '3550000', '100', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 40, 37),
+(36, 'Bàn phím Razer Huntsman V3 Pro TKL', '1732711552_AnhSP.png', '1732711552_AnhCT1.png', '1732711552_AnhCT2.png', '1732711552_AnhCT3.png', '1732711552_AnhCT4.png', '5345000', '200', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 40, 19),
+(37, 'Bàn phím cơ DareU A98 Pro TM Red Wave Dream switch', '1732711854_AnhSP.png', '1732711854_AnhCT1.png', '1732711854_AnhCT2.png', '1732711854_AnhCT3.png', '1732711854_AnhCT4.png', '2990000', '1', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 40, 39),
+(38, 'Chuột Razer Deathadder Essential White', '1732712128_AnhSP.png', '1732712128_AnhCT1.png', '1732712128_AnhCT2.png', '1732712128_AnhCT3.png', '1732712128_AnhCT4.png', '420000', '150', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 41, 19),
+(39, 'Chuột AKKO Smart 1 Sailor Moon', '1732712513_AnhSP.png', '1732712513_AnhCT1.png', '1732712513_AnhCT2.png', '1732712513_AnhCT3.png', '1732712513_AnhCT4.png', '290000', '20', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 41, 38),
+(40, 'Chuột DareU EM901X RGB Superlight Wireless', '1732712687_AnhSP.png', '1732712687_AnhCT1.png', '1732712687_AnhCT2.png', '1732712687_AnhCT3.png', '1732712687_AnhCT4.png', '790000', '33', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 41, 39),
+(41, 'Màn hình AOC Q24G4E 24\" IPS 2K 180Hz G-Sync chuyên game', '1732712990_AnhSP.png', '1732712990_AnhCT1.png', '1732712990_AnhCT2.png', '1732712990_AnhCT3.png', '1732712990_AnhCT4.png', '4790000', '13', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 40, 40),
+(42, 'Màn hình Lenovo L24i-4A 24\" IPS 100Hz', '1732713228_AnhSP.png', '1732713228_AnhCT1.png', '1732713228_AnhCT2.png', '1732713228_AnhCT3.png', '1732713228_AnhCT4.png', '2490000', '100', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 39, 10),
+(43, 'Màn hình ASUS VY279HGR 27\" IPS 120Hz viền mỏng', '1732713482_AnhSP.png', '1732713482_AnhCT1.png', '1732713482_AnhCT2.png', '1732713482_AnhCT3.png', '1732713482_AnhCT4.png', '2990000', '10', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 39, 1),
+(44, 'Màn hình MSI PRO MP252 25\" IPS 100Hz', '1732713775_AnhSP.png', '1732713775_AnhCT1.png', '1732713775_AnhCT2.png', '1732713775_AnhCT3.png', '1732713775_AnhCT4.png', '2190000', '10', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 39, 33),
 (45, 'Màn hình Acer EK251Q G 25\" IPS 120Hz', '1732714028_AnhSP.png', '1732714028_AnhCT1.png', '1732714028_AnhCT2.png', '1732714028_AnhCT3.png', '1732714028_AnhCT4.png', '2390000', '12', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 39, 8),
 (46, 'Laptop gaming Acer Nitro V ANV16 41 R6ZY', '1732714565_AnhSP.png', '1732714565_AnhCT1.png', '1732714565_AnhCT2.png', '1732714565_AnhCT3.png', '1732714565_AnhCT4.png', '25990000', '30', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 29, 8),
-(47, 'Laptop gaming MSI Crosshair 16 HX D14VFKG 860VN', '1732714747_AnhSP.png', '1732714747_AnhCT1.png', '1732714747_AnhCT2.png', '1732714747_AnhCT3.png', '1732714747_AnhCT4.png', '39990000', '24', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 29, 8);
+(47, 'Laptop gaming MSI Crosshair 16 HX D14VFKG 860VN', '1732714747_AnhSP.png', '1732714747_AnhCT1.png', '1732714747_AnhCT2.png', '1732714747_AnhCT3.png', '1732714747_AnhCT4.png', '39990000', '24', '2024-11-27', 'Hiện', 'Chính hãng', '1 năm', 29, 33),
+(48, 'Laptop ASUS Vivobook S 14 OLED S5406MA PP046WS', '1732728599_AnhSP.png', '1732728599_AnhCT1.png', '1732728599_AnhCT2.png', '1732728599_AnhCT3.png', '1732728599_AnhCT4.png', '17290000', '18', '2024-11-28', 'Hiện', 'chính hãng', '1 năm', 29, 1),
+(49, 'Laptop Dell Inspiron 14 5440 i5U085W11IBU', '1732728954_AnhSP.png', '1732728954_AnhCT1.png', '1732728954_AnhCT2.png', '1732728954_AnhCT3.png', '1732728954_AnhCT4.png', '18890000', '10', '2024-11-28', NULL, 'chính hãng', '1 năm', 29, 4),
+(50, 'Tai nghe Asus ROG Cetra II Core', '1732731475_AnhSP.png', '1732731475_AnhCT1.png', '1732731475_AnhCT2.png', '1732731475_AnhCT3.png', '1732731475_AnhCT4.png', '1290000', '50', NULL, NULL, 'Chính hãng', '1 năm', 42, 1),
+(51, 'Tai nghe HP HyperX Cloud III Wireless Black', '1732731740_AnhSP.png', '1732731740_AnhCT1.png', '1732731740_AnhCT2.png', '1732731740_AnhCT3.png', '1732731740_AnhCT4.png', '3990000', '12', NULL, NULL, 'Chính hãng', '1 năm', 42, 25),
+(52, 'Tai nghe Corsair HS35 Surround v2 Carbon', '1732734022_AnhSP.png', '1732734022_AnhCT1.png', '1732734022_AnhCT2.png', '1732734022_AnhCT3.png', '1732734022_AnhCT4.png', '1190000', '5', NULL, NULL, 'Chính hãng', '1 năm', 42, 12),
+(53, 'Loa Logitech G560', '1732734387_AnhSP.png', '1732734387_AnhCT1.png', '1732734387_AnhCT2.png', '1732734387_AnhCT3.png', '1732734388_AnhCT4.png', '3890000', '15', NULL, NULL, 'Chính hãng', '1 năm', 38, 18),
+(54, 'Loa máy tính Edifier 2.0 R1080BT', '1732735079_AnhSP.png', '1732735079_AnhCT1.png', '1732735079_AnhCT2.png', '1732735079_AnhCT3.png', '1732735079_AnhCT4.png', '1790000', '40', NULL, NULL, 'Chính hãng', '1 năm', 38, 26),
+(55, 'Bộ vi xử lý Intel Core i9 14900KS / Turbo up to 6.2GHz / 24 Nhân 32 Luồng / 36MB / LGA 1700', '1732735452_AnhSP.png', '1732735452_AnhCT1.png', '1732735452_AnhCT2.png', '1732735452_AnhCT3.png', '1732735452_AnhCT4.png', '18520000', '20', NULL, NULL, 'Chính hãng', '2 năm', 32, 27),
+(56, 'Bộ vi xử lý Intel Core i7 14700 / Turbo up to 5.4GHz / 20 Nhân 28 Luồng / 33MB / LGA 1700', '1732735534_AnhSP.png', '1732735534_AnhCT1.png', '1732735534_AnhCT2.png', '1732735534_AnhCT3.png', '1732735534_AnhCT4.png', '9290000', '30', NULL, NULL, 'Chính hãng', '1 năm', 32, 28),
+(57, 'Bộ vi xử lý Intel Core i5 14400F / Turbo up to 4.7GHz / 10 Nhân 16 Luồng / 20MB / LGA 1700', '1732735651_AnhSP.png', '1732735651_AnhCT1.png', '1732735651_AnhCT2.png', '1732735651_AnhCT3.png', '1732735651_AnhCT4.png', '4320000', '3', NULL, NULL, 'Chính hãng', '1 năm', 32, 29),
+(58, 'RAM PNY XLR8 1x8GB 3200MHz DDR4 LONGDIMM (MD8GD4320016XR)', '1732736514_AnhSP.png', '1732736514_AnhCT1.png', '1732736514_AnhCT2.png', '1732736514_AnhCT3.png', '1732736514_AnhCT4.png', '650000', '4', NULL, NULL, 'Chính hãng', '1 năm', 37, 30),
+(59, 'Ram T-Group T-Force Delta 1x16GB 3600 RGB White', '1732737073_AnhSP.png', '1732737073_AnhCT1.png', '1732737073_AnhCT2.png', '1732737073_AnhCT3.png', '1732737073_AnhCT4.png', '1190000', '123', NULL, NULL, 'Chính hãng', '1 năm', 37, 31),
+(60, 'Ram Corsair Dominator 32GB (2x16GB) RGB 3200 (CMT32GX4M2E3200C16)', '1732737331_AnhSP.png', '1732737331_AnhCT1.png', '1732737331_AnhCT2.png', '1732737331_AnhCT3.png', '1732737331_AnhCT4.png', '3390000', '2', NULL, NULL, 'Chính hãng', '1 năm', 37, 32),
+(61, 'Tản nhiệt AIO Corsair iCUE LINK H150i RGB White (CW-9061006-WW)', '1732737506_AnhSP.png', '1732737506_AnhCT1.png', '1732737506_AnhCT2.png', '1732737506_AnhCT3.png', '1732737506_AnhCT4.png', '6250000', '67', NULL, NULL, 'Chính hãng', '1 năm', 36, 12);
 
 -- --------------------------------------------------------
 
@@ -989,13 +1098,13 @@ ALTER TABLE `chitietgiohang`
 -- AUTO_INCREMENT cho bảng `chitietsanpham`
 --
 ALTER TABLE `chitietsanpham`
-  MODIFY `MaCTSP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `MaCTSP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT cho bảng `danhmuchsx`
 --
 ALTER TABLE `danhmuchsx`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT cho bảng `danhmucsanpham`
@@ -1025,7 +1134,7 @@ ALTER TABLE `giohang`
 -- AUTO_INCREMENT cho bảng `hangsanxuat`
 --
 ALTER TABLE `hangsanxuat`
-  MODIFY `MaHSX` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `MaHSX` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT cho bảng `khuyenmai`
@@ -1049,7 +1158,7 @@ ALTER TABLE `lichsutrangthaidh`
 -- AUTO_INCREMENT cho bảng `phanquyenadmin`
 --
 ALTER TABLE `phanquyenadmin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT cho bảng `phuongthucthanhtoan`
@@ -1061,13 +1170,13 @@ ALTER TABLE `phuongthucthanhtoan`
 -- AUTO_INCREMENT cho bảng `quyenadmin`
 --
 ALTER TABLE `quyenadmin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `sanpham`
 --
 ALTER TABLE `sanpham`
-  MODIFY `MaSP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `MaSP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT cho bảng `taikhoan`
