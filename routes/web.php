@@ -6,8 +6,10 @@ use App\Http\Controllers\khach_hang\GioHangController;
 use App\Http\Controllers\khach_hang\DatHangController;
 use App\Http\Controllers\khach_hang\ThongTinTaiKhoanController;
 use App\Http\Controllers\khach_hang\TraCuuDonHangController;
+use App\Http\Controllers\khach_hang\VNpayController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ResetPassWordController;
 use App\Http\Controllers\super_admin\PhuongThucThanhToanController;
 use App\Http\Controllers\super_admin\QuanLyKhuyenMaiVCController;
 use App\Http\Controllers\super_admin\QuanLyQuyenAdminController;
@@ -31,6 +33,11 @@ Route::get('/',[DashBoardController::class,'getViewDashBoardUser'])->name('home-
 Route::get('/register',[RegisterController::class,'getViewRegister'])->name('index.register');
 Route::post('/register/add',[RegisterController::class,'addAccount'])->name('add-account');
 Route::get('/login',[LoginController::class,'getViewLogin'])->name('index.login');
+
+Route::get('/reset-password', [ResetPassWordController::class, 'getViewResetPassWord'])->name('get-reset-password');
+
+Route::post('/send-verification-code', [ResetPassWordController::class, 'GuiMaXacNhan'])->name('gui-ma-xac-nhan');
+Route::post('/update-password', [ResetPassWordController::class, 'capNhatMatKhauMoi'])->name('cap-nhat-mat-khau-moi');
 Route::post('/login',[LoginController::class,'loginAction'])->name('login-action');
 Route::get('/logout', [LoginController::class, 'logoutAction'])->name('logout');
 
@@ -41,7 +48,10 @@ Route::get('/san-pham-tim-kiem', [DashBoardController::class, 'getViewSearch'])-
 
 Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::group(['prefix' => '/super-admin'], function () {
-        Route::get('/home',[DashBoardController::class,'getViewDashBoardSuperAdmin'])->name('super-admin-home');
+        Route::get('/home', [DashBoardController::class, 'getViewDashBoard'])->name('super-admin-home');
+        Route::post('/get-thong-ke', [DashBoardController::class, 'getThongKe'])->name('get-thong-ke');
+        Route::get('/excel-export-khach-hang', [DashBoardController::class, 'getExportKH'])->name('excel-export-khach-hang');
+        Route::get('/excel-export-san-pham', [DashBoardController::class, 'getExportSP'])->name('excel-export-san-pham');
 
         // Tài khoản
         Route::group(['prefix' => '/tai-khoan'], function () {
@@ -136,7 +146,11 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
 
         // Vận chuyển
         Route::group(['prefix' => '/van-chuyen'], function () {
-            Route::get('/danh-sach',[QuanLyVanChuyenController::class,'getView'])->name('danh-sach-van-chuyen');
+            Route::get('/danh-sach', [QuanLyVanChuyenController::class, 'getView'])->name('danh-sach-van-chuyen');
+            Route::post('/add-van-chuyen', [QuanLyVanChuyenController::class, 'addVanChuyen'])->name('add-van-chuyen');
+            Route::get('/edit-van-chuyen/{id}', [QuanLyVanChuyenController::class, 'editVanChuyen'])->name('edit-van-chuyen');
+            Route::post('/update-van-chuyen/{id}', [QuanLyVanChuyenController::class, 'updateVanChuyen'])->name('update-van-chuyen');
+            Route::delete('/delete-van-chuyen/{id}', [QuanLyVanChuyenController::class, 'deleteVanChuyen'])->name('delete-van-chuyen');
         });
 
         // Bài đăng
@@ -150,8 +164,10 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
 
         // Bình luận
         Route::group(['prefix' => '/binh-luan'], function () {
-            Route::get('/danh-sach',[QuanLyBinhLuanController::class,'getView'])->name('danh-sach-binh-luan');
-            Route::delete('/delete/{id}',[QuanLyBinhLuanController::class,'deleteBL'])->name('delete-binh-luan');
+            Route::get('/danh-sach', [QuanLyBinhLuanController::class, 'getView'])->name('danh-sach-binh-luan');
+            Route::get('/filter-binh-luan', [QuanLyBinhLuanController::class, 'filterBinhLuan'])->name('filter-binh-luan');
+            Route::post('/binh-luan/duyet/{id}', [QuanLyBinhLuanController::class, 'duyetBinhLuan'])->name('duyet-binh-luan');
+            Route::delete('/binh-luan/xoa/{id}', [QuanLyBinhLuanController::class, 'xoaBinhLuan'])->name('xoa-binh-luan');
         });
 
         //Trả lời bình luận
@@ -196,7 +212,15 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::group(['prefix' => '/khach-hang'], function () {
         Route::get('/home',[DashBoardController::class,'getViewDashBoardUser'])->name('khach-hang-home');
         Route::get('/home/tra-cuu-don-hang',[TraCuuDonHangController::class,'getViewTraCuuDonHang'])->name('tra-cuu-don-hang');
+        Route::get('/home/tra-cuu-don-hang/tat-ca', [DatHangController::class, 'hienTatCaDonHang_ALL'])->name('all-data');
+        Route::get('/home/tra-cuu-don-hang/trang-thai/{trangthai}', [DatHangController::class, 'hienTatCaDonHang_TT'])->name('get-donhang-trangthai');
         Route::post('/add-binh-luan', [ChiTietSanPhamController::class, 'addBinhLuan'])->name('them-binh-luan');
+
+
+        //Thanh toán VNpay
+        Route::post('/home/tra-cuu-don-hang/thanh-toan', [VNpayController::class, 'ThanhToanVNpay'])->name('thanh-toan-vnpay');
+        Route::get('/home/tra-cuu-don-hang/ket-qua', [VNpayController::class, 'ketQuaThanhToan'])->name('vnpay.callback');
+        Route::post('/home/tra-cuu-don-hang//update{id}', [VNpayController::class, 'HuyDon'])->name('huy-don-hang');
 
         // Giỏ hàng
         Route::group(['prefix' => '/gio-hang'], function () {

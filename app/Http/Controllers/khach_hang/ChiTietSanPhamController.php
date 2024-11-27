@@ -37,6 +37,9 @@ class ChiTietSanPhamController extends Controller
         // Thêm ngày tạo bình luận là ngày hiện tại
         $validate['NgayTaoBL'] = Carbon::now();
 
+        // Thêm trạng thái mặc định là 0 (Chưa duyệt)
+        $validate['TrangThaiBL'] = '0';
+
         $binhluan = BinhLuanModel::create($validate);
 
         if ($request->hasFile('files')) {
@@ -64,6 +67,7 @@ class ChiTietSanPhamController extends Controller
             'message' => 'Thêm thành công!',
         ]);
     }
+
 
 
 

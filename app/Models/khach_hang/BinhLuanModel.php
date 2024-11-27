@@ -20,6 +20,7 @@ class BinhLuanModel extends Model
         'AnhBL',
         'NoiDungDG',
         'NgayTaoBL',
+        'TrangThaiBL',
     ];
     public $timestamps = false;
 

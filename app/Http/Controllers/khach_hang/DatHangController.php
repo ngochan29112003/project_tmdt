@@ -227,4 +227,22 @@ class DatHangController extends Controller
         ->select('chitietgiohang.*', 'sanpham.GiaBan') // Đảm bảo rằng GiaBan được lấy
         ->get();
     }
+
+    public function hienTatCaDonHang_ALL()
+    {
+        // Sử dụng phương thức getDonHang() trong model để lấy dữ liệu đơn hàng
+        $data = (new DatHang())->getDonHang_ALL();
+
+        // Trả về dữ liệu dưới dạng JSON cho AJAX
+        return response()->json($data);
+    }
+
+    public function hienTatCaDonHang_TT($trangthai)
+    {
+        // Sử dụng phương thức getdonhang_TT($trangthai) trong model để lấy dữ liệu đơn hàng theo trạng thái
+        $data = (new DatHang())->getdonhang_TT($trangthai);
+
+        // Trả về dữ liệu dưới dạng JSON cho AJAX
+        return response()->json($data);
+    }
 }

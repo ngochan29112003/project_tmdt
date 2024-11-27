@@ -1,57 +1,88 @@
 @extends('super-admin.master')
 @section('contents')
-    <div class = "page-header d-print-none">
-        <div class = "container-xl">
-            <div class = "row g-2 align-items-center">
-                <div class = "col">
-                    <h2 class = "page-title">
-                        TRANG QUẢN LÝ DANH SÁCH BÌNH LUẬN </h2>
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <h2 class="page-title">
+                        TRANG QUẢN LÝ BÌNH LUẬN
+                    </h2>
+                </div>
+                <div class="col-auto ms-auto d-flex align-items-center">
+                    <!-- Dropdown trạng thái -->
+                    <select id="TrangThaiBinhLuan" class="form-select ms-2">
+                        <option value="0" selected>Chưa duyệt</option>
+                        <!-- ({{ count($list_binh_luan_chua_duyet) }}) -->
+                        <option value="1">Đã duyệt</option>
+                    </select>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class = "page-body">
-        <div class = "container-xl">
-            <div class = "row row-deck row-cards">
-                <div class = "col-12">
-                    <div class = "card">
-                        <div class = "table-responsive p-2">
-                            <table id = "table" class = "table table-vcenter card-table table-striped">
+    <div class="page-body">
+        <div class="container-xl">
+            <div class="row row-deck row-cards">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="table-responsive p-2">
+                            <table id="tableBinhLuan" class="table table-vcenter card-table table-striped">
                                 <thead>
                                 <tr>
                                     <th>STT</th>
-                                    <th>Mã bình luận</th>
                                     <th>Tên tài khoản</th>
-                                    <th>Mã sản phẩm</th>
+                                    <th>Tên sản phẩm</th>
+                                    <!-- <th>Ảnh bình luận</th> -->
                                     <th>Đánh giá</th>
-                                    <th>Nội dung đánh giá</th>
+                                    <th>Nội dung bình luận</th>
                                     <th>Ngày tạo bình luận</th>
-                                    <th class = "text-center">Action</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                @php $stt = 1; @endphp <!-- Initialize the serial number -->
-                                @foreach($list_binh_luan as $item)
+                                <tbody id="binhLuanList">
+                                @foreach($list_binh_luan_chua_duyet as $index => $item)
                                     <tr>
-                                        <td>{{ $stt++ }}</td>
-                                        <td>{{$item->MaBL}}</td>
-                                        <td>{{ $item->HoTen}}</td>
-                                        <td>{{ $item->MaSP}}</td>
-                                        <td>{{ $item->DanhGia}}</td>
-                                        <td>{{ $item->NoiDungDG}}</td>
-                                        <td>{{ $item->NgayTaoBL}}</td>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $item->HoTen }}</td>
+                                        <td>{{ $item->TenSP }}</td>
+                                        <!-- <td><img src="{{ asset('/asset/img-binh-luan/' . $item->AnhBL) }}"
+                                                alt="Ảnh bình luận" style="width: 100px;"></td> -->
+                                        <td>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                     fill="{{ $i <= $item->DanhGia ? 'yellow' : 'gray' }}"
+                                                     class="bi bi-star-fill" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M3.612 15.443c-.396.198-.86-.149-.746-.592l.83-3.569-2.641-2.356c-.33-.294-.158-.888.283-.95l3.63-.303 1.525-3.348c.197-.433.73-.433.927 0l1.525 3.348 3.63.303c.441.037.613.656.283.95l-2.641 2.356.83 3.569c.114.443-.35.79-.746.592L8 13.187l-3.389 2.256z" />
+                                                </svg>
+                                            @endfor
+                                        </td>
+
+                                        <td>{{ $item->NoiDungDG }}</td>
+                                        <td>{{ $item->NgayTaoBL }}</td>
                                         <td class="text-center align-middle">
-                                            <button class="btn p-0  btn-primary border-0 bg-transparent text-danger shadow-none edit-btn" data-id="{{ $item->MaBL }}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="m-0 icon icon-tabler icons-tabler-outline icon-tabler-pencil"> 
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" /> 
-                                                    <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /> 
-                                                    <path d="M13.5 6.5l4 4" /> 
-                                                </svg> 
-                                            </button> 
+                                            <button
+                                                class="btn p-0  btn-primary border-0 bg-transparent text-danger shadow-none edit-btn"
+                                                data-id="{{ $item->MaBL }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     viewBox="0 0 24 24" fill="none" stroke="#28a745" stroke-width="2"
+                                                     stroke-linecap="round" stroke-linejoin="round"
+                                                     class="icon icon-tabler icons-tabler-outline icon-tabler-checkbox">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M9 11l3 3l8 -8" />
+                                                    <path
+                                                        d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9" />
+                                                </svg>
+
+                                            </button>
                                             |
-                                            <button class="btn p-0 m-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn" data-id="{{ $item->MaBL }}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="m-0 icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                                            <button
+                                                class="btn p-0 m-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
+                                                data-id="{{ $item->MaBL }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2"
+                                                     stroke-linecap="round" stroke-linejoin="round"
+                                                     class="m-0 icon icon-tabler icons-tabler-outline icon-tabler-trash">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                     <path d="M4 7l16 0" />
                                                     <path d="M10 11l0 6" />
@@ -72,74 +103,155 @@
         </div>
     </div>
 
-    <!-- Trả lời bình luận -->
-    <div class="modal fade" id="Modaladdtlbl">
-        <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Trả lời bình luận</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="Formaddtlbl" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="MaBL" class="form-label">Mã bình luận</label>
-                                <select class="form-select" name="MaBL" id="edit_MaBL">
-                                    <option value="" disabled selected>Chọn mã bình luận</option>
-                                    @foreach ($list_traloi as $item)
-                                        <option value="{{ $item->MaBL}}">{{ $item->MaBL}} </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="NoiDungTL" class="form-label">Nội dung trả lời</label>
-                                <input type="text" class="form-control" name="NoiDungTL" id="edit_NoiDungTL" required>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <label for="NgayTL" class="form-label">Ngày trả lời</label>
-                                <input type="date" class="form-control" name="NgayTL" id="edit_NgayTL" required>
-                            </div>
-                        <div class="text-end">
-                            <button type="submit" class="btn btn-primary">Trả lời</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
+<!-- <td><img src="{{ asset('/asset/img-binh-luan/') }}/${item.AnhBL}" alt="Ảnh bình luận" style="width: 100px;"></td> -->
 @section('scripts')
     <script>
-      var table = $('#table').DataTable({
-        "language": {
-          "emptyTable": "Không có dữ liệu trong bảng",
-          "search": "Tìm kiếm:",
-          "lengthMenu": "Hiển thị _MENU_ danh mục mỗi trang",
-          "zeroRecords": "Không tìm thấy kết quả",
-          "infoEmpty": "Không có dữ liệu"
+        // Hàm load lại danh sách bình luận theo trạng thái
+        function loadBinhLuanByTrangThai(trangThai) {
+            $.ajax({
+                url: '{{ route('filter-binh-luan') }}',
+                method: 'GET',
+                data: { trangThai: trangThai },
+                success: function (response) {
+                    var html = '';
 
+                    // Kiểm tra nếu không có bình luận
+                    if (response.list_binh_luan.length === 0) {
+                        html = '<tr><td colspan="7" class="text-center">Không có bình luận mới</td></tr>';
+                    } else {
+                        $.each(response.list_binh_luan, function (index, item) {
+                            var actionButtons = '';
+
+                            if (trangThai == 0) { // "Chưa duyệt"
+                                actionButtons = `
+                            <button class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none edit-btn" data-id="${item.MaBL}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#28a745" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-checkbox">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M9 11l3 3l8 -8" />
+                                    <path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9" />
+                                </svg>
+                            </button>
+                            |
+                            <button class="btn p-0 m-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn" data-id="${item.MaBL}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="m-0 icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M4 7l16 0" />
+                                    <path d="M10 11l0 6" />
+                                    <path d="M14 11l0 6" />
+                                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                </svg>
+                            </button>
+                        `;
+                            } else { // "Đã duyệt"
+                                actionButtons = `
+                            <button class="btn p-0 m-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn" data-id="${item.MaBL}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="m-0 icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M4 7l16 0" />
+                                    <path d="M10 11l0 6" />
+                                    <path d="M14 11l0 6" />
+                                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                </svg>
+                            </button>
+                        `;
+                            }
+
+                            html += `<tr>
+                        <td>${index + 1}</td>
+                        <td>${item.HoTen}</td>
+                        <td>${item.TenSP}</td>
+
+                        <td>
+                            ${[...Array(5)].map((_, i) =>
+                                `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="${i < item.DanhGia ? 'yellow' : 'gray'}" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.396.198-.86-.149-.746-.592l.83-3.569-2.641-2.356c-.33-.294-.158-.888.283-.95l3.63-.303 1.525-3.348c.197-.433.73-.433.927 0l1.525 3.348 3.63.303c.441.037.613.656.283.95l-2.641 2.356.83 3.569c.114.443-.35.79-.746.592L8 13.187l-3.389 2.256z"/>
+                                </svg>`
+                            ).join('')}
+                        </td>
+                        <td>${item.NoiDungDG}</td>
+                        <td>${item.NgayTaoBL}</td>
+                        <td class="text-center align-middle">${actionButtons}</td>
+                    </tr>`;
+                        });
+                    }
+
+                    $('#binhLuanList').html(html);
+                }
+            });
         }
-      });
 
-        $('#table').on('click', '.delete-btn', function () {
-            var MaBL = $(this).data('id');
-            var row = $(this).closest('tr');
+        // Xử lý khi trang reload hoặc load lại lần đầu
+        $(document).ready(function () {
+            var trangThai = $('#TrangThaiBinhLuan').val(); // Lấy trạng thái chọn hiện tại
+            loadBinhLuanByTrangThai(trangThai); // Gọi hàm để tải lại danh sách khi trang reload
+        });
+
+
+        // Xử lý thay đổi trạng thái bình luận
+        $('#TrangThaiBinhLuan').on('change', function () {
+            var trangThai = $(this).val();
+            loadBinhLuanByTrangThai(trangThai);
+        });
+
+        // Xử lý sự kiện duyệt bình luận
+        $('#tableBinhLuan').on('click', '.edit-btn', function () {
+            var Ma_BL = $(this).data('id'); // Lấy MaBL của bình luận
+            var trangThai = $('#TrangThaiBinhLuan').val(); // Lấy trạng thái hiện tại (Chưa duyệt hoặc Đã duyệt)
 
             Swal.fire({
-                title: 'Bạn có chắc chăn ?',
-                text: "Bạn có muốn xóa khoa không ?",
-                icon: 'cảnh báo',
+                title: 'Bạn có chắc chắn?',
+                text: "Bạn có muốn duyệt bình luận này không?",
+                icon: 'question',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButtonText: 'Có, duyệt!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Gửi yêu cầu PATCH để cập nhật trạng thái
+                    $.ajax({
+                        url: '{{ route('duyet-binh-luan', ':id') }}'.replace(':id', Ma_BL),
+                        method: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}', // CSRF token bảo vệ
+                            TrangThaiBL: 1 // Cập nhật trạng thái thành 'Đã duyệt' (1)
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                toastr.success(response.message, "Duyệt thành công");
+                                loadBinhLuanByTrangThai(trangThai); // Cập nhật lại danh sách bình luận
+                            } else {
+                                toastr.error("Duyệt không thành công.", "Thao tác thất bại");
+                            }
+                        },
+                        error: function (xhr) {
+                            toastr.error("Đã xảy ra lỗi.", "Thao tác thất bại");
+                        }
+                    });
+                }
+            });
+        });
+
+        // Xử lý sự kiện xóa bình luận
+        $('#tableBinhLuan').on('click', '.delete-btn', function () {
+            var MaBL = $(this).data('id');
+            var trangThai = $('#TrangThaiBinhLuan').val();
+
+            Swal.fire({
+                title: 'Bạn có chắc chắn?',
+                text: "Bạn có muốn xóa bình luận này không?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Có, xóa nó!'
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '{{ route('delete-binh-luan', ':id') }}'.replace(':id', MaBL),
+                        url: '{{ route('xoa-binh-luan', ':id') }}'.replace(':id', MaBL),
                         method: 'DELETE',
                         data: {
                             _token: '{{ csrf_token() }}'
@@ -147,77 +259,19 @@
                         success: function (response) {
                             if (response.success) {
                                 toastr.success(response.message, "Xóa thành công");
-                                setTimeout(function () {
-                                    location.reload()
-                                }, 500);
+                                loadBinhLuanByTrangThai(trangThai); // Cập nhật danh sách theo trạng thái hiện tại
                             } else {
-                                toastr.error("Xóa không thành công.",
-                                    "Operation Failed");
+                                toastr.error("Xóa không thành công.", "Thao tác thất bại");
                             }
                         },
                         error: function (xhr) {
-                            toastr.error("An error occurred.", "Operation Failed");
+                            toastr.error("Đã xảy ra lỗi.", "Thao tác thất bại");
                         }
                     });
                 }
             });
         });
 
-        // Xử lý khi nhấn nút 'edit-btn' để hiện chi tiết của dữ liệu
-$('#table').on('click', '.edit-btn', function () {
-    var MaTL = $(this).data('id');
-
-    // Lấy dữ liệu từ server theo MaTL để hiển thị trong modal edit
-    var url = "{{ route('edit-tra-loi-binh-luan', ':id') }}";
-    url = url.replace(':id', MaTL);
-
-    $.ajax({
-        url: url,
-        method: 'GET',
-        success: function (response) {
-            var data = response.traloi;
-            // Gán giá trị trả về vào các trường input của modal edit
-            $('#edit_MaBL').val(data.MaBL);
-            $('#Modaladdtlbl').modal('show'); // Hiển thị modal
-        },
-        error: function (xhr) {
-            console.error("Lỗi khi lấy dữ liệu:", xhr);
-        }
-    });
-});
-
-// Xử lý submit form thêm mới (#Formaddtlbl)
-$('#Formaddtlbl').on('submit', function (e) {
-    e.preventDefault();
-
-    $.ajax({
-        url: '{{ route('add-tra-loi-binh-luan') }}',
-        method: 'POST',
-        data: $(this).serialize(),
-        success: function (response) {
-            if (response.success) {
-                $('#Modaladdtlbl').modal('hide');
-                toastr.success(response.message || "Thành công!", "Successful");
-                setTimeout(function () {
-                    location.reload(); // Reload lại trang để cập nhật dữ liệu mới
-                }, 500);
-            } else {
-                toastr.error(response.message || "Đã xảy ra lỗi không xác định.", "Error");
-            }
-        },
-        error: function (xhr) {
-            var response = xhr.responseJSON;
-
-            if (response && response.message) {
-                toastr.error(response.message, "Error");
-            } else if (xhr.status === 400) {
-                toastr.error("Yêu cầu không hợp lệ", "Error");
-            } else {
-                toastr.error("Đã xảy ra lỗi không xác định.", "Error");
-            }
-        }
-    });
-});
-
     </script>
 @endsection
+
