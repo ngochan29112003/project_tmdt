@@ -300,7 +300,26 @@
                             </a>
                         </li>
 
-{{--                        <li class="nav-item">--}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('danh-sach-khuyen-mai-vc')}}">
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/gift -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="icon icon-tabler icon-tabler-gift">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <path d="M4 7h16v10H4z"/>
+                                        <path d="M8 4v3h8V4z"/>
+                                        <path d="M12 7v10"/>
+                                        <path d="M4 12h16"/>
+                                    </svg>
+                                    </span>
+                                <span class="nav-link-title">Khuyến mãi vận chuyển</span>
+                            </a>
+                        </li>
+
+
+                        {{--                        <li class="nav-item">--}}
 {{--                            <a class="nav-link" href="{{route('danh-sach-bao-cao')}}">--}}
 {{--                                <span class="nav-link-icon d-md-none d-lg-inline-block">--}}
 {{--                                    <!-- Download SVG icon from http://tabler-icons.io/i/mail-opened -->--}}

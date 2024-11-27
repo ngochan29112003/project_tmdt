@@ -53,7 +53,7 @@
                                     <th>Giá bán</th>
                                     <th>Số lượng còn</th>
                                     <th>Thời gian bảo hành</th>
-                                    <th>Trạng thái sản phẩm</th>
+{{--                                    <th>Trạng thái sản phẩm</th>--}}
                                     <th class = "text-center">Action</th>
                                 </tr>
                                 </thead>
@@ -76,13 +76,13 @@
                                         <td>{{ $item->GiaBan}}</td>
                                         <td>{{ $item->SoLuongTonKho}}</td>
                                         <td>{{ $item->ThoiGianBaoHanh}}</td>
-                                        <td class="text-center align-middle">
-                                            @if($item->TrangThaiSP === "Ẩn")
-                                                <span class = "badge bg-danger text-white p-2">Ẩn</span>
-                                            @else
-                                                <span class = "badge bg-success text-white p-2">Hiện</span>
-                                            @endif
-                                        </td>
+{{--                                        <td class="text-center align-middle">--}}
+{{--                                            @if($item->TrangThaiSP === "Ẩn")--}}
+{{--                                                <span class = "badge bg-danger text-white p-2">Ẩn</span>--}}
+{{--                                            @else--}}
+{{--                                                <span class = "badge bg-success text-white p-2">Hiện</span>--}}
+{{--                                            @endif--}}
+{{--                                        </td>--}}
                                         <td class="text-center align-middle p-0">
                                             <button class="btn p-0  btn-primary border-0 bg-transparent text-danger shadow-none edit-btn" data-id="{{ $item->MaSP }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="m-0 icon icon-tabler icons-tabler-outline icon-tabler-pencil">
@@ -188,13 +188,13 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-12 mb-3">
-                            <label for="TrangThaiSP" class="form-label">Trạng thái sản phẩm</label>
-                            <select class="form-select" name="TrangThaiSP" id="TrangThaiSP">
-                                <option value="Ẩn">Ẩn</option>
-                                <option value="Hiện">Hiện</option>
-                            </select>
-                        </div>
+{{--                        <div class="col-md-12 mb-3">--}}
+{{--                            <label for="TrangThaiSP" class="form-label">Trạng thái sản phẩm</label>--}}
+{{--                            <select class="form-select" name="TrangThaiSP" id="TrangThaiSP">--}}
+{{--                                <option value="Ẩn">Ẩn</option>--}}
+{{--                                <option value="Hiện">Hiện</option>--}}
+{{--                            </select>--}}
+{{--                        </div>--}}
                     </div>
                     <div class="text-end">
                         <button type="submit" class="btn btn-primary">Thêm</button>
@@ -274,13 +274,13 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-12 mb-3">
-                            <label for="TrangThaiSP" class="form-label">Trạng thái sản phẩm</label>
-                            <select class="form-select" name="TrangThaiSP" id="edit_TrangThaiSP">
-                                <option value="Ẩn">Ẩn</option>
-                                <option value="Hiện">Hiện</option>
-                            </select>
-                        </div>
+{{--                        <div class="col-md-12 mb-3">--}}
+{{--                            <label for="TrangThaiSP" class="form-label">Trạng thái sản phẩm</label>--}}
+{{--                            <select class="form-select" name="TrangThaiSP" id="edit_TrangThaiSP">--}}
+{{--                                <option value="Ẩn">Ẩn</option>--}}
+{{--                                <option value="Hiện">Hiện</option>--}}
+{{--                            </select>--}}
+{{--                        </div>--}}
                     </div>
                         <div class="text-end">
                             <button type="submit" class="btn btn-primary">Lưu</button>
@@ -290,7 +290,7 @@
                 </form>
             </div>
         </div>
-    </div
+    </div>
 
 @endsection
 @section('scripts')
@@ -396,25 +396,25 @@
                   $('#edit_GiaBan').val(data.GiaBan);
                   $('#edit_SoLuongTonKho').val(data.SoLuongTonKho);
                   $('#edit_NgayTaoSP').val(data.NgayTaoSP);
-                  $('#edit_TrangThaiSP').val(data.TrangThaiSP);
+                  // $('#edit_TrangThaiSP').val(data.TrangThaiSP);
                   $('#edit_MoTaChiTiet').val(data.MoTaChiTiet);
                   $('#edit_ThoiGianBaoHanh').val(data.ThoiGianBaoHanh);
                   $('#edit_DanhMucSP').val(data.MaDM);
                   $('#edit_HangSanXuat').val(data.MaHSX);
 
-                  // Hiển thị ảnh hiện tại
-                  if (data.AnhSP) {
-                      $('#current_AnhSP').html(
-                          `<img src="/${data.AnhSP}" alt="Ảnh chính" class="img-thumbnail" width="100">`
-                      );
-                  }
-                  ['AnhCT1', 'AnhCT2', 'AnhCT3', 'AnhCT4'].forEach(function (key, index) {
-                      if (data[key]) {
-                          $(`#current_${key}`).html(
-                              `<img src="/${data[key]}" alt="Ảnh phụ ${index + 1}" class="img-thumbnail" width="100">`
-                          );
-                      }
-                  });
+                  // // Hiển thị ảnh hiện tại
+                  // if (data.AnhSP) {
+                  //     $('#current_AnhSP').html(
+                  //         `<img src="asset/img-product/${data.AnhSP}" alt="Ảnh chính" class="img-thumbnail" width="100">`
+                  //     );
+                  // }
+                  // ['AnhCT1', 'AnhCT2', 'AnhCT3', 'AnhCT4'].forEach(function (key, index) {
+                  //     if (data[key]) {
+                  //         $(`#current_${key}`).html(
+                  //             `<img src="asset/img-product/${data[key]}" alt="Ảnh phụ ${index + 1}" class="img-thumbnail" width="100">`
+                  //         );
+                  //     }
+                  // });
 
                   $('#Modaleditsanpham').modal('show');
               },

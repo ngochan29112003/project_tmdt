@@ -36,8 +36,8 @@ class QuanLySanPhamController extends Controller
             'AnhCT4' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'GiaBan' => 'string|required',
             'SoLuongTonKho' => 'integer|required',
-            'NgayTaoSP' => 'date|required',
-            'TrangThaiSP' => 'string|required',
+//            'NgayTaoSP' => now(),
+//            'TrangThaiSP' => 'string|required',
             'MoTaChiTiet' => 'string|required',
             'ThoiGianBaoHanh' => 'string|required',
             'MaDM' => 'integer|required',
@@ -117,7 +117,7 @@ class QuanLySanPhamController extends Controller
             'NgayTaoSP' => $request->NgayTaoSP,
             'ThoiGianBaoHanh' => $request->ThoiGianBaoHanh,
             'MoTaChiTiet' => $request->MoTaChiTiet,
-            'TrangThaiSP' => $request->TrangThaiSP,
+//            'TrangThaiSP' => $request->TrangThaiSP,
             'MaDM' => $request->MaDM,
             'MaHSX' => $request->MaHSX,
         ]);
@@ -159,65 +159,72 @@ class QuanLySanPhamController extends Controller
 
     public function updateSanPham(Request $request, $id)
     {
+        // 1. Xác thực dữ liệu
         $validated = $request->validate([
             'TenSP' => 'required|string',
-            'AnhSP' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'GiaBan' => 'required|string',
-            'SoLuongTonKho' => 'required|string',
-            'NgayTaoSP' => 'required|date',
-            'TrangThaiSP' => 'required|string',
+            'SoLuongTonKho' => 'required|integer',
+//            'TrangThaiSP' => 'required|string',
             'MoTaChiTiet' => 'nullable|string',
+//            'NgayTaoSP' => now(),
             'ThoiGianBaoHanh' => 'nullable|string',
             'MaDM' => 'required|int',
             'MaHSX' => 'required|int',
+            'AnhSP' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'AnhCT1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'AnhCT2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'AnhCT3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'AnhCT4' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        // 2. Lấy sản phẩm cần sửa
         $sanpham = SanPhamModel::findOrFail($id);
 
-        // Xử lý ảnh chính
-        if ($request->hasFile('AnhSP')) {
-            $file = $request->file('AnhSP');
-            if ($file->isValid()) {
-                $fileNameAnhSP = time() . '_AnhSP.' . $file->getClientOriginalExtension();
-                $file->move(public_path('asset/img-product'), $fileNameAnhSP);
-
-                if ($sanpham->AnhSP && file_exists(public_path($sanpham->AnhSP))) {
-                    unlink(public_path($sanpham->AnhSP));
-                }
-
-                $validated['AnhSP'] = $fileNameAnhSP;
-            }
-        }
-
-        // Xử lý ảnh phụ
-        foreach (['AnhCT1', 'AnhCT2', 'AnhCT3', 'AnhCT4'] as $key) {
+        // 3. Xử lý ảnh (nếu có upload mới)
+        foreach (['AnhSP', 'AnhCT1', 'AnhCT2', 'AnhCT3', 'AnhCT4'] as $key) {
             if ($request->hasFile($key)) {
                 $file = $request->file($key);
                 if ($file->isValid()) {
+                    // Tạo tên file mới
                     $fileName = time() . '_' . $key . '.' . $file->getClientOriginalExtension();
                     $file->move(public_path('asset/img-product'), $fileName);
 
-                    if ($sanpham->{$key} && file_exists(public_path($sanpham->{$key}))) {
-                        unlink(public_path($sanpham->{$key}));
+                    // Xóa ảnh cũ nếu có
+                    if ($sanpham->{$key} && file_exists(public_path('asset/img-product/' . $sanpham->{$key}))) {
+                        unlink(public_path('asset/img-product/' . $sanpham->{$key}));
                     }
 
-                    $validated[$key] = $fileName;
+                    // Cập nhật ảnh mới
+                    $sanpham->{$key} = $fileName;
                 }
             }
         }
 
-        $sanpham->update($validated);
+        // 4. Cập nhật thông tin khác
+        $sanpham->TenSP = $request->TenSP;
+        $sanpham->GiaBan = $request->GiaBan;
+        $sanpham->SoLuongTonKho = $request->SoLuongTonKho;
+//        $sanpham->TrangThaiSP = $request->TrangThaiSP;
+        $sanpham->MoTaChiTiet = $request->MoTaChiTiet;
+        $sanpham->ThoiGianBaoHanh = $request->ThoiGianBaoHanh;
+        $sanpham->MaDM = $request->MaDM;
+        $sanpham->MaHSX = $request->MaHSX;
+
+        // 5. Lưu sản phẩm
+        if ($sanpham->save()) {
+            return response()->json([
+                'success' => true,
+                'response' => 'Cập nhật sản phẩm thành công!',
+                'sanpham' => $sanpham,
+            ]);
+        }
 
         return response()->json([
-            'success' => true,
-            'response' => 'Cập nhật sản phẩm thành công!',
-            'sanpham' => $sanpham,
-        ]);
+            'success' => false,
+            'response' => 'Cập nhật sản phẩm thất bại!',
+        ], 500);
     }
+
 
 
 

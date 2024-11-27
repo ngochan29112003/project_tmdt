@@ -18,7 +18,7 @@ class SanPhamModel extends Model
         'GiaBan',
         'SoLuongTonKho',
         'NgayTaoSP',
-        'TrangThaiSP',
+
         'MoTaChiTiet',
         'ThoiGianBaoHanh',
         'MaDM',
