@@ -219,8 +219,6 @@ class DashBoardController extends Controller
         $writer->save('php://output');
     }
 
-
-
     public function getViewDashBoardUser()
     {
         $model = new SanPhamModel();

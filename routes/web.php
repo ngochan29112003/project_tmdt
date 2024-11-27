@@ -31,8 +31,8 @@ Route::get('/', [DashBoardController::class, 'getViewDashBoardUser'])->name('hom
 Route::get('/register', [RegisterController::class, 'getViewRegister'])->name('index.register');
 Route::post('/register/add', [RegisterController::class, 'addAccount'])->name('add-account');
 Route::get('/login', [LoginController::class, 'getViewLogin'])->name('index.login');
-Route::get('/reset-password', [ResetPassWordController::class, 'getViewResetPassWord'])->name('get-reset-password');
 
+Route::get('/reset-password', [ResetPassWordController::class, 'getViewResetPassWord'])->name('get-reset-password');
 Route::post('/send-verification-code', [ResetPassWordController::class, 'GuiMaXacNhan'])->name('gui-ma-xac-nhan');
 Route::post('/update-password', [ResetPassWordController::class, 'capNhatMatKhauMoi'])->name('cap-nhat-mat-khau-moi');
 
@@ -48,7 +48,6 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/excel-export-khach-hang', [DashBoardController::class, 'getExportKH'])->name('excel-export-khach-hang');
         Route::get('/excel-export-san-pham', [DashBoardController::class, 'getExportSP'])->name('excel-export-san-pham');
         
-
 
         // Tài khoản
         Route::group(['prefix' => '/tai-khoan'], function () {
@@ -176,9 +175,6 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::post('/home/tra-cuu-don-hang/thanh-toan', [VNpayController::class, 'ThanhToanVNpay'])->name('thanh-toan-vnpay');
         Route::get('/home/tra-cuu-don-hang/ket-qua', [VNpayController::class, 'ketQuaThanhToan'])->name('vnpay.callback');
         Route::post('/home/tra-cuu-don-hang//update{id}', [VNpayController::class, 'HuyDon'])->name('huy-don-hang');
-
-
-
 
         // Giỏ hàng
         Route::group(['prefix' => '/gio-hang'], function () {

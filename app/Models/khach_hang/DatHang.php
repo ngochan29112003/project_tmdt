@@ -28,6 +28,11 @@ class DatHang extends Model
         'MaVC',
     ];
 
+    public function getpttt()
+    {
+        return DB::table('phuongthucthanhtoan')->get();
+    }
+
     public $timestamps = false;
 
     public function getdonhang()
@@ -38,11 +43,6 @@ class DatHang extends Model
             ->join('khuyenmai', 'khuyenmai.MaKM', '=', 'donhang.MaKM')
             ->join('donvivanchuyen', 'donvivanchuyen.MaVC', '=', 'donhang.MaVC')
             ->get();
-    }
-
-    public function getpttt()
-    {
-        return DB::table('phuongthucthanhtoan')->get();
     }
 
     public function gettaikhoan($MaTK)
@@ -71,7 +71,6 @@ class DatHang extends Model
     {
         return DB::table('donvivanchuyen')->get();
     }
-
 
     public function getdonhang_ALL()
     {

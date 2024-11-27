@@ -40,5 +40,4 @@ class VNpayModel extends Model
             return false;
         }
     }
-
 }

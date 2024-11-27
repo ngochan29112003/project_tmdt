@@ -85,7 +85,6 @@ class DashBoardModel extends Model
         return $query->count();
     }
 
-
     public function getTongTien($time)
     {
         [$startDate, $endDate] = $this->getTimeRange($time);

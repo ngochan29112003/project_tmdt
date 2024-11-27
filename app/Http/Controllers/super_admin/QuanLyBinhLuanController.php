@@ -27,7 +27,6 @@ class QuanLyBinhLuanController extends Controller
         );
     }
 
-
     /**
      * Lọc bình luận theo trạng thái (Chưa duyệt/Đã duyệt)
      */

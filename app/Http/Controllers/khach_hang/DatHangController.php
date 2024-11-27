@@ -21,8 +21,6 @@ class DatHangController extends Controller
             ->where('donhang.MaTK', $MaTK)
             ->get();
 
-
-
         $dathang = new DatHang();
         $list_don_hang = $dathang->getdonhang();
         //        $list_san_pham = $dathang -> getsanpham();
