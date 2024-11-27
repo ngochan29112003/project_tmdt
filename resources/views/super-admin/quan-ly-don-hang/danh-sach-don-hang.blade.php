@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="row mt-2">
-                <div class="col-md-9 d-flex align-items-center gap-2 justify-content-start">
+                <!-- <div class="col-md-9 d-flex align-items-center gap-2 justify-content-start">
                     <a class="btn btn-danger d-flex align-items-center text-white btn-export">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-export">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -18,7 +18,7 @@
                         </svg>
                         Xuất file PDF
                     </a>
-                </div>
+                </div> -->
 
                 <div class="col-3">
                     <div class="form-floating w-100">
@@ -52,6 +52,10 @@
                                         <th>Địa chỉ giao hàng</th>
                                         <th>PTTT</th>
                                         <th>Đơn vị vận chuyển</th>
+                                        <th>Tiền hàng</th>
+                                        <th>Tiền vận chuyển</th>
+                                        <th>Giảm tiền hàng</th>
+                                        <th>Giảm tiền hàng</th>
                                         <th>Tổng tiền</th>
                                         <th>Xuất đơn hàng</th>
                                         <th>Trạng thái đơn hàng</th>
@@ -67,9 +71,13 @@
                                             <td>{{$item->DiaChiGiaoHang}}</td>
                                             <td>{{$item->TenPTTT}}</td>
                                             <td>{{$item->TenDonViVC}}</td>
-                                            <td>{{$item->TongTien}}</td>
+                                            <td>{{number_format($item->TienHang, 0, ',', '.')}}</td>
+                                            <td>{{number_format($item->TienVC, 0, ',', '.')}}</td>
+                                            <td>{{number_format($item->GiamTienHang, 0, ',', '.')}}</td>
+                                            <td>{{number_format($item->GiamTienVC, 0, ',', '.')}}</td>
+                                            <td>{{number_format($item->TongTien, 0, ',', '.')}}</td>
                                             <td class="text-center align-middle">
-                                                <a href="">
+                                                <a target="_blank" href="{{ route('in-don-hang', $item->MaDH) }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-arrow-right text-danger">
                                                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                         <path d="M14 3v4a1 1 0 0 0 1 1h4" />
@@ -161,7 +169,7 @@
     </div>
 @endsection
 @section('scripts')
-    <script>
+<script>
       var table = $('#tableDonHang').DataTable({
         "language": {
           "emptyTable": "Không có dữ liệu trong bảng",
@@ -174,21 +182,48 @@
       });
 
       $(document).ready(function () {
-    // Lắng nghe sự kiện thay đổi trên select trạng thái
+    // Hàm để ẩn các option nhỏ hơn trạng thái hiện tại
+    function hideLowerStatusOptions() {
+        $('#tableDonHang tbody tr').each(function () {
+            var $row = $(this);
+            var currentMaTT = parseInt($row.find('.change-status').val()); // Lấy mã trạng thái hiện tại
+
+            // Lặp qua từng option trong select để tùy chỉnh hiển thị
+            $row.find('.change-status option').each(function () {
+                var optionMaTT = parseInt($(this).val());
+
+                // Logic ẩn/hiển trạng thái
+                if (currentMaTT === 1) {
+                    $(this).show(); // Hiển thị mọi trạng thái
+                } else if (optionMaTT < currentMaTT) {
+                    $(this).hide(); // Ẩn các trạng thái nhỏ hơn
+                } else if (currentMaTT > 1 && optionMaTT === 6) {
+                    $(this).hide(); // Ẩn trạng thái Hủy đơn hàng
+                } else {
+                    $(this).show(); // Hiển thị các trạng thái lớn hơn hoặc bằng
+                }
+            });
+        });
+    }
+
+    // Lọc trạng thái đơn hàng
     $('#filter-status').on('change', function () {
-        var trangThaiId = $(this).val(); // Lấy trạng thái mới được chọn
-        var url = "{{ route('loc-trang-thai-don-hang') }}"; // Route đã định nghĩa
+        var trangThaiId = $(this).val(); // Lấy trạng thái được chọn
+        console.log("Selected Status ID: ", trangThaiId); // Debug giá trị
+
+        var url = "{{ route('loc-trang-thai-don-hang') }}";
 
         $.ajax({
             url: url,
             method: 'POST',
             data: {
                 trangThaiId: trangThaiId,
-                _token: '{{ csrf_token() }}' // Thêm CSRF token
+                _token: '{{ csrf_token() }}'
             },
             success: function (response) {
-                // Cập nhật lại nội dung bảng
-                $('#tableDonHang tbody').html(response.html); 
+                console.log(response); // Debug phản hồi từ server
+                $('#tableDonHang tbody').html(response.html);
+                hideLowerStatusOptions(); // Ẩn các trạng thái nhỏ hơn
             },
             error: function (xhr) {
                 toastr.error("Có lỗi xảy ra khi lọc.", "Operation Failed");
@@ -196,15 +231,15 @@
         });
     });
 
-    // Lắng nghe sự kiện thay đổi trên trạng thái đơn hàng
+    // Cập nhật trạng thái đơn hàng
     $('#tableDonHang').on('change', '.change-status', function () {
-        var ttdhid = $(this).data('id'); // Lấy ID của trạng thái đơn hàng
-        var newStatus = $(this).val(); // Lấy trạng thái mới được chọn
+        var ttdhid = $(this).data('id'); // Lấy ID đơn hàng
+        var newStatus = $(this).val(); // Trạng thái mới được chọn
         var url = "{{ route('update-trang-thai-don-hang', ':id') }}".replace(':id', ttdhid);
 
         var formData = new FormData();
-        formData.append('_token', '{{ csrf_token() }}'); // Thêm CSRF token
-        formData.append('MaTT', newStatus); // Thêm trạng thái mới
+        formData.append('_token', '{{ csrf_token() }}');
+        formData.append('MaTT', newStatus);
 
         $.ajax({
             url: url,
@@ -221,12 +256,12 @@
                     if (currentFilterStatus) {
                         // Nếu có lọc, xóa dòng tương ứng
                         $('#tableDonHang tbody tr').each(function () {
-                            var rowStatus = $(this).find('.change-status').val();
                             if ($(this).find('.change-status').data('id') == ttdhid) {
                                 $(this).remove(); // Xóa dòng tương ứng
                             }
                         });
                     }
+                    hideLowerStatusOptions(); // Cập nhật lại các trạng thái hiển thị
                 } else {
                     toastr.error("Cập nhật không thành công.", "Operation Failed");
                 }
@@ -236,6 +271,9 @@
             }
         });
     });
+
+    // Gọi hàm để ẩn trạng thái nhỏ hơn khi trang được tải lần đầu
+    hideLowerStatusOptions();
 });
     </script>
 @endsection
