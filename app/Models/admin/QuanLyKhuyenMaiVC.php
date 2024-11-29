@@ -15,7 +15,6 @@ class QuanLyKhuyenMaiVC extends Model
     protected $fillable = [
         'MaTK',
         'TenKMVC',
-        'DieuKien',
         'PhanTramGiam',
         'GiaTriToiDa',
         'SoLuongMa',

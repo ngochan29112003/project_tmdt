@@ -23,7 +23,6 @@ class QuanLyKhuyenMaiVCController extends Controller
         $validate = $request->validate([
             'MaTK' => 'required|string',
             'TenKMVC' => 'required|string',
-            'DieuKien' => 'required|string',
             'PhanTramGiam' => 'required|string',
             'GiaTriToiDa' => 'required|string',
             'SoLuongMa' => 'required|integer',
@@ -40,7 +39,6 @@ class QuanLyKhuyenMaiVCController extends Controller
                 QuanLyKhuyenMaiVC::create([
                     'MaTK' => $MaTK,
                     'TenKMVC' => $validate['TenKMVC'],
-                    'DieuKien' => $validate['DieuKien'],
                     'PhanTramGiam' => $validate['PhanTramGiam'],
                     'GiaTriToiDa' => $validate['GiaTriToiDa'],
                     'SoLuongMa' => $validate['SoLuongMa'],
@@ -85,7 +83,6 @@ class QuanLyKhuyenMaiVCController extends Controller
         $validated = $request->validate([
             'MaTK'=>'int',
             'TenKMVC'=>'string',
-            'DieuKien'=>'string',
             'PhanTramGiam'=>'string',
             'GiaTriToiDa'=>'string',
             'SoLuongMa'=>'int',

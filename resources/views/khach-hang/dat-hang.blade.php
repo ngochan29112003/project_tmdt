@@ -1,6 +1,29 @@
 @extends('khach-hang.master')
 
 @section('contents')
+    <style>
+        .dathang-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .product-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .product-name {
+            font-weight: 500;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f8f9fa; /* Màu hover nhạt */
+        }
+    </style>
+
     <div class="container-xl d-flex justify-content-center py-4">
         <div class="card w-75">
             <!-- Khung 1: Địa chỉ nhận hàng -->
@@ -26,29 +49,30 @@
 
             <!-- Khung 2: Bảng sản phẩm -->
             <div class="card mb-4">
-                <div class="card-body table-responsive" >
-                    <table class="table table-hover ">
-                        <thead>
+                <div class="card-body table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-dark">
                         <tr>
                             <th>Sản phẩm</th>
-                            <th>Giá</th>
-                            <th>Số lượng</th>
-                            <th>Tổng tiền</th>
+                            <th class="text-end">Giá</th>
+                            <th class="text-center">Số lượng</th>
+                            <th class="text-end">Tổng tiền</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($products as $product)
                             <tr>
-
                                 <td>
-                                    <a href="">
-                                        <img class="dathang-img" src="{{ $product['AnhSP'] }}" alt="{{ $product['TenSP'] }}">
-                                    </a>
-                                    {{ $product['TenSP'] }}
-                                </td> <!-- Hiển thị tên sản phẩm -->
-                                <td>{{ number_format($product['GiaBan'], 0, ',', '.') }}₫</td>
-                                <td>{{ $product['SLSanPham'] }}</td>
-                                <td class="item-total">{{ number_format($product['Total'], 0, ',', '.') }}₫</td>
+                                    <div class="product-info">
+                                        <a href="#">
+                                            <img class="dathang-img" src="{{ $product['AnhSP'] }}" alt="{{ $product['TenSP'] }}">
+                                        </a>
+                                        <span class="product-name">{{ $product['TenSP'] }}</span>
+                                    </div>
+                                </td>
+                                <td class="text-end">{{ number_format($product['GiaBan'], 0, ',', '.') }}₫</td>
+                                <td class="text-center">{{ $product['SLSanPham'] }}</td>
+                                <td class="text-end item-total">{{ number_format($product['Total'], 0, ',', '.') }}₫</td>
                             </tr>
                         @endforeach
                         </tbody>

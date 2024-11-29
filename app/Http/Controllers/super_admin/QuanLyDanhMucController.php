@@ -103,11 +103,11 @@ class QuanLyDanhMucController extends Controller
         foreach ($leave_report as $row) {
             $cell->setCellValue('A' . $num_row, $stt++);
             $cell->setCellValue('B' . $num_row, $row->TenDM);
-            $cell->setCellValue('C' . $num_row, $row->TenHSX);
+//            $cell->setCellValue('C' . $num_row, $row->TenHSX);
 
-            $borderStyle = $cell->getStyle('A' . $num_row . ':C' . $num_row)->getBorders();
+            $borderStyle = $cell->getStyle('A' . $num_row . ':B' . $num_row)->getBorders();
             $borderStyle->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
-            $cell->getStyle('A' . $num_row . ':C' . $num_row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
+            $cell->getStyle('A' . $num_row . ':B' . $num_row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
             $num_row++;
         }

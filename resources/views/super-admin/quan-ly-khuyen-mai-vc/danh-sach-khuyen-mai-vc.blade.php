@@ -47,7 +47,6 @@
                                     <th>STT</th>
                                     <th>Tên tài khoản</th>
                                     <th>Tên khuyến mãi</th>
-                                    <th>Điều kiện</th>
                                     <th>Phần trăm giảm</th>
                                     <th>Ngày bắt đầu</th>
                                     <th>Ngày kết thúc</th>
@@ -62,7 +61,6 @@
                                         <td>{{ $stt++ }}</td>
                                         <td>{{ $item->HoTen}}</td>
                                         <td>{{ $item->TenKMVC}}</td>
-                                        <td>{{ $item->DieuKien}}</td>
                                         <td>{{ $item->PhanTramGiam}}</td>
                                         <td>{{ $item->NgayBD}}</td>
                                         <td>{{ $item->NgayKT}}</td>
@@ -124,10 +122,7 @@
                                 <label for="TenKM" class="form-label">Tên khuyến mãi</label>
                                 <input type="text" class="form-control" name="TenKMVC" id="TenKMVC" required>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="DieuKien" class="form-label">Điều kiện</label>
-                                <input type="text" class="form-control" name="DieuKien" id="DieuKien" required>
-                            </div>
+
                             <div class="col-md-6 mb-3">
                                 <label for="PhanTramGiam" class="form-label">Phần trăm giảm</label>
                                 <input type="text" class="form-control" name="PhanTramGiam" id="PhanTramGiam" required>
@@ -184,10 +179,7 @@
                                 <label for="TenKM" class="form-label">Tên khuyến mãi</label>
                                 <input type="text" class="form-control" name="TenKMVC" id="edit_TenKMVC" required>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="DieuKien" class="form-label">Điều kiện</label>
-                                <input type="text" class="form-control" name="DieuKien" id="edit_DieuKien" required>
-                            </div>
+
                             <div class="col-md-6 mb-3">
                                 <label for="PhanTramGiam" class="form-label">Phần trăm giảm</label>
                                 <input type="text" class="form-control" name="PhanTramGiam" id="edit_PhanTramGiam" required>
@@ -318,7 +310,6 @@
                     var data = response.khuyenmai;
                     $('#edit_MaTK').val(data.MaTK);
                     $('#edit_TenKMVC').val(data.TenKMVC);
-                    $('#edit_DieuKien').val(data.DieuKien);
                     $('#edit_PhanTramGiam').val(data.PhanTramGiam);
                     $('#edit_GiaTriToiDa').val(data.GiaTriToiDa);
                     $('#edit_SoLuongMa').val(data.SoLuongMa);
