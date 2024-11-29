@@ -9,11 +9,11 @@
             <div class="col-12 col-md-auto">
                 <div class="col-12 col-md-auto">
                     <div class="d-flex gap-4">
-                        <select class="mw-10 form-select custom-select" id="LoaiThongKe" aria-label="Sales from" style="width: auto;">
-                            <option value="Tất cả" selected>Tất cả</option>
-                            <option value="Tháng">Tháng (1 tháng gần nhất)</option>
-                            <option value="Quý">Quý (3 tháng gần nhất)</option>
-                            <option value="Năm">Năm (12 tháng gần nhất)</option>
+                        <select class="mw-10 form-select custom-select" id="LoaiThongKe" aria-label="Sales from" style="width: auto; display: none" >
+                            <option value="ALL" selected>Tất cả</option>
+                            <option value="Thang">Tháng (1 tháng gần nhất)</option>
+                            <option value="Quy">Quý (3 tháng gần nhất)</option>
+                            <option value="Nam">Năm (12 tháng gần nhất)</option>
                         </select>
                     </div>
                 </div>
@@ -40,17 +40,6 @@
                                 </svg>
                             </div>
                         </div>
-                        <!-- <div class="card-text">
-                            <div class="d-inline-flex align-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
-                                    class="bi bi-arrow-up" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M8 12a.5.5 0 0 1-.5-.5V3.707L4.354 7.854a.5.5 0 0 1-.708-.708l4-4a.5.5 0 0 1 .708 0l4 4a.5.5 0 0 1-.708.708L8.5 3.707V11.5A.5.5 0 0 1 8 12z" />
-                                </svg>
-                                <div class="caption fw-500 me-2">3%</div>
-                                <div class="caption">so với tháng trước</div>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -74,17 +63,6 @@
                                 </svg>
                             </div>
                         </div>
-                        <!-- <div class="card-text">
-                            <div class="d-inline-flex align-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
-                                    class="bi bi-arrow-down" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M8 4a.5.5 0 0 1 .5.5V12.293l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 12.293V4.5A.5.5 0 0 1 8 4z" />
-                                </svg>
-                                <div class="caption fw-500 me-2">3%</div>
-                                <div class="caption">so với tháng trước</div>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -108,17 +86,7 @@
                                 </svg>
                             </div>
                         </div>
-                        <!-- <div class="card-text">
-                            <div class="d-inline-flex align-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
-                                    class="bi bi-arrow-up" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M8 12a.5.5 0 0 1-.5-.5V3.707L4.354 7.854a.5.5 0 0 1-.708-.708l4-4a.5.5 0 0 1 .708 0l4 4a.5.5 0 0 1-.708.708L8.5 3.707V11.5A.5.5 0 0 1 8 12z" />
-                                </svg>
-                                <div class="caption fw-500 me-2">3%</div>
-                                <div class="caption">so với tháng trước</div>
-                            </div>
-                        </div> -->
+
                     </div>
                 </div>
             </div>
@@ -137,17 +105,6 @@
 
                             </div>
                         </div>
-                        <!-- <div class="card-text">
-                            <div class="d-inline-flex align-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
-                                    class="bi bi-currency-exchange" viewBox="0 0 16 16">
-                                    <path
-                                        d="M8 4a.5.5 0 0 1 .5.5V12.293l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 12.293V4.5A.5.5 0 0 1 8 4z" />
-                                </svg>
-                                <div class="caption fw-500 me-2">3%</div>
-                                <div class="caption">so với tháng trước</div>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -260,24 +217,27 @@
                 </div>
             </div>
         </div>
+    </div>
 
         @endsection
         @section('scripts')
             <script>
                 $(document).ready(function () {
-                    // Lắng nghe sự kiện khi người dùng chọn loại thống kê
                     $('#LoaiThongKe').change(function () {
                         var loaiThongKe = $(this).val();
+                        var url = '{{ route("get-thong-ke") }}';  // Kiểm tra URL
+                        console.log(url);  // In URL ra console để kiểm tra
+
                         $.ajax({
-                            url: '{{ route("get-thong-ke") }}',
+                            url: url,
                             type: 'POST',
                             data: {
-                    p            _token: '{{ csrf_token() }}',  // Thêm token ở đây
+                                _token: '{{ csrf_token() }}',  // Đảm bảo csrf_token có trong yêu cầu
                                 LoaiThongKe: loaiThongKe
                             },
                             success: function (response) {
                                 if (response.success) {
-                                    // Cập nhật các số liệu thống kê và bảng
+                                    // Cập nhật dữ liệu thống kê trên trang
                                     $('.card-body .display-5:eq(0)').text(response.tong_tk);
                                     $('.card-body .display-5:eq(1)').text(response.tong_sp);
                                     $('.card-body .display-5:eq(2)').text(response.tong_dh);
@@ -290,6 +250,8 @@
                         });
                     });
                 });
+
+
             </script>
 @endsection
 

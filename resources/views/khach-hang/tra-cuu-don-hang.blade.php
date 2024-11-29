@@ -40,19 +40,19 @@
                     <h3 class="fw-bold">chị Bảy</h3>
                 </div>
                 <ul class="nav flex-column">
+{{--                    <li class="nav-item mb-2">--}}
+{{--                        <a href="#" class="nav-link text-dark hover-red">--}}
+{{--                            <i class="bi bi-geo-alt-fill me-2"></i>Số địa chỉ--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li class="nav-item mb-2">--}}
+{{--                        <a href="#" class="nav-link text-dark hover-red">--}}
+{{--                            <i class="bi bi-briefcase-fill me-2"></i>Quản lý đơn hàng--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link text-dark hover-red">
-                            <i class="bi bi-geo-alt-fill me-2"></i>Số địa chỉ
-                        </a>
-                    </li>
-                    <li class="nav-item mb-2">
-                        <a href="#" class="nav-link text-dark hover-red">
-                            <i class="bi bi-briefcase-fill me-2"></i>Quản lý đơn hàng
-                        </a>
-                    </li>
-                    <li class="nav-item mb-2">
-                        <a href="#" class="nav-link text-dark hover-red">
-                            <i class="bi bi-eye-fill me-2"></i>Sản phẩm đã xem
+                        <a href="{{route('gio-hang')}}" class="nav-link text-dark hover-red">
+                            <i class="bi bi-eye-fill me-2"></i>Sản phẩm trong giỏ
                         </a>
                     </li>
                     <li>

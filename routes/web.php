@@ -18,6 +18,7 @@ use App\Http\Controllers\super_admin\QuanLyBaiDangController;
 use App\Http\Controllers\super_admin\QuanLyBaoCaoController;
 use App\Http\Controllers\super_admin\QuanLyBinhLuanController;
 use App\Http\Controllers\super_admin\QuanLyCTSPController;
+use App\Http\Controllers\super_admin\QuanLyThongKeController;
 use App\Http\Controllers\super_admin\TraLoiBinhLuanController;
 use App\Http\Controllers\super_admin\QuanLyDanhMucController;
 use App\Http\Controllers\super_admin\QuanLyDonHangController;
@@ -48,10 +49,12 @@ Route::get('/san-pham/{category}/{manufacturer}', [NhomSanPhamController::class,
 
 Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::group(['prefix' => '/super-admin'], function () {
-        Route::get('/home', [DashBoardController::class, 'getViewDashBoard'])->name('super-admin-home');
-        Route::post('/get-thong-ke', [DashBoardController::class, 'getThongKe'])->name('get-thong-ke');
-        Route::get('/excel-export-khach-hang', [DashBoardController::class, 'getExportKH'])->name('excel-export-khach-hang');
-        Route::get('/excel-export-san-pham', [DashBoardController::class, 'getExportSP'])->name('excel-export-san-pham');
+
+        //Thống kê
+        Route::get('/home', [QuanLyThongKeController::class, 'getViewDashBoard'])->name('super-admin-home');
+        Route::post('get-thong-ke', [QuanLyThongKeController::class, 'getThongKe'])->name('get-thong-ke');
+        Route::get('/excel-export-khach-hang', [QuanLyThongKeController::class, 'getExportKH'])->name('excel-export-khach-hang');
+        Route::get('/excel-export-san-pham', [QuanLyThongKeController::class, 'getExportSP'])->name('excel-export-san-pham');
 
         // Tài khoản
         Route::group(['prefix' => '/tai-khoan'], function () {

@@ -13,6 +13,12 @@ class QuanLyTaiKhoan extends Model
     protected $primaryKey = 'MaTK';
     protected $fillable =[
         'HoTen',
+        'AnhDaiDien',
+        'Email',
+        'NgaySinh',
+        'GioiTinh',
+        'SDT',
+        'DiaChi',
     ];
     public $timestamps = false;
 
@@ -39,4 +45,3 @@ class QuanLyTaiKhoan extends Model
             ->get();
     }
 }
-

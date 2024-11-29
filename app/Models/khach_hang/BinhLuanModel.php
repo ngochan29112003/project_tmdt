@@ -49,6 +49,7 @@ class BinhLuanModel extends Model
         $binhLuan = DB::table('binhluan')
             ->join('taikhoan', 'taikhoan.MaTK', '=', 'binhluan.MaTK')
             ->where('binhluan.MaSP',$id)
+            ->where('TrangThaiBL','=','1')
             ->orderBy('NgayTaoBL', 'DESC') // Đổi từ DESC sang ASC
             ->get();
 
